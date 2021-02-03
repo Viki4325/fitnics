@@ -1,1 +1,4 @@
-Fitnics
+# Fitnics
+---
+
+## Vision Statement
