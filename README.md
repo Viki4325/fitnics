@@ -48,7 +48,6 @@ do not provide diet and exercise management tools together. Fitnics considers
 these two as critical aspects of healthy life and therefore provides an extensive
 platform to gather all the tips and tools for its users in one place.
 
-The project will be free to use and make its revenue through ad views. In addition,
-users will be provided with some perks for a subscription to the premium
-account. In total, Fitnics will be considered successful if it reaches 2 million free
-and paid subscription in total.
+This project is considered successful if the following two criteria are satisfied. Within a month after
+launching, it achieves an average rating of 4.0 or more on the app store. Within a month after
+launching, we receive at least one review that has succeeded in reaching their target weight.
