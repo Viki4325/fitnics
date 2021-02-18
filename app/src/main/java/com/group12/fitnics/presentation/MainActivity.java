@@ -1,8 +1,10 @@
-package com.group12.fitnics;
+package com.group12.fitnics.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.group12.fitnics.R;
 
 public class MainActivity extends AppCompatActivity {
 
