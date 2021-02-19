@@ -1,6 +1,7 @@
 package com.group12.fitnics.objects;
 
 public class Exercise {
+    private int exerciseID;
     private String title;
     private String description;
     //ABS, CHEST, ARM,LEG
@@ -18,6 +19,10 @@ public class Exercise {
         this.level = level;
         this.caloriesBurn = caloriesBurn;
     }
+
+    public int getExerciseID() { return exerciseID; }
+
+    public void setExerciseID(int id) { exerciseID = id; }
 
     public String getTitle() {
         return title;

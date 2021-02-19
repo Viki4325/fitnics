@@ -3,14 +3,14 @@ package com.group12.fitnics.objects;
 public class Food {
     private int foodID;
     private String name;
-    private int calories;
+    private int caloriesPerGram;
 
     public int getFoodID() {
         return foodID;
     }
 
-    public void setFoodID(int foodID) {
-        this.foodID = foodID;
+    public void setFoodID(int id) {
+        this.foodID = id;
     }
 
     public String getName() {
@@ -22,10 +22,10 @@ public class Food {
     }
 
     public int getCalories() {
-        return calories;
+        return caloriesPerGram;
     }
 
     public void setCalories(int calories) {
-        this.calories = calories;
+        this.caloriesPerGram = calories;
     }
 }

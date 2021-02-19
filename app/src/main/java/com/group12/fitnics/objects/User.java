@@ -1,28 +1,30 @@
 package com.group12.fitnics.objects;
 
-import java.util.ArrayList;
-
 public class User {
-    private int uID;
+    private int userID;
     private String username;
-    private String password;
     private String birthday;
     private int activityLevel;
-    private Double weight;
-    private Double height;
-    private int gender;
+    private double weight;
+    private double height;
+    private char gender;
     private int dailyCaloricNeeds;
-    private ArrayList<DayLog> logs;
+    private static int lastUserID = -1;
 
-    public Double getHeight() {
+    public User(String username, String birthday, int activityLevel, double weight, double height, char gender) {
+        this.username = username;
+        this.birthday = birthday;
+        this.activityLevel = activityLevel;
+        this.weight = weight;
+        this.height = height;
+        this.gender = gender;
+    }
+
+    public double getHeight() {
         return height;
     }
 
-    public ArrayList<DayLog> getLogs() {
-        return logs;
-    }
-
-    public Double getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -30,16 +32,12 @@ public class User {
         return dailyCaloricNeeds;
     }
 
-    public int getuID() {
-        return uID;
+    public int getUserID() {
+        return userID;
     }
 
     public String getBirthday() {
         return birthday;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getUsername() {
@@ -50,7 +48,7 @@ public class User {
         return activityLevel;
     }
 
-    public int getGender() {
+    public char getGender() {
         return gender;
     }
 
@@ -66,31 +64,29 @@ public class User {
         this.dailyCaloricNeeds = dailyCaloricNeeds;
     }
 
-    public void setGender(int gender) {
+    public void setGender(char gender) {
         this.gender = gender;
     }
 
-    public void setHeight(Double height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
-    public void setLogs(ArrayList<DayLog> logs) {
-        this.logs = logs;
+    // set the userID only when insert a user
+    public void setUserID() {
+        lastUserID++;
+        this.userID = lastUserID;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setupID(int uID) {
-        this.uID = uID;
+    public void setUserID(int id) {
+        this.userID = id;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public void setWeight(Double weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 }
