@@ -70,7 +70,7 @@ public class ExercisePersistenceStub implements ExercisePersistence {
                 1
         );
 
-        Exercise Shrugs = new Exercise(
+        Exercise shrugs = new Exercise(
                 6,
                 "Shrugs,Dumbbells",
                 "Stand with straight body, the hands are hanging freely on the side and hold each a dumbbell. Lift from this position the shoulders as high as you can, but don't bend the arms during the movement. On the highest point, make a short pause of 1 or 2 seconds before returning slowly to the initial position.\n" +
@@ -90,7 +90,7 @@ public class ExercisePersistenceStub implements ExercisePersistence {
         );
 
         exerciseList.add(calf_raises);
-        exerciseList.add (Shrugs);
+        exerciseList.add (shrugs);
         exerciseList.add(chin_ups);
         exerciseList.add(bench_press);
         exerciseList.add(flutter_kicks);
