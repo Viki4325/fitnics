@@ -18,21 +18,24 @@ import com.group12.fitnics.objects.User;
 import java.util.Calendar;
 
 public class InformationActivity extends AppCompatActivity{
-    //private User newUser;
-    //EditText date;
-    //private AccessUsers accessUsers;
+    private User newUser;
+    private EditText date;
+    private AccessUsers accessUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
-        /*newUser = new User();
+        newUser = new User();
         accessUsers = new AccessUsers();
+        Intent intent = getIntent();
+        //newUser.setGoal(intent.getIntExtra("goal",-1));
+
         Spinner Gender = (Spinner) findViewById(R.id.chooseGender);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(InformationActivity.this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Genders));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Gender.setAdapter(adapter);
-        date = (EditText)findViewById(R.id.editDateOfBirth);
+        date = (EditText)findViewById(R.id.editBirthday);
         date.addTextChangedListener(new TextWatcher() {
             private String current = "";
             private String ddmmyyyy = "DDMMYYYY";
@@ -94,18 +97,18 @@ public class InformationActivity extends AppCompatActivity{
             public void afterTextChanged(Editable editable) {
 
             }
-        });*/
+        });
 
     }
-/*
+
     public void btnNextPage(View v) {
         String username;
         //Add username to new user
-        EditText data = (EditText) findViewById(R.id.UsernameInput);
+        EditText data = (EditText) findViewById(R.id.enterUsername);
         username = data.getText().toString().trim();
         newUser.setUsername(username);
         //Add birthday to new user
-        data = (EditText) findViewById(R.id.editDateOfBirth);
+        data = (EditText) findViewById(R.id.editBirthday);
         newUser.setBirthday(data.getText().toString());
         //Add gender to new user
         Spinner choice = (Spinner) findViewById(R.id.chooseGender);
@@ -118,10 +121,10 @@ public class InformationActivity extends AppCompatActivity{
         newUser.setWeight(Integer.parseInt(data.getText().toString().trim()));
         //go to next panel to get activity level
         accessUsers.insertUser(newUser);
-        //Intent signUpPage = new Intent(InformationActivity.this, ActivityLevel.class);
-        //signUpPage.putExtra("username",username);
-        //startActivity(signUpPage);
+        Intent ActivityPage = new Intent(InformationActivity.this, ActivityLevel.class);
+        ActivityPage.putExtra("username",username);
+        startActivity(ActivityPage);
     }
 
- */
+
 }
