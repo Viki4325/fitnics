@@ -17,19 +17,19 @@ import com.group12.fitnics.objects.User;
 
 import java.util.Calendar;
 
-public class SignUpActivity extends AppCompatActivity {
-    private User newUser;
-    EditText date;
-    private AccessUsers accessUsers;
+public class InformationActivity extends AppCompatActivity{
+    //private User newUser;
+    //EditText date;
+    //private AccessUsers accessUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
-        newUser = new User();
+        setContentView(R.layout.activity_information);
+        /*newUser = new User();
         accessUsers = new AccessUsers();
         Spinner Gender = (Spinner) findViewById(R.id.chooseGender);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(SignUpActivity.this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Genders));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(InformationActivity.this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Genders));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Gender.setAdapter(adapter);
         date = (EditText)findViewById(R.id.editDateOfBirth);
@@ -94,10 +94,10 @@ public class SignUpActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
             }
-        });
+        });*/
 
     }
-
+/*
     public void btnNextPage(View v) {
         String username;
         //Add username to new user
@@ -118,8 +118,10 @@ public class SignUpActivity extends AppCompatActivity {
         newUser.setWeight(Integer.parseInt(data.getText().toString().trim()));
         //go to next panel to get activity level
         accessUsers.insertUser(newUser);
-        Intent signUpPage = new Intent(SignUpActivity.this, ActivityLevel.class);
-        signUpPage.putExtra("username",username);
-        startActivity(signUpPage);
+        //Intent signUpPage = new Intent(InformationActivity.this, ActivityLevel.class);
+        //signUpPage.putExtra("username",username);
+        //startActivity(signUpPage);
     }
+
+ */
 }
