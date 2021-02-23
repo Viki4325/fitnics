@@ -10,21 +10,22 @@ import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.objects.User;
 
-public class ActivityLevel extends AppCompatActivity
-{
+public class SignUpActiveLevelActivity extends AppCompatActivity {
+
     private User newUser;
     private AccessUsers accessUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_activity_level);
+        setContentView(R.layout.activity_sign_up_active_level);
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
 
         accessUsers = new AccessUsers();
-        newUser = accessUsers.getRandom(username);
+        newUser = accessUsers.getUserByUsername(username);
+
     }
 
     public void btnComplete(View v)
@@ -41,7 +42,7 @@ public class ActivityLevel extends AppCompatActivity
 
         newUser.setActivityLevel(activityLevel);
 
-        Intent logInToHomeIntent = new Intent(ActivityLevel.this, HomeActivity.class);
+        Intent logInToHomeIntent = new Intent(this, HomeActivity.class);
         logInToHomeIntent.putExtra("username", newUser.getUsername());
         logInToHomeIntent.putExtra("userID", Integer.toString(newUser.getUserID()));
         startActivity(logInToHomeIntent);

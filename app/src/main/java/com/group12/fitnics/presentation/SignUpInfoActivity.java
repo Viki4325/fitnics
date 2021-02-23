@@ -17,7 +17,8 @@ import com.group12.fitnics.objects.User;
 
 import java.util.Calendar;
 
-public class InformationActivity extends AppCompatActivity{
+public class SignUpInfoActivity extends AppCompatActivity {
+
     private User newUser;
     private EditText date;
     private AccessUsers accessUsers;
@@ -25,14 +26,15 @@ public class InformationActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_information);
+        setContentView(R.layout.activity_sign_up_info);
+
         newUser = new User();
         accessUsers = new AccessUsers();
         Intent intent = getIntent();
         //newUser.setGoal(intent.getIntExtra("goal",-1));
 
         Spinner Gender = (Spinner) findViewById(R.id.chooseGender);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(InformationActivity.this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Genders));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Genders));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Gender.setAdapter(adapter);
         date = (EditText)findViewById(R.id.editBirthday);
@@ -98,7 +100,6 @@ public class InformationActivity extends AppCompatActivity{
 
             }
         });
-
     }
 
     public void btnNextPage(View v) {
@@ -121,10 +122,8 @@ public class InformationActivity extends AppCompatActivity{
         newUser.setWeight(Integer.parseInt(data.getText().toString().trim()));
         //go to next panel to get activity level
         accessUsers.insertUser(newUser);
-        Intent ActivityPage = new Intent(InformationActivity.this, ActivityLevel.class);
+        Intent ActivityPage = new Intent(this, SignUpActiveLevelActivity.class);
         ActivityPage.putExtra("username",username);
         startActivity(ActivityPage);
     }
-
-
 }
