@@ -11,8 +11,6 @@ public class User {
     private int dailyCaloricNeeds;
     private static int lastUserID = -1;
 
-    public User(){}
-
     public User(String username, String birthday, int activityLevel, double weight, double height, char gender) {
         this.username = username;
         this.birthday = birthday;
