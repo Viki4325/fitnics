@@ -11,7 +11,10 @@ import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExerciseLogs;
 import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.business.AccessUsers;
+import com.group12.fitnics.objects.MyDate;
 import com.group12.fitnics.objects.User;
+
+import java.util.Calendar;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -19,6 +22,7 @@ public class HomeActivity extends AppCompatActivity {
     private AccessFoodLogs accessFoodLogs;
     private AccessExerciseLogs accessExerciseLogs;
     private User selectedUser;
+    private MyDate dateToday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
         accessUsers = new AccessUsers();
         accessFoodLogs = new AccessFoodLogs();
         accessExerciseLogs = new AccessExerciseLogs();
+        dateToday = new MyDate(Calendar.getInstance());
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
@@ -43,11 +48,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private int calculateIntake() {
-        return accessFoodLogs.getUserTotalDailyIntake();
+        return accessFoodLogs.getUserTotalDailyIntake(selectedUser.getUserID(), dateToday);
     }
 
     private int calculateBurned() {
-        return accessExerciseLogs.getUserTotalDailyBurned();
+        return accessExerciseLogs.getUserTotalDailyBurned(selectedUser.getUserID(), dateToday);
     }
 
     private void paintGreeting() {
