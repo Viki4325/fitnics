@@ -2,10 +2,10 @@ package com.group12.fitnics.persistence;
 
 import com.group12.fitnics.objects.Food;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface FoodPersistence {
-    List<Food> getFoodSequential();
+    ArrayList<Food> getFoodSequential();
 
     Food getFoodByID(final int foodID);
 
