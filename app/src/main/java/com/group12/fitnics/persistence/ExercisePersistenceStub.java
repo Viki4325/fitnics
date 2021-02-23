@@ -1,0 +1,214 @@
+package com.group12.fitnics.persistence;
+
+import com.group12.fitnics.objects.Exercise;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class ExercisePersistenceStub implements ExercisePersistence {
+    private final List<Exercise> exerciseList;
+
+    public ExercisePersistenceStub(){
+        this.exerciseList = new ArrayList<>();
+
+        Exercise axe_Hold = new Exercise(
+                1,
+                "Axe Hold",
+                "Grab dumbbells and extend arms to side and hold as long as you can",
+                "Arms",
+                "Intermediate",
+                 500
+        );
+
+        Exercise  braced_squat = new Exercise(
+                2,
+                "Brace Squat",
+                "Stand with feet slightly wider than shoulder-width apart, while standing as tall as you can. \n" +
+                "Grab a weight plate and hold it out in front of your body with arms straight out. Keep your core tight and stand with a natural arch in your back. \n" +
+                "Now, push hips back and bend knees down into a squat as far as you can. Hold for a few moments and bring yourself back up to the starting position.\n",
+                "Legs",
+                "Intermediate",
+                222
+        );
+
+        Exercise flutter_kicks = new Exercise(
+                3,
+                "Flutter Kicks",
+                "Laying on the back, lift your straightened legs from the ground at a 45 degree angle.\n"+
+                "As your Left foot travels downward and nearly touches the floor, your Right foot should seek to reach a 90 degree angle, or as close to one as possible.\n"+
+                "Bring your R foot down until it nearly touches the floor, and bring your L foot upwards.  Maintain leg rigidity throughout the exercise.  Your head should stay off the ground, supported by tightened upper abdominals.\n" +
+                "(L up R down, L down R up, x2)  ^v, v^, ^v, v^ = 1 rep\n" ,
+                "Abs",
+                "Beginner",
+                120
+        );
+
+        Exercise bench_press = new Exercise(
+                4,
+                "Bench Press",
+                "Lay down on a bench, the bar should be directly above your eyes, the knees are somewhat angled and the feet are firmly on the floor. " +
+                        "Concentrate, breath deeply and grab the bar more than shoulder wide. Bring it slowly down till it briefly touches your chest at the height of your nipples. " +
+                        "Push the bar up. \n" +
+                "If you train with a high weight it is advisable to have a spotter that can help you up if you can't lift the weight on your own.\n"+
+                "With the width of the grip you can also control which part of the chest is trained more:\n" +
+                        "\n" +
+                        "\t\twide grip: outer chest muscles\n" +
+                        "\t\tnarrow grip: inner chest muscles and triceps",
+                "Chest",
+                "Beginner",
+                532
+        );
+
+        Exercise chin_ups = new Exercise(
+                5,
+                "Chin-Ups",
+                "Like pull-ups but with a reverse grip\n" ,
+                "Back",
+                "Beginner",
+                1
+        );
+
+        Exercise shrugs = new Exercise(
+                6,
+                "Shrugs,Dumbbells",
+                "Stand with straight body, the hands are hanging freely on the side and hold each a dumbbell. Lift from this position the shoulders as high as you can, but don't bend the arms during the movement. On the highest point, make a short pause of 1 or 2 seconds before returning slowly to the initial position.\n" +
+                "When training with a higher weight, make sure that you still do the whole movement!\n" ,
+                "Shoulders",
+                "Expert",
+                100
+        );
+
+        Exercise calf_raises = new Exercise(
+                7,
+                "Calf Raises",
+                 "Calf raises are a method of exercising the gastrocnemius, tibialis posterior and soleus muscles of the lower leg. The movement performed is plantar flexion, a.k.a. ankle extension.\n",
+                "Calves",
+                "Expert",
+                85
+        );
+
+        exerciseList.add(calf_raises);
+        exerciseList.add (shrugs);
+        exerciseList.add(chin_ups);
+        exerciseList.add(bench_press);
+        exerciseList.add(flutter_kicks);
+        exerciseList.add( braced_squat);
+        exerciseList.add(axe_Hold);
+
+
+    }
+
+    /*
+     * Returns list sorted alphabetically by default
+     * */
+    @Override
+    public List<Exercise> getExerciseList() {
+
+        exerciseList.sort(new Comparator<Exercise>() {
+             @Override
+             public int compare(Exercise exercise1, Exercise exercise2) {
+                 return (exercise1.getTitle()).compareToIgnoreCase(exercise2.getTitle());
+             }
+         });
+         return exerciseList;
+    }
+
+    @Override
+    public Exercise getExerciseById(int exerciseID) {
+        for (int i = 0; i < exerciseList.size() ; i++) {
+            if(exerciseList.get(i).getExerciseID() == exerciseID){
+                return exerciseList.get(i);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Exercise getExerciseByName(String exerciseName) {
+        for (int i = 0; i < exerciseList.size() ; i++) {
+            if(exerciseList.get(i).getTitle().equalsIgnoreCase(exerciseName)){
+                return exerciseList.get(i);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Exercise> getExerciseByLevel(String exerciseLevel) {
+        List<Exercise> exerciseListByLevel = new ArrayList<>();
+
+        for (int i = 0; i < exerciseList.size(); i++) {
+            if(exerciseList.get(i).getLevel().equalsIgnoreCase(exerciseLevel)){
+                exerciseListByLevel.add(exerciseList.get(i));
+            }
+        }
+        return exerciseListByLevel;
+    }
+
+    @Override
+    public List<Exercise> getExerciseByCategory(String exerciseCategory) {
+        List<Exercise> exerciseListByCategory = new ArrayList<>();
+
+        for (int i = 0; i < exerciseList.size(); i++) {
+            if(exerciseList.get(i).getCategory().equalsIgnoreCase(exerciseCategory)){
+                exerciseListByCategory.add(exerciseList.get(i));
+            }
+        }
+        return exerciseListByCategory;
+    }
+
+    @Override
+    public boolean insertExercise(Exercise newExercise) {
+        boolean inserted = false;
+        if(newExercise != null)
+        {
+            newExercise.setExerciseID();
+            exerciseList.add(newExercise);
+            inserted = true;
+        }
+        return inserted;
+    }
+
+    /*
+    * Only if an exercise Item exists, then it can be updated
+    * */
+    @Override
+    public boolean updateExercise(int exerciseID, Exercise currentExercise) {
+        boolean found = false;
+        boolean updated = false;
+        for(int i = 0; i < exerciseList.size() && !found; i++) {
+            if(exerciseList.get(i).getExerciseID() == exerciseID) {
+                Exercise prevExercise = exerciseList.get(i);
+                currentExercise.setExerciseID(currentExercise.getExerciseID());
+                exerciseList.set(i, currentExercise);
+                updated = true;
+                found = true;
+            }
+        }
+        return updated;
+    }
+
+    @Override
+    public boolean deleteExercise(int exerciseID) {
+        boolean deleted = false;
+        for (int i = 0; i < exerciseList.size() && !deleted; i++) {
+            if(exerciseList.get(i).getExerciseID() == exerciseID){
+                exerciseList.remove(i);
+                deleted = true;
+            }
+        }
+        return deleted;
+    }
+
+    @Override
+    public boolean deleteExercise(Exercise currentExercise) {
+        boolean deleted = false;
+        if(exerciseList.contains(currentExercise)){
+            exerciseList.remove(currentExercise);
+            deleted = true;
+        }
+        return deleted;
+    }
+}
