@@ -23,7 +23,7 @@ public class CalorieHelper {
         int total = 0;
         for (int i = 0; i < logs.size(); i++) {
             int mins = logs.get(i).getMinutes();
-            int caloriesPerMins = exercises.getExerciseByID(logs.get(i).getExerciseID()).getCaloriesBurn();
+            int caloriesPerMins = exercises.getExerciseById(logs.get(i).getExerciseID()).getCaloriesBurn();
             total += mins * caloriesPerMins;
         }
         return total;

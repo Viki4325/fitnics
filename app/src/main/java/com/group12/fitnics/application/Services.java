@@ -5,9 +5,11 @@ import com.group12.fitnics.objects.ExerciseLog;
 import com.group12.fitnics.persistence.ExerciseLogPersistence;
 import com.group12.fitnics.persistence.ExerciseLogPersistenceStub;
 import com.group12.fitnics.persistence.ExercisePersistence;
+import com.group12.fitnics.persistence.ExercisePersistenceStub;
 import com.group12.fitnics.persistence.FoodLogPersistence;
 import com.group12.fitnics.persistence.FoodLogPersistenceStub;
 import com.group12.fitnics.persistence.FoodPersistence;
+import com.group12.fitnics.persistence.FoodPersistenceStub;
 import com.group12.fitnics.persistence.UserPersistence;
 import com.group12.fitnics.persistence.UserPersistenceStub;
 
@@ -17,7 +19,7 @@ public class Services {
     private static FoodLogPersistence foodLogPersistence = null;
     private static ExerciseLogPersistence exerciseLogPersistence = null;
     private static FoodPersistence foodPersistence = null;
-    private static ExercisePersistence exercisePersistence = null
+    private static ExercisePersistence exercisePersistence = null;
 
     public static UserPersistence getUserPersistence() {
         if (userPersistence == null) {
