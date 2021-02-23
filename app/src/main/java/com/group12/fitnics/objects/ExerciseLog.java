@@ -1,12 +1,14 @@
 package com.group12.fitnics.objects;
 
+import java.util.Calendar;
+
 public class ExerciseLog {
     private int userID;
     private int exerciseID;
-    private String date;
+    private MyDate date;
     private int minutes;
 
-    public ExerciseLog(int userId, int foodId, String date, int minutes) {
+    public ExerciseLog(int userId, int foodId, MyDate date, int minutes) {
         this.userID = userId;
         this.exerciseID = foodId;
         this.date = date;
@@ -16,19 +18,19 @@ public class ExerciseLog {
     public int getUserID() {
         return userID;
     }
-    public String getDate() {
+    public MyDate getDate() {
         return date;
     }
     public int getExerciseID() {
         return exerciseID;
     }
-    public int getGrams() {
+    public int getMinutes() {
         return minutes;
     }
 
     public void setUserID(int id) { this.userID = id; }
     public void setExerciseIDID(int id) { this.exerciseID = id; }
-    public void setDate(String date) { this.date = date; }
+    public void setDate(MyDate date) { this.date = date; }
     public void setMinutes(int minutes) { this.minutes = minutes; }
 
 }

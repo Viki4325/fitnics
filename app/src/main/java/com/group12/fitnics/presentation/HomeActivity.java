@@ -43,13 +43,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private int calculateIntake() {
-//        return accessFoodLogs.getUserTotalDailyIntake();
-        return -1;
+        return accessFoodLogs.getUserTotalDailyIntake();
     }
 
     private int calculateBurned() {
-//        return accessExerciseLogs.getUserTotalDailyBurned();
-        return -1;
+        return accessExerciseLogs.getUserTotalDailyBurned();
     }
 
     private void paintGreeting() {
