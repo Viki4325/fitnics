@@ -3,11 +3,9 @@ package com.group12.fitnics.persistence;
 import com.group12.fitnics.objects.Food;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class FoodPersistenceStub implements FoodPersistence {
-    private List<Food> foods;
+    private ArrayList<Food> foods;
 
     public FoodPersistenceStub() {
         this.foods = new ArrayList<>();
@@ -21,8 +19,8 @@ public class FoodPersistenceStub implements FoodPersistence {
         foods.add(hamburg);
     }
 
-    public List<Food> getFoodSequential() {
-        return Collections.unmodifiableList(foods);
+    public ArrayList<Food> getFoodSequential() {
+        return foods;
     }
 
     // get a user by userID
@@ -81,3 +79,4 @@ public class FoodPersistenceStub implements FoodPersistence {
         return "success";
     }
 }
+
