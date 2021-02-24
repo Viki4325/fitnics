@@ -31,12 +31,23 @@ public class SignUpInfoActivity extends AppCompatActivity {
         newUser = new User();
         accessUsers = new AccessUsers();
         Intent intent = getIntent();
-        //newUser.setGoal(intent.getIntExtra("goal",-1));
+        newUser.setGoal(intent.getIntExtra("goal",-1));
 
         Spinner Gender = (Spinner) findViewById(R.id.chooseGender);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Genders));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Gender.setAdapter(adapter);
+        ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Genders));
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Gender.setAdapter(genderAdapter);
+
+        Spinner weightUnits = (Spinner) findViewById(R.id.weightUnitSpinner);
+        ArrayAdapter<String> weightAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.weightUnits));
+        weightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        weightUnits.setAdapter(weightAdapter);
+
+        Spinner heightUnits = (Spinner) findViewById(R.id.heightUnitSpinner);
+        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.heightUnits));
+        heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        heightUnits.setAdapter(heightAdapter);
+
         date = (EditText)findViewById(R.id.editBirthday);
         date.addTextChangedListener(new TextWatcher() {
             private String current = "";
@@ -110,16 +121,29 @@ public class SignUpInfoActivity extends AppCompatActivity {
         newUser.setUsername(username);
         //Add birthday to new user
         data = (EditText) findViewById(R.id.editBirthday);
-        newUser.setBirthday(data.getText().toString());
+        String birthday = data.getText().toString().trim();
+        newUser.setBirthDay(Integer.parseInt(birthday.substring(0, 2)));
+        newUser.setBirthMonth(Integer.parseInt(birthday.substring(3, 5)));
+        newUser.setBirthYear(Integer.parseInt(birthday.substring(6, 9)));
         //Add gender to new user
         Spinner choice = (Spinner) findViewById(R.id.chooseGender);
         newUser.setGender(choice.getSelectedItem().toString().charAt(0));
         //Add weight to new user
         data = (EditText) findViewById(R.id.editWeight);
-        newUser.setHeight(Integer.parseInt(data.getText().toString().trim()));
+        choice = (Spinner) findViewById(R.id.weightUnitSpinner);
+
+        if(choice.getSelectedItem().toString() == "kg")
+            newUser.setWeight(Integer.parseInt(data.getText().toString().trim())*2.205);
+        else
+            newUser.setWeight(Integer.parseInt(data.getText().toString().trim()));
         //Add height to new user
         data = (EditText) findViewById(R.id.editHeight);
-        newUser.setWeight(Integer.parseInt(data.getText().toString().trim()));
+        choice = (Spinner) findViewById(R.id.heightUnitSpinner);
+
+        if(choice.getSelectedItem().toString() == "ft")
+            newUser.setHeight(Integer.parseInt(data.getText().toString().trim())*30.48);
+        else
+            newUser.setHeight(Integer.parseInt(data.getText().toString().trim()));
         //go to next panel to get activity level
         accessUsers.insertUser(newUser);
         Intent ActivityPage = new Intent(this, SignUpActiveLevelActivity.class);

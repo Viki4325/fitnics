@@ -14,10 +14,10 @@
         android:text="@string/next_page"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.539"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.926" />
+        app:layout_constraintVertical_bias="0.953" />
 
     <TextView
         android:id="@+id/EnterUsernameText"
@@ -76,6 +76,7 @@
         android:layout_weight="0.25"
         android:autofillHints=""
         android:ems="10"
+        android:hint="DD/MM/YYYY"
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="@+id/nextPagebtn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,22 +132,6 @@
         app:layout_constraintTop_toBottomOf="@+id/chooseGender"
         app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
-        android:id="@+id/editWeight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_weight="0.25"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterWeightText"
-        app:layout_constraintVertical_bias="0.0" />
-
     <TextView
         android:id="@+id/enterHeightText"
         android:layout_width="wrap_content"
@@ -160,23 +145,70 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editWeight"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
-        android:id="@+id/editHeight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="391dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_weight="0.25"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="numberDecimal"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enterWeightText">
+
+        <EditText
+            android:id="@+id/editWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="0.5"
+            android:autofillHints="123.45"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="numberDecimal" />
+
+        <Spinner
+            android:id="@+id/weightUnitSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_weight="0.25" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="393dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enterHeightText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0">
+
+        <EditText
+            android:id="@+id/editHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="0.5"
+            android:autofillHints="123.45"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+        <Spinner
+            android:id="@+id/heightUnitSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_weight="0.25" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

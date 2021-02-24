@@ -12,9 +12,9 @@
     <string name="example">example</string>
     <string name="enter_date_of_birth">Enter Date of Birth</string>
     <string name="mm_dd_yyyy">MM/DD/YYYY</string>
-    <string name="enter_weight_in_lbs">Enter Weight in lbs</string>
+    <string name="enter_weight_in_lbs">Enter Weight</string>
     <string name="_165_24">165.24</string>
-    <string name="enter_height_in_cm">Enter Height in cm</string>
+    <string name="enter_height_in_cm">Enter Height</string>
     <string name="_172_72">172.72</string>
     <string name="choose_gender">Choose Gender</string>
     <string name="not_active">Not Active: you do not workout or do phisical activity during a standard week</string>
@@ -29,6 +29,14 @@
         <item>Male</item>
         <item>Female</item>
         <item>Other</item>
+    </string-array>
+    <string-array name="weightUnits">
+        <item>lbs</item>
+        <item>kg</item>
+    </string-array>
+    <string-array name="heightUnits">
+        <item>cm</item>
+        <item>ft</item>
     </string-array>
 
 </resources>
