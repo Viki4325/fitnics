@@ -16,6 +16,10 @@ public class MyDate {
                (other.getDate() == dateInfo.get(Calendar.DATE));
     }
 
+    public void setDateInfo(Calendar newDateInfo) {
+        this.dateInfo = newDateInfo;
+    }
+
     public Calendar getDateInfo() {
         return dateInfo;
     }
