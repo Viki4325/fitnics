@@ -1,5 +1,7 @@
 package com.group12.fitnics.persistence;
 
+import android.os.Build;
+
 import com.group12.fitnics.objects.Exercise;
 
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ExercisePersistenceStub implements ExercisePersistence {
-    private final List<Exercise> exerciseList;
+    private List<Exercise> exerciseList;
 
     public ExercisePersistenceStub(){
         this.exerciseList = new ArrayList<>();
@@ -106,13 +108,17 @@ public class ExercisePersistenceStub implements ExercisePersistence {
     @Override
     public List<Exercise> getExerciseList() {
 
-        exerciseList.sort(new Comparator<Exercise>() {
-             @Override
-             public int compare(Exercise exercise1, Exercise exercise2) {
-                 return (exercise1.getTitle()).compareToIgnoreCase(exercise2.getTitle());
-             }
-         });
-         return exerciseList;
+        List<Exercise> exerciseSortedAlpha = new ArrayList<>(exerciseList);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            exerciseSortedAlpha.sort(new Comparator<Exercise>() {
+                 @Override
+                 public int compare(Exercise exercise1, Exercise exercise2) {
+                     return (exercise1.getTitle()).compareToIgnoreCase(exercise2.getTitle());
+                 }
+             });
+        }
+        return exerciseSortedAlpha;
     }
 
     @Override

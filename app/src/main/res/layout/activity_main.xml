@@ -44,7 +44,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/login"
-            android:onClick="btnLogInOnClick"/>
+            android:onClick="btnSearchFood"/>
+
+        <Button
+            android:id="@+id/btnSearchExercise"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/searchExerciseHint"
+            android:onClick="btnSearchExercise"/>
     </LinearLayout>
 
 

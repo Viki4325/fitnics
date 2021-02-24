@@ -55,8 +55,8 @@ public class AccessExercises {
     * Sorted Alphabetically by default
     * */
     public List<Exercise> getAllExercise(){
-
-        return exercisePersistence.getExerciseList();
+        List<Exercise> exerciseList = exercisePersistence.getExerciseList();
+        return exerciseList;
     }
 
     public void filter(String[] filterOptionsChose){

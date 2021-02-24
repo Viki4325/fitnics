@@ -102,15 +102,4 @@ public class Exercise {
         return false;
     }
 
-    @Override
-    public String toString() {
-        return "{" +
-                "ID =" + exerciseID +
-                "title =" + title +
-                ", description =" + description +
-                ", category =" + category +
-                ", level =" + level +
-                ", calories =" + caloriesBurn +
-                '}';
-    }
 }
