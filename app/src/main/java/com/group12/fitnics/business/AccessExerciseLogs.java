@@ -18,33 +18,42 @@ public class AccessExerciseLogs {
         exercisePersistence = Services.getExercisePersistence();
     }
 
-    ExerciseLog getExerciseLog(int userID, int exerciseID, MyDate date) {
+    public ExerciseLog getExerciseLog(int userID, int exerciseID, MyDate date) {
         return exerciseLogPersistence.getExerciseLog(userID, exerciseID, date);
     }
 
-    List<ExerciseLog> getExerciseLogByUser(int userID) {
+    public List<ExerciseLog> getExerciseLogByUser(int userID) {
         return exerciseLogPersistence.getExerciseLogByUser(userID);
     }
 
-    List<ExerciseLog> getExerciseLogByUserDate(int userID, MyDate date) {
+    public List<ExerciseLog> getExerciseLogByUserDate(int userID, MyDate date) {
         return exerciseLogPersistence.getExerciseLogByUserDate(userID, date);
     }
 
-    String insertExerciseLog(ExerciseLog exerciseLog) {
+    public String insertExerciseLog(ExerciseLog exerciseLog) {
         return exerciseLogPersistence.insertExerciseLog(exerciseLog);
     }
 
-    String updateExerciseLog(int userID, int exerciseID, MyDate date, ExerciseLog updatedLog) {
+    public String updateExerciseLog(int userID, int exerciseID, MyDate date, ExerciseLog updatedLog) {
         return exerciseLogPersistence.updateExerciseLog(userID, exerciseID, date, updatedLog);
     }
 
-    String deleteExerciseLog(int userID, int exerciseID, MyDate date) {
+    public String deleteExerciseLog(int userID, int exerciseID, MyDate date) {
         return exerciseLogPersistence.deleteExerciseLog(userID, exerciseID, date);
     }
 
     public int getUserTotalDailyBurned(int userID, MyDate date) {
         List<ExerciseLog> logs = getExerciseLogByUserDate(userID, date);
-        int total = CalorieHelper.getUserTotalDailyBurned(logs, exercisePersistence);
+        return getUserTotalDailyBurned(logs, exercisePersistence);
+    }
+
+    private static int getUserTotalDailyBurned(List<ExerciseLog> logs, ExercisePersistence exercises) {
+        int total = 0;
+        for (int i = 0; i < logs.size(); i++) {
+            int mins = logs.get(i).getMinutes();
+            int caloriesPerMins = exercises.getExerciseById(logs.get(i).getExerciseID()).getCaloriesBurn();
+            total += mins * caloriesPerMins;
+        }
         return total;
     }
 }

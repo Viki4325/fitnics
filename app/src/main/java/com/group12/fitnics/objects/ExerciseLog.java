@@ -8,9 +8,9 @@ public class ExerciseLog {
     private MyDate date;
     private int minutes;
 
-    public ExerciseLog(int userId, int foodId, MyDate date, int minutes) {
+    public ExerciseLog(int userId, int exerciseID, MyDate date, int minutes) {
         this.userID = userId;
-        this.exerciseID = foodId;
+        this.exerciseID = exerciseID;
         this.date = date;
         this.minutes = minutes;
     }
