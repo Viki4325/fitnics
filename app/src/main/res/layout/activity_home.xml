@@ -53,27 +53,24 @@
             android:text="@string/food"
             android:textSize="20sp"
             android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="@string/zero"
-            android:textSize="20sp"
-            android:id="@+id/textFoodCalories"/>
+
     </RelativeLayout>
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#1111"
-        android:id="@+id/listViewFoods"/>
     <Button
-        android:id="@+id/btnAddFood"
+        android:id="@+id/btnSearchFood"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:text="@string/addFood"
-        android:onClick="btnAddFoodOnClick"/>
+        android:text="@string/searchFood"
+        android:onClick="btnSearchFoodOnClick"/>
+
+    <Button
+        android:id="@+id/btnFoodLog"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/foodLog"
+        android:onClick="btnFoodLogOnClick"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -86,52 +83,31 @@
             android:text="@string/exercise"
             android:textSize="20sp"
             android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="@string/zero"
-            android:textSize="20sp"
-            android:id="@+id/textExerciseCalories"/>
+
     </RelativeLayout>
 
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#1111"
-        android:id="@+id/listViewExercises"/>
     <Button
-        android:id="@+id/btnAddExercise"
+        android:id="@+id/btnSearchExercise"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:text="@string/addExercise"
-        android:onClick="btnAddExerciseOnClick"/>
+        android:text="@string/searchExercise"
+        android:onClick="btnSearchExerciseOnClick"/>
+
+    <Button
+        android:id="@+id/btnExerciseLog"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/exerciseLog"
+        android:onClick="btnExerciseLogOnClick"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp">
 
-        <Button
-            android:id="@+id/btnProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:enabled="false"
-            android:onClick="btnHistoryOnClick"
-            android:text="@string/history"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/btnProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:enabled="false"
-            android:onClick="buttonProfileOnClick"
-            android:text="@string/profile" />
     </RelativeLayout>
 
 </LinearLayout>

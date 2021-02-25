@@ -15,6 +15,7 @@ import com.group12.fitnics.objects.MyDate;
 import com.group12.fitnics.objects.User;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -32,8 +33,8 @@ public class HomeActivity extends AppCompatActivity {
         accessUsers = new AccessUsers();
         accessFoodLogs = new AccessFoodLogs();
         accessExerciseLogs = new AccessExerciseLogs();
-        dateToday = new MyDate(Calendar.getInstance());
-
+//        dateToday = new MyDate(Calendar.getInstance());
+        dateToday = new MyDate(new GregorianCalendar(2021, 0, 1));
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         selectedUser = accessUsers.getUserByName(username);
@@ -43,8 +44,6 @@ public class HomeActivity extends AppCompatActivity {
         paintGreeting();
         paintCalorieGoal();
         paintCalorieRemaining(intake, burned);
-        paintCalorieFood(intake);
-        paintCalorieExercise(burned);
     }
 
     private int calculateIntake() {
@@ -72,38 +71,29 @@ public class HomeActivity extends AppCompatActivity {
         textRemaining.setText("Remaining: " + remaining);
     }
 
-    private void paintCalorieFood(int intake) {
-        TextView textFoodCalories = findViewById(R.id.textFoodCalories);
-        textFoodCalories.setText(intake);
-    }
 
-    private void paintCalorieExercise(int burned) {
-        TextView textExerciseCalories = findViewById(R.id.textExerciseCalories);
-        textExerciseCalories.setText(burned);
-
-    }
-
-    public void btnAddFoodOnClick(View v) {
+    public void btnSearchFoodOnClick(View v) {
         Intent intent = new Intent(HomeActivity.this, AddFoodActivity.class);
         intent.putExtra("userID", Integer.toString(selectedUser.getUserID()));
         startActivity(intent);
     }
 
-    public void btnAddExerciseOnClick(View v) {
+    public void btnFoodLogOnClick(View v) {
+        Intent intent = new Intent(HomeActivity.this, AddFoodActivity.class);
+        intent.putExtra("userID", Integer.toString(selectedUser.getUserID()));
+        startActivity(intent);
+    }
+
+    public void btnSearchExerciseOnClick(View v) {
         Intent intent = new Intent(HomeActivity.this, AddExerciseActivity.class);
         intent.putExtra("userID", Integer.toString(selectedUser.getUserID()));
         startActivity(intent);
     }
 
-    public void btnHistoryOnClick(View v) {
-        Intent intent = new Intent(HomeActivity.this, HistoryActivity.class);
+    public void btnExerciseLogOnClick(View v) {
+        Intent intent = new Intent(HomeActivity.this, AddExerciseActivity.class);
         intent.putExtra("userID", Integer.toString(selectedUser.getUserID()));
         startActivity(intent);
     }
 
-    public void buttonProfileOnClick(View v) {
-        Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
-        intent.putExtra("userID", Integer.toString(selectedUser.getUserID()));
-        startActivity(intent);
-    }
 }
