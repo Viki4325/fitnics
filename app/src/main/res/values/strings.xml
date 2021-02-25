@@ -6,5 +6,18 @@
     <string name="username">Username</string>
     <string name="fatalError">Fatal Error</string>
     <string name="warning">Warning</string>
+    <string name="greeting">Welcome, </string>
+    <string name="caloriesRemaining">Calories Remaining</string>
+    <string name="food">Food</string>
+    <string name="exercise">Exercise</string>
+    <string name="goal">Goal: </string>
+    <string name="remaining">Remaining: </string>
+    <string name="searchFood">Search Food</string>
+    <string name="foodLog">Food Log</string>
+    <string name="searchExercise">Search Exercise</string>
+    <string name="exerciseLog">Exercise Log</string>
+    <string name="history">History</string>
+    <string name="profile">Profile</string>
+    <string name="zero">0</string>
 
 </resources>
