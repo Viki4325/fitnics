@@ -4,7 +4,6 @@ import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.MyDate;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -67,6 +66,10 @@ public class FoodLogPersistenceStub implements FoodLogPersistence{
     @Override
     public String insertFoodLog(FoodLog foodLog) {
         if (!checkInvariant(foodLog))
+            return "Fail";
+
+        // if there exists same food log already, to not allow it to be inserted
+        if (getFoodLog(foodLog.getUserID(), foodLog.getFoodID(), foodLog.getDate()) != null)
             return "Fail";
 
         foodLogs.add(foodLog);

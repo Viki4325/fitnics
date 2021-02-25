@@ -44,7 +44,10 @@ public class AccessExerciseLogs {
 
     public int getUserTotalDailyBurned(int userID, MyDate date) {
         List<ExerciseLog> logs = getExerciseLogByUserDate(userID, date);
-        return getUserTotalDailyBurned(logs, exercisePersistence);
+        int result = 0;
+        if (logs.size() > 0)
+            result = getUserTotalDailyBurned(logs, exercisePersistence);
+        return result;
     }
 
     private static int getUserTotalDailyBurned(List<ExerciseLog> logs, ExercisePersistence exercises) {

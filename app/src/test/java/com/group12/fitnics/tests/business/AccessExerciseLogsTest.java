@@ -36,6 +36,8 @@ public class AccessExerciseLogsTest extends TestCase {
 
         log = accessExerciseLogs.getExerciseLog(0, 4, date); // not found
         assertNull(log);
+        log = accessExerciseLogs.getExerciseLog(2, 1, date); // not found
+        assertNull(log);
 
         System.out.println("Finished testGetExerciseLog");
     }
@@ -82,9 +84,10 @@ public class AccessExerciseLogsTest extends TestCase {
         System.out.println("\nStarting testInsertExerciseLog");
         MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
         ExerciseLog log1 = new ExerciseLog(0, 2, date, 10);
-        ExerciseLog log2 = new ExerciseLog(-1, 2, date, 10); // invalid food log
-        ExerciseLog log3 = new ExerciseLog(1, -2, date, 10); // invalid food log
-        ExerciseLog log4 = new ExerciseLog(1, 2, date, -10); // invalid food log
+        ExerciseLog log2 = new ExerciseLog(-1, 2, date, 10); // invalid exercise log
+        ExerciseLog log3 = new ExerciseLog(1, -2, date, 10); // invalid exercise log
+        ExerciseLog log4 = new ExerciseLog(1, 2, date, -10); // invalid exercise log
+        ExerciseLog log5 = new ExerciseLog(0, 3, date, 7); // exercise log that already exists
 
         String result = accessExerciseLogs.insertExerciseLog(log1);
         assertEquals(2, accessExerciseLogs.getExerciseLogByUserDate(0, date).size());
@@ -95,6 +98,8 @@ public class AccessExerciseLogsTest extends TestCase {
         result = accessExerciseLogs.insertExerciseLog(log3);
         assertEquals("Fail", result);
         result = accessExerciseLogs.insertExerciseLog(log4);
+        assertEquals("Fail", result);
+        result = accessExerciseLogs.insertExerciseLog(log5);
         assertEquals("Fail", result);
 
         // delete what we just inserted
@@ -115,6 +120,8 @@ public class AccessExerciseLogsTest extends TestCase {
 
         result = accessExerciseLogs.deleteExerciseLog(0, 4, date); // not found
         assertEquals("Fail", result);
+        result = accessExerciseLogs.deleteExerciseLog(1, 2, date); // not found
+        assertEquals("Fail", result);
 
         // add what we just deleted
         assertEquals("Success", accessExerciseLogs.insertExerciseLog(new ExerciseLog(0, 3, date, 10)));
@@ -128,9 +135,9 @@ public class AccessExerciseLogsTest extends TestCase {
         System.out.println("\nStarting testUpdateExerciseLog");
         MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
         ExerciseLog log1 = new ExerciseLog(1, 1, date, 10);
-        ExerciseLog log2 = new ExerciseLog(-1, 2, date, 10); // invalid food log
-        ExerciseLog log3 = new ExerciseLog(1, -2, date, 10); // invalid food log
-        ExerciseLog log4 = new ExerciseLog(1, 2, date, -10); // invalid food log
+        ExerciseLog log2 = new ExerciseLog(-1, 2, date, 10); // invalid exercise log
+        ExerciseLog log3 = new ExerciseLog(1, -2, date, 10); // invalid exercise log
+        ExerciseLog log4 = new ExerciseLog(1, 2, date, -10); // invalid exercise log
 
         String result = accessExerciseLogs.updateExerciseLog(1, 1, date, log1);
         assertEquals("Success", result);
@@ -157,10 +164,16 @@ public class AccessExerciseLogsTest extends TestCase {
     @Test
     public void testGetUserTotalDailyBurned() {
         System.out.println("\nStarting testGetUserTotalDailyBurned");
-        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
+        MyDate date1 = new MyDate(new GregorianCalendar(2021, 0, 1));
+        MyDate date2 = new MyDate(new GregorianCalendar(2021, 7, 19));
 
-        int result = accessExerciseLogs.getUserTotalDailyBurned(2, date);
+        int result = accessExerciseLogs.getUserTotalDailyBurned(2, date1);
         assertEquals(1600, result);
+
+        result = accessExerciseLogs.getUserTotalDailyBurned(3, date1); // no logs
+        assertEquals(0, result);
+        result = accessExerciseLogs.getUserTotalDailyBurned(1, date2); // no logs
+        assertEquals(0, result);
 
         System.out.println("Finished testGetUserTotalDailyBurned");
     }

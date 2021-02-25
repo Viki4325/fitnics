@@ -36,6 +36,8 @@ public class AccessFoodLogsTest extends TestCase {
 
         log = accessFoodLogs.getFoodLog(0, 4, date); // not found
         assertNull(log);
+        log = accessFoodLogs.getFoodLog(2, 3, date); // not found
+        assertNull(log);
 
         System.out.println("Finished testGetFoodLog");
     }
@@ -85,6 +87,7 @@ public class AccessFoodLogsTest extends TestCase {
         FoodLog log2 = new FoodLog(-1, 2, date, 200); // invalid food log
         FoodLog log3 = new FoodLog(1, -2, date, 200); // invalid food log
         FoodLog log4 = new FoodLog(1, 2, date, -10); // invalid food log
+        FoodLog log5 = new FoodLog(0, 1, date, 77); // food log that already exists
 
         String result = accessFoodLogs.insertFoodLog(log1);
         assertEquals(1, accessFoodLogs.getFoodLogByUserDate(1, date).size());
@@ -95,6 +98,8 @@ public class AccessFoodLogsTest extends TestCase {
         result = accessFoodLogs.insertFoodLog(log3);
         assertEquals("Fail", result);
         result = accessFoodLogs.insertFoodLog(log4);
+        assertEquals("Fail", result);
+        result = accessFoodLogs.insertFoodLog(log5);
         assertEquals("Fail", result);
 
         // delete what we just inserted
@@ -114,6 +119,8 @@ public class AccessFoodLogsTest extends TestCase {
         assertEquals("Success", result);
 
         result = accessFoodLogs.deleteFoodLog(0, 4, date); // not found
+        assertEquals("Fail", result);
+        result = accessFoodLogs.deleteFoodLog(1, 3, date); // not found
         assertEquals("Fail", result);
 
         // add what we just deleted
@@ -157,10 +164,18 @@ public class AccessFoodLogsTest extends TestCase {
     @Test
     public void testGetUserTotalDailyIntake() {
         System.out.println("\nStarting testGetUserTotalDailyIntake");
-        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
+        MyDate date1 = new MyDate(new GregorianCalendar(2021, 0, 1));
+        MyDate date2 = new MyDate(new GregorianCalendar(2021, 7, 19));
 
-        int result = accessFoodLogs.getUserTotalDailyIntake(0, date);
+        int result = accessFoodLogs.getUserTotalDailyIntake(0, date1);
         assertEquals(164, result);
+        result = accessFoodLogs.getUserTotalDailyIntake(2, date1);
+        assertEquals(699, result);
+
+        result = accessFoodLogs.getUserTotalDailyIntake(3, date1); // no logs
+        assertEquals(0, result);
+        result = accessFoodLogs.getUserTotalDailyIntake(0, date2); // no logs
+        assertEquals(0, result);
 
         System.out.println("Finished testGetUserTotalDailyIntake");
     }

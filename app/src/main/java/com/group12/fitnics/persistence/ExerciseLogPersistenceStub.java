@@ -25,6 +25,7 @@ public class ExerciseLogPersistenceStub implements ExerciseLogPersistence{
         exerciseLogs.add(new ExerciseLog(2, 3, date1, 5));
         exerciseLogs.add(new ExerciseLog(2, 6, date1, 10));
         exerciseLogs.add(new ExerciseLog(2, 7, date2, 10));
+        exerciseLogs.add(new ExerciseLog(3, 4, date2, 10));
     }
 
 
@@ -66,6 +67,10 @@ public class ExerciseLogPersistenceStub implements ExerciseLogPersistence{
     @Override
     public String insertExerciseLog(ExerciseLog exerciseLog) {
         if (!checkInvariant(exerciseLog))
+            return "Fail";
+
+        // if there exists same food log already, to not allow it to be inserted
+        if (getExerciseLog(exerciseLog.getUserID(), exerciseLog.getExerciseID(), exerciseLog.getDate()) != null)
             return "Fail";
 
         exerciseLogs.add(exerciseLog);

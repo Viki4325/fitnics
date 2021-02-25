@@ -44,7 +44,10 @@ public class AccessFoodLogs {
 
     public int getUserTotalDailyIntake(int userID, MyDate date) {
         List<FoodLog> logs = getFoodLogByUserDate(userID, date);
-        return getUserTotalDailyIntake(logs, foodPersistence);
+        int result = 0;
+        if (logs.size() > 0)
+            result = getUserTotalDailyIntake(logs, foodPersistence);
+        return result;
     }
 
     private static int getUserTotalDailyIntake(List<FoodLog> logs, FoodPersistence foods) {
