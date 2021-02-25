@@ -6,10 +6,25 @@
     tools:context=".presentation.HomeActivity">
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/textGreeting"
+        android:layout_width="176dp"
         android:layout_height="wrap_content"
         android:text="Hello"
-        android:textSize="40sp"
-        android:id="@+id/textGreeting"/>
+        android:textSize="40sp" />
 
+    <Button
+        android:id="@+id/Search_food"
+        android:layout_width="137dp"
+        android:layout_height="89dp"
+        android:layout_weight="1"
+        android:onClick="btnSearchFoodOnClick"
+        android:text="@string/add_food_to_your_log" />
+
+    <Button
+        android:id="@+id/food_log"
+        android:layout_width="116dp"
+        android:layout_height="89dp"
+        android:layout_weight="1"
+        android:onClick="btnFoodLog"
+        android:text="@string/view_food_log" />
 </LinearLayout>

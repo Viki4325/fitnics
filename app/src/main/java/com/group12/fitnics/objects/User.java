@@ -1,4 +1,7 @@
 package com.group12.fitnics.objects;
+import com.group12.fitnics.objects.FoodLog;
+
+import java.util.ArrayList;
 
 public class User {
     private int userID;
@@ -10,6 +13,7 @@ public class User {
     private char gender;
     private int dailyCaloricNeeds;
     private static int lastUserID = -1;
+    ArrayList<FoodLog> foodLogs;
 
     public User(String username, String birthday, int activityLevel, double weight, double height, char gender) {
         this.username = username;
@@ -89,4 +93,11 @@ public class User {
     public void setWeight(double weight) {
         this.weight = weight;
     }
-}
+
+    public void addFoodLog(FoodLog newLog){
+        foodLogs.add(newLog);
+    }
+
+    public ArrayList<FoodLog> getFoodLogList(){
+        return foodLogs;
+    }

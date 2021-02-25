@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".presentation.SearchFoodActivity">
+    tools:context=".presentation.FoodLogActivity">
 
     <ListView
-        android:id="@+id/Search_food"
+        android:id="@+id/food_log"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
