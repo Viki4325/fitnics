@@ -12,7 +12,7 @@ public class MyDate {
 
     public boolean equals(MyDate other) {
         return (other.getYear() == dateInfo.get(Calendar.YEAR)) &&
-               (other.getMonth() == dateInfo.get(Calendar.MONTH)) &&
+               (other.getMonth() == (dateInfo.get(Calendar.MONTH)) + 1) &&
                (other.getDate() == dateInfo.get(Calendar.DATE));
     }
 
@@ -29,7 +29,7 @@ public class MyDate {
     }
 
     public int getMonth() {
-        return dateInfo.get(Calendar.MONTH);
+        return dateInfo.get(Calendar.MONTH) + 1;
     }
 
     public int getDate() {

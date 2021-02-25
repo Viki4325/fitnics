@@ -16,15 +16,15 @@ public class ExerciseLogPersistenceStub implements ExerciseLogPersistence{
     public ExerciseLogPersistenceStub() {
         exerciseLogs = new ArrayList<>();
 
-        MyDate date1 = new MyDate(new GregorianCalendar(21, 1, 1));
-        MyDate date2 = new MyDate(new GregorianCalendar(21, 1, 2));
+        MyDate date1 = new MyDate(new GregorianCalendar(2021, 0, 1));
+        MyDate date2 = new MyDate(new GregorianCalendar(2021, 0, 2));
 
-        exerciseLogs.add(new ExerciseLog(0, 1, date1, 10));
-        exerciseLogs.add(new ExerciseLog(1, 2, date1, 5));
-        exerciseLogs.add(new ExerciseLog(1, 3, date2, 10));
-        exerciseLogs.add(new ExerciseLog(2, 1, date1, 5));
-        exerciseLogs.add(new ExerciseLog(2, 2, date1, 10));
-        exerciseLogs.add(new ExerciseLog(2, 5, date2, 10));
+        exerciseLogs.add(new ExerciseLog(0, 3, date1, 10));
+        exerciseLogs.add(new ExerciseLog(1, 1, date1, 5));
+        exerciseLogs.add(new ExerciseLog(1, 2, date2, 10));
+        exerciseLogs.add(new ExerciseLog(2, 3, date1, 5));
+        exerciseLogs.add(new ExerciseLog(2, 6, date1, 10));
+        exerciseLogs.add(new ExerciseLog(2, 7, date2, 10));
     }
 
 

@@ -25,13 +25,13 @@ public class AccessExerciseLogsTest extends TestCase {
     @Test
     public void testGetExerciseLog() {
         System.out.println("\nStarting testGetExerciseLog");
-        MyDate date = new MyDate(new GregorianCalendar(2021, 1, 1));
+        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
         ExerciseLog log = accessExerciseLogs.getExerciseLog(0, 3, date);
 
         assertNotNull(log);
         assertEquals(0, log.getUserID());
         assertEquals(3, log.getExerciseID());
-        assertEquals(date, log.getDate());
+        assertEquals(date.toString(), log.getDate().toString());
         assertEquals(10, log.getMinutes());
 
         log = accessExerciseLogs.getExerciseLog(0, 4, date); // not found
@@ -52,7 +52,7 @@ public class AccessExerciseLogsTest extends TestCase {
         }
 
         lists = accessExerciseLogs.getExerciseLogByUser(4); // not found
-        assertNull(lists);
+        assertEquals(0, lists.size());
 
         System.out.println("Finished testGetExerciseLogByUser");
     }
@@ -60,7 +60,7 @@ public class AccessExerciseLogsTest extends TestCase {
     @Test
     public void testGetExerciseLogByUserDate() {
         System.out.println("\nStarting testGetExerciseLogByUserDate");
-        MyDate date = new MyDate(new GregorianCalendar(21, 1, 1));
+        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
         List<ExerciseLog> lists = accessExerciseLogs.getExerciseLogByUserDate(2, date);
 
         assertNotNull(lists);
@@ -70,9 +70,9 @@ public class AccessExerciseLogsTest extends TestCase {
         }
 
         lists = accessExerciseLogs.getExerciseLogByUserDate(3, date); // not found
-        assertNull(lists);
+        assertEquals(0, lists.size());
         lists = accessExerciseLogs.getExerciseLogByUserDate(4, date); // not found
-        assertNull(lists);
+        assertEquals(0, lists.size());
 
         System.out.println("Finished testGetExerciseLogByUserDate");
     }
@@ -80,14 +80,14 @@ public class AccessExerciseLogsTest extends TestCase {
     @Test
     public void testInsertExerciseLog() {
         System.out.println("\nStarting testInsertExerciseLog");
-        MyDate date = new MyDate(new GregorianCalendar(21, 1, 1));
+        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
         ExerciseLog log1 = new ExerciseLog(0, 2, date, 10);
         ExerciseLog log2 = new ExerciseLog(-1, 2, date, 10); // invalid food log
         ExerciseLog log3 = new ExerciseLog(1, -2, date, 10); // invalid food log
         ExerciseLog log4 = new ExerciseLog(1, 2, date, -10); // invalid food log
 
         String result = accessExerciseLogs.insertExerciseLog(log1);
-        assertEquals(2, accessExerciseLogs.getExerciseLogByUserDate(1, date).size());
+        assertEquals(2, accessExerciseLogs.getExerciseLogByUserDate(0, date).size());
         assertEquals("Success", result);
 
         result = accessExerciseLogs.insertExerciseLog(log2);
@@ -107,7 +107,7 @@ public class AccessExerciseLogsTest extends TestCase {
     @Test
     public void testDeleteExerciseLog() {
         System.out.println("\nStarting testDeleteExerciseLog");
-        MyDate date = new MyDate(new GregorianCalendar(21, 1, 1));
+        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
 
         String result = accessExerciseLogs.deleteExerciseLog(0, 3, date);
         assertNull(accessExerciseLogs.getExerciseLog(0, 3, date));
@@ -126,7 +126,7 @@ public class AccessExerciseLogsTest extends TestCase {
     @Test
     public void testUpdateExerciseLog() {
         System.out.println("\nStarting testUpdateExerciseLog");
-        MyDate date = new MyDate(new GregorianCalendar(21, 1, 1));
+        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
         ExerciseLog log1 = new ExerciseLog(1, 1, date, 10);
         ExerciseLog log2 = new ExerciseLog(-1, 2, date, 10); // invalid food log
         ExerciseLog log3 = new ExerciseLog(1, -2, date, 10); // invalid food log
@@ -148,7 +148,7 @@ public class AccessExerciseLogsTest extends TestCase {
         // un-do the update
         result = accessExerciseLogs.updateExerciseLog(1, 1, date, new ExerciseLog(1, 1, date,5));
         assertEquals("Success", result);
-        assertEquals(5, accessExerciseLogs.getExerciseLog(0, 1, date).getMinutes());
+        assertEquals(5, accessExerciseLogs.getExerciseLog(1, 1, date).getMinutes());
 
         System.out.println("Finished testUpdateExerciseLog");
     }
@@ -157,7 +157,7 @@ public class AccessExerciseLogsTest extends TestCase {
     @Test
     public void testGetUserTotalDailyBurned() {
         System.out.println("\nStarting testGetUserTotalDailyBurned");
-        MyDate date = new MyDate(new GregorianCalendar(21, 1, 1));
+        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
 
         int result = accessExerciseLogs.getUserTotalDailyBurned(2, date);
         assertEquals(1600, result);

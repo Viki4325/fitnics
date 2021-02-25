@@ -25,13 +25,13 @@ public class AccessFoodLogsTest extends TestCase {
     @Test
     public void testGetFoodLog() {
         System.out.println("\nStarting testGetFoodLog");
-        MyDate date = new MyDate(new GregorianCalendar(2021, 1, 1));
+        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
         FoodLog log = accessFoodLogs.getFoodLog(0, 1, date);
 
         assertNotNull(log);
         assertEquals(0, log.getUserID());
         assertEquals(1, log.getFoodID());
-        assertEquals(date, log.getDate());
+        assertEquals(date.toString(), log.getDate().toString());
         assertEquals(25, log.getGrams());
 
         log = accessFoodLogs.getFoodLog(0, 4, date); // not found
@@ -52,7 +52,7 @@ public class AccessFoodLogsTest extends TestCase {
         }
 
         lists = accessFoodLogs.getFoodLogByUser(4); // not found
-        assertNull(lists);
+        assertEquals(0, lists.size());
 
         System.out.println("Finished testGetFoodLogByUser");
     }
@@ -60,7 +60,7 @@ public class AccessFoodLogsTest extends TestCase {
     @Test
     public void testGetFoodLogByUserDate() {
         System.out.println("\nStarting testGetFoodLogByUserDate");
-        MyDate date = new MyDate(new GregorianCalendar(21, 1, 1));
+        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
         List<FoodLog> lists = accessFoodLogs.getFoodLogByUserDate(2, date);
 
         assertNotNull(lists);
@@ -70,9 +70,9 @@ public class AccessFoodLogsTest extends TestCase {
         }
 
         lists = accessFoodLogs.getFoodLogByUserDate(1, date); // not found
-        assertNull(lists);
+        assertEquals(0, lists.size());
         lists = accessFoodLogs.getFoodLogByUserDate(3, date); // not found
-        assertNull(lists);
+        assertEquals(0, lists.size());
 
         System.out.println("Finished testGetFoodLogByUserDate");
     }
@@ -80,7 +80,7 @@ public class AccessFoodLogsTest extends TestCase {
     @Test
     public void testInsertFoodLog() {
         System.out.println("\nStarting testInsertFoodLog");
-        MyDate date = new MyDate(new GregorianCalendar(21, 1, 1));
+        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
         FoodLog log1 = new FoodLog(1, 2, date, 200);
         FoodLog log2 = new FoodLog(-1, 2, date, 200); // invalid food log
         FoodLog log3 = new FoodLog(1, -2, date, 200); // invalid food log
@@ -107,7 +107,7 @@ public class AccessFoodLogsTest extends TestCase {
     @Test
     public void testDeleteFoodLog() {
         System.out.println("\nStarting testDeleteFoodLog");
-        MyDate date = new MyDate(new GregorianCalendar(21, 1, 1));
+        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
 
         String result = accessFoodLogs.deleteFoodLog(0, 1, date);
         assertNull(accessFoodLogs.getFoodLog(0, 1, date));
@@ -126,7 +126,7 @@ public class AccessFoodLogsTest extends TestCase {
     @Test
     public void testUpdateFoodLog() {
         System.out.println("\nStarting testUpdateFoodLog");
-        MyDate date = new MyDate(new GregorianCalendar(21, 1, 1));
+        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
         FoodLog log1 = new FoodLog(0, 1, date, 100);
         FoodLog log2 = new FoodLog(-1, 2, date, 200); // invalid food log
         FoodLog log3 = new FoodLog(1, -2, date, 200); // invalid food log
@@ -157,7 +157,7 @@ public class AccessFoodLogsTest extends TestCase {
     @Test
     public void testGetUserTotalDailyIntake() {
         System.out.println("\nStarting testGetUserTotalDailyIntake");
-        MyDate date = new MyDate(new GregorianCalendar(21, 1, 1));
+        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
 
         int result = accessFoodLogs.getUserTotalDailyIntake(0, date);
         assertEquals(164, result);

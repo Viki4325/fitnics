@@ -17,7 +17,7 @@ public class MyDateTest {
     @Test
     public void testMyDateCreation() {
         System.out.println("\nStarting testMyDateCreation");
-        Calendar dateInfo = new GregorianCalendar(2021, 1, 15);
+        Calendar dateInfo = new GregorianCalendar(2021, 0, 15);
         MyDate date = new MyDate(dateInfo);
 
         assertNotNull(date);
@@ -32,9 +32,9 @@ public class MyDateTest {
     @Test
     public void testMyDateEquals() {
         System.out.println("\nStarting testMyDateEquals");
-        MyDate date1 = new MyDate(new GregorianCalendar(2021, 1, 1));
-        MyDate date2 = new MyDate(new GregorianCalendar(2021, 1, 1));
-        MyDate date3 = new MyDate(new GregorianCalendar(2021, 1, 2));
+        MyDate date1 = new MyDate(new GregorianCalendar(2021, 0, 1));
+        MyDate date2 = new MyDate(new GregorianCalendar(2021, 0, 1));
+        MyDate date3 = new MyDate(new GregorianCalendar(2021, 0, 2));
 
         assertTrue(date1.equals(date2));
         assertFalse(date1.equals(date3));
@@ -45,11 +45,11 @@ public class MyDateTest {
     @Test
     public void testMyDateSetter() {
         System.out.println("\nStarting testMyDateSetter");
-        MyDate date = new MyDate(new GregorianCalendar(2021, 1, 1));
-        Calendar newDateInfo = new GregorianCalendar(2022, 12, 7);
+        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
+        Calendar newDateInfo = new GregorianCalendar(2022, 11, 7);
 
         date.setDateInfo(newDateInfo);
-        assertEquals(2021, date.getYear());
+        assertEquals(2022, date.getYear());
         assertEquals(12, date.getMonth());
         assertEquals(7, date.getDate());
         assertEquals(newDateInfo, date.getDateInfo());
@@ -60,10 +60,15 @@ public class MyDateTest {
     @Test
     public void testMyDateToString() {
         System.out.println("\nStarting testMyDateToString");
-        Calendar dateInfo = new GregorianCalendar(2021, 1, 15);
+        Calendar dateInfo = new GregorianCalendar(2021, 2, 27);
         MyDate date = new MyDate(dateInfo);
 
-        assertEquals("2021-01-15", date.toString());
+        assertEquals(2021, date.getYear());
+        assertEquals(3, date.getMonth());
+        assertEquals(27, date.getDate());
+        assertEquals(dateInfo, date.getDateInfo());
+
+        assertEquals("2021-03-27", date.toString());
 
         System.out.println("Finished testMyDateToString");
     }
