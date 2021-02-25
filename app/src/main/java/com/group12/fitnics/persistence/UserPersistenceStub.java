@@ -61,13 +61,13 @@ public class UserPersistenceStub implements UserPersistence {
 
     // update a user with userID to the currentUser
     @Override
-    public String updateUser(int userID, User currentUser) {
+    public String updateUser(int userID, User updatedUser) {
         boolean found = false;
         for(int i = 0; i < users.size() && !found; i++) {
             if(users.get(i).getUserID() == userID) {
                 User prevUser = users.get(i);
-                currentUser.setUserID(prevUser.getUserID());
-                users.set(i, currentUser);
+                updatedUser.setUserID(prevUser.getUserID());
+                users.set(i, updatedUser);
                 found = true;
             }
         }

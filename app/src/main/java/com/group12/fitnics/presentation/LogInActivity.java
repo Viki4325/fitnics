@@ -24,7 +24,7 @@ public class LogInActivity extends AppCompatActivity {
 
     public void btnLogInToHomeOnClick(View v) {
         EditText editUsername = (EditText)findViewById(R.id.editUsername);
-        User selectedUser = accessUsers.getUserByUsername(editUsername.getText().toString());
+        User selectedUser = accessUsers.getUserByName(editUsername.getText().toString());
 
         Intent logInToHomeIntent = new Intent(LogInActivity.this, HomeActivity.class);
         logInToHomeIntent.putExtra("username", selectedUser.getUsername());

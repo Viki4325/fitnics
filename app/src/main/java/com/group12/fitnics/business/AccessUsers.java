@@ -23,7 +23,7 @@ public class AccessUsers {
         return userPersistence.getUserByID(id);
     }
 
-    public User getUserByUsername(String username) {
+    public User getUserByName(String username) {
         return userPersistence.getUserByUsername(username);
     }
 
