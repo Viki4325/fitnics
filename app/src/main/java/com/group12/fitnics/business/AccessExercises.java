@@ -67,6 +67,10 @@ public class AccessExercises {
         }
     }
 
+    /*
+    * This method takes in List of exercises.
+    * This is because, the plan is for it to work with an already filtered list.
+    * */
    public List<Exercise> getExerciseBySearch(List<Exercise> exerciseList){
         List<Exercise> searchResults = new ArrayList<>(exerciseList.size());
 
@@ -82,8 +86,32 @@ public class AccessExercises {
         return searchResults;
    }
 
+   public List<Exercise> getExerciseByCategory(String category){
+        if(category != null){
+            return exercisePersistence.getExerciseByCategory(category);
+        }
+        return null;
+   }
+
+   public List<Exercise> getExerciseByLevel(String level){
+        if(level != null){
+            return exercisePersistence.getExerciseByLevel(level);
+        }
+        return null;
+   }
+
    public Exercise getExerciseById(int exerciseId){
-      return exercisePersistence.getExerciseById(exerciseId);
+        if(exerciseId > 0){
+            return exercisePersistence.getExerciseById(exerciseId);
+        }
+        return null;
+   }
+
+   public boolean insertExercise(Exercise exercise){
+        if(exercise != null){
+            return exercisePersistence.insertExercise(exercise);
+        }
+        return false;
    }
 
    public void deleteExercise(Exercise exercise){
