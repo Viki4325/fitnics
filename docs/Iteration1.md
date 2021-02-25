@@ -29,5 +29,5 @@ SOLID
 
 Agile Planning
 --------------
-We found that [updating user information](link) actually had a relatively low priority compared to other user stories for Iteration 1, so it was pushed to the next iteration.
-The [Food Logger](link) and [Exercise Logger](link) that we currently have can show the user a list of food or exercise for the day, but have not implemented a function that allows new items to be added to the lists. Therefore, they are expected to be completed in the next iteration.
+- We found that [updating user information](link) actually had a relatively low priority compared to other user stories for Iteration 1, so it was pushed to the next iteration.
+- The [Food Logger](link) and [Exercise Logger](link) that we currently have can show the user a list of food or exercise for the day, but have not implemented a function that allows new items to be added to the lists. Therefore, they are expected to be completed in the next iteration.
