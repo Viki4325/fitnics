@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fitnics">
+        <activity android:name=".presentation.SignUpActiveLevelActivity"></activity>
+        <activity android:name=".presentation.SignUpInfoActivity" />
         <activity android:name=".presentation.ProfileActivity"></activity>
         <activity android:name=".presentation.HistoryActivity" />
         <activity android:name=".presentation.AddExerciseActivity" />

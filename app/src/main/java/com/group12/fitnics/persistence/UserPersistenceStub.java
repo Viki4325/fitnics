@@ -12,10 +12,10 @@ public class UserPersistenceStub implements UserPersistence {
     public UserPersistenceStub() {
         this.users = new ArrayList<>();
 
-        User alice = new User("alice", "001201", 1, 55, 163, 'F');
-        User bob = new User("bob", "980515", 2, 70, 175, 'M');
-        User carol = new User("carol", "950722", 3, 47, 160, 'F');
-        User david = new User("david", "851127", 1, 50, 160, 'M');
+        User alice = new User("alice", 1, 55, 163, 'F');
+        User bob = new User("bob", 2, 70, 175, 'M');
+        User carol = new User("carol", 3, 47, 160, 'F');
+        User david = new User("david", 1, 50, 160, 'M');
         alice.setUserID(0);
         bob.setUserID(1);
         carol.setUserID(2);
