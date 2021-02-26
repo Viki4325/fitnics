@@ -13,9 +13,9 @@ public class FoodLogPersistenceStub implements FoodLogPersistence{
     public FoodLogPersistenceStub() {
         foodLogs = new ArrayList<>();
 
-        MyDate date1 = new MyDate(new GregorianCalendar(21, 1, 1));
-        MyDate date2 = new MyDate(new GregorianCalendar(21, 1, 2));
-        MyDate date3 = new MyDate(new GregorianCalendar(21, 2, 17));
+        MyDate date1 = new MyDate(new GregorianCalendar(2021, 0, 1));
+        MyDate date2 = new MyDate(new GregorianCalendar(2021, 0, 2));
+        MyDate date3 = new MyDate(new GregorianCalendar(2021, 1, 17));
 
         foodLogs.add(new FoodLog(0, 1, date1, 25));
         foodLogs.add(new FoodLog(0, 2, date1, 200));
@@ -66,6 +66,10 @@ public class FoodLogPersistenceStub implements FoodLogPersistence{
     @Override
     public String insertFoodLog(FoodLog foodLog) {
         if (!checkInvariant(foodLog))
+            return "Fail";
+
+        // if there exists same food log already, to not allow it to be inserted
+        if (getFoodLog(foodLog.getUserID(), foodLog.getFoodID(), foodLog.getDate()) != null)
             return "Fail";
 
         foodLogs.add(foodLog);

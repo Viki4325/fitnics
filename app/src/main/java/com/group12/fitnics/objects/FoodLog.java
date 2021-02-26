@@ -5,7 +5,6 @@ import java.util.Calendar;
 public class FoodLog {
     private int userID;
     private int foodID;
-    private String foodName;
     private MyDate date;
     private int grams;
 

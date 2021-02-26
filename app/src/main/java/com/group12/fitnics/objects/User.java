@@ -6,18 +6,22 @@ import java.util.ArrayList;
 public class User {
     private int userID;
     private String username;
-    private String birthday;
+    private int birthDay;
+    private int birthMonth;
+    private int birthYear;
     private int activityLevel;
     private double weight;
     private double height;
     private char gender;
     private int dailyCaloricNeeds;
+    private int goal;
     private static int lastUserID = -1;
     ArrayList<FoodLog> foodLogs;
 
-    public User(String username, String birthday, int activityLevel, double weight, double height, char gender) {
+    public User(){}
+
+    public User(String username, int activityLevel, double weight, double height, char gender) {
         this.username = username;
-        this.birthday = birthday;
         this.activityLevel = activityLevel;
         this.weight = weight;
         this.height = height;
@@ -40,10 +44,6 @@ public class User {
         return userID;
     }
 
-    public String getBirthday() {
-        return birthday;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -58,10 +58,6 @@ public class User {
 
     public void setActivityLevel(int activityLevel) {
         this.activityLevel = activityLevel;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
     }
 
     public void setDailyCaloricNeeds(int dailyCaloricNeeds) {
@@ -94,10 +90,35 @@ public class User {
         this.weight = weight;
     }
 
-    public void addFoodLog(FoodLog newLog){
-        foodLogs.add(newLog);
+    public int getBirthDay() {
+        return birthDay;
     }
 
-    public ArrayList<FoodLog> getFoodLogList(){
-        return foodLogs;
+    public int getBirthMonth() {
+        return birthMonth;
     }
+
+    public int getBirthYear() {
+        return birthYear;
+    }
+
+    public int getGoal() {
+        return goal;
+    }
+
+    public void setBirthDay(int birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public void setBirthMonth(int birthMonth) {
+        this.birthMonth = birthMonth;
+    }
+
+    public void setBirthYear(int birthYear) {
+        this.birthYear = birthYear;
+    }
+
+    public void setGoal(int goal) {
+        this.goal = goal;
+    }
+}

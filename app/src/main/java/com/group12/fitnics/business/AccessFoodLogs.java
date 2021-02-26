@@ -42,11 +42,23 @@ public class AccessFoodLogs {
         return foodLogPersistence.deleteFoodLog(userID, foodID, date);
     }
 
-//    public int getUserTotalDailyIntake(int userID, MyDate date) {
-//        List<FoodLog> logs = getFoodLogByUserDate(userID, date);
-//        int total = CalorieHelper.getUserTotalDailyIntake(logs, foodPersistence);
-//        return total;
-//    }
+    public int getUserTotalDailyIntake(int userID, MyDate date) {
+        List<FoodLog> logs = getFoodLogByUserDate(userID, date);
+        int result = 0;
+        if (logs.size() > 0)
+            result = getUserTotalDailyIntake(logs, foodPersistence);
+        return result;
+    }
+
+    private static int getUserTotalDailyIntake(List<FoodLog> logs, FoodPersistence foods) {
+        int total = 0;
+        for (int i = 0; i < logs.size(); i++) {
+            int gram = logs.get(i).getGrams();
+            double caloriesPerGram = foods.getFoodByID(logs.get(i).getFoodID()).getCalories();
+            total += gram * caloriesPerGram;
+        }
+        return total;
+    }
 
 
 }
