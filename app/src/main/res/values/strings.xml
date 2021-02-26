@@ -52,4 +52,8 @@
     <string name="profile">Profile</string>
     <string name="zero">0</string>
 
+    <string name="view_food_log">View Food log</string>
+    <string name="data">data</string>
+    <string name="add_food_to_log">add food to log</string>
+
 </resources>

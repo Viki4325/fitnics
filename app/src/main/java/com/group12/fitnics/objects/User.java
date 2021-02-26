@@ -1,4 +1,7 @@
 package com.group12.fitnics.objects;
+import com.group12.fitnics.objects.FoodLog;
+
+import java.util.ArrayList;
 
 public class User {
     private int userID;
@@ -13,6 +16,7 @@ public class User {
     private int dailyCaloricNeeds;
     private int goal;
     private static int lastUserID = -1;
+    ArrayList<FoodLog> foodLogs;
 
     public User(){}
 
