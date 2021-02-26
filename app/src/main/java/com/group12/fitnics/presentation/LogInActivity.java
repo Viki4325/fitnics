@@ -22,13 +22,21 @@ public class LogInActivity extends AppCompatActivity {
         accessUsers = new AccessUsers();
     }
 
-    public void btnLogInToHomeOnClick(View v) {
-        EditText editUsername = (EditText)findViewById(R.id.editUsername);
-        User selectedUser = accessUsers.getUserByName(editUsername.getText().toString());
-
-        Intent logInToHomeIntent = new Intent(LogInActivity.this, HomeActivity.class);
-        logInToHomeIntent.putExtra("username", selectedUser.getUsername());
-        logInToHomeIntent.putExtra("userID", Integer.toString(selectedUser.getUserID()));
-        startActivity(logInToHomeIntent);
+    public void btnLogInToHomeOnClick(View v) throws Exception {
+        try {
+            EditText editUsername = (EditText) findViewById(R.id.editUsername);
+            User selectedUser = accessUsers.getUserByName(editUsername.getText().toString());
+            if (selectedUser == null) {
+                throw new Exception("Invalid User Name");
+            }
+            Intent logInToHomeIntent = new Intent(LogInActivity.this, HomeActivity.class);
+            logInToHomeIntent.putExtra("username", selectedUser.getUsername());
+            logInToHomeIntent.putExtra("userID", Integer.toString(selectedUser.getUserID()));
+            startActivity(logInToHomeIntent);
+        }
+        catch (Exception e){
+            Toast toast = Toast.makeText(LogInActivity.this,"Invalid User Name", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 }
