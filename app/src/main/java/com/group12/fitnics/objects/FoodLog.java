@@ -33,7 +33,7 @@ public class FoodLog {
     public void setDate(MyDate date) { this.date = date; }
     public void setGrams(int grams) { this.grams = grams; }
 
-    ppublic String toString(){
+    public String toString(){
         AccessFood search = new AccessFood();
         Food food = search.searchByFoodID(foodID);
 
