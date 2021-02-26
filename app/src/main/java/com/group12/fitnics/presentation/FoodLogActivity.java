@@ -12,7 +12,6 @@ import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.User;
-import com.group12.fitnics.persistence.FoodLogPersistenceStub;
 
 import java.util.ArrayList;
 

@@ -42,19 +42,25 @@
         android:id="@+id/textRemaining"/>
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:text="@string/food"
             android:textSize="20sp"
             android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/food"
+            android:textSize="20sp"
+            android:id="@+id/textTotalIntake"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnSearchFood"
@@ -72,19 +78,25 @@
         android:text="@string/foodLog"
         android:onClick="btnFoodLogOnClick"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:text="@string/exercise"
             android:textSize="20sp"
             android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/exercise"
+            android:textSize="20sp"
+            android:id="@+id/textTotalBurned"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
     <Button
