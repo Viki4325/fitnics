@@ -34,7 +34,7 @@ A feature called Food finder and Logger was partially done.
 
 Exceptional code
 ----------------
-
+[LINK](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/LogInActivity.java) We throw an Exception when the user tries to login with an invalid username. An error message is displayed to notify the user trying to log in.
 
 
 Branching
