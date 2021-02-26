@@ -1,20 +1,19 @@
 package com.group12.fitnics.business;
 
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
 import com.group12.fitnics.application.Services;
 import com.group12.fitnics.objects.Exercise;
-import com.group12.fitnics.persistence.ExercisePersistence;
+import com.group12.fitnics.persistence.IExercisePersistence;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class AccessExercises {
-    private final ExercisePersistence exercisePersistence;
+    private final IExercisePersistence exercisePersistence;
     private String searchPhrase;
     private List<String> filter;
 

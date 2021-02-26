@@ -3,15 +3,15 @@ package com.group12.fitnics.business;
 import com.group12.fitnics.application.Services;
 import com.group12.fitnics.objects.ExerciseLog;
 import com.group12.fitnics.objects.MyDate;
-import com.group12.fitnics.persistence.ExerciseLogPersistence;
-import com.group12.fitnics.persistence.ExercisePersistence;
+import com.group12.fitnics.persistence.IExerciseLogPersistence;
+import com.group12.fitnics.persistence.IExercisePersistence;
 
 import java.util.List;
 
 public class AccessExerciseLogs {
 
-    private ExerciseLogPersistence exerciseLogPersistence;
-    private ExercisePersistence exercisePersistence;
+    private IExerciseLogPersistence exerciseLogPersistence;
+    private IExercisePersistence exercisePersistence;
 
     public AccessExerciseLogs() {
         exerciseLogPersistence = Services.getExerciseLogPersistence();
@@ -50,7 +50,7 @@ public class AccessExerciseLogs {
         return result;
     }
 
-    private static int getUserTotalDailyBurned(List<ExerciseLog> logs, ExercisePersistence exercises) {
+    private static int getUserTotalDailyBurned(List<ExerciseLog> logs, IExercisePersistence exercises) {
         int total = 0;
         for (int i = 0; i < logs.size(); i++) {
             int mins = logs.get(i).getMinutes();

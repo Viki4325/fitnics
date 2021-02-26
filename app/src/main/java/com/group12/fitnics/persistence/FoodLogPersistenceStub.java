@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class FoodLogPersistenceStub implements FoodLogPersistence{
+public class FoodLogPersistenceStub implements IFoodLogPersistence {
     private List<FoodLog> foodLogs;
 
     public FoodLogPersistenceStub() {

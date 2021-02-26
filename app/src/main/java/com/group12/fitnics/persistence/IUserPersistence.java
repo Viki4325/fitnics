@@ -5,7 +5,7 @@ import com.group12.fitnics.objects.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface UserPersistence {
+public interface IUserPersistence {
     List<User> getUserSequential();
 
     User getUserByID(final int userID);

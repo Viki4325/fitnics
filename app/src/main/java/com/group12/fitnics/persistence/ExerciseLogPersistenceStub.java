@@ -1,15 +1,13 @@
 package com.group12.fitnics.persistence;
 
 import com.group12.fitnics.objects.ExerciseLog;
-import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.MyDate;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class ExerciseLogPersistenceStub implements ExerciseLogPersistence{
+public class ExerciseLogPersistenceStub implements IExerciseLogPersistence {
 
     private List<ExerciseLog> exerciseLogs;
 

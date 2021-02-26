@@ -2,14 +2,13 @@ package com.group12.fitnics.business;
 
 import com.group12.fitnics.application.Services;
 import com.group12.fitnics.objects.User;
-import com.group12.fitnics.persistence.UserPersistence;
+import com.group12.fitnics.persistence.IUserPersistence;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AccessUsers {
 
-    private UserPersistence userPersistence;
+    private IUserPersistence userPersistence;
 
     public AccessUsers() {
         userPersistence = Services.getUserPersistence();

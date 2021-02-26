@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class UserPersistenceStub implements UserPersistence {
+public class UserPersistenceStub implements IUserPersistence {
     private List<User> users;
 
     public UserPersistenceStub() {
