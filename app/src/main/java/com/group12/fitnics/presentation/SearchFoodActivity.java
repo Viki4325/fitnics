@@ -63,9 +63,4 @@ public class SearchFoodActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void btnAddFoodOnClick(View v) {
-        Intent intent = new Intent(SearchFoodActivity.this, AddFoodActivity.class);
-        intent.putExtra("userID", Integer.toString(selectedUser.getUserID()));
-        startActivity(intent);
-    }
 }
