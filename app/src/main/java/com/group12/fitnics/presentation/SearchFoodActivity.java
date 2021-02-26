@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessFood;
 import com.group12.fitnics.objects.User;
-import com.group12.fitnics.persistence.FoodPersistenceStub;
 import com.group12.fitnics.objects.Food;
 
 public class SearchFoodActivity extends AppCompatActivity {

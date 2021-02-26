@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
         int burned = calculateBurned();
         paintGreeting();
         paintCalorieGoal();
-        paintCalorieRemaining(intake, burned);
+        paintCaloriesInfo(intake, burned);
     }
 
     private int calculateIntake() {
@@ -63,11 +63,16 @@ public class HomeActivity extends AppCompatActivity {
         textGoal.setText("Goal: " + selectedUser.getDailyCaloricNeeds());
     }
 
-    private void paintCalorieRemaining(int intake, int burned) {
+    private void paintCaloriesInfo(int intake, int burned) {
         TextView textRemaining = findViewById(R.id.textRemaining);
+        TextView textTotalIntake = findViewById(R.id.textTotalIntake);
+        TextView textTotalBurned = findViewById(R.id.textTotalBurned);
+
         int goal = selectedUser.getDailyCaloricNeeds();
         int remaining = goal - intake + burned;
-        textRemaining.setText("Remaining: " + remaining);
+        textRemaining.setText("Remaining: " + remaining + " calories");
+        textTotalIntake.setText(intake + " calories");
+        textTotalBurned.setText(burned + " calories");
     }
 
 
