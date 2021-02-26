@@ -4,7 +4,7 @@ import com.group12.fitnics.objects.Exercise;
 
 import java.util.List;
 
-public interface ExercisePersistence {
+public interface IExercisePersistence {
 
     List<Exercise> getExerciseList();
 

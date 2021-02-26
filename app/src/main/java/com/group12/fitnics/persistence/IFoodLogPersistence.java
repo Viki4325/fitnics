@@ -5,7 +5,7 @@ import com.group12.fitnics.objects.MyDate;
 
 import java.util.List;
 
-public interface FoodLogPersistence {
+public interface IFoodLogPersistence {
 
     FoodLog getFoodLog(final int userID, final int exerciseID, final MyDate date);
 

@@ -7,14 +7,11 @@ import androidx.annotation.RequiresApi;
 import com.group12.fitnics.objects.Exercise;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class ExercisePersistenceStub implements ExercisePersistence {
+public class ExercisePersistenceStub implements IExercisePersistence {
     private List<Exercise> exerciseList;
 
     public ExercisePersistenceStub(){

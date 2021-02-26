@@ -4,7 +4,7 @@ import com.group12.fitnics.objects.Food;
 
 import java.util.ArrayList;
 
-public interface FoodPersistence {
+public interface IFoodPersistence {
     ArrayList<Food> getFoodSequential();
 
     Food getFoodByID(final int foodID);

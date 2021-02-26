@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExercises;
@@ -19,7 +17,7 @@ import com.group12.fitnics.presentation.adapters.ExerciseAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class searchExerciseActivity extends AppCompatActivity {
+public class SearchExerciseActivity extends AppCompatActivity {
 
     AccessExercises accessExercises = new AccessExercises();
     private ListView exerciseListView;

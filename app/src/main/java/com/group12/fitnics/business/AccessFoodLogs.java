@@ -3,15 +3,15 @@ package com.group12.fitnics.business;
 import com.group12.fitnics.application.Services;
 import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.MyDate;
-import com.group12.fitnics.persistence.FoodLogPersistence;
-import com.group12.fitnics.persistence.FoodPersistence;
+import com.group12.fitnics.persistence.IFoodLogPersistence;
+import com.group12.fitnics.persistence.IFoodPersistence;
 
 import java.util.List;
 
 public class AccessFoodLogs {
 
-    private FoodLogPersistence foodLogPersistence;
-    private FoodPersistence foodPersistence;
+    private IFoodLogPersistence foodLogPersistence;
+    private IFoodPersistence foodPersistence;
 
     public AccessFoodLogs() {
         foodLogPersistence = Services.getFoodLogPersistence();
@@ -50,7 +50,7 @@ public class AccessFoodLogs {
         return result;
     }
 
-    private static int getUserTotalDailyIntake(List<FoodLog> logs, FoodPersistence foods) {
+    private static int getUserTotalDailyIntake(List<FoodLog> logs, IFoodPersistence foods) {
         int total = 0;
         for (int i = 0; i < logs.size(); i++) {
             int gram = logs.get(i).getGrams();

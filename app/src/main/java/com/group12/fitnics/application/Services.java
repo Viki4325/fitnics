@@ -1,53 +1,53 @@
 package com.group12.fitnics.application;
 
-import com.group12.fitnics.persistence.ExerciseLogPersistence;
+import com.group12.fitnics.persistence.IExerciseLogPersistence;
 import com.group12.fitnics.persistence.ExerciseLogPersistenceStub;
-import com.group12.fitnics.persistence.ExercisePersistence;
+import com.group12.fitnics.persistence.IExercisePersistence;
 import com.group12.fitnics.persistence.ExercisePersistenceStub;
-import com.group12.fitnics.persistence.FoodLogPersistence;
+import com.group12.fitnics.persistence.IFoodLogPersistence;
 import com.group12.fitnics.persistence.FoodLogPersistenceStub;
-import com.group12.fitnics.persistence.FoodPersistence;
+import com.group12.fitnics.persistence.IFoodPersistence;
 import com.group12.fitnics.persistence.FoodPersistenceStub;
-import com.group12.fitnics.persistence.UserPersistence;
+import com.group12.fitnics.persistence.IUserPersistence;
 import com.group12.fitnics.persistence.UserPersistenceStub;
 
 public class Services {
 
-    private static UserPersistence userPersistence = null;
-    private static FoodLogPersistence foodLogPersistence = null;
-    private static ExerciseLogPersistence exerciseLogPersistence = null;
-    private static FoodPersistence foodPersistence = null;
-    private static ExercisePersistence exercisePersistence = null;
+    private static IUserPersistence userPersistence = null;
+    private static IFoodLogPersistence foodLogPersistence = null;
+    private static IExerciseLogPersistence exerciseLogPersistence = null;
+    private static IFoodPersistence foodPersistence = null;
+    private static IExercisePersistence exercisePersistence = null;
 
-    public static UserPersistence getUserPersistence() {
+    public static IUserPersistence getUserPersistence() {
         if (userPersistence == null) {
             userPersistence = new UserPersistenceStub();
         }
         return userPersistence;
     }
 
-    public static FoodLogPersistence getFoodLogPersistence() {
+    public static IFoodLogPersistence getFoodLogPersistence() {
         if (foodLogPersistence == null) {
             foodLogPersistence = new FoodLogPersistenceStub();
         }
         return foodLogPersistence;
     }
 
-    public static ExerciseLogPersistence getExerciseLogPersistence() {
+    public static IExerciseLogPersistence getExerciseLogPersistence() {
         if (exerciseLogPersistence == null) {
             exerciseLogPersistence = new ExerciseLogPersistenceStub();
         }
         return exerciseLogPersistence;
     }
 
-    public static FoodPersistence getFoodPersistence() {
+    public static IFoodPersistence getFoodPersistence() {
         if (foodPersistence == null) {
             foodPersistence = new FoodPersistenceStub();
         }
         return foodPersistence;
     }
 
-    public static ExercisePersistence getExercisePersistence() {
+    public static IExercisePersistence getExercisePersistence() {
         if (exercisePersistence == null) {
             exercisePersistence = new ExercisePersistenceStub();
         }

@@ -4,7 +4,7 @@ import com.group12.fitnics.objects.Food;
 
 import java.util.ArrayList;
 
-public class FoodPersistenceStub implements FoodPersistence {
+public class FoodPersistenceStub implements IFoodPersistence {
     private ArrayList<Food> foods;
 
     public FoodPersistenceStub() {

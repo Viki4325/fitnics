@@ -2,12 +2,11 @@ package com.group12.fitnics.business;
 
 import com.group12.fitnics.application.Services;
 import com.group12.fitnics.objects.Food;
-import com.group12.fitnics.persistence.FoodPersistence;
-import com.group12.fitnics.persistence.FoodPersistenceStub;
+import com.group12.fitnics.persistence.IFoodPersistence;
 
 public class AccessFood{
 
-    FoodPersistence foodList;
+    IFoodPersistence foodList;
     public AccessFood(){
         foodList = Services.getFoodPersistence();
     }
@@ -24,12 +23,8 @@ public class AccessFood{
         return result;
     }
     
-    public FoodPersistence getFoodList() {
+    public IFoodPersistence getFoodList() {
         return foodList;
-    }
-
-    public void setFoodList(FoodPersistence foodList) {
-        this.foodList = foodList;
     }
     
     public void addFood(Food newFood){

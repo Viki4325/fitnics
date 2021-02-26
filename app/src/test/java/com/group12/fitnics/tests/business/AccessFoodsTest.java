@@ -10,11 +10,13 @@ import static org.junit.Assert.*;
 public class AccessFoodsTest {
     private Food food;
     AccessFood accessFood;
+
     @Before
     public void setUp() throws Exception {
         accessFood = new AccessFood();
         food = new Food(10, "Orange", 1.5);
     }
+
     @Test
     // test search by food name
     public void TestSearchByFoodName(){
@@ -24,9 +26,8 @@ public class AccessFoodsTest {
         assertEquals(food.getCalories(), 2.33,0.01);
         assertSame(food.getName(), "Bread");
         System.out.println("Finished TestSearchByFoodName");
-
-
     }
+
     @Test
     // test search by food id
     public void TestSearchByFoodID(){
@@ -36,8 +37,6 @@ public class AccessFoodsTest {
         assertEquals(food.getCalories(), 0.53,0.01);
         assertSame(food.getName(), "Nonfat Greek yogurt");
         System.out.println("Finished TestSearchByFoodID");
-
-
     }
 
     @Test
@@ -49,8 +48,6 @@ public class AccessFoodsTest {
         assertEquals(test.getCalories(), 1.5,0.01);
         assertSame(test.getName(), "Orange");
         System.out.println("Finished TestAddFood");
-
-
     }
 
     @Test
@@ -61,9 +58,8 @@ public class AccessFoodsTest {
         assertTrue(accessFood.deleteFood(food));
         assertNull(accessFood.searchByFoodID(10));
         System.out.println("Finished TestDeleteFood");
-
-
     }
+
     @Test
     public void TestUpdateFood(){
         System.out.println("\nStarting TestUpdateFood");
@@ -75,6 +71,7 @@ public class AccessFoodsTest {
         accessFood.updateFood(food);
         System.out.println("Finished TestUpdateFood");
     }
+
 }
 
 

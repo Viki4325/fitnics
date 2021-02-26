@@ -5,7 +5,7 @@ import com.group12.fitnics.objects.MyDate;
 
 import java.util.List;
 
-public interface ExerciseLogPersistence {
+public interface IExerciseLogPersistence {
 
     ExerciseLog getExerciseLog(final int userID, final int exerciseID, final MyDate date);
 

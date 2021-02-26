@@ -25,18 +25,18 @@ public class IndividualExercise extends AppCompatActivity implements View.OnClic
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_detail);
-        Toolbar toolbar = findViewById(R.id.exerciseDetailToolBar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+//        Toolbar toolbar = findViewById(R.id.exerciseDetailToolBar);
+//        setSupportActionBar(toolbar);
+//        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        addExercise = findViewById(R.id.add_button);
-        addExercise.setOnClickListener(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        addExercise = findViewById(R.id.add_button);
+//        addExercise.setOnClickListener(this);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle info = getIntent().getExtras();
 
-        final CollapsingToolbarLayout layout = findViewById(R.id.exerciseDetailCollapseToolBar);
-        layout.setTitle(info.getString("exerciseTitle"));
+//        final CollapsingToolbarLayout layout = findViewById(R.id.exerciseDetailCollapseToolBar);
+//        layout.setTitle(info.getString("exerciseTitle"));
 
         final TextView title = findViewById(R.id.exerciseTitle);
         title.setText(info.getString("exerciseTitle"));
@@ -59,12 +59,12 @@ public class IndividualExercise extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        addExercise();
+//        addExercise();
     }
 
-    private void addExercise(){
-        Toast.makeText(getApplicationContext(), "Still working on it",Toast.LENGTH_SHORT).show();
-        //once you add an exercise go back to the list to select more
-        onBackPressed();
-    }
+//    private void addExercise(){
+//        Toast.makeText(getApplicationContext(), "Still working on it",Toast.LENGTH_SHORT).show();
+//        //once you add an exercise go back to the list to select more
+//        onBackPressed();
+//    }
 }

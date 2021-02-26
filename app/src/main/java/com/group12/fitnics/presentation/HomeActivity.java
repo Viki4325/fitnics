@@ -14,7 +14,6 @@ import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.objects.MyDate;
 import com.group12.fitnics.objects.User;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class HomeActivity extends AppCompatActivity {
@@ -85,12 +84,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void btnSearchExerciseOnClick(View v) {
-        Intent exerciseFinder = new Intent(HomeActivity.this, searchExerciseActivity.class);
+        Intent exerciseFinder = new Intent(HomeActivity.this, SearchExerciseActivity.class);
         startActivity(exerciseFinder);
     }
 
     public void btnExerciseLogOnClick(View v) {
-        Intent intent = new Intent(HomeActivity.this, AddExerciseActivity.class);
+        Intent intent = new Intent(HomeActivity.this, ExerciseLogActivity.class);
         intent.putExtra("userID", Integer.toString(selectedUser.getUserID()));
         startActivity(intent);
     }
