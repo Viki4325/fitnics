@@ -52,6 +52,7 @@ SOLID violation in the project of group 1: [Link](https://code.cs.umanitoba.ca/3
 Agile Planning
 --------------
 We realized that we had under-estimated the time allocation for feratures and user stories. Some features and user stories were too lengthy to be done as one feature and therefore split into two seperate features, as described below. 
+We also had planned initially that we will make perfect GUIs for each feature we completed as we go to the next feature. We later decided to work with making horizontal and vertical prototypes for the GUIs and will make them perfect starting next Iteration.
 - We changed the description of the [Daily Progress](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/issues/2) feature to be more specific and clear.
 - We found that [updating user information](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/issues/14) actually had a relatively low priority compared to other user stories for Iteration 1, so it was pushed to the next iteration.
 - There were several design opinions on how to calculate [daily caloric needs](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/issues/15), and we don't reach an agreement yet, so this user story was also pushed to the next iteration.
