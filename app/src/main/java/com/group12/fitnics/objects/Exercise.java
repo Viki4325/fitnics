@@ -22,30 +22,28 @@ public class Exercise {
         this.caloriesBurn = caloriesBurn;
     }
 
-    /*
-    * This constructor allows you to set all instance variable INCLUDING exerciseID
-    * */
-    public Exercise(int id, String title, String description, String category, String level, int caloriesBurn) {
-        this.exerciseID = id;
-        this.title = title;
-        this.description = description;
-        this.category = category;
-        this.level = level;
-        this.caloriesBurn = caloriesBurn;
-    }
 
     public int getExerciseID() { return exerciseID; }
 
     public void setExerciseID(int id) {
         this.exerciseID = id;
+        //sync the lastUserId
+        lastExerciseID = this.exerciseID;
     }
 
     /*
-     *   set the exerciseID only when insert an exercise
+     *   set the exerciseID only when inserting an exercise
      * */
     public void setExerciseID() {
         lastExerciseID++;
         this.exerciseID = lastExerciseID;
+    }
+
+    /*
+     *Update ID when item is deleted
+     *  */
+    public void updateId(){
+        lastExerciseID--;
     }
 
     public String getTitle() {
@@ -97,7 +95,7 @@ public class Exercise {
     public boolean equals(Object o) {
         if(o instanceof Exercise){
             Exercise currExercise = (Exercise)o;
-            return this.getExerciseID() == currExercise.getExerciseID();
+            return this.getTitle().equalsIgnoreCase( currExercise.getTitle());
         }
         return false;
     }
