@@ -11,8 +11,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textGreeting"
-        android:layout_width="176dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/greeting"
         android:textSize="25sp"
