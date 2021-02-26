@@ -33,4 +33,7 @@ public class FoodLog {
     public void setDate(MyDate date) { this.date = date; }
     public void setGrams(int grams) { this.grams = grams; }
 
+    public String toString(){
+        return foodID +" "+ date  + ", " + grams;
+    }
 }
