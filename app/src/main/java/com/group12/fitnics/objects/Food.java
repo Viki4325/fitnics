@@ -31,7 +31,11 @@ public class Food {
         return caloriesPerGram;
     }
 
-    public void setCalories(int calories) {
+    public void setCalories(double calories) {
         this.caloriesPerGram = calories;
+    }
+
+    public String toString(){
+        return foodID +". "+name +" "+ caloriesPerGram + " calories per garm";
     }
 }
