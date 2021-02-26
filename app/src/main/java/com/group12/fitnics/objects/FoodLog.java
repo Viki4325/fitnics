@@ -1,12 +1,14 @@
 package com.group12.fitnics.objects;
 
+import java.util.Calendar;
+import com.group12.fitnics.business.AccessFood;
 public class FoodLog {
     private int userID;
     private int foodID;
-    private String date;
+    private MyDate date;
     private int grams;
 
-    public FoodLog(int userId, int foodId, String date, int grams) {
+    public FoodLog(int userId, int foodId, MyDate date, int grams) {
         this.userID = userId;
         this.foodID = foodId;
         this.date = date;
@@ -16,7 +18,7 @@ public class FoodLog {
     public int getUserID() {
         return userID;
     }
-    public String getDate() {
+    public MyDate getDate() {
         return date;
     }
     public int getFoodID() {
@@ -28,7 +30,13 @@ public class FoodLog {
 
     public void setUserID(int id) { this.userID = id; }
     public void setFoodID(int id) { this.foodID = id; }
-    public void setDate(String date) { this.date = date; }
+    public void setDate(MyDate date) { this.date = date; }
     public void setGrams(int grams) { this.grams = grams; }
 
+    public String toString(){
+        AccessFood search = new AccessFood();
+        Food food = search.searchByFoodID(foodID);
+
+        return foodID +" "+ food.getName() + " " + date  + ", " + grams;
+    }
 }

@@ -15,15 +15,15 @@ public class AccessUsers {
         userPersistence = Services.getUserPersistence();
     }
 
-    public List<User> getUsers(ArrayList<User> users) {
+    public List<User> getUsers() {
         return userPersistence.getUserSequential();
     }
 
-    public User getRandom(int id) {
+    public User getUserById(int id) {
         return userPersistence.getUserByID(id);
     }
 
-    public User getRandom(String username) {
+    public User getUserByName(String username) {
         return userPersistence.getUserByUsername(username);
     }
 

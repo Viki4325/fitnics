@@ -22,7 +22,6 @@ public class Exercise {
         this.caloriesBurn = caloriesBurn;
     }
 
-
     public int getExerciseID() { return exerciseID; }
 
     public void setExerciseID(int id) {

@@ -118,12 +118,6 @@ public class AccessExercises {
         return exercisePersistence.getExerciseByName(exerciseTitle);
    }
 
-
-   public boolean insertExercise(Exercise newExercise){
-        return exercisePersistence.insertExercise(newExercise);
-   }
-
-
     /*
     * This method is an addition to the 2 basic ways of deleting exercise objects
     * */

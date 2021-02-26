@@ -9,14 +9,18 @@ public class FoodPersistenceStub implements FoodPersistence {
 
     public FoodPersistenceStub() {
         this.foods = new ArrayList<>();
-        Food apple = new Food(1, "Apple",  100);
-        Food pizza = new Food(2, "Pizza", 175);
-        Food spaghetti = new Food(3, "Spaghetti", 160);
-        Food hamburg = new Food(4, "Hamburg", 160);
-        foods.add(apple);
-        foods.add(pizza);
-        foods.add(spaghetti);
-        foods.add(hamburg);
+        Food bread = new Food(1, "Bread",  2.33);
+        Food yogurt = new Food(2, "Nonfat Greek yogurt", 0.53);
+        Food egg = new Food(3, "Fried Egg", 1.84);
+        Food banana = new Food(4, "Banana", 0.89);
+        Food rice = new Food(5, "Steamed rice", 1.93);
+        Food chicken = new Food(6, "Grilled chicken breast", 1.65);
+        foods.add(bread);
+        foods.add(yogurt);
+        foods.add(egg);
+        foods.add(banana);
+        foods.add(rice);
+        foods.add(chicken);
     }
 
     public ArrayList<Food> getFoodSequential() {
@@ -46,7 +50,6 @@ public class FoodPersistenceStub implements FoodPersistence {
 
     @Override
     public String insertFood(Food food) {
-        food.setFoodID(0);
         foods.add(food);
         return "success";
     }
@@ -79,4 +82,3 @@ public class FoodPersistenceStub implements FoodPersistence {
         return "success";
     }
 }
-

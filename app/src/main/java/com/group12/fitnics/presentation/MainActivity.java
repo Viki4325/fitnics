@@ -85,14 +85,4 @@ public class MainActivity extends AppCompatActivity {
         Intent logInIntent = new Intent(MainActivity.this, LogInActivity.class);
         startActivity(logInIntent);
     }
-    
-    public void btnSearchFood(View v) {
-        Intent foodFinder = new Intent(MainActivity.this,SearchFood.class);
-        startActivity(foodFinder);
-    }
-
-    public void btnSearchExercise(View v) {
-        Intent exerciseFinder = new Intent(MainActivity.this,searchExerciseActivity.class);
-        startActivity(exerciseFinder);
-    }
 }

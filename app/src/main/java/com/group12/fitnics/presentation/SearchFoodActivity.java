@@ -1,27 +1,28 @@
 package com.group12.fitnics.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 import java.util.ArrayList;
 import com.group12.fitnics.R;
+import com.group12.fitnics.business.AccessFood;
+import com.group12.fitnics.objects.User;
 import com.group12.fitnics.persistence.FoodPersistenceStub;
 import com.group12.fitnics.objects.Food;
 
-public class SearchFood extends AppCompatActivity {
+public class SearchFoodActivity extends AppCompatActivity {
     ListView listView;
-
+    User selectedUser;
     ArrayAdapter<Food> adapter;
-    FoodPersistenceStub food = new FoodPersistenceStub();
+    AccessFood food = new AccessFood();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class SearchFood extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.Search_food);
 
         ArrayList<Food> list = new ArrayList<>();
-        list = food.getFoodSequential();
+        list = food.getFoodList().getFoodSequential();
         adapter = new ArrayAdapter<Food>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -60,8 +61,8 @@ public class SearchFood extends AppCompatActivity {
                 return false;
             }
         });
-
-
         return super.onCreateOptionsMenu(menu);
     }
+
 }
+

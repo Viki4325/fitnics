@@ -6,7 +6,52 @@
     <string name="username">Username</string>
     <string name="fatalError">Fatal Error</string>
     <string name="warning">Warning</string>
-
+    <string name="next">Next</string>
+    <string name="next_page">Next Page</string>
+    <string name="enter_a_username">Enter a Username</string>
+    <string name="example">example</string>
+    <string name="enter_date_of_birth">Enter Date of Birth</string>
+    <string name="mm_dd_yyyy">MM/DD/YYYY</string>
+    <string name="enter_weight_in_lbs">Enter Weight</string>
+    <string name="_165_24">165.24</string>
+    <string name="enter_height_in_cm">Enter Height</string>
+    <string name="_172_72">172.72</string>
+    <string name="choose_gender">Choose Gender</string>
+    <string name="not_active">Not Active: you do not workout or do phisical activity during a standard week</string>
+    <string name="very_active">Very Active: you workout or do physical activity more then 4 days during a standard week</string>
+    <string name="somewhat_active">Somewhat Active: you workout or do physical activity 1–2 days during a standard week</string>
+    <string name="active">Active: you workout or do physical activity 2–4 days during a standard week</string>
+    <string name="not_activebtn">Not Active</string>
+    <string name="somewhat_activebtn">Somewhat Active</string>
+    <string name="activebtn">Active</string>
+    <string name="very_activebtn">very active</string>
+    <string-array name="Genders">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="weightUnits">
+        <item>lbs</item>
+        <item>kg</item>
+    </string-array>
+    <string-array name="heightUnits">
+        <item>cm</item>
+        <item>ft</item>
+    </string-array>
+    <string name="greeting">Welcome, </string>
+    <string name="caloriesRemaining">Calories Remaining</string>
+    <string name="food">Food</string>
+    <string name="exercise">Exercise</string>
+    <string name="goal">Goal: </string>
+    <string name="remaining">Remaining: </string>
+    <string name="searchFood">Search Food</string>
+    <string name="foodLog">Food Log</string>
+    <string name="searchExercise">Search Exercise</string>
+    <string name="exerciseLog">Exercise Log</string>
+    <string name="history">History</string>
+    <string name="profile">Profile</string>
+    <string name="zero">0</string>
+    <string name="search" />
 
     <string name="searchExerciseHint">Search Exercise</string>
 </resources>

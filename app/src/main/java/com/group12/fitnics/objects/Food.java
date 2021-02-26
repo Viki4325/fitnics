@@ -3,7 +3,13 @@ package com.group12.fitnics.objects;
 public class Food {
     private int foodID;
     private String name;
-    private int caloriesPerGram;
+    private double caloriesPerGram;
+
+    public Food(int foodID, String name, double caloriesPerGram) {
+        this.foodID = foodID;
+        this.name = name;
+        this.caloriesPerGram = caloriesPerGram;
+    }
 
     public int getFoodID() {
         return foodID;
@@ -21,11 +27,15 @@ public class Food {
         this.name = name;
     }
 
-    public int getCalories() {
+    public double getCalories() {
         return caloriesPerGram;
     }
 
-    public void setCalories(int calories) {
+    public void setCalories(double calories) {
         this.caloriesPerGram = calories;
+    }
+
+    public String toString(){
+        return foodID +". "+name +" "+ caloriesPerGram + " calories per garm";
     }
 }
