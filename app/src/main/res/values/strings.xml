@@ -51,5 +51,6 @@
     <string name="history">History</string>
     <string name="profile">Profile</string>
     <string name="zero">0</string>
+    <string name="search" />
 
 </resources>

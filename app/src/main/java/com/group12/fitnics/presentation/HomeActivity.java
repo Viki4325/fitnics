@@ -73,13 +73,13 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void btnSearchFoodOnClick(View v) {
-        Intent intent = new Intent(HomeActivity.this, AddFoodActivity.class);
+        Intent intent = new Intent(HomeActivity.this, SearchFoodActivity.class);
         intent.putExtra("userID", Integer.toString(selectedUser.getUserID()));
         startActivity(intent);
     }
 
     public void btnFoodLogOnClick(View v) {
-        Intent intent = new Intent(HomeActivity.this, AddFoodActivity.class);
+        Intent intent = new Intent(HomeActivity.this, FoodLogActivity.class);
         intent.putExtra("userID", Integer.toString(selectedUser.getUserID()));
         startActivity(intent);
     }
