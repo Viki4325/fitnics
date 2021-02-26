@@ -7,31 +7,38 @@ Iteration 1 Diagram
 
 Presentation Layer
 ------------------
-[HomeActivity](link)
+[MainActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/MainActivity.java)
+ - An entrance page that allows users to sign up or log in to go to the home screen
 
-[LogInActivity](link)
+[LogInActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/LogInActivity.java)
+ - A screen that allows you to log in by entering a user name
 
-[SignUpActivity](link)
+[SignUpActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/SignUpActivity.java)
+ - A screen that asks for necessary information to register a user
 
-[MainActivity](link)
+[HomeActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/HomeActivity.java)
+ - A home screen where user can check calorie intake and calorie consumption during the day
 
-[HomeActivity](link)
+[SearchFoodActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/SearchFoodActivity.java)
+ - A screen where to search for food to get information
 
-[SearchFoodActivity](link)
+[FoodLogActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/FoodLogActivity.java)
+ - A place where the types and amounts of foods eaten during the day are listed
 
-[FoodLogActivity](link)
+[SearchExerciseActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/SearchExerciseActivity.java)
+ -  A screen where to search for exercise to get information
 
-[SearchExerciseActivity](link)
-
-[ExerciseLogActivity](link)
+[ExerciseLogActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/ExerciseLogActivity.java)
+ - A place where the types and amounts of exercises done during the day are listed
 
 
 Application Layer
 -----------------
-[Services](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/application/Services.java)
-
 [Main](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/application/Main.java)
+ - The class that sets up database
 
+[Services](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/application/Services.java)
+ - The class that provides persistence objects
 
 Business Layer
 --------------

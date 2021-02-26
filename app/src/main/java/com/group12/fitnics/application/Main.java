@@ -5,7 +5,7 @@ public class Main {
     private static String dbName = "FT";
 
     public static void main(String[] args) {
-        System.out.println("Should be doing something in main()?");
+        System.out.println();
     }
 
     public static void setDBPathName(final String name) {
