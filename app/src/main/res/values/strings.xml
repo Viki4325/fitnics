@@ -19,8 +19,8 @@
     <string name="choose_gender">Choose Gender</string>
     <string name="not_active">Not Active: you do not workout or do phisical activity during a standard week</string>
     <string name="very_active">Very Active: you workout or do physical activity more then 4 days during a standard week</string>
-    <string name="somewhat_active">Somewhat Active: you workout or do physical activity 1-2 days during a standard week</string>
-    <string name="active">Active: you workout or do physical activity 2-4 days during a standard week</string>
+    <string name="somewhat_active">Somewhat Active: you workout or do physical activity 1–2 days during a standard week</string>
+    <string name="active">Active: you workout or do physical activity 2–4 days during a standard week</string>
     <string name="not_activebtn">Not Active</string>
     <string name="somewhat_activebtn">Somewhat Active</string>
     <string name="activebtn">Active</string>
@@ -53,4 +53,5 @@
     <string name="zero">0</string>
     <string name="search" />
 
+    <string name="searchExerciseHint">Search Exercise</string>
 </resources>

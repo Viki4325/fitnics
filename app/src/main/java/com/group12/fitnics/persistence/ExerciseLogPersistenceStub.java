@@ -19,13 +19,13 @@ public class ExerciseLogPersistenceStub implements ExerciseLogPersistence{
         MyDate date1 = new MyDate(new GregorianCalendar(2021, 0, 1));
         MyDate date2 = new MyDate(new GregorianCalendar(2021, 0, 2));
 
-        exerciseLogs.add(new ExerciseLog(0, 3, date1, 10));
-        exerciseLogs.add(new ExerciseLog(1, 1, date1, 5));
-        exerciseLogs.add(new ExerciseLog(1, 2, date2, 10));
-        exerciseLogs.add(new ExerciseLog(2, 3, date1, 5));
-        exerciseLogs.add(new ExerciseLog(2, 6, date1, 10));
-        exerciseLogs.add(new ExerciseLog(2, 7, date2, 10));
-        exerciseLogs.add(new ExerciseLog(3, 4, date2, 10));
+        exerciseLogs.add(new ExerciseLog(0, 2, date1, 10));
+        exerciseLogs.add(new ExerciseLog(1, 0, date1, 5));
+        exerciseLogs.add(new ExerciseLog(1, 1, date2, 10));
+        exerciseLogs.add(new ExerciseLog(2, 2, date1, 5));
+        exerciseLogs.add(new ExerciseLog(2, 5, date1, 10));
+        exerciseLogs.add(new ExerciseLog(2, 6, date2, 10));
+        exerciseLogs.add(new ExerciseLog(3, 3, date2, 10));
     }
 
 

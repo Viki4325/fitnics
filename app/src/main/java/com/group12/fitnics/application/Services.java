@@ -1,7 +1,5 @@
 package com.group12.fitnics.application;
 
-import com.group12.fitnics.objects.Exercise;
-import com.group12.fitnics.objects.ExerciseLog;
 import com.group12.fitnics.persistence.ExerciseLogPersistence;
 import com.group12.fitnics.persistence.ExerciseLogPersistenceStub;
 import com.group12.fitnics.persistence.ExercisePersistence;

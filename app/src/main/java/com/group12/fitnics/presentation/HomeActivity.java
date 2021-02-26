@@ -85,9 +85,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void btnSearchExerciseOnClick(View v) {
-        Intent intent = new Intent(HomeActivity.this, AddExerciseActivity.class);
-        intent.putExtra("userID", Integer.toString(selectedUser.getUserID()));
-        startActivity(intent);
+        Intent exerciseFinder = new Intent(HomeActivity.this, searchExerciseActivity.class);
+        startActivity(exerciseFinder);
     }
 
     public void btnExerciseLogOnClick(View v) {

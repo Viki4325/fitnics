@@ -26,17 +26,17 @@ public class AccessExerciseLogsTest extends TestCase {
     public void testGetExerciseLog() {
         System.out.println("\nStarting testGetExerciseLog");
         MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
-        ExerciseLog log = accessExerciseLogs.getExerciseLog(0, 3, date);
+        ExerciseLog log = accessExerciseLogs.getExerciseLog(0, 2, date);
 
         assertNotNull(log);
         assertEquals(0, log.getUserID());
-        assertEquals(3, log.getExerciseID());
+        assertEquals(2, log.getExerciseID());
         assertEquals(date.toString(), log.getDate().toString());
         assertEquals(10, log.getMinutes());
 
-        log = accessExerciseLogs.getExerciseLog(0, 4, date); // not found
+        log = accessExerciseLogs.getExerciseLog(0, 3, date); // not found
         assertNull(log);
-        log = accessExerciseLogs.getExerciseLog(2, 1, date); // not found
+        log = accessExerciseLogs.getExerciseLog(2, 0, date); // not found
         assertNull(log);
 
         System.out.println("Finished testGetExerciseLog");
@@ -83,11 +83,11 @@ public class AccessExerciseLogsTest extends TestCase {
     public void testInsertExerciseLog() {
         System.out.println("\nStarting testInsertExerciseLog");
         MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
-        ExerciseLog log1 = new ExerciseLog(0, 2, date, 10);
-        ExerciseLog log2 = new ExerciseLog(-1, 2, date, 10); // invalid exercise log
-        ExerciseLog log3 = new ExerciseLog(1, -2, date, 10); // invalid exercise log
-        ExerciseLog log4 = new ExerciseLog(1, 2, date, -10); // invalid exercise log
-        ExerciseLog log5 = new ExerciseLog(0, 3, date, 7); // exercise log that already exists
+        ExerciseLog log1 = new ExerciseLog(0, 1, date, 10);
+        ExerciseLog log2 = new ExerciseLog(-1, 1, date, 10); // invalid exercise log
+        ExerciseLog log3 = new ExerciseLog(1, -1, date, 10); // invalid exercise log
+        ExerciseLog log4 = new ExerciseLog(1, 1, date, -10); // invalid exercise log
+        ExerciseLog log5 = new ExerciseLog(0, 2, date, 7); // exercise log that already exists
 
         String result = accessExerciseLogs.insertExerciseLog(log1);
         assertEquals(2, accessExerciseLogs.getExerciseLogByUserDate(0, date).size());
@@ -105,8 +105,8 @@ public class AccessExerciseLogsTest extends TestCase {
         assertEquals("Fail", result);
 
         // delete what we just inserted
-        assertEquals("Success", accessExerciseLogs.deleteExerciseLog(0, 2, date));
-        assertNull(accessExerciseLogs.getExerciseLog(0, 2, date));
+        assertEquals("Success", accessExerciseLogs.deleteExerciseLog(0, 1, date));
+        assertNull(accessExerciseLogs.getExerciseLog(0, 1, date));
 
         System.out.println("Finished testInsertExerciseLog");
     }
@@ -116,17 +116,17 @@ public class AccessExerciseLogsTest extends TestCase {
         System.out.println("\nStarting testDeleteExerciseLog");
         MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
 
-        String result = accessExerciseLogs.deleteExerciseLog(0, 3, date);
-        assertNull(accessExerciseLogs.getExerciseLog(0, 3, date));
+        String result = accessExerciseLogs.deleteExerciseLog(0, 2, date);
+        assertNull(accessExerciseLogs.getExerciseLog(0, 2, date));
         assertEquals("Success", result);
 
-        result = accessExerciseLogs.deleteExerciseLog(0, 4, date); // not found
+        result = accessExerciseLogs.deleteExerciseLog(0, 3, date); // not found
         assertEquals("Fail", result);
-        result = accessExerciseLogs.deleteExerciseLog(1, 2, date); // not found
+        result = accessExerciseLogs.deleteExerciseLog(1, 1, date); // not found
         assertEquals("Fail", result);
 
         // add what we just deleted
-        assertEquals("Success", accessExerciseLogs.insertExerciseLog(new ExerciseLog(0, 3, date, 10)));
+        assertEquals("Success", accessExerciseLogs.insertExerciseLog(new ExerciseLog(0, 2, date, 10)));
         assertEquals(1, accessExerciseLogs.getExerciseLogByUserDate(0, date).size());
 
         System.out.println("Finished testDeleteExerciseLog");
@@ -136,28 +136,28 @@ public class AccessExerciseLogsTest extends TestCase {
     public void testUpdateExerciseLog() {
         System.out.println("\nStarting testUpdateExerciseLog");
         MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
-        ExerciseLog log1 = new ExerciseLog(1, 1, date, 10);
-        ExerciseLog log2 = new ExerciseLog(-1, 2, date, 10); // invalid exercise log
-        ExerciseLog log3 = new ExerciseLog(1, -2, date, 10); // invalid exercise log
-        ExerciseLog log4 = new ExerciseLog(1, 2, date, -10); // invalid exercise log
+        ExerciseLog log1 = new ExerciseLog(1, 0, date, 10);
+        ExerciseLog log2 = new ExerciseLog(-1, 1, date, 10); // invalid exercise log
+        ExerciseLog log3 = new ExerciseLog(1, -1, date, 10); // invalid exercise log
+        ExerciseLog log4 = new ExerciseLog(1, 1, date, -10); // invalid exercise log
 
-        String result = accessExerciseLogs.updateExerciseLog(1, 1, date, log1);
+        String result = accessExerciseLogs.updateExerciseLog(1, 0, date, log1);
         assertEquals("Success", result);
-        assertEquals(10, accessExerciseLogs.getExerciseLog(1, 1, date).getMinutes());
+        assertEquals(10, accessExerciseLogs.getExerciseLog(1, 0, date).getMinutes());
 
-        result = accessExerciseLogs.updateExerciseLog(0, 4, date, log1); // not found
+        result = accessExerciseLogs.updateExerciseLog(0, 3, date, log1); // not found
         assertEquals("Fail", result);
-        result = accessExerciseLogs.updateExerciseLog(1, 1, date, log2);
+        result = accessExerciseLogs.updateExerciseLog(1, 0, date, log2);
         assertEquals("Fail", result);
-        result = accessExerciseLogs.updateExerciseLog(1, 1, date, log3);
+        result = accessExerciseLogs.updateExerciseLog(1, 0, date, log3);
         assertEquals("Fail", result);
-        result = accessExerciseLogs.updateExerciseLog(1, 1, date, log4);
+        result = accessExerciseLogs.updateExerciseLog(1, 0, date, log4);
         assertEquals("Fail", result);
 
         // un-do the update
-        result = accessExerciseLogs.updateExerciseLog(1, 1, date, new ExerciseLog(1, 1, date,5));
+        result = accessExerciseLogs.updateExerciseLog(1, 0, date, new ExerciseLog(1, 0, date,5));
         assertEquals("Success", result);
-        assertEquals(5, accessExerciseLogs.getExerciseLog(1, 1, date).getMinutes());
+        assertEquals(5, accessExerciseLogs.getExerciseLog(1, 0, date).getMinutes());
 
         System.out.println("Finished testUpdateExerciseLog");
     }

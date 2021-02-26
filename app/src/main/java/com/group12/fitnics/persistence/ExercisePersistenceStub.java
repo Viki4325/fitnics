@@ -1,20 +1,26 @@
 package com.group12.fitnics.persistence;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.group12.fitnics.objects.Exercise;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ExercisePersistenceStub implements ExercisePersistence {
-    private final List<Exercise> exerciseList;
+    private List<Exercise> exerciseList;
 
     public ExercisePersistenceStub(){
         this.exerciseList = new ArrayList<>();
 
         Exercise axe_Hold = new Exercise(
-                1,
                 "Axe Hold",
                 "Grab dumbbells and extend arms to side and hold as long as you can",
                 "Arms",
@@ -23,7 +29,6 @@ public class ExercisePersistenceStub implements ExercisePersistence {
         );
 
         Exercise  braced_squat = new Exercise(
-                2,
                 "Brace Squat",
                 "Stand with feet slightly wider than shoulder-width apart, while standing as tall as you can. \n" +
                 "Grab a weight plate and hold it out in front of your body with arms straight out. Keep your core tight and stand with a natural arch in your back. \n" +
@@ -34,7 +39,6 @@ public class ExercisePersistenceStub implements ExercisePersistence {
         );
 
         Exercise flutter_kicks = new Exercise(
-                3,
                 "Flutter Kicks",
                 "Laying on the back, lift your straightened legs from the ground at a 45 degree angle.\n"+
                 "As your Left foot travels downward and nearly touches the floor, your Right foot should seek to reach a 90 degree angle, or as close to one as possible.\n"+
@@ -46,7 +50,7 @@ public class ExercisePersistenceStub implements ExercisePersistence {
         );
 
         Exercise bench_press = new Exercise(
-                4,
+
                 "Bench Press",
                 "Lay down on a bench, the bar should be directly above your eyes, the knees are somewhat angled and the feet are firmly on the floor. " +
                         "Concentrate, breath deeply and grab the bar more than shoulder wide. Bring it slowly down till it briefly touches your chest at the height of your nipples. " +
@@ -62,7 +66,7 @@ public class ExercisePersistenceStub implements ExercisePersistence {
         );
 
         Exercise chin_ups = new Exercise(
-                5,
+
                 "Chin-Ups",
                 "Like pull-ups but with a reverse grip\n" ,
                 "Back",
@@ -71,7 +75,7 @@ public class ExercisePersistenceStub implements ExercisePersistence {
         );
 
         Exercise shrugs = new Exercise(
-                6,
+
                 "Shrugs,Dumbbells",
                 "Stand with straight body, the hands are hanging freely on the side and hold each a dumbbell. Lift from this position the shoulders as high as you can, but don't bend the arms during the movement. On the highest point, make a short pause of 1 or 2 seconds before returning slowly to the initial position.\n" +
                 "When training with a higher weight, make sure that you still do the whole movement!\n" ,
@@ -81,7 +85,7 @@ public class ExercisePersistenceStub implements ExercisePersistence {
         );
 
         Exercise calf_raises = new Exercise(
-                7,
+
                 "Calf Raises",
                  "Calf raises are a method of exercising the gastrocnemius, tibialis posterior and soleus muscles of the lower leg. The movement performed is plantar flexion, a.k.a. ankle extension.\n",
                 "Calves",
@@ -89,13 +93,21 @@ public class ExercisePersistenceStub implements ExercisePersistence {
                 85
         );
 
-        exerciseList.add(calf_raises);
-        exerciseList.add (shrugs);
-        exerciseList.add(chin_ups);
-        exerciseList.add(bench_press);
-        exerciseList.add(flutter_kicks);
-        exerciseList.add( braced_squat);
+        axe_Hold.setExerciseID(0);
+        braced_squat.setExerciseID(1);
+        flutter_kicks.setExerciseID(2);
+        bench_press.setExerciseID(3);
+        chin_ups.setExerciseID(4);
+        shrugs.setExerciseID(5);
+        calf_raises.setExerciseID(6);
+
         exerciseList.add(axe_Hold);
+        exerciseList.add( braced_squat);
+        exerciseList.add(flutter_kicks);
+        exerciseList.add(bench_press);
+        exerciseList.add(chin_ups);
+        exerciseList.add (shrugs);
+        exerciseList.add(calf_raises);
 
 
     }
@@ -103,16 +115,22 @@ public class ExercisePersistenceStub implements ExercisePersistence {
     /*
      * Returns list sorted alphabetically by default
      * */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public List<Exercise> getExerciseList() {
 
-        exerciseList.sort(new Comparator<Exercise>() {
-             @Override
-             public int compare(Exercise exercise1, Exercise exercise2) {
-                 return (exercise1.getTitle()).compareToIgnoreCase(exercise2.getTitle());
-             }
-         });
-         return exerciseList;
+        List<Exercise> exerciseSortedAlpha = new ArrayList<>(exerciseList.size());
+
+        exerciseSortedAlpha.addAll(exerciseList);
+
+        Collections.sort(exerciseSortedAlpha, new Comparator<Exercise>() {
+            @Override
+            public int compare(Exercise exercise1, Exercise exercise2) {
+                return (exercise1.getTitle()).compareToIgnoreCase(exercise2.getTitle());
+            }
+        });
+
+        return exerciseSortedAlpha;
     }
 
     @Override
@@ -127,12 +145,13 @@ public class ExercisePersistenceStub implements ExercisePersistence {
 
     @Override
     public Exercise getExerciseByName(String exerciseName) {
+        Exercise result = null;
         for (int i = 0; i < exerciseList.size() ; i++) {
             if(exerciseList.get(i).getTitle().equalsIgnoreCase(exerciseName)){
-                return exerciseList.get(i);
+                result = exerciseList.get(i);
             }
         }
-        return null;
+        return result;
     }
 
     @Override
@@ -195,6 +214,7 @@ public class ExercisePersistenceStub implements ExercisePersistence {
         boolean deleted = false;
         for (int i = 0; i < exerciseList.size() && !deleted; i++) {
             if(exerciseList.get(i).getExerciseID() == exerciseID){
+                exerciseList.get(i).updateId();
                 exerciseList.remove(i);
                 deleted = true;
             }
@@ -202,10 +222,12 @@ public class ExercisePersistenceStub implements ExercisePersistence {
         return deleted;
     }
 
+
     @Override
     public boolean deleteExercise(Exercise currentExercise) {
         boolean deleted = false;
         if(exerciseList.contains(currentExercise)){
+            currentExercise.updateId();
             exerciseList.remove(currentExercise);
             deleted = true;
         }
