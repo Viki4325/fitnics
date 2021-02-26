@@ -32,6 +32,15 @@ A feature called Food finder and Logger was partially done.
     - Food finder, completed
     - Food Logger, moved to Iteration 2
 
+A feature called Account and Profile Manager
+ - The domain specific objects related to this feature was completed first.
+ - This features consist of two user stories
+    -[Create Account](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/issues/13) was implemented where users can create an account and insert their goal, Information, and activity level.
+    -[Update User Information](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/issues/14)
+ - This feature was split into two, as we realized it was they were accessed seperatly
+    - Create Account, Completed
+    - Update User Information, moved to Iteration 2
+
 Exceptional code
 ----------------
 [LINK](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/LogInActivity.java) We throw an Exception when the user tries to login with an invalid username. An error message is displayed to notify the user trying to log in.
