@@ -1,6 +1,9 @@
 package com.group12.fitnics.business;
 
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import com.group12.fitnics.application.Services;
 import com.group12.fitnics.objects.Exercise;
@@ -8,6 +11,7 @@ import com.group12.fitnics.persistence.ExercisePersistence;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AccessExercises {
     private final ExercisePersistence exercisePersistence;
@@ -21,14 +25,10 @@ public class AccessExercises {
         searchPhrase = null;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void setFilter(String newFilter){
-        int index = filter.indexOf(newFilter);
-        //check if the string filter already exists
-        if(index != 0){
-            filter.add(newFilter);
-        }else{
-            filter.remove(index);
-        }
+        filter.add(newFilter);
+        filter = filter.stream().distinct().collect(Collectors.toList());
     }
 
     public List<String> getFilter(){
@@ -55,10 +55,10 @@ public class AccessExercises {
     * Sorted Alphabetically by default
     * */
     public List<Exercise> getAllExercise(){
-        List<Exercise> exerciseList = exercisePersistence.getExerciseList();
-        return exerciseList;
+        return exercisePersistence.getExerciseList();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void filter(String[] filterOptionsChose){
         for (String s : filterOptionsChose) {
             if (s != null) {
@@ -114,21 +114,36 @@ public class AccessExercises {
         return false;
    }
 
-   public void deleteExercise(Exercise exercise){
-       boolean deleted = false;
-        if(exercise != null){
-            deleted = exercisePersistence.deleteExercise(exercise);
-        }
-        if(deleted){
-            Log.i("Deletion Status:","SUCCESSFULL");
-        }else{
-            Log.i("Deletion Status:", "FAILED TO DELETE");
-        }
+   public Exercise getExerciseByName(String exerciseTitle){
+        return exercisePersistence.getExerciseByName(exerciseTitle);
    }
 
-    public void deleteExercise(int exerciseId){
+
+   public boolean insertExercise(Exercise newExercise){
+        return exercisePersistence.insertExercise(newExercise);
+   }
+
+
+    /*
+    * This method is an addition to the 2 basic ways of deleting exercise objects
+    * */
+   public boolean deleteExerciseByName(String exerciseName){
+       boolean deleted = false;
+       if( exerciseName != null){
+           Exercise result = exercisePersistence.getExerciseByName(exerciseName);
+            if(result != null){
+                deleted = exercisePersistence.deleteExercise(result);
+            }
+       }
+       return deleted;
+   }
+
+    public boolean deleteExerciseById(int exerciseId){
+        boolean deleted = false;
         if(exerciseId >= 0){
-            exercisePersistence.deleteExercise(exerciseId);
+            deleted = exercisePersistence.deleteExercise(exerciseId);
         }
+        return deleted;
     }
+
 }
