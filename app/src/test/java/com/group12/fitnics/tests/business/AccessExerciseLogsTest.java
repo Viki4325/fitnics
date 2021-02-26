@@ -101,6 +101,8 @@ public class AccessExerciseLogsTest extends TestCase {
         assertEquals("Fail", result);
         result = accessExerciseLogs.insertExerciseLog(log5);
         assertEquals("Fail", result);
+        result = accessExerciseLogs.insertExerciseLog(null);
+        assertEquals("Fail", result);
 
         // delete what we just inserted
         assertEquals("Success", accessExerciseLogs.deleteExerciseLog(0, 2, date));

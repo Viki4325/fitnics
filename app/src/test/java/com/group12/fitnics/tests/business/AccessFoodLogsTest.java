@@ -101,6 +101,8 @@ public class AccessFoodLogsTest extends TestCase {
         assertEquals("Fail", result);
         result = accessFoodLogs.insertFoodLog(log5);
         assertEquals("Fail", result);
+        result = accessFoodLogs.insertFoodLog(null);
+        assertEquals("Fail", result);
 
         // delete what we just inserted
         assertEquals("Success", accessFoodLogs.deleteFoodLog(1, 2, date));

@@ -6,13 +6,17 @@ public class User {
     private int birthDay;
     private int birthMonth;
     private int birthYear;
+    // activityLevel: 0 - Not Active, 1 - Somewhat Active, 2 - Active, 3 - Very Active
     private int activityLevel;
     private double weight;
     private double height;
+    // gender: 'M' - Male, 'F' - Female, 'O' - Other
     private char gender;
     private int dailyCaloricNeeds;
+    // goal: 0 - Loose Weight, 1 - Maintain Weight, 2 - Gain Weight
     private int goal;
-    private static int lastUserID = -1;
+    // lastUserID is 3 because we are currently using a fake database for users.
+    private static int lastUserID = 3;
 
     public User(){}
 
@@ -22,6 +26,8 @@ public class User {
         this.weight = weight;
         this.height = height;
         this.gender = gender;
+        // ** The logic for dailyCaloricNeeds is pushed to the next iteration.
+        this.dailyCaloricNeeds = 0;
     }
 
     public double getHeight() {

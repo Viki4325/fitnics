@@ -24,7 +24,7 @@ public class SignUpActiveLevelActivity extends AppCompatActivity {
         String username = intent.getStringExtra("username");
 
         accessUsers = new AccessUsers();
-        newUser = accessUsers.getUserByUsername(username);
+        newUser = accessUsers.getUserByName(username);
 
     }
 

@@ -16,7 +16,7 @@ public class UserPersistenceStub implements UserPersistence {
         User bob = new User("bob", 2, 70, 175, 'M');
         User carol = new User("carol", 3, 47, 160, 'F');
         User david = new User("david", 1, 50, 160, 'M');
-        alice.setUserID(0);
+        alice.setUserID(0); alice.setBirthYear(1998); alice.setBirthMonth(4); alice.setBirthDay(15); alice.setGoal(0);
         bob.setUserID(1);
         carol.setUserID(2);
         david.setUserID(3);
@@ -54,14 +54,24 @@ public class UserPersistenceStub implements UserPersistence {
 
     @Override
     public String insertUser(User currentUser) {
+        if (currentUser == null)
+            return "Fail";
+
+        // if there exists same username already, do not allow it to be inserted
+        if (getUserByUsername(currentUser.getUsername()) != null)
+            return "Fail";
+
         currentUser.setUserID();
         users.add(currentUser);
-        return "success";
+        return "Success";
     }
 
-    // update a user with userID to the currentUser
+    // update a user with userID to the updatedUser
     @Override
     public String updateUser(int userID, User updatedUser) {
+        if (updatedUser == null)
+            return "Fail";
+
         boolean found = false;
         for(int i = 0; i < users.size() && !found; i++) {
             if(users.get(i).getUserID() == userID) {
@@ -71,7 +81,10 @@ public class UserPersistenceStub implements UserPersistence {
                 found = true;
             }
         }
-        return "success";
+        if (!found)
+            return "Fail";
+
+        return "Success";
     }
 
     // delete a user by userID
@@ -84,6 +97,9 @@ public class UserPersistenceStub implements UserPersistence {
                 found = true;
             }
         }
-        return "success";
+        if (!found)
+            return "Fail";
+
+        return "Success";
     }
 }

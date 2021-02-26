@@ -15,7 +15,7 @@ public class AccessUsers {
         userPersistence = Services.getUserPersistence();
     }
 
-    public List<User> getUsers(ArrayList<User> users) {
+    public List<User> getUsers() {
         return userPersistence.getUserSequential();
     }
 
