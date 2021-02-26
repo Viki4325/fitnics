@@ -50,7 +50,6 @@ public class FoodPersistenceStub implements FoodPersistence {
 
     @Override
     public String insertFood(Food food) {
-        food.setFoodID(0);
         foods.add(food);
         return "success";
     }
