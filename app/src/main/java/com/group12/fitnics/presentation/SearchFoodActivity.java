@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import java.util.ArrayList;
 import com.group12.fitnics.R;
+import com.group12.fitnics.business.AccessFood;
 import com.group12.fitnics.objects.User;
 import com.group12.fitnics.persistence.FoodPersistenceStub;
 import com.group12.fitnics.objects.Food;
@@ -21,7 +22,7 @@ public class SearchFoodActivity extends AppCompatActivity {
     ListView listView;
     User selectedUser;
     ArrayAdapter<Food> adapter;
-    FoodPersistenceStub food = new FoodPersistenceStub();
+    AccessFood food = new AccessFood();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class SearchFoodActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.Search_food);
 
         ArrayList<Food> list = new ArrayList<>();
-        list = food.getFoodSequential();
+        list = food.getFoodList().getFoodSequential();
         adapter = new ArrayAdapter<Food>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -64,3 +65,4 @@ public class SearchFoodActivity extends AppCompatActivity {
     }
 
 }
+

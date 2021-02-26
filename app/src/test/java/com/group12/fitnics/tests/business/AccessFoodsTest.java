@@ -71,7 +71,10 @@ public class AccessFoodsTest {
         food.setCalories(10);
         accessFood.updateFood(food);
         assertEquals(accessFood.searchByFoodID(5).getCalories(), 10,0.01);
+        food.setCalories(1.93);
+        accessFood.updateFood(food);
         System.out.println("Finished TestUpdateFood");
-
     }
 }
+
+

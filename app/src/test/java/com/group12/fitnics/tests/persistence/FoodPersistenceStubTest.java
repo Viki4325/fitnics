@@ -67,11 +67,14 @@ public class FoodPersistenceStubTest {
         assertEquals(5.5, test.getCalories(),0.1);
         System.out.println("Finished TestUpdateFood");
     }
+
     @Test
     public void testDeleteFood(){
         System.out.println("\nStarting testDeleteFood");
-        assertTrue(foodPersistenceStub.deleteFood(6).equals("Success"));
+        assertEquals("success", foodPersistenceStub.deleteFood(6));
         assertNull(foodPersistenceStub.getFoodByID(6));
         System.out.println("Finished testDeleteFood");
+        foodPersistenceStub = new FoodPersistenceStub();
     }
 }
+

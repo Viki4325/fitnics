@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.group12.fitnics.R;
+import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.User;
 import com.group12.fitnics.persistence.FoodLogPersistenceStub;
@@ -20,7 +21,7 @@ public class FoodLogActivity extends AppCompatActivity {
     ListView listView;
     FoodLog foodLog;
     ArrayAdapter<FoodLog> adapter;
-    FoodLogPersistenceStub log = new FoodLogPersistenceStub();
+    AccessFoodLogs log = new AccessFoodLogs();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

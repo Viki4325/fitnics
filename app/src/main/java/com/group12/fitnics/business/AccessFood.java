@@ -30,14 +30,14 @@ public class AccessFood{
 
     public boolean deleteFood(Food targetFood){
         boolean result = false;
-        if(foodList.deleteFood(targetFood.getFoodID()).equals("Success"))
+        if(foodList.deleteFood(targetFood.getFoodID()).equals("success"))
             result = true;
         return result;
     }
 
     public boolean updateFood(Food newFood){
         boolean result = false;
-        if(foodList.updateFood(newFood.getFoodID(), newFood).equals("Success")){
+        if(foodList.updateFood(newFood.getFoodID(), newFood).equals("success")){
             result = true;
         }
         return result;
