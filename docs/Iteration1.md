@@ -13,7 +13,7 @@ A feature called [Daily Progress in Calories](https://code.cs.umanitoba.ca/3350-
 - [Merge request](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/merge_requests/3)
 - [Merge commit that was used complete the feature](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/commit/ae4fbced1113ee200e85150172fa97547097505d)
 
-A feature called Exercise finder and Logger wasa partially done.
+A feature called Exercise finder and Logger was partially done.
 - The domain specific objects related to this feature was completed first.
 - This feature consists of two user stories.
     - [Exercise finder](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/issues/20) was implemented where users can view all the exercises available and even search for them.
@@ -55,4 +55,4 @@ Agile Planning
 - We found that [updating user information](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/issues/14) actually had a relatively low priority compared to other user stories for Iteration 1, so it was pushed to the next iteration.
 - There were several design opinions on how to calculate [daily caloric needs](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/issues/15), and we don't reach an agreement yet, so this user story was also pushed to the next iteration.
 - The [Food Logger](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/issues/18) and [Exercise Logger](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/issues/22) have not implemented, since we found that each of them was actually too lengthy as a single user story. These loggers will allow users to browse a list of food they ate or exercise they did for the day, and allow new items to be added to the lists. These user stories are expected to be completed in the next iteration.
-- We decided we will make a class that makes custom exceptions and will use them effectively from Iteration 2, that is. throwing and handling of customr exceptions.
+- We decided we will make a class that makes custom exceptions and will use them effectively from Iteration 2, that is. throwing and handling of custom exceptions.
