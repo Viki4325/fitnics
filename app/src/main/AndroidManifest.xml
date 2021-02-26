@@ -16,7 +16,8 @@
         <activity android:name=".presentation.AddExerciseActivity" />
         <activity android:name=".presentation.AddFoodActivity" />
         <activity android:name=".presentation.HomeActivity" />
-        <activity android:name=".presentation.SearchFood" />
+        <activity android:name=".presentation.SearchFoodActivity" />
+        <activity android:name=".presentation.FoodLogActivity" />
         <activity android:name=".presentation.SignUpActivity" />
         <activity android:name=".presentation.LogInActivity" />
         <activity android:name=".presentation.MainActivity">
