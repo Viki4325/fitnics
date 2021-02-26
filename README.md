@@ -6,3 +6,9 @@
 
 ## Branching Strategy
 - Our team will use [GitHub flow](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/docs/Branching%20Strategy.md) as the branching strategy
+
+## Architecture
+- [Architecture](.docs/Architecture.md)
+
+## Iteration 1 Worksheet
+- [Iteration 1](.docs/Iteration1.md)
