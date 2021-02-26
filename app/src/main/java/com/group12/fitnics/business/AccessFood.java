@@ -17,13 +17,21 @@ public class AccessFood{
         result = foodList.getFoodByFoodName(target);
         return result;
     }
-
+    
     public Food searchByFoodID(int foodID){
         Food result = null;
         result = foodList.getFoodByID(foodID);
         return result;
     }
+    
+    public FoodPersistence getFoodList() {
+        return foodList;
+    }
 
+    public void setFoodList(FoodPersistence foodList) {
+        this.foodList = foodList;
+    }
+    
     public void addFood(Food newFood){
         foodList.insertFood(newFood);
     }
