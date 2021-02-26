@@ -17,6 +17,7 @@
         <activity android:name=".presentation.HomeActivity" />
         <activity android:name=".presentation.SearchFood" />
         <activity android:name=".presentation.SignUpActivity" />
+        <activity android:name=".presentation.SignUpInfoActivity" />
         <activity android:name=".presentation.LogInActivity" />
         <activity android:name=".presentation.MainActivity">
             <intent-filter>
