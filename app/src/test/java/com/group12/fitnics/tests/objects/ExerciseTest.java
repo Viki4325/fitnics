@@ -8,10 +8,6 @@ import com.group12.fitnics.objects.Exercise;
 
 public class ExerciseTest {
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     @BeforeClass
     public static void setup(){
         System.out.println("\nStarting testing on the Exercise class...");
@@ -59,11 +55,7 @@ public class ExerciseTest {
         assertEquals("The id should be equal to 0", workout.getExerciseID(), 0);
         assertEquals("The title should be equal to Axe Hold", workout.getTitle(), "Axe Hold");
         assertEquals("The description should be equal to 'Grab dumbbells and extend arms to side and hold as long as you can' ",
-<<<<<<< Updated upstream
-                        workout.getDescription(), "Grab dumbbells and extend arms to side and hold as long as you can");
-=======
                 workout.getDescription(), "Grab dumbbells and extend arms to side and hold as long as you can");
->>>>>>> Stashed changes
         assertEquals("The category should be equal to 'Arms' ", workout.getCategory(), "Arms");
         assertEquals("The level should be equal to 'Intermediate' ", workout.getLevel(), "Intermediate");
         assertEquals("The calories should be equal to 500", workout.getCaloriesBurn(), 500);
@@ -72,43 +64,13 @@ public class ExerciseTest {
 
     }
 
-<<<<<<< Updated upstream
-    @Test
-    public void testExerciseParamCustomId(){
-        System.out.println("\nStarting testExerciseParamCustomId");
-
-        Exercise workout = new Exercise(
-                5,
-                "Chin-Ups",
-                "Like pull-ups but with a reverse grip\n" ,
-                "Back",
-                "Beginner",
-                1
-        );
-
-        assertEquals("The id should be equal to 0", workout.getExerciseID(), 5);
-        assertEquals("The title should be equal to Chin-Ups", workout.getTitle(), "Chin-Ups");
-        assertEquals("The description should be equal to 'Like pull-ups but with a reverse grip' ",
-                workout.getDescription(), "Like pull-ups but with a reverse grip\n");
-        assertEquals("The category should be equal to 'Back' ", workout.getCategory(), "Back");
-        assertEquals("The level should be equal to 'Beginner' ", workout.getLevel(), "Beginner");
-        assertEquals("The calories should be equal to 1", workout.getCaloriesBurn(), 1);
-
-        System.out.println("Finished testExerciseParamCustomId");
-    }
-=======
->>>>>>> Stashed changes
 
     @Test
     public void testSetExerciseTitle(){
         System.out.println("\nStarting testSetExerciseTitle");
 
         Exercise workout = new Exercise(
-<<<<<<< Updated upstream
-                5,
-=======
 
->>>>>>> Stashed changes
                 "Chin-Ups",
                 "Like pull-ups but with a reverse grip\n" ,
                 "Back",
@@ -127,11 +89,7 @@ public class ExerciseTest {
         String expectedDescription = "Description has been changed!!";
 
         Exercise workout = new Exercise(
-<<<<<<< Updated upstream
-                5,
-=======
 
->>>>>>> Stashed changes
                 "Chin-Ups",
                 "Like pull-ups but with a reverse grip\n" ,
                 "Back",
@@ -157,11 +115,7 @@ public class ExerciseTest {
         String expectedCategory = "Category has been changed!!";
 
         Exercise workout = new Exercise(
-<<<<<<< Updated upstream
-                5,
-=======
 
->>>>>>> Stashed changes
                 "Chin-Ups",
                 "Like pull-ups but with a reverse grip\n" ,
                 "Back",
@@ -187,10 +141,6 @@ public class ExerciseTest {
         String expectedLevel = "Level has been changed!!";
 
         Exercise workout = new Exercise(
-<<<<<<< Updated upstream
-                5,
-=======
->>>>>>> Stashed changes
                 "Chin-Ups",
                 "Like pull-ups but with a reverse grip\n" ,
                 "Back",
@@ -215,10 +165,6 @@ public class ExerciseTest {
         int expectedCalories = 1000;
 
         Exercise workout = new Exercise(
-<<<<<<< Updated upstream
-                5,
-=======
->>>>>>> Stashed changes
                 "Chin-Ups",
                 "Like pull-ups but with a reverse grip\n" ,
                 "Back",
@@ -236,8 +182,6 @@ public class ExerciseTest {
 
         System.out.println("Finished testSetExerciseCalories");
     }
-<<<<<<< Updated upstream
-=======
 
     @Test
     public void testUpdateId(){
@@ -258,5 +202,4 @@ public class ExerciseTest {
 
         System.out.println("Finished testUpdateId");
     }
->>>>>>> Stashed changes
 }
