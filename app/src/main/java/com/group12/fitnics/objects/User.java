@@ -17,6 +17,8 @@ public class User {
     private int goal;
     // lastUserID is 3 because we are currently using a fake database for users.
     private static int lastUserID = 3;
+    //units 0 - weight[0 - lbs, 1 - kg], 1 - height[0 - cm, 1 - ft]
+    private int[] units = new int[2];
 
     public User(){}
 
@@ -122,5 +124,13 @@ public class User {
 
     public void setGoal(int goal) {
         this.goal = goal;
+    }
+
+    public void setUnits(int[] units) {
+        this.units = units;
+    }
+
+    public int[] getUnits() {
+        return units;
     }
 }

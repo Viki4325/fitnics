@@ -115,6 +115,13 @@
         android:text="@string/exerciseLog"
         android:onClick="btnExerciseLogOnClick"/>
 
+    <Button
+        android:id="@+id/btnUpdateUserInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="btnUpdateUserInfoOnClick"
+        android:text="Update Information" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

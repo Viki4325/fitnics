@@ -17,38 +17,80 @@ import com.group12.fitnics.objects.User;
 
 import java.util.Calendar;
 
-public class SignUpInfoActivity extends AppCompatActivity {
-
-    private User newUser;
-    private EditText date;
+public class UpdateUserInfoActivity extends AppCompatActivity {
     private AccessUsers accessUsers;
+    private User selectedUser;
+    private EditText date;
+    private EditText name;
+    private EditText weight;
+    private EditText height;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_info);
+        setContentView(R.layout.activity_update_user_info);
 
-        newUser = new User();
         accessUsers = new AccessUsers();
         Intent intent = getIntent();
-        newUser.setGoal(intent.getIntExtra("goal",-1));
+        String id = intent.getStringExtra("userID");
 
-        Spinner Gender = (Spinner) findViewById(R.id.chooseGender);
+        selectedUser = accessUsers.getUserById(Integer.parseInt(id));
+        int[] units = selectedUser.getUnits();
+
+        Spinner Gender = (Spinner) findViewById(R.id.genderSpinner);
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Genders));
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Gender.setAdapter(genderAdapter);
+        char gender = selectedUser.getGender();
+        int selection = -1;
+        if(gender == 'M')
+            selection = 0;
+        else if(gender == 'F')
+            selection = 1;
+        else if(gender == 'O')
+            selection = 2;
+        Gender.setSelection(selection);
 
-        Spinner weightUnits = (Spinner) findViewById(R.id.weightUnitSpinner);
+        Spinner weightUnits = (Spinner) findViewById(R.id.weightUnitsSpinner);
         ArrayAdapter<String> weightAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.weightUnits));
         weightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         weightUnits.setAdapter(weightAdapter);
+        weightUnits.setSelection(units[0]);
 
-        Spinner heightUnits = (Spinner) findViewById(R.id.heightUnitSpinner);
+        Spinner heightUnits = (Spinner) findViewById(R.id.heightUnitsSpinner);
         ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.heightUnits));
         heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         heightUnits.setAdapter(heightAdapter);
+        heightUnits.setSelection(units[1]);
 
-        date = (EditText)findViewById(R.id.editBirthday);
+        Spinner goals = (Spinner) findViewById(R.id.goalSpinner);
+        ArrayAdapter<String> goalAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.goals));
+        goalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        goals.setAdapter(goalAdapter);
+        goals.setSelection(selectedUser.getGoal());
+
+        Spinner activityLevel = (Spinner) findViewById(R.id.activityLevelSpinner);
+        ArrayAdapter<String> activityLevelAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.activityLevels));
+        activityLevelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        activityLevel.setAdapter(activityLevelAdapter);
+        activityLevel.setSelection(selectedUser.getActivityLevel());
+
+        name = (EditText)findViewById(R.id.usernameBox);
+        name.setText(selectedUser.getUsername());
+
+        height = (EditText)findViewById(R.id.heightBox);
+        height.setText(""+selectedUser.getHeight());
+
+        weight = (EditText)findViewById(R.id.weightBox);
+        weight.setText(""+selectedUser.getWeight());
+
+        date = (EditText)findViewById(R.id.birthdayBox);
+        if(selectedUser.getBirthDay() < 10)
+            date.setText("0"+selectedUser.getBirthDay()+"/"+selectedUser.getBirthMonth()+"/"+selectedUser.getBirthYear());
+        else if(selectedUser.getBirthMonth() < 10)
+            date.setText(selectedUser.getBirthDay()+"/0"+selectedUser.getBirthMonth()+"/"+selectedUser.getBirthYear());
+        else
+            date.setText(selectedUser.getBirthDay()+"/"+selectedUser.getBirthMonth()+"/"+selectedUser.getBirthYear());
         date.addTextChangedListener(new TextWatcher() {
             private String current = "";
             private String ddmmyyyy = "DDMMYYYY";
@@ -113,45 +155,54 @@ public class SignUpInfoActivity extends AppCompatActivity {
         });
     }
 
-    public void btnNextPage(View v) {
+    public void btnSaveUpdatesOnClick(View v) {
         String username;
         int[] units = new int[2];
         //Add username to new user
-        EditText data = (EditText) findViewById(R.id.enterUsername);
+        EditText data = (EditText) findViewById(R.id.usernameBox);
         username = data.getText().toString().trim();
-        newUser.setUsername(username);
+        selectedUser.setUsername(username);
         //Add birthday to new user
-        data = (EditText) findViewById(R.id.editBirthday);
+        data = (EditText) findViewById(R.id.birthdayBox);
         String birthday = data.getText().toString().trim();
-        newUser.setBirthDay(Integer.parseInt(birthday.substring(0, 2)));
-        newUser.setBirthMonth(Integer.parseInt(birthday.substring(3, 5)));
-        newUser.setBirthYear(Integer.parseInt(birthday.substring(6, 10)));
+        selectedUser.setBirthDay(Integer.parseInt(birthday.substring(0, 2)));
+        selectedUser.setBirthMonth(Integer.parseInt(birthday.substring(3, 5)));
+        selectedUser.setBirthYear(Integer.parseInt(birthday.substring(6, 10)));
         //Add gender to new user
-        Spinner choice = (Spinner) findViewById(R.id.chooseGender);
-        newUser.setGender(choice.getSelectedItem().toString().charAt(0));
+        Spinner choice = (Spinner) findViewById(R.id.genderSpinner);
+        selectedUser.setGender(choice.getSelectedItem().toString().charAt(0));
         //Add weight to new user
-        data = (EditText) findViewById(R.id.editWeight);
-        choice = (Spinner) findViewById(R.id.weightUnitSpinner);
-
-        if(choice.getSelectedItem().toString() == "kg")
-            newUser.setWeight(Double.parseDouble(data.getText().toString().trim())*2.205);
-        else
-            newUser.setWeight(Double.parseDouble(data.getText().toString().trim()));
+        data = (EditText) findViewById(R.id.weightBox);
+        choice = (Spinner) findViewById(R.id.weightUnitsSpinner);
+        if(choice.getSelectedItem().toString() == "kg") {
+            selectedUser.setWeight(Double.parseDouble(data.getText().toString().trim()) * 2.205);
+        }
+        else {
+            selectedUser.setWeight(Double.parseDouble(data.getText().toString().trim()));
+        }
         units[0] = choice.getSelectedItemPosition();
         //Add height to new user
-        data = (EditText) findViewById(R.id.editHeight);
-        choice = (Spinner) findViewById(R.id.heightUnitSpinner);
+        data = (EditText) findViewById(R.id.heightBox);
+        choice = (Spinner) findViewById(R.id.heightUnitsSpinner);
 
-        if(choice.getSelectedItem().toString() == "ft")
-            newUser.setHeight(Double.parseDouble(data.getText().toString().trim())*30.48);
-        else
-            newUser.setHeight(Double.parseDouble(data.getText().toString().trim()));
+        if(choice.getSelectedItem().toString() == "ft") {
+            selectedUser.setHeight(Double.parseDouble(data.getText().toString().trim()) * 30.48);
+        }
+        else {
+            selectedUser.setHeight(Double.parseDouble(data.getText().toString().trim()));
+        }
         units[1] = choice.getSelectedItemPosition();
-        newUser.setUnits(units);
-        //go to next panel to get activity level
-        accessUsers.insertUser(newUser);
-        Intent ActivityPage = new Intent(this, SignUpActiveLevelActivity.class);
-        ActivityPage.putExtra("username",username);
-        startActivity(ActivityPage);
+        selectedUser.setUnits(units);
+
+        choice = (Spinner) findViewById(R.id.goalSpinner);
+        selectedUser.setGoal(choice.getSelectedItemPosition());
+
+        choice = (Spinner) findViewById(R.id.activityLevelSpinner);
+        selectedUser.setActivityLevel(choice.getSelectedItemPosition());
+
+        accessUsers.updateUser(selectedUser.getUserID(),selectedUser);
+        Intent logInToHomeIntent = new Intent(this, HomeActivity.class);
+        logInToHomeIntent.putExtra("username", username);
+        startActivity(logInToHomeIntent);
     }
 }
