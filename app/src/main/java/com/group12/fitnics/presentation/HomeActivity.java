@@ -99,4 +99,10 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void btnUpdateUserInfoOnClick(View v){
+        Intent intent = new Intent(HomeActivity.this, UpdateUserInfoActivity.class);
+        intent.putExtra("userID",Integer.toString(selectedUser.getUserID()));
+        startActivity(intent);
+    }
+
 }

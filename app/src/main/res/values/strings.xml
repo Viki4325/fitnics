@@ -24,7 +24,7 @@
     <string name="not_activebtn">Not Active</string>
     <string name="somewhat_activebtn">Somewhat Active</string>
     <string name="activebtn">Active</string>
-    <string name="very_activebtn">very active</string>
+    <string name="very_activebtn">Very Active</string>
     <string-array name="Genders">
         <item>Male</item>
         <item>Female</item>
@@ -37,6 +37,17 @@
     <string-array name="heightUnits">
         <item>cm</item>
         <item>ft</item>
+    </string-array>
+    <string-array name="activityLevels">
+        <item>Not Active</item>
+        <item>Somewhat Active</item>
+        <item>Active</item>
+        <item>Very Active</item>
+    </string-array>
+    <string-array name="goals">
+        <item>Loose Weight</item>
+        <item>Maintain Weight</item>
+        <item>Gain Weight</item>
     </string-array>
     <string name="greeting">Welcome, </string>
     <string name="caloriesRemaining">Calories Remaining</string>

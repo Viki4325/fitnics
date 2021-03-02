@@ -9,11 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fitnics">
-        <activity android:name=".presentation.ExerciseLogActivity"></activity>
+        <activity android:name=".presentation.UpdateUserInfoActivity"></activity>
+        <activity android:name=".presentation.ExerciseLogActivity" />
         <activity android:name=".presentation.SearchExerciseActivity" />
         <activity
             android:name=".presentation.IndividualExercise"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".presentation.HomeActivity" />
         <activity android:name=".presentation.SignUpActiveLevelActivity" />
         <activity android:name=".presentation.SignUpInfoActivity" />
