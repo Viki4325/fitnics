@@ -16,11 +16,11 @@ public interface IExercisePersistence {
 
     List<Exercise> getExerciseByCategory(final String exerciseCategory);
 
-    boolean insertExercise(final Exercise newExercise);
+    void insertExercise(final Exercise newExercise);
 
-    boolean updateExercise(int exerciseID, Exercise currentExercise);
+    void updateExercise(int exerciseID, Exercise currentExercise);
 
-    boolean deleteExercise(final int exerciseID);
+    void deleteExercise(final int exerciseID);
 
-    boolean deleteExercise(Exercise currentExercise);
+    void deleteExercise(Exercise currentExercise);
 }

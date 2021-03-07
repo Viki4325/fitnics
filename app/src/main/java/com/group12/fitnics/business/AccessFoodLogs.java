@@ -1,6 +1,8 @@
 package com.group12.fitnics.business;
 
 import com.group12.fitnics.application.Services;
+import com.group12.fitnics.exceptions.FoodLogNotFoundException;
+import com.group12.fitnics.exceptions.InvalidFoodLogException;
 import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.MyDate;
 import com.group12.fitnics.persistence.IFoodLogPersistence;
@@ -30,16 +32,16 @@ public class AccessFoodLogs {
         return foodLogPersistence.getFoodLogByUserDate(userID, date);
     }
 
-    public String insertFoodLog(FoodLog foodLog) {
-        return foodLogPersistence.insertFoodLog(foodLog);
+    public void insertFoodLog(FoodLog foodLog) throws InvalidFoodLogException {
+        foodLogPersistence.insertFoodLog(foodLog);
     }
 
-    public String updateFoodLog(int userID, int foodID, MyDate date, FoodLog updatedLog) {
-        return foodLogPersistence.updateFoodLog(userID, foodID, date, updatedLog);
+    public void updateFoodLog(int userID, int foodID, MyDate date, FoodLog updatedLog) throws InvalidFoodLogException, FoodLogNotFoundException {
+        foodLogPersistence.updateFoodLog(userID, foodID, date, updatedLog);
     }
 
-    public String deleteFoodLog(int userID, int foodID, MyDate date) {
-        return foodLogPersistence.deleteFoodLog(userID, foodID, date);
+    public void deleteFoodLog(int userID, int foodID, MyDate date) throws FoodLogNotFoundException {
+        foodLogPersistence.deleteFoodLog(userID, foodID, date);
     }
 
     public int getUserTotalDailyIntake(int userID, MyDate date) {

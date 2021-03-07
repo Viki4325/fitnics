@@ -1,6 +1,8 @@
 package com.group12.fitnics.tests.business;
 
 import com.group12.fitnics.business.AccessExercises;
+import com.group12.fitnics.exceptions.ExerciseNotFoundException;
+import com.group12.fitnics.exceptions.InvalidExerciseException;
 import com.group12.fitnics.objects.Exercise;
 
 import static org.junit.Assert.*;
@@ -384,17 +386,24 @@ public class AccessExercisesTest {
                 100
         );
 
-        assertTrue("Inserted new object", exerciseHandler.insertExercise(new_1));
+        exerciseHandler.insertExercise(new_1);
         assertEquals("Inserted new object. Id should be set to the next incremented id",exerciseHandler.getAllExercise().size()-1, new_1.getExerciseID());
         original_size++;
         assertEquals("Inserted one new exercise object. Size should increased by 1",exerciseHandler.getAllExercise().size(), original_size);
 
-        assertTrue("Inserted new object", exerciseHandler.insertExercise(new_2));
+        exerciseHandler.insertExercise(new_2);
         assertEquals("Inserted new object. Id should be set to the next incremented id",exerciseHandler.getAllExercise().size()-1, new_2.getExerciseID());
         original_size++;
         assertEquals("Inserted one new exercise object. Size should increased by 1",exerciseHandler.getAllExercise().size(), original_size);
 
         System.out.println("Finished testInsertExercise");
+    }
+
+    @Test(expected = InvalidExerciseException.class)
+    public void testInsertExerciseNull() {
+        System.out.println("\nStarting testInsertExerciseNull...");
+        exerciseHandler.insertExercise(null);
+        System.out.println("Finished testInsertExerciseNull");
     }
 
     @Test
@@ -425,18 +434,18 @@ public class AccessExercisesTest {
                 100
         );
 
-        assertTrue("Inserted exercise object",exerciseHandler.insertExercise(new_1));
+        exerciseHandler.insertExercise(new_1); // Inserted exercise object
         size++;
-        assertTrue("Exercise object deleted using id.",exerciseHandler.deleteExerciseById(new_1.getExerciseID()));
+        exerciseHandler.deleteExerciseById(new_1.getExerciseID()); // Exercise object deleted using id
         size--;
         assertEquals("Exercise object deleted using id. Size should decrease respectively",exerciseHandler.getAllExercise().size(),size);
 
-        assertTrue("Inserted exercise object",exerciseHandler.insertExercise(new_2));
+        exerciseHandler.insertExercise(new_2); // Inserted exercise object
         size++;
         System.out.println(exerciseHandler.getExerciseById(8));
         System.out.println(new_2.getExerciseID());
         System.out.println(exerciseHandler.getAllExercise().toString());
-        assertTrue("Exercise object deleted using id.",exerciseHandler.deleteExerciseById(new_1.getExerciseID()));
+        exerciseHandler.deleteExerciseById(new_1.getExerciseID()); // Exercise object deleted using id
         size--;
         assertEquals("Exercise object deleted using id. Size should decrease respectively",exerciseHandler.getAllExercise().size(),size);
 
@@ -445,7 +454,20 @@ public class AccessExercisesTest {
 
         System.out.println("Finished testDeleteExerciseById");
 
+    }
 
+    @Test(expected = InvalidExerciseException.class)
+    public void testDeleteExerciseByInvalidID() {
+        System.out.println("\nStarting testDeleteExerciseByInvalidID...");
+        exerciseHandler.deleteExerciseById(-1);
+        System.out.println("Finished testDeleteExerciseByInvalidID");
+    }
+
+    @Test(expected = ExerciseNotFoundException.class)
+    public void testDeleteExerciseNotFoundByID() {
+        System.out.println("\nStarting testDeleteExerciseNotFoundByID...");
+        exerciseHandler.deleteExerciseById(88);
+        System.out.println("Finished testDeleteExerciseNotFoundByID");
     }
 
     @Test
@@ -475,16 +497,16 @@ public class AccessExercisesTest {
                 100
         );
 
-        assertTrue("Inserted exercise object",exerciseHandler.insertExercise(new_1));
+        exerciseHandler.insertExercise(new_1); // Inserted exercise object
         size++;
-        assertTrue("Exercise object deleted using id.",exerciseHandler.deleteExerciseByName("I am new"));
+        exerciseHandler.deleteExerciseByName("I am new"); // Exercise object deleted using id
         size--;
         assertEquals("Exercise object deleted using id. Size should decrease respectively",exerciseHandler.getAllExercise().size(),size);
 
 
-        assertTrue("Inserted exercise object",exerciseHandler.insertExercise(new_2));
+        exerciseHandler.insertExercise(new_2); // Inserted exercise object
         size++;
-        assertTrue("Exercise object deleted using title.",exerciseHandler.deleteExerciseByName("I am new_2"));
+        exerciseHandler.deleteExerciseByName("I am new_2"); // Exercise object deleted using title
         size--;
         assertEquals("Exercise object deleted using title. Size should decrease respectively",exerciseHandler.getAllExercise().size(),size);
 
@@ -493,6 +515,20 @@ public class AccessExercisesTest {
 
 
         System.out.println("Finished testDeleteExerciseByName");
+    }
+
+    @Test(expected = InvalidExerciseException.class)
+    public void testDeleteExerciseByInvalidName() {
+        System.out.println("\nStarting testDeleteExerciseInvalidName...");
+        exerciseHandler.deleteExerciseByName("");
+        System.out.println("Finished testDeleteExerciseInvalidName");
+    }
+
+    @Test(expected = ExerciseNotFoundException.class)
+    public void testDeleteExerciseNotFoundByName() {
+        System.out.println("\nStarting testDeleteExerciseNotFoundByName...");
+        exerciseHandler.deleteExerciseByName("Swimming");
+        System.out.println("Finished testDeleteExerciseNotFoundByName");
     }
 
 

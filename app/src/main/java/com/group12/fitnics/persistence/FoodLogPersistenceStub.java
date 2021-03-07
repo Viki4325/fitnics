@@ -1,5 +1,7 @@
 package com.group12.fitnics.persistence;
 
+import com.group12.fitnics.exceptions.FoodLogNotFoundException;
+import com.group12.fitnics.exceptions.InvalidFoodLogException;
 import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.MyDate;
 
@@ -64,22 +66,21 @@ public class FoodLogPersistenceStub implements IFoodLogPersistence {
     }
 
     @Override
-    public String insertFoodLog(FoodLog foodLog) {
+    public void insertFoodLog(FoodLog foodLog) throws InvalidFoodLogException {
         if (!checkInvariant(foodLog))
-            return "Fail";
+            throw new InvalidFoodLogException("The food log has invalid userID or foodID or grams. ");
 
         // if there exists same food log already, to not allow it to be inserted
         if (getFoodLog(foodLog.getUserID(), foodLog.getFoodID(), foodLog.getDate()) != null)
-            return "Fail";
+            throw new InvalidFoodLogException("The food log is duplicate. ");
 
         foodLogs.add(foodLog);
-        return "Success";
     }
 
     @Override
-    public String updateFoodLog(int userID, int foodID, MyDate date, FoodLog updatedLog) {
+    public void updateFoodLog(int userID, int foodID, MyDate date, FoodLog updatedLog) throws InvalidFoodLogException, FoodLogNotFoundException {
         if (!checkInvariant(updatedLog))
-            return "Fail";
+            throw new InvalidFoodLogException("The food log has invalid userID or foodID or grams. ");
 
         boolean found = false;
         for (int i = 0; i < foodLogs.size() && !found; i++) {
@@ -90,13 +91,11 @@ public class FoodLogPersistenceStub implements IFoodLogPersistence {
             }
         }
         if (!found)
-            return "Fail";
-
-        return "Success";
+            throw new FoodLogNotFoundException("There is no such food log to update. ");
     }
 
     @Override
-    public String deleteFoodLog(int userID, int foodID, MyDate date) {
+    public void deleteFoodLog(int userID, int foodID, MyDate date) throws FoodLogNotFoundException {
         boolean found = false;
         for (int i = 0; i < foodLogs.size() && !found; i++) {
             FoodLog log = foodLogs.get(i);
@@ -106,9 +105,7 @@ public class FoodLogPersistenceStub implements IFoodLogPersistence {
             }
         }
         if (!found)
-            return "Fail";
-
-        return "Success";
+            throw new FoodLogNotFoundException("There is no such food log to delete. ");
     }
 
     private boolean checkInvariant(FoodLog foodLog) {

@@ -12,10 +12,10 @@ public interface IUserPersistence {
 
     User getUserByUsername(final String username);
 
-    String insertUser(final User currentUser);
+    void insertUser(final User currentUser);
 
-    String updateUser(final int userID, final User currentUser);
+    void updateUser(final int userID, final User currentUser);
 
-    String deleteUser(final int userID);
+    void deleteUser(final int userID);
 
 }

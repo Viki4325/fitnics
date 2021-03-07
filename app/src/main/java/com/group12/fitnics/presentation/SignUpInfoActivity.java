@@ -13,6 +13,7 @@ import android.widget.Spinner;
 
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
+import com.group12.fitnics.business.UnitConverter;
 import com.group12.fitnics.objects.User;
 
 import java.util.Calendar;
@@ -134,7 +135,7 @@ public class SignUpInfoActivity extends AppCompatActivity {
         choice = (Spinner) findViewById(R.id.weightUnitSpinner);
 
         if(choice.getSelectedItem().toString() == "kg")
-            newUser.setWeight(Double.parseDouble(data.getText().toString().trim())*2.205);
+            newUser.setWeight(UnitConverter.KGToLB(Double.parseDouble(data.getText().toString().trim())));
         else
             newUser.setWeight(Double.parseDouble(data.getText().toString().trim()));
         units[0] = choice.getSelectedItemPosition();
@@ -143,7 +144,7 @@ public class SignUpInfoActivity extends AppCompatActivity {
         choice = (Spinner) findViewById(R.id.heightUnitSpinner);
 
         if(choice.getSelectedItem().toString() == "ft")
-            newUser.setHeight(Double.parseDouble(data.getText().toString().trim())*30.48);
+            newUser.setHeight(UnitConverter.FTToCM(Double.parseDouble(data.getText().toString().trim())));
         else
             newUser.setHeight(Double.parseDouble(data.getText().toString().trim()));
         units[1] = choice.getSelectedItemPosition();

@@ -1,5 +1,7 @@
 package com.group12.fitnics.persistence;
 
+import com.group12.fitnics.exceptions.ExerciseLogNotFoundException;
+import com.group12.fitnics.exceptions.InvalidExerciseLogException;
 import com.group12.fitnics.objects.ExerciseLog;
 import com.group12.fitnics.objects.MyDate;
 
@@ -63,22 +65,21 @@ public class ExerciseLogPersistenceStub implements IExerciseLogPersistence {
     }
 
     @Override
-    public String insertExerciseLog(ExerciseLog exerciseLog) {
+    public void insertExerciseLog(ExerciseLog exerciseLog) throws InvalidExerciseLogException {
         if (!checkInvariant(exerciseLog))
-            return "Fail";
+            throw new InvalidExerciseLogException("The exercise log has invalid userID or exerciseID or minutes. ");
 
         // if there exists same food log already, to not allow it to be inserted
         if (getExerciseLog(exerciseLog.getUserID(), exerciseLog.getExerciseID(), exerciseLog.getDate()) != null)
-            return "Fail";
+            throw new InvalidExerciseLogException("The exercise log is duplicate. ");
 
         exerciseLogs.add(exerciseLog);
-        return "Success";
     }
 
     @Override
-    public String updateExerciseLog(int userID, int exerciseID, MyDate date, ExerciseLog updatedLog) {
+    public void updateExerciseLog(int userID, int exerciseID, MyDate date, ExerciseLog updatedLog) throws InvalidExerciseLogException, ExerciseLogNotFoundException {
         if (!checkInvariant(updatedLog))
-            return "Fail";
+            throw new InvalidExerciseLogException("The exercise log has invalid userID or exerciseID or minutes. ");
 
         boolean found = false;
         for (int i = 0; i < exerciseLogs.size() && !found; i++) {
@@ -89,13 +90,11 @@ public class ExerciseLogPersistenceStub implements IExerciseLogPersistence {
             }
         }
         if (!found)
-            return "Fail";
-
-        return "Success";
+            throw new ExerciseLogNotFoundException("There is no such exercise log to update. ");
     }
 
     @Override
-    public String deleteExerciseLog(int userID, int exerciseID, MyDate date) {
+    public void deleteExerciseLog(int userID, int exerciseID, MyDate date) throws ExerciseLogNotFoundException {
         boolean found = false;
         for (int i = 0; i < exerciseLogs.size() && !found; i++) {
             ExerciseLog log = exerciseLogs.get(i);
@@ -105,9 +104,7 @@ public class ExerciseLogPersistenceStub implements IExerciseLogPersistence {
             }
         }
         if (!found)
-            return "Fail";
-
-        return "Success";
+            throw new ExerciseLogNotFoundException("There is no such exercise log to delete. ");
     }
 
     private boolean checkInvariant(ExerciseLog exerciseLog) {
