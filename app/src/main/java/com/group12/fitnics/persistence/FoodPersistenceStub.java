@@ -1,5 +1,7 @@
 package com.group12.fitnics.persistence;
 
+import com.group12.fitnics.exceptions.FoodNotFoundException;
+import com.group12.fitnics.exceptions.InvalidFoodException;
 import com.group12.fitnics.objects.Food;
 
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ public class FoodPersistenceStub implements IFoodPersistence {
         return foods;
     }
 
-    // get a user by userID
+    // get food by foodID
     @Override
     public Food getFoodByID(int foodID) {
         Food result = null;
@@ -49,14 +51,23 @@ public class FoodPersistenceStub implements IFoodPersistence {
     }
 
     @Override
-    public String insertFood(Food food) {
+    public void insertFood(Food food) throws InvalidFoodException {
+        if (food == null)
+            throw new InvalidFoodException("The food is not valid. ");
+
+        // if there exists same food name already, do not allow it to be inserted
+        if (getFoodByFoodName(food.getName()) != null)
+            throw new InvalidFoodException("There exists duplicate food. ");
+
         foods.add(food);
-        return "success";
     }
 
-    // update a user with userID to the currentUser
+    // update food with foodID
     @Override
-    public String updateFood(int foodID, Food food) {
+    public void updateFood(int foodID, Food food) throws InvalidFoodException, FoodNotFoundException {
+        if (food == null)
+            throw new InvalidFoodException("The food is not valid. ");
+
         boolean found = false;
         for(int i = 0; i < foods.size() && !found; i++) {
             if(foods.get(i).getFoodID() == foodID) {
@@ -66,12 +77,13 @@ public class FoodPersistenceStub implements IFoodPersistence {
                 found = true;
             }
         }
-        return "success";
+        if (!found)
+            throw new FoodNotFoundException("There's no food with the foodID. ");
     }
 
-    // delete a user by userID
+    // delete food by foodID
     @Override
-    public String deleteFood(int foodID) {
+    public void deleteFood(int foodID) throws FoodNotFoundException {
         boolean found = false;
         for(int i = 0; i < foods.size() && !found; i++) {
             if(foods.get(i).getFoodID() == foodID) {
@@ -79,6 +91,7 @@ public class FoodPersistenceStub implements IFoodPersistence {
                 found = true;
             }
         }
-        return "success";
+        if (!found)
+            throw new FoodNotFoundException("There's no food with the foodID. ");
     }
 }

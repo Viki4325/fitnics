@@ -11,9 +11,9 @@ public interface IFoodPersistence {
 
     Food getFoodByFoodName(final String foodName);
 
-    String insertFood(final Food currentUser);
+    void insertFood(final Food currentUser);
 
-    String updateFood(final int foodID, final Food currentFood);
+    void updateFood(final int foodID, final Food currentFood);
 
-    String deleteFood(final int foodID);
+    void deleteFood(final int foodID);
 }

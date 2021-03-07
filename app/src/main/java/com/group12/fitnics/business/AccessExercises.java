@@ -5,6 +5,8 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.group12.fitnics.application.Services;
+import com.group12.fitnics.exceptions.ExerciseNotFoundException;
+import com.group12.fitnics.exceptions.InvalidExerciseException;
 import com.group12.fitnics.objects.Exercise;
 import com.group12.fitnics.persistence.IExercisePersistence;
 
@@ -106,37 +108,33 @@ public class AccessExercises {
         return null;
    }
 
-   public boolean insertExercise(Exercise exercise){
-        if(exercise != null){
-            return exercisePersistence.insertExercise(exercise);
-        }
-        return false;
-   }
-
    public Exercise getExerciseByName(String exerciseTitle){
         return exercisePersistence.getExerciseByName(exerciseTitle);
    }
 
+    public void insertExercise(Exercise exercise) throws InvalidExerciseException {
+        exercisePersistence.insertExercise(exercise);
+    }
+
     /*
     * This method is an addition to the 2 basic ways of deleting exercise objects
     * */
-   public boolean deleteExerciseByName(String exerciseName){
-       boolean deleted = false;
-       if( exerciseName != null){
-           Exercise result = exercisePersistence.getExerciseByName(exerciseName);
-            if(result != null){
-                deleted = exercisePersistence.deleteExercise(result);
-            }
-       }
-       return deleted;
+   public void deleteExerciseByName(String exerciseName) throws InvalidExerciseException, ExerciseNotFoundException {
+       if(exerciseName.equals(""))
+           throw new InvalidExerciseException("The exercise name is not valid. ");
+
+       Exercise result = exercisePersistence.getExerciseByName(exerciseName);
+       if(result == null)
+           throw new ExerciseNotFoundException("There's no exercise with the name. ");
+
+       exercisePersistence.deleteExercise(result);
    }
 
-    public boolean deleteExerciseById(int exerciseId){
-        boolean deleted = false;
-        if(exerciseId >= 0){
-            deleted = exercisePersistence.deleteExercise(exerciseId);
-        }
-        return deleted;
+    public void deleteExerciseById(int exerciseId) throws InvalidExerciseException, ExerciseNotFoundException {
+        if(exerciseId < 0)
+            throw new InvalidExerciseException("The exercise id is not valid. ");
+
+        exercisePersistence.deleteExercise(exerciseId);
     }
 
 }
