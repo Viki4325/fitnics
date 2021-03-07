@@ -1,5 +1,8 @@
 package com.group12.fitnics.persistence;
 
+import com.group12.fitnics.exceptions.InvalidUserException;
+import com.group12.fitnics.exceptions.InvalidUsernameException;
+import com.group12.fitnics.exceptions.UserNotFoundException;
 import com.group12.fitnics.objects.User;
 
 import java.util.ArrayList;
@@ -53,24 +56,23 @@ public class UserPersistenceStub implements IUserPersistence {
     }
 
     @Override
-    public String insertUser(User currentUser) {
+    public void insertUser(User currentUser) throws InvalidUserException {
         if (currentUser == null)
-            return "Fail";
+            throw new InvalidUserException("The user is not valid. ");
 
         // if there exists same username already, do not allow it to be inserted
         if (getUserByUsername(currentUser.getUsername()) != null)
-            return "Fail";
+            throw new InvalidUsernameException("There exists duplicate username. ");
 
         currentUser.setUserID();
         users.add(currentUser);
-        return "Success";
     }
 
     // update a user with userID to the updatedUser
     @Override
-    public String updateUser(int userID, User updatedUser) {
+    public void updateUser(int userID, User updatedUser) throws InvalidUserException, UserNotFoundException{
         if (updatedUser == null)
-            return "Fail";
+            throw new InvalidUserException("The user is not valid. ");
 
         boolean found = false;
         for(int i = 0; i < users.size() && !found; i++) {
@@ -82,14 +84,13 @@ public class UserPersistenceStub implements IUserPersistence {
             }
         }
         if (!found)
-            return "Fail";
+            throw new UserNotFoundException("There's no user with the userID. ");
 
-        return "Success";
     }
 
     // delete a user by userID
     @Override
-    public String deleteUser(int userID) {
+    public void deleteUser(int userID) throws UserNotFoundException {
         boolean found = false;
         for(int i = 0; i < users.size() && !found; i++) {
             if(users.get(i).getUserID() == userID) {
@@ -98,8 +99,7 @@ public class UserPersistenceStub implements IUserPersistence {
             }
         }
         if (!found)
-            return "Fail";
+            throw new UserNotFoundException("There's no user with the userID. ");
 
-        return "Success";
     }
 }

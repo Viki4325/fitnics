@@ -1,31 +1,35 @@
 package com.group12.fitnics.tests.business;
 
 import com.group12.fitnics.business.AccessFoodLogs;
+import com.group12.fitnics.exceptions.FoodLogNotFoundException;
+import com.group12.fitnics.exceptions.InvalidFoodLogException;
 import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.MyDate;
-
-import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class AccessFoodLogsTest extends TestCase {
+public class AccessFoodLogsTest {
 
     private AccessFoodLogs accessFoodLogs;
+    private MyDate date;
 
     @Before
     public void setUp() {
         System.out.println("Starting test for AccessFoodLogs");
         accessFoodLogs = new AccessFoodLogs();
+        date = new MyDate(new GregorianCalendar(2021, 0, 1));
+
     }
 
     @Test
     public void testGetFoodLog() {
         System.out.println("\nStarting testGetFoodLog");
-        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
         FoodLog log = accessFoodLogs.getFoodLog(0, 1, date);
 
         assertNotNull(log);
@@ -62,7 +66,6 @@ public class AccessFoodLogsTest extends TestCase {
     @Test
     public void testGetFoodLogByUserDate() {
         System.out.println("\nStarting testGetFoodLogByUserDate");
-        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
         List<FoodLog> lists = accessFoodLogs.getFoodLogByUserDate(2, date);
 
         assertNotNull(lists);
@@ -82,86 +85,141 @@ public class AccessFoodLogsTest extends TestCase {
     @Test
     public void testInsertFoodLog() {
         System.out.println("\nStarting testInsertFoodLog");
-        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
         FoodLog log1 = new FoodLog(1, 2, date, 200);
-        FoodLog log2 = new FoodLog(-1, 2, date, 200); // invalid food log
-        FoodLog log3 = new FoodLog(1, -2, date, 200); // invalid food log
-        FoodLog log4 = new FoodLog(1, 2, date, -10); // invalid food log
-        FoodLog log5 = new FoodLog(0, 1, date, 77); // food log that already exists
 
-        String result = accessFoodLogs.insertFoodLog(log1);
+        accessFoodLogs.insertFoodLog(log1);
+        assertEquals(log1, accessFoodLogs.getFoodLog(1, 2, date));
         assertEquals(1, accessFoodLogs.getFoodLogByUserDate(1, date).size());
-        assertEquals("Success", result);
-
-        result = accessFoodLogs.insertFoodLog(log2);
-        assertEquals("Fail", result);
-        result = accessFoodLogs.insertFoodLog(log3);
-        assertEquals("Fail", result);
-        result = accessFoodLogs.insertFoodLog(log4);
-        assertEquals("Fail", result);
-        result = accessFoodLogs.insertFoodLog(log5);
-        assertEquals("Fail", result);
-        result = accessFoodLogs.insertFoodLog(null);
-        assertEquals("Fail", result);
 
         // delete what we just inserted
-        assertEquals("Success", accessFoodLogs.deleteFoodLog(1, 2, date));
+        accessFoodLogs.deleteFoodLog(1, 2, date);
         assertNull(accessFoodLogs.getFoodLog(1, 2, date));
 
         System.out.println("Finished testInsertFoodLog");
     }
 
-    @Test
-    public void testDeleteFoodLog() {
-        System.out.println("\nStarting testDeleteFoodLog");
-        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
 
-        String result = accessFoodLogs.deleteFoodLog(0, 1, date);
-        assertNull(accessFoodLogs.getFoodLog(0, 1, date));
-        assertEquals("Success", result);
+    @Test(expected = InvalidFoodLogException.class)
+    public void testInsertFoodLogNull() {
+        System.out.println("\nStarting testInsertFoodLogNull");
+        accessFoodLogs.insertFoodLog(null);
+        System.out.println("Finished testInsertFoodLogNull");
+    }
 
-        result = accessFoodLogs.deleteFoodLog(0, 4, date); // not found
-        assertEquals("Fail", result);
-        result = accessFoodLogs.deleteFoodLog(1, 3, date); // not found
-        assertEquals("Fail", result);
+    @Test(expected = InvalidFoodLogException.class)
+    public void testInsertFoodLogInvalidUserID() {
+        System.out.println("\nStarting testInsertFoodLogInvalidUserID");
+        FoodLog log2 = new FoodLog(-1, 2, date, 200); // invalid userID
+        accessFoodLogs.insertFoodLog(log2);
+        System.out.println("Finished testInsertFoodLogInvalidUserID");
+    }
 
-        // add what we just deleted
-        assertEquals("Success", accessFoodLogs.insertFoodLog(new FoodLog(0, 1, date, 25)));
-        assertEquals(2, accessFoodLogs.getFoodLogByUserDate(0, date).size());
+    @Test(expected = InvalidFoodLogException.class)
+    public void testInsertFoodLogInvalidFoodID() {
+        System.out.println("\nStarting testInsertFoodLogInvalidFoodID");
+        FoodLog log3 = new FoodLog(1, -2, date, 200); // invalid foodID
+        accessFoodLogs.insertFoodLog(log3);
+        System.out.println("Finished testInsertFoodLogInvalidFoodID");
+    }
 
-        System.out.println("Finished testDeleteFoodLog");
+    @Test(expected = InvalidFoodLogException.class)
+    public void testInsertFoodLogInvalidGrams() {
+        System.out.println("\nStarting testInsertFoodLogInvalidGrams");
+        FoodLog log4 = new FoodLog(1, 2, date, -10); // invalid grams
+        accessFoodLogs.insertFoodLog(log4);
+        System.out.println("Finished testInsertFoodLogInvalidGrams");
+    }
+
+    @Test(expected = InvalidFoodLogException.class)
+    public void testInsertDuplicateFoodLog() {
+        System.out.println("\nStarting testInsertDuplicateFoodLog");
+        FoodLog log5 = new FoodLog(0, 1, date, 77); // food log that already exists
+        accessFoodLogs.insertFoodLog(log5);
+        System.out.println("Finished testInsertDuplicateFoodLog");
     }
 
     @Test
     public void testUpdateFoodLog() {
         System.out.println("\nStarting testUpdateFoodLog");
-        MyDate date = new MyDate(new GregorianCalendar(2021, 0, 1));
         FoodLog log1 = new FoodLog(0, 1, date, 100);
-        FoodLog log2 = new FoodLog(-1, 2, date, 200); // invalid food log
-        FoodLog log3 = new FoodLog(1, -2, date, 200); // invalid food log
-        FoodLog log4 = new FoodLog(1, 2, date, -10); // invalid food log
 
-        String result = accessFoodLogs.updateFoodLog(0, 1, date, log1);
-        assertEquals("Success", result);
+        accessFoodLogs.updateFoodLog(0, 1, date, log1);
         assertEquals(100, accessFoodLogs.getFoodLog(0, 1, date).getGrams());
 
-        result = accessFoodLogs.updateFoodLog(0, 4, date, log1); // not found
-        assertEquals("Fail", result);
-        result = accessFoodLogs.updateFoodLog(0, 1, date, log2);
-        assertEquals("Fail", result);
-        result = accessFoodLogs.updateFoodLog(0, 1, date, log3);
-        assertEquals("Fail", result);
-        result = accessFoodLogs.updateFoodLog(0, 1, date, log4);
-        assertEquals("Fail", result);
-
         // un-do the update
-        result = accessFoodLogs.updateFoodLog(0, 1, date, new FoodLog(0, 1, date,25));
-        assertEquals("Success", result);
+        accessFoodLogs.updateFoodLog(0, 1, date, new FoodLog(0, 1, date,25));
         assertEquals(25, accessFoodLogs.getFoodLog(0, 1, date).getGrams());
 
         System.out.println("Finished testUpdateFoodLog");
     }
 
+    @Test(expected = InvalidFoodLogException.class)
+    public void testUpdateFoodLogNull() {
+        System.out.println("\nStarting testUpdateFoodLogNull");
+        accessFoodLogs.updateFoodLog(0, 1, date, null);
+        System.out.println("Finished testUpdateFoodLogInvalidUserID");
+    }
+
+    @Test(expected = InvalidFoodLogException.class)
+    public void testUpdateFoodLogInvalidUserID() {
+        System.out.println("\nStarting testUpdateFoodLogInvalidUserID");
+        FoodLog log2 = new FoodLog(-1, 2, date, 200); // invalid user id
+        accessFoodLogs.updateFoodLog(0, 1, date, log2);
+        System.out.println("Finished testUpdateFoodLogInvalidUserID");
+    }
+
+    @Test(expected = InvalidFoodLogException.class)
+    public void testUpdateFoodLogInvalidFoodID() {
+        System.out.println("\nStarting testUpdateFoodLogInvalidFoodID");
+        FoodLog log3 = new FoodLog(1, -2, date, 200); // invalid food id
+        accessFoodLogs.updateFoodLog(0, 1, date, log3);
+        System.out.println("Finished testUpdateFoodLogInvalidFoodID");
+    }
+
+    @Test(expected = InvalidFoodLogException.class)
+    public void testUpdateFoodLogInvalidGrams() {
+        System.out.println("\nStarting testUpdateFoodLogInvalidGrams");
+        FoodLog log4 = new FoodLog(1, 2, date, -10); // invalid grams
+        accessFoodLogs.updateFoodLog(0, 1, date, log4);
+        System.out.println("Finished testUpdateFoodLogInvalidGrams");
+    }
+
+    @Test(expected = FoodLogNotFoundException.class)
+    public void testUpdateNotFoundFoodLog() {
+        System.out.println("\nStarting testUpdateNotFoundFoodLog");
+        FoodLog log1 = new FoodLog(0, 1, date, 100);
+        accessFoodLogs.updateFoodLog(0, 4, date, log1); // not found
+        System.out.println("Finished testUpdateNotFoundFoodLog");
+    }
+
+    @Test
+    public void testDeleteFoodLog() {
+        System.out.println("\nStarting testDeleteFoodLog");
+
+        accessFoodLogs.deleteFoodLog(0, 1, date);
+        assertNull(accessFoodLogs.getFoodLog(0, 1, date));
+
+        // add what we just deleted
+        accessFoodLogs.insertFoodLog(new FoodLog(0, 1, date, 25));
+        assertEquals(25, accessFoodLogs.getFoodLog(0, 1, date).getGrams());
+        assertEquals(2, accessFoodLogs.getFoodLogByUserDate(0, date).size());
+
+        System.out.println("Finished testDeleteFoodLog");
+    }
+
+    @Test(expected = FoodLogNotFoundException.class)
+    public void testDeleteNotFoundFoodLog1() {
+        System.out.println("\nStarting testDeleteNotFoundFoodLog1 - User ID and date are the same, but foodID is different.");
+        accessFoodLogs.deleteFoodLog(0, 4, date); // not found
+        System.out.println("Finished testDeleteNotFoundFoodLog1");
+    }
+
+    @Test(expected = FoodLogNotFoundException.class)
+    public void testDeleteNotFoundFoodLog2() {
+        System.out.println("\nStarting testDeleteNotFoundFoodLog2 - User ID and foodID are the same, but date is different.");
+        accessFoodLogs.deleteFoodLog(1, 3, date); // not found
+        System.out.println("Finished testDeleteNotFoundFoodLog2");
+    }
 
     @Test
     public void testGetUserTotalDailyIntake() {

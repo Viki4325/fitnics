@@ -1,6 +1,8 @@
 package com.group12.fitnics.business;
 
 import com.group12.fitnics.application.Services;
+import com.group12.fitnics.exceptions.ExerciseLogNotFoundException;
+import com.group12.fitnics.exceptions.InvalidExerciseLogException;
 import com.group12.fitnics.objects.ExerciseLog;
 import com.group12.fitnics.objects.MyDate;
 import com.group12.fitnics.persistence.IExerciseLogPersistence;
@@ -30,16 +32,16 @@ public class AccessExerciseLogs {
         return exerciseLogPersistence.getExerciseLogByUserDate(userID, date);
     }
 
-    public String insertExerciseLog(ExerciseLog exerciseLog) {
-        return exerciseLogPersistence.insertExerciseLog(exerciseLog);
+    public void insertExerciseLog(ExerciseLog exerciseLog) throws InvalidExerciseLogException {
+        exerciseLogPersistence.insertExerciseLog(exerciseLog);
     }
 
-    public String updateExerciseLog(int userID, int exerciseID, MyDate date, ExerciseLog updatedLog) {
-        return exerciseLogPersistence.updateExerciseLog(userID, exerciseID, date, updatedLog);
+    public void updateExerciseLog(int userID, int exerciseID, MyDate date, ExerciseLog updatedLog) throws InvalidExerciseLogException, ExerciseLogNotFoundException {
+        exerciseLogPersistence.updateExerciseLog(userID, exerciseID, date, updatedLog);
     }
 
-    public String deleteExerciseLog(int userID, int exerciseID, MyDate date) {
-        return exerciseLogPersistence.deleteExerciseLog(userID, exerciseID, date);
+    public void deleteExerciseLog(int userID, int exerciseID, MyDate date) throws ExerciseLogNotFoundException {
+        exerciseLogPersistence.deleteExerciseLog(userID, exerciseID, date);
     }
 
     public int getUserTotalDailyBurned(int userID, MyDate date) {

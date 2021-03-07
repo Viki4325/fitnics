@@ -13,9 +13,9 @@ public interface IFoodLogPersistence {
 
     List<FoodLog> getFoodLogByUserDate(final int userID, final MyDate date);
 
-    String insertFoodLog(final FoodLog foodLog);
+    void insertFoodLog(final FoodLog foodLog);
 
-    String updateFoodLog(final int userID, final int foodID, final MyDate date, final FoodLog updatedLog);
+    void updateFoodLog(final int userID, final int foodID, final MyDate date, final FoodLog updatedLog);
 
-    String deleteFoodLog(final int userID, final int foodID, final MyDate date);
+    void deleteFoodLog(final int userID, final int foodID, final MyDate date);
 }

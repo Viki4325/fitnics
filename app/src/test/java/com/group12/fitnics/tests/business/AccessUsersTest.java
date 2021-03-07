@@ -1,16 +1,19 @@
 package com.group12.fitnics.tests.business;
 
 import com.group12.fitnics.business.AccessUsers;
+import com.group12.fitnics.exceptions.InvalidUserException;
+import com.group12.fitnics.exceptions.InvalidUsernameException;
+import com.group12.fitnics.exceptions.UserNotFoundException;
 import com.group12.fitnics.objects.User;
-
-import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
-public class AccessUsersTest extends TestCase {
+public class AccessUsersTest {
 
     private AccessUsers accessUsers;
 
@@ -64,9 +67,9 @@ public class AccessUsersTest extends TestCase {
     public void testInsertUser() {
         System.out.println("\nStarting testInsertUser");
         User eve = new User("eve", 1, 47, 160, 'F');
-        String result = accessUsers.insertUser(eve);
+        accessUsers.insertUser(eve);
 
-        assertEquals("Success", result);
+        assertNotNull(accessUsers.getUserByName("eve"));
         assertEquals(4, eve.getUserID());
         assertEquals("eve", accessUsers.getUserByName("eve").getUsername());
         assertEquals(1, accessUsers.getUserByName("eve").getActivityLevel());
@@ -74,60 +77,84 @@ public class AccessUsersTest extends TestCase {
         assertEquals(160.0, accessUsers.getUserByName("eve").getHeight(), 0.0001);
         assertEquals('F', accessUsers.getUserByName("eve").getGender());
 
-        User alice2 = new User("alice", 0, 50, 165, 'F');
-        result = accessUsers.insertUser(alice2); // A user with existing name can not be inserted
-        assertEquals("Fail", result);
-        result = accessUsers.insertUser(null);
-        assertEquals("Fail", result);
-
-        // add what we just deleted
-        assertEquals("Success", accessUsers.deleteUser(4));
+        // delete what we just added
+        accessUsers.deleteUser(4);
         assertNull(accessUsers.getUserByName("eve"));
 
         System.out.println("Finished testInsertUser");
+    }
+
+    @Test(expected = InvalidUsernameException.class)
+    public void testInsertDuplicateUser() {
+        System.out.println("\nStarting testInsertDuplicateUser");
+        // A user with existing name can not be inserted
+        User alice2 = new User("alice", 0, 50, 165, 'F');
+        accessUsers.insertUser(alice2);
+        System.out.println("Finished InvalidUsernameException");
+    }
+
+    @Test(expected = InvalidUserException.class)
+    public void testInsertUserNull() {
+        System.out.println("\nStarting testInsertUserNull");
+        accessUsers.insertUser(null);
+        System.out.println("Finished testInsertUserNull");
     }
 
     @Test
     public void testUpdateUser() {
         System.out.println("\nStarting testUpdateUser");
         User updatedAlice = new User("alice", 2, 49, 163, 'F');
-        String result = accessUsers.updateUser(0, updatedAlice);
+        accessUsers.updateUser(0, updatedAlice);
 
-        assertEquals("Success", result);
         User alice = accessUsers.getUserByName("alice");
         assertEquals(2, alice.getActivityLevel());
         assertEquals(49, alice.getWeight(), 0.0001);
         assertEquals(163, alice.getHeight(), 0.0001);
 
-        result = accessUsers.updateUser(7, updatedAlice); // not found
-        assertEquals("Fail", result);
-        result = accessUsers.updateUser(0, null);
-        assertEquals("Fail", result);
-
         // un-do the update
-        result = accessUsers.updateUser(0, new User("alice", 1, 55, 163, 'F'));
-        assertEquals("Success", result);
+        accessUsers.updateUser(0, new User("alice", 1, 55, 163, 'F'));
 
         System.out.println("Finished testUpdateUser");
+    }
+
+    @Test(expected = InvalidUserException.class)
+    public void testUpdateInvalidUser() {
+        System.out.println("\nStarting testUpdateInvalidUser");
+        accessUsers.updateUser(0, null);
+        System.out.println("Finished testUpdateInvalidUser");
+    }
+
+    @Test(expected = UserNotFoundException.class)
+    public void testUpdateNotFoundUser() {
+        System.out.println("\nStarting testUpdateNotFoundUser");
+        User updatedAlice = new User("alice", 2, 49, 163, 'F');
+        accessUsers.updateUser(7, updatedAlice); // not found
+        System.out.println("Finished testUpdateNotFoundUser");
     }
 
     @Test
     public void testDeleteUser() {
         System.out.println("\nStarting testDeleteUser");
 
-        String result = accessUsers.deleteUser(3);
-        assertEquals("Success", result);
+        accessUsers.deleteUser(3);
+        assertNull(accessUsers.getUserById(3));
         assertEquals(3, accessUsers.getUsers().size());
-
-        result = accessUsers.deleteUser(7); // not found
-        assertEquals("Fail", result);
 
         // add what we just deleted
         User david = new User("david", 1, 50, 160, 'M');
+        accessUsers.insertUser(david);
         david.setUserID(3);
-        assertEquals("Success", accessUsers.insertUser(david));
+        assertNotNull(accessUsers.getUserById(3));
+        assertNotNull(accessUsers.getUserByName("david"));
         assertEquals(4, accessUsers.getUsers().size());
 
         System.out.println("Finished testDeleteUser");
+    }
+
+    @Test(expected = UserNotFoundException.class)
+    public void testDeleteNotFoundUser() {
+        System.out.println("\nStarting testDeleteNotFoundUser");
+        accessUsers.deleteUser(7); // not found
+        System.out.println("Finished testDeleteNotFoundUser");
     }
 }
