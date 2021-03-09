@@ -1,14 +1,16 @@
 package com.group12.fitnics.persistence.hsqldb;
 
 import com.group12.fitnics.objects.ExerciseLog;
-import com.group12.fitnics.objects.MyDate;
 import com.group12.fitnics.persistence.IExerciseLogPersistence;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
+
+
     @Override
-    public ExerciseLog getExerciseLog(int userID, int exerciseID, MyDate date) {
+    public ExerciseLog getExerciseLog(int userID, int exerciseID, LocalDate date) {
         return null;
     }
 
@@ -18,7 +20,7 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
     }
 
     @Override
-    public List<ExerciseLog> getExerciseLogByUserDate(int userID, MyDate date) {
+    public List<ExerciseLog> getExerciseLogByUserDate(int userID, LocalDate date) {
         return null;
     }
 
@@ -28,12 +30,12 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
     }
 
     @Override
-    public void updateExerciseLog(int userID, int exerciseID, MyDate date, ExerciseLog updatedLog) {
+    public void updateExerciseLog(int userID, int exerciseID, LocalDate date, ExerciseLog updatedLog) {
 
     }
 
     @Override
-    public void deleteExerciseLog(int userID, int exerciseID, MyDate date) {
+    public void deleteExerciseLog(int userID, int exerciseID, LocalDate date) {
 
     }
 }

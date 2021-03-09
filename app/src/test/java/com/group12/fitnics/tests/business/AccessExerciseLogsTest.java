@@ -12,19 +12,21 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 public class AccessExerciseLogsTest {
 
     private AccessExerciseLogs accessExerciseLogs;
-    private MyDate date;
+    private LocalDate date;
 
     @Before
     public void setUp() {
         System.out.println("Starting test for AccessExerciseLogs");
         accessExerciseLogs = new AccessExerciseLogs();
-        date = new MyDate(new GregorianCalendar(2021, 0, 1));
+//        date = new MyDate(new GregorianCalendar(2021, 0, 1));
+        date = LocalDate.of(2021, 1, 1);
     }
 
     @Test
@@ -224,8 +226,10 @@ public class AccessExerciseLogsTest {
     @Test
     public void testGetUserTotalDailyBurned() {
         System.out.println("\nStarting testGetUserTotalDailyBurned");
-        MyDate date1 = new MyDate(new GregorianCalendar(2021, 0, 1));
-        MyDate date2 = new MyDate(new GregorianCalendar(2021, 7, 19));
+//        MyDate date1 = new MyDate(new GregorianCalendar(2021, 0, 1));
+//        MyDate date2 = new MyDate(new GregorianCalendar(2021, 7, 19));
+        LocalDate date1 = LocalDate.of(2021, 1, 1);
+        LocalDate date2 = LocalDate.of(2021, 8, 19);
 
         int result = accessExerciseLogs.getUserTotalDailyBurned(2, date1);
         assertEquals(1600, result);

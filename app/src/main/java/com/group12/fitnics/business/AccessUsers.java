@@ -2,7 +2,6 @@ package com.group12.fitnics.business;
 
 import com.group12.fitnics.application.Services;
 import com.group12.fitnics.exceptions.InvalidUserException;
-import com.group12.fitnics.exceptions.InvalidUsernameException;
 import com.group12.fitnics.exceptions.UserNotFoundException;
 import com.group12.fitnics.objects.User;
 import com.group12.fitnics.persistence.IUserPersistence;
@@ -12,6 +11,10 @@ import java.util.List;
 public class AccessUsers {
 
     private IUserPersistence userPersistence;
+
+    public AccessUsers(IUserPersistence userPersistence) {
+        this.userPersistence = userPersistence;
+    }
 
     public AccessUsers() {
         userPersistence = Services.getUserPersistence();

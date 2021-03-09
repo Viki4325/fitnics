@@ -11,20 +11,20 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 public class AccessFoodLogsTest {
 
     private AccessFoodLogs accessFoodLogs;
-    private MyDate date;
+    private LocalDate date;
 
     @Before
     public void setUp() {
         System.out.println("Starting test for AccessFoodLogs");
         accessFoodLogs = new AccessFoodLogs();
-        date = new MyDate(new GregorianCalendar(2021, 0, 1));
-
+        date = LocalDate.of(2021, 1, 1);
     }
 
     @Test
@@ -224,8 +224,10 @@ public class AccessFoodLogsTest {
     @Test
     public void testGetUserTotalDailyIntake() {
         System.out.println("\nStarting testGetUserTotalDailyIntake");
-        MyDate date1 = new MyDate(new GregorianCalendar(2021, 0, 1));
-        MyDate date2 = new MyDate(new GregorianCalendar(2021, 7, 19));
+//        MyDate date1 = new MyDate(new GregorianCalendar(2021, 0, 1));
+//        MyDate date2 = new MyDate(new GregorianCalendar(2021, 7, 19));
+        LocalDate date1 = LocalDate.of(2021, 1, 1);
+        LocalDate date2 = LocalDate.of(2021, 8, 19);
 
         int result = accessFoodLogs.getUserTotalDailyIntake(0, date1);
         assertEquals(164, result);

@@ -8,7 +8,11 @@ import com.group12.fitnics.persistence.IFoodPersistence;
 
 public class AccessFood{
 
-    IFoodPersistence foodList;
+    private IFoodPersistence foodList;
+
+    public AccessFood(IFoodPersistence foodList) {
+        this.foodList = foodList;
+    }
 
     public AccessFood(){
         foodList = Services.getFoodPersistence();

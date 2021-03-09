@@ -1,23 +1,31 @@
 package com.group12.fitnics.tests.objects;
 
 import com.group12.fitnics.objects.FoodLog;
-import com.group12.fitnics.objects.MyDate;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class FoodLogTest {
 
+    private LocalDate date;
+    private FoodLog log;
+
+    @Before
+    public void setUp() {
+        System.out.println("Starting test for AccessFoodLogs");
+        date = LocalDate.of(2021, 2, 1);
+        log = new FoodLog(0, 3, date, 200);
+    }
+
     @Test
     public void testFoodLogCreation() {
         System.out.println("\nStarting testFoodLogCreation");
-        MyDate date = new MyDate(new GregorianCalendar(2021, 1, 1));
 
-        FoodLog log = new FoodLog(0, 3, date, 200);
         assertNotNull(log);
         assertEquals(0, log.getUserID());
         assertEquals(3, log.getFoodID());
@@ -30,10 +38,8 @@ public class FoodLogTest {
     @Test
     public void testFoodLogSetters() {
         System.out.println("\nStarting testFoodLogSetters");
-        MyDate date1 = new MyDate(new GregorianCalendar(2021, 1, 1));
-        MyDate date2 = new MyDate(new GregorianCalendar(2021, 1, 2));
+        LocalDate date2 = LocalDate.of(2021, 2, 2);
 
-        FoodLog log = new FoodLog(0, 3, date1, 200);
         log.setUserID(1);
         assertEquals(1, log.getUserID());
         log.setFoodID(1);
@@ -44,5 +50,18 @@ public class FoodLogTest {
         assertEquals(100, log.getGrams());
 
         System.out.println("Finished testFoodLogSetters");
+    }
+
+    @Test
+    public void testFoodLogDateString() {
+        System.out.println("\nStarting testFoodLogDateString");
+        LocalDate date2 = LocalDate.of(2021, 11, 8);
+
+        assertEquals("2021-02-01", log.getDateString());
+
+        log.setDateString("2021-11-08");
+        assertEquals(date2, log.getDate());
+
+        System.out.println("Finished testFoodLogDateString");
     }
 }
