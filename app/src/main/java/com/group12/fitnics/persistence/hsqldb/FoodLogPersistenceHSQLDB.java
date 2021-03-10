@@ -1,13 +1,18 @@
 package com.group12.fitnics.persistence.hsqldb;
 
+import android.util.Log;
+
+import com.group12.fitnics.business.DateHelper;
 import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.persistence.IFoodLogPersistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
@@ -26,37 +31,124 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
         int userId = rs.getInt("uid");
         int foodId = rs.getInt("fid");
         String dateStr = rs.getString("date");
-        int gram = rs.getInt("gram");
-        return new FoodLog(userId, foodId, dateStr, gram);
+        int grams = rs.getInt("grams");
+        return new FoodLog(userId, foodId, dateStr, grams);
     }
 
     @Override
-    public FoodLog getFoodLog(int userID, int exerciseID, LocalDate date) {
+    public FoodLog getFoodLog(int userID, int foodID, LocalDate date) {
+        try (Connection c = connect()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM FOODLOGS WHERE uid = ? AND fid = ? AND date = ?");
+            st.setString(1, Integer.toString(userID));
+            st.setString(2, Integer.toString(foodID));
+            st.setString(3, DateHelper.dateToString(date));
+            final ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return fromResultSet(rs);
+            }
+
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public List<FoodLog> getFoodLogByUser(int userID) {
-        return null;
+        List<FoodLog> logs = new ArrayList<>();
+        try (Connection c = connect()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM FOODLOGS WHERE uid = ?");
+            st.setString(1, Integer.toString(userID));
+            final ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                final FoodLog foodLog = fromResultSet(rs);
+                logs.add(foodLog);
+            }
+            rs.close();
+            st.close();
+
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
+
+        return logs;
     }
 
     @Override
     public List<FoodLog> getFoodLogByUserDate(int userID, LocalDate date) {
-        return null;
+        List<FoodLog> logs = new ArrayList<>();
+        try (Connection c = connect()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM FOODLOGS WHERE uid = ? AND date = ?");
+            st.setString(1, Integer.toString(userID));
+            st.setString(2, DateHelper.dateToString(date));
+            final ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                final FoodLog foodLog = fromResultSet(rs);
+                logs.add(foodLog);
+            }
+            rs.close();
+            st.close();
+
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
+
+        return logs;
     }
 
     @Override
     public void insertFoodLog(FoodLog foodLog) {
+        try (final Connection c = connect()) {
+            final PreparedStatement st = c.prepareStatement("INSERT INTO FOODLOGS VALUES(?, ?, ?, ?)");
+            st.setInt(1, foodLog.getUserID());
+            st.setInt(2, foodLog.getFoodID());
+            st.setString(3, foodLog.getDateString());
+            st.setInt(4, foodLog.getGrams());
+            st.executeUpdate();
+            st.close();
 
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void updateFoodLog(int userID, int foodID, LocalDate date, FoodLog updatedLog) {
+        try (final Connection c = connect()) {
+            final PreparedStatement st = c.prepareStatement("UPDATE FOODLOGS SET uid=?, fid=?, date=?, grams=? where uid=? AND fid=? AND date=?");
+            st.setInt(1, updatedLog.getUserID());
+            st.setInt(2, updatedLog.getFoodID());
+            st.setString(3, updatedLog.getDateString());
+            st.setInt(4, updatedLog.getGrams());
+            st.setString(5, Integer.toString(userID));
+            st.setString(6, Integer.toString(foodID));
+            st.setString(7, DateHelper.dateToString(date));
+            st.executeUpdate();
+            st.close();
 
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void deleteFoodLog(int userID, int foodID, LocalDate date) {
+        try (final Connection c = connect()) {
+            final PreparedStatement st = c.prepareStatement("DELETE FROM FOODLOGS WHERE uid = ? AND fid = ? AND date = ?");
+            st.setString(1, Integer.toString(userID));
+            st.setString(2, Integer.toString(foodID));
+            st.setString(3, DateHelper.dateToString(date));
+            st.executeUpdate();
+            st.close();
 
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
     }
 }

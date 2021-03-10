@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IFoodLogPersistence {
 
-    FoodLog getFoodLog(final int userID, final int exerciseID, final LocalDate date);
+    FoodLog getFoodLog(final int userID, final int foodID, final LocalDate date);
 
     List<FoodLog> getFoodLogByUser(final int userID);
 

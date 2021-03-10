@@ -1,0 +1,90 @@
+CREATE SCHEMA PUBLIC AUTHORIZATION DBA
+
+CREATE MEMORY TABLE PUBLIC.USERS (
+"id" INTEGER NOT NULL PRIMARY KEY,
+"username" TEXT,
+"birthDay" INTEGER,
+"birthMonth" INTEGER,
+"birthYear" INTEGER,
+"actLvl" INTEGER,
+"weight" DOUBLE,
+"height" DOUBLE,
+"gender" CHAR(1),
+"caloricNeeds" INTEGER,
+"goal" INTEGER
+);
+
+CREATE MEMORY TABLE PUBLIC.FOODS (
+"id" INTEGER NOT NULL PRIMARY KEY,
+"name" TEXT,
+"calPerGram" DOUBLE
+);
+
+CREATE MEMORY TABLE PUBLIC.EXERCISES (
+"id" INTEGER NOT NULL PRIMARY KEY,
+"name" TEXT,
+"description" TEXT,
+"category" TEXT,
+"level" TEXT,
+"calPerMin" INTEGER
+);
+
+CREATE MEMORY TABLE PUBLIC.FOODLOGS (
+"uid" INTEGER,
+"fid" INTEGER,
+"date" TEXT,
+"grams" INTEGER,
+FOREIGN KEY("uid") REFERENCES "users"("id"),
+FOREIGN KEY("fid") REFERENCES "foods"("id")
+);
+
+CREATE TABLE PUBLIC.EXERCISELOGS (
+"uid" INTEGER,
+"eid" INTEGER,
+"date" TEXT,
+"minutes" INTEGER,
+FOREIGN KEY("uid") REFERENCES "users"("id"),
+FOREIGN KEY("eid") REFERENCES "exercises"("id")
+);
+
+CREATE USER SA PASSWORD DIGEST 'd41d8cd98f00b204e9800998ecf8427e'
+ALTER USER SA SET LOCAL TRUE
+CREATE SCHEMA PUBLIC AUTHORIZATION DBA
+SET DATABASE DEFAULT INITIAL SCHEMA PUBLIC
+GRANT DBA TO SA
+SET WRITE_DELAY 20
+SET FILES SCALE 32
+SET SCHEMA public
+
+INSERT INTO users VALUES (0, "alice", 15, 4, 1998, 1, 55, 163, "F", 0, 0);
+INSERT INTO users VALUES (1, "bob", 1, 5, 2000, 2, 70, 175, "M", 0, 1);
+INSERT INTO users VALUES (2, "carol", 22, 7, 1995, 3, 47, 160, "F", 0, 2);
+INSERT INTO users VALUES (3, "david", 27, 11, 1985, 1, 50, 160, "M", 0, 0);
+INSERT INTO foods VALUES (1, "Bread",  2.33);
+INSERT INTO foods VALUES (2, "Nonfat Greek yogurt", 0.53);
+INSERT INTO foods VALUES (3, "Fried Egg", 1.84);
+INSERT INTO foods VALUES (4, "Banana", 0.89);
+INSERT INTO foods VALUES (5, "Steamed rice", 1.93);
+INSERT INTO foods VALUES (6, "Grilled chicken breast", 1.65);
+INSERT INTO exercises VALUES (1, "Brace Squat", "Stand with feet slightly wider than shoulder-width apart, while standing as tall as you can. Grab a weight plate and hold it out in front of your body with arms straight out. Keep your core tight and stand with a natural arch in your back. Now, push hips back and bend knees down into a squat as far as you can. Hold for a few moments and bring yourself back up to the starting position.\n", "Legs", "Intermediate", 222);
+INSERT INTO exercises VALUES (2, "Flutter Kicks", "Laying on the back, lift your straightened legs from the ground at a 45 degree angle. As your Left foot travels downward and nearly touches the floor, your Right foot should seek to reach a 90 degree angle, or as close to one as possible. Bring your R foot down until it nearly touches the floor, and bring your L foot upwards.  Maintain leg rigidity throughout the exercise.  Your head should stay off the ground, supported by tightened upper abdominals. (L up R down, L down R up, x2)  ^v, v^, ^v, v^ = 1 rep\n", "Abs", "Beginner", 120);
+INSERT INTO exercises VALUES (3, "Bench Press", "Lay down on a bench, the bar should be directly above your eyes, the knees are somewhat angled and the feet are firmly on the floor. Concentrate, breath deeply and grab the bar more than shoulder wide. Bring it slowly down till it briefly touches your chest at the height of your nipples. Push the bar up. If you train with a high weight it is advisable to have a spotter that can help you up if you can't lift the weight on your own. With the width of the grip you can also control which part of the chest is trained more: \t\twide grip: outer chest muscles\n \t\tnarrow grip: inner chest muscles and triceps", "Chest", "Beginner", 532);
+INSERT INTO exercises VALUES (4, "Chin-Ups", "Like pull-ups but with a reverse grip\n", "Back", "Beginner", 1);
+INSERT INTO exercises VALUES (5, "Shrugs,Dumbbells", "Stand with straight body, the hands are hanging freely on the side and hold each a dumbbell. Lift from this position the shoulders as high as you can, but don't bend the arms during the movement. On the highest point, make a short pause of 1 or 2 seconds before returning slowly to the initial position. When training with a higher weight, make sure that you still do the whole movement!\n", "Shoulders", "Expert", 100);
+INSERT INTO exercises VALUES (6, "Calf Raises", "Calf raises are a method of exercising the gastrocnemius, tibialis posterior and soleus muscles of the lower leg. The movement performed is plantar flexion, a.k.a. ankle extension.\n", "Calves", "Expert", 85);
+INSERT INTO foodlogs VALUES (0, 1, "2021-01-01", 25);
+INSERT INTO foodlogs VALUES (0, 2, "2021-01-01", 200);
+INSERT INTO foodlogs VALUES (1, 3, "2021-01-17", 50);
+INSERT INTO foodlogs VALUES (2, 1, "2021-01-01", 30);
+INSERT INTO foodlogs VALUES (2, 2, "2021-01-01", 150);
+INSERT INTO foodlogs VALUES (2, 5, "2021-01-01", 200);
+INSERT INTO foodlogs VALUES (2, 6, "2021-01-01", 100);
+INSERT INTO foodlogs VALUES (2, 4, "2021-01-02", 150);
+INSERT INTO foodlogs VALUES (2, 5, "2021-01-02", 200);
+INSERT INTO exerciselogs VALUES (0, 2, "2021-01-01", 10);
+INSERT INTO exerciselogs VALUES (1, 0, "2021-01-01", 5);
+INSERT INTO exerciselogs VALUES (1, 1, "2021-01-02", 105);
+INSERT INTO exerciselogs VALUES (2, 2, "2021-01-01", 5);
+INSERT INTO exerciselogs VALUES (2, 5, "2021-01-01", 10);
+INSERT INTO exerciselogs VALUES (2, 6, "2021-01-02", 10);
+INSERT INTO exerciselogs VALUES (3, 3, "2021-01-02", 10);

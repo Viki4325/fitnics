@@ -1,9 +1,8 @@
 package com.group12.fitnics.objects;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import com.group12.fitnics.business.AccessFood;
 import com.group12.fitnics.business.DateHelper;
+import java.time.LocalDate;
 
 public class FoodLog {
     private int userID;

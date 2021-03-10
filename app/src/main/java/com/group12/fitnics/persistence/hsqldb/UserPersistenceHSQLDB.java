@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserPersistenceHSQLDB implements IUserPersistence {
@@ -25,27 +27,42 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     }
 
     private User fromResultSet(final ResultSet rs) throws SQLException {
-        String userID = rs.getString("id");
+        int userID = rs.getInt("id");
         String username = rs.getString("username");
-        String birthDay = rs.getString("birthDay");
-        String birthMonth = rs.getString("birthMonth");
-        String birthYear = rs.getString("birthYear");
+        int birthDay = rs.getInt("birthDay");
+        int birthMonth = rs.getInt("birthMonth");
+        int birthYear = rs.getInt("birthYear");
         int activityLvl = Integer.parseInt(rs.getString("actLvl"));
         double weight = Double.parseDouble(rs.getString("weight"));
         double height = Double.parseDouble(rs.getString("height"));
         char gender = rs.getString("gender").charAt(0);
-        String dailyCaloricNeeds = rs.getString("caloricNeeds");
-        String goal = rs.getString("goal");
+        Integer dailyCaloricNeeds = rs.getInt("caloricNeeds");
+        Integer goal = rs.getInt("goal");
 //        String unit = rs.getString("unit"); // ?????
 
-        return new User(username, activityLvl, weight, height, gender);
+        User user = new User(username, activityLvl, weight, height, gender);
+        user.setUserID(userID);
+        return user;
     }
 
     @Override
     public List<User> getUserSequential() {
-        // TO DO
+        final List<User> users = new ArrayList<>();
+        try (final Connection c = connect()) {
+            final Statement st = c.createStatement();
+            final ResultSet rs = st.executeQuery("SELECT * FROM USERS");
+            while (rs.next()) {
+                final User user = fromResultSet(rs);
+                users.add(user);
+            }
+            rs.close();
+            st.close();
 
-        return null;
+        } catch (final SQLException e) {
+            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+            e.printStackTrace();
+        }
+        return users;
     }
 
     @Override
