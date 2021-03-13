@@ -28,6 +28,9 @@ public class SignUpActiveLevelActivity extends AppCompatActivity {
 
     }
 
+    //Probably make separate code or method for this.
+    //Looks like code smell -> Coz of the if statements
+
     public void btnComplete(View v)
     {
         int activityLevel = -1;

@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="What is your Goal?"
+        android:fontFamily="@font/muli"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,35 +22,59 @@
         app:layout_constraintVertical_bias="0.219" />
 
     <LinearLayout
-        android:layout_width="250dp"
-        android:layout_height="266dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/looseWeightbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:onClick="btnSetGoal"
-            android:text="Loose Weight" />
+            android:elevation="10dp"
+            android:padding="20dp"
+            android:fontFamily="@font/muli"
+            android:textStyle="bold"
+            app:cornerRadius="50dp"
+            android:text="@string/goal_loose_weight" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/maintianWeightbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/muli"
+            android:textStyle="bold"
+            android:padding="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:onClick="btnSetGoal"
-            android:text="Maintain Weight" />
+            android:elevation="10dp"
+            app:cornerRadius="50dp"
+            android:text="@string/goal_maintain_weight" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/gainWeightbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:elevation="10dp"
+            android:fontFamily="@font/muli"
+            android:gravity="center"
             android:onClick="btnSetGoal"
-            android:text="Gain Weight" />
+            android:padding="20dp"
+            android:text="@string/goal_gain_weight"
+            android:textStyle="bold"
+            app:cornerRadius="50dp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

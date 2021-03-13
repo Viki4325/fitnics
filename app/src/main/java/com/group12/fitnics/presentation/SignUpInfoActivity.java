@@ -2,26 +2,36 @@ package com.group12.fitnics.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.objects.User;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Calendar;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 public class SignUpInfoActivity extends AppCompatActivity {
 
     private User newUser;
     private EditText date;
     private AccessUsers accessUsers;
+    ToggleButton weightSwitch;
+    ToggleButton heightSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +48,8 @@ public class SignUpInfoActivity extends AppCompatActivity {
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Gender.setAdapter(genderAdapter);
 
-        Spinner weightUnits = (Spinner) findViewById(R.id.weightUnitSpinner);
-        ArrayAdapter<String> weightAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.weightUnits));
-        weightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        weightUnits.setAdapter(weightAdapter);
+        setupUnitSwitch();
 
-        Spinner heightUnits = (Spinner) findViewById(R.id.heightUnitSpinner);
-        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.heightUnits));
-        heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        heightUnits.setAdapter(heightAdapter);
 
         date = (EditText)findViewById(R.id.editBirthday);
         date.addTextChangedListener(new TextWatcher() {
@@ -54,6 +57,7 @@ public class SignUpInfoActivity extends AppCompatActivity {
             private String ddmmyyyy = "DDMMYYYY";
             private Calendar calendar = Calendar.getInstance();
 
+            @SuppressLint("DefaultLocale")
             @Override
             public void onTextChanged(CharSequence seq, int start, int before, int count) {
 
@@ -114,44 +118,184 @@ public class SignUpInfoActivity extends AppCompatActivity {
     }
 
     public void btnNextPage(View v) {
-        String username;
-        int[] units = new int[2];
-        //Add username to new user
-        EditText data = (EditText) findViewById(R.id.enterUsername);
-        username = data.getText().toString().trim();
-        newUser.setUsername(username);
-        //Add birthday to new user
-        data = (EditText) findViewById(R.id.editBirthday);
-        String birthday = data.getText().toString().trim();
-        newUser.setBirthDay(Integer.parseInt(birthday.substring(0, 2)));
-        newUser.setBirthMonth(Integer.parseInt(birthday.substring(3, 5)));
-        newUser.setBirthYear(Integer.parseInt(birthday.substring(6, 10)));
-        //Add gender to new user
-        Spinner choice = (Spinner) findViewById(R.id.chooseGender);
-        newUser.setGender(choice.getSelectedItem().toString().charAt(0));
-        //Add weight to new user
-        data = (EditText) findViewById(R.id.editWeight);
-        choice = (Spinner) findViewById(R.id.weightUnitSpinner);
+        newUser.setUsername(getUserName());
+        newUser.setBirthDay(Integer.parseInt(getBirthDay().substring(0, 2)));
+        newUser.setBirthMonth(Integer.parseInt(getBirthDay().substring(3, 5)));
+        newUser.setBirthYear(Integer.parseInt(getBirthDay().substring(6, 10)));
+        newUser.setGender(getGender());
 
-        if(choice.getSelectedItem().toString() == "kg")
-            newUser.setWeight(Double.parseDouble(data.getText().toString().trim())*2.205);
-        else
-            newUser.setWeight(Double.parseDouble(data.getText().toString().trim()));
-        units[0] = choice.getSelectedItemPosition();
-        //Add height to new user
-        data = (EditText) findViewById(R.id.editHeight);
-        choice = (Spinner) findViewById(R.id.heightUnitSpinner);
-
-        if(choice.getSelectedItem().toString() == "ft")
-            newUser.setHeight(Double.parseDouble(data.getText().toString().trim())*30.48);
-        else
-            newUser.setHeight(Double.parseDouble(data.getText().toString().trim()));
-        units[1] = choice.getSelectedItemPosition();
-        newUser.setUnits(units);
-        //go to next panel to get activity level
+        updateWeightInfo();
+        updateHeightInfo();
+        setUnits();
         accessUsers.insertUser(newUser);
+        setupIntent();
+    }
+
+
+    private String getUserName(){
+        EditText data = (EditText) findViewById(R.id.enterUsername);
+        return data.getText().toString().trim();
+    }
+
+    private String getBirthDay(){
+        EditText data = (EditText) findViewById(R.id.editBirthday);
+        return data.getText().toString().trim();
+    }
+
+    private char getGender(){
+        Spinner choice = (Spinner) findViewById(R.id.chooseGender);
+        return choice.getSelectedItem().toString().charAt(0);
+    }
+
+    private void updateWeightInfo(){
+        try {
+            EditText data = (EditText) findViewById(R.id.editWeight);
+            float weight = Float.parseFloat(data.getText().toString().trim());
+            newUser.setWeight(weight);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void updateHeightInfo(){
+
+        try {
+            EditText data = (EditText) findViewById(R.id.editHeight);
+            float height = Float.parseFloat(data.getText().toString().trim());
+            newUser.setHeight(height);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void setupIntent(){
         Intent ActivityPage = new Intent(this, SignUpActiveLevelActivity.class);
-        ActivityPage.putExtra("username",username);
+        ActivityPage.putExtra("username",getUserName());
         startActivity(ActivityPage);
+    }
+
+    private void setupUnitSwitch(){
+        weightSwitch = (ToggleButton) findViewById(R.id.weightUnitSwitch);
+        weightSwitch.setText("lbs");
+        weightSwitch.setTextOff("lbs");
+        weightSwitch.setTextOn("kgs");
+        weightSwitch.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton toggleButton, boolean convertToKgs) {
+                updateWeight(convertToKgs);
+            }
+        }) ;
+
+        heightSwitch = (ToggleButton) findViewById(R.id.heightUnitSwitch);
+        heightSwitch.setText("cm");
+        heightSwitch.setTextOff("cm");
+        heightSwitch.setTextOn("ft");
+        heightSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean convertToFts) {
+                updateHeight(convertToFts);
+            }
+        });
+
+    }
+
+    /*
+    * IF weightSwitch is checked -> current unit is LBS (Need to be converted to Kgs)
+    * IF weightSwitch is unchecked -> current unit is KGS (Need to be converted to LBS)
+    * */
+    private void updateWeight(boolean convertToKgs) {
+        try {
+            EditText weightData = (EditText) findViewById(R.id.editWeight);
+            double currentValue = Double.parseDouble(weightData.getText().toString());
+            if(convertToKgs){
+                //Someone please make a method out of this and put it in the calculation class.
+                double result = currentValue / 2.2046226218;
+                DecimalFormat df = new DecimalFormat("#.#");
+                df.setRoundingMode(RoundingMode.CEILING);
+                String toKgs = df.format(result);
+                setTextToEditText(weightData,toKgs);
+
+            }else{
+                //Someone please make a method out of this and put it in the calculation class.
+                double result = currentValue * 2.2046226218;
+                DecimalFormat df = new DecimalFormat("#");
+                df.setRoundingMode(RoundingMode.FLOOR);
+                String toLbs = df.format(result);
+                setTextToEditText(weightData,toLbs);
+
+            }
+
+        }catch (Exception e){
+            Toast.makeText(this,e.getMessage(), LENGTH_SHORT).show();
+        }
+    }
+
+    /*
+     * IF heightSwitch is checked -> current unit is FT (Need to be converted to cm)
+     * IF heightSwitch is unchecked -> current unit is cm (Need to be converted to FT)
+     * */
+    private void updateHeight(boolean convertToFts) {
+        try {
+            //by default user types in lbs, cm
+            EditText heightData = (EditText) findViewById(R.id.editHeight);
+            double currentValue = Double.parseDouble(heightData.getText().toString());
+
+            if(convertToFts){
+                //Someone please make a method out of this and put it in the calculation class.
+                double result = currentValue/30.48;
+                DecimalFormat df = new DecimalFormat("#.#");
+                df.setRoundingMode(RoundingMode.CEILING);
+                String ftInch = df.format(result);
+                setTextToEditText(heightData,ftInch);
+
+            }else{
+                //Someone please make a method out of this and put it in the calculation class.
+                double result = currentValue * 30.48;
+                DecimalFormat df = new DecimalFormat("#");
+                df.setRoundingMode(RoundingMode.FLOOR);
+                String cm = df.format(result);
+                setTextToEditText(heightData,cm);
+
+            }
+        }catch (Exception e){
+            Toast.makeText(this,e.getLocalizedMessage(), LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void setTextToEditText(EditText editTextWidget, String textToDisplay){
+        if(textToDisplay != null && editTextWidget != null){
+            editTextWidget.setText(textToDisplay);
+        }
+    }
+
+
+    private void setUnits(){
+        int[] choiceUnits = new int[2];
+        if(weightSwitch.isChecked()){
+            choiceUnits[0] = 1; //if kgs
+        }else{
+            choiceUnits[0] = 0;  //if lbs
+        }
+
+        if(heightSwitch.isChecked()){
+            choiceUnits[1] = 1; //if ft
+        }else{
+            choiceUnits[1] = 0;  //if cm
+        }
+        newUser.setUnits(choiceUnits);
+    }
+
+
+    public void closePage(View view){
+        onBackPressed();
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
