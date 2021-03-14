@@ -159,7 +159,7 @@ android:padding="10dp">
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:imeOptions="actionNext"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -209,7 +209,7 @@ android:padding="10dp">
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:imeOptions="actionNext"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>

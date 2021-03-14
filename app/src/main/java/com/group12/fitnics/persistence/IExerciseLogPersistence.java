@@ -13,9 +13,9 @@ public interface IExerciseLogPersistence {
 
     List<ExerciseLog> getExerciseLogByUserDate(final int userID, final MyDate date);
 
-    String insertExerciseLog(final ExerciseLog exerciseLog);
+    void insertExerciseLog(final ExerciseLog exerciseLog);
 
-    String updateExerciseLog(final int userID, final int exerciseID, final MyDate date, final ExerciseLog updatedLog);
+    void updateExerciseLog(final int userID, final int exerciseID, final MyDate date, final ExerciseLog updatedLog);
 
-    String deleteExerciseLog(final int userID, final int exerciseID, final MyDate date);
+    void deleteExerciseLog(final int userID, final int exerciseID, final MyDate date);
 }

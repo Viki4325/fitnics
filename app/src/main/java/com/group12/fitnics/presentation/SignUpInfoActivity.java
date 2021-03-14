@@ -17,19 +17,20 @@ import android.widget.ToggleButton;
 
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
+import com.group12.fitnics.business.UnitConverter;
 import com.group12.fitnics.objects.User;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.Calendar;
 
 import static android.widget.Toast.LENGTH_SHORT;
+import static com.group12.fitnics.business.UnitConverter.convertUnitToString;
 
 public class SignUpInfoActivity extends AppCompatActivity {
 
     private User newUser;
     private EditText date;
     private AccessUsers accessUsers;
+    int[] choiceUnits = new int[2];
     ToggleButton weightSwitch;
     ToggleButton heightSwitch;
 
@@ -49,13 +50,12 @@ public class SignUpInfoActivity extends AppCompatActivity {
         Gender.setAdapter(genderAdapter);
 
         setupUnitSwitch();
-
-
         date = (EditText)findViewById(R.id.editBirthday);
+
         date.addTextChangedListener(new TextWatcher() {
             private String current = "";
-            private String ddmmyyyy = "DDMMYYYY";
-            private Calendar calendar = Calendar.getInstance();
+            private final String ddmmyyyy = "DDMMYYYY";
+            private final Calendar calendar = Calendar.getInstance();
 
             @SuppressLint("DefaultLocale")
             @Override
@@ -85,14 +85,13 @@ public class SignUpInfoActivity extends AppCompatActivity {
                         if (mon > 12) mon = 12;
                         calendar.set(Calendar.MONTH, mon - 1);
 
-                        year = (year < 1900) ? 1900 : (year > 2100) ? 2100 : year;
+                        year = (year < 1900) ? 1900 : Math.min(year, 2100);
                         calendar.set(Calendar.YEAR, year);
                         //^ first set year for the line below to work correctly
                         //with leap years - otherwise, date e.g. 29/02/2012
                         //would be automatically corrected to 28/02/2012
 
-                        day = (day > calendar.getActualMaximum(Calendar.DATE)) ?
-                                calendar.getActualMaximum(Calendar.DATE) : day;
+                        day = Math.min(day, calendar.getActualMaximum(Calendar.DATE));
                         clean = String.format("%02d%02d%02d",day,mon,year);
                     }
 
@@ -100,10 +99,10 @@ public class SignUpInfoActivity extends AppCompatActivity {
                             clean.substring(2,4),
                             clean.substring(4,8));
 
-                    sel = sel < 0?0:sel;
+                    sel = Math.max(sel, 0);
                     current = clean;
                     date.setText(current);
-                    date.setSelection(sel < current.length() ? sel:current.length());
+                    date.setSelection(Math.min(sel, current.length()));
                 }
             }
             @Override
@@ -132,6 +131,7 @@ public class SignUpInfoActivity extends AppCompatActivity {
     }
 
 
+
     private String getUserName(){
         EditText data = (EditText) findViewById(R.id.enterUsername);
         return data.getText().toString().trim();
@@ -150,8 +150,13 @@ public class SignUpInfoActivity extends AppCompatActivity {
     private void updateWeightInfo(){
         try {
             EditText data = (EditText) findViewById(R.id.editWeight);
-            float weight = Float.parseFloat(data.getText().toString().trim());
-            newUser.setWeight(weight);
+            if(choiceUnits[0] == 1)
+            {//If kgs : then convert to default unit -> lbs
+                newUser.setWeight(UnitConverter.KGToLB(Double.parseDouble(data.getText().toString().trim())));
+            }else
+            {
+                newUser.setWeight(Double.parseDouble(data.getText().toString().trim()));
+            }
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -159,12 +164,19 @@ public class SignUpInfoActivity extends AppCompatActivity {
 
     }
 
+    /*
+    * User's height information stored as cm's by default
+    * */
     private void updateHeightInfo(){
-
         try {
             EditText data = (EditText) findViewById(R.id.editHeight);
-            float height = Float.parseFloat(data.getText().toString().trim());
-            newUser.setHeight(height);
+            if(choiceUnits[1] == 1)
+            {//If fts : then convert to default unit -> kgs
+                newUser.setHeight(UnitConverter.FTToCM(Double.parseDouble(data.getText().toString().trim())));
+            }else
+            {
+                newUser.setHeight(Double.parseDouble(data.getText().toString().trim()));
+            }
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -178,6 +190,7 @@ public class SignUpInfoActivity extends AppCompatActivity {
         startActivity(ActivityPage);
     }
 
+
     private void setupUnitSwitch(){
         weightSwitch = (ToggleButton) findViewById(R.id.weightUnitSwitch);
         weightSwitch.setText("lbs");
@@ -187,6 +200,8 @@ public class SignUpInfoActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton toggleButton, boolean convertToKgs) {
                 updateWeight(convertToKgs);
+                //call setUnits to update what units the user has
+                setUnits();
             }
         }) ;
 
@@ -198,6 +213,8 @@ public class SignUpInfoActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean convertToFts) {
                 updateHeight(convertToFts);
+                //call setUnits to update what units the user has
+                setUnits();
             }
         });
 
@@ -212,21 +229,13 @@ public class SignUpInfoActivity extends AppCompatActivity {
             EditText weightData = (EditText) findViewById(R.id.editWeight);
             double currentValue = Double.parseDouble(weightData.getText().toString());
             if(convertToKgs){
-                //Someone please make a method out of this and put it in the calculation class.
-                double result = currentValue / 2.2046226218;
-                DecimalFormat df = new DecimalFormat("#.#");
-                df.setRoundingMode(RoundingMode.CEILING);
-                String toKgs = df.format(result);
-                setTextToEditText(weightData,toKgs);
-
+                double toKg = UnitConverter.LBToKg(Double.parseDouble(weightData.getText().toString().trim()));
+                String toKgString = convertUnitToString(toKg,1);
+                setTextToEditText(weightData,toKgString);
             }else{
-                //Someone please make a method out of this and put it in the calculation class.
-                double result = currentValue * 2.2046226218;
-                DecimalFormat df = new DecimalFormat("#");
-                df.setRoundingMode(RoundingMode.FLOOR);
-                String toLbs = df.format(result);
-                setTextToEditText(weightData,toLbs);
-
+                double toLbs = UnitConverter.KGToLB(Double.parseDouble(weightData.getText().toString().trim()));
+                String toLbsString = convertUnitToString(toLbs,1);
+                setTextToEditText(weightData,toLbsString);
             }
 
         }catch (Exception e){
@@ -242,29 +251,22 @@ public class SignUpInfoActivity extends AppCompatActivity {
         try {
             //by default user types in lbs, cm
             EditText heightData = (EditText) findViewById(R.id.editHeight);
-            double currentValue = Double.parseDouble(heightData.getText().toString());
 
             if(convertToFts){
-                //Someone please make a method out of this and put it in the calculation class.
-                double result = currentValue/30.48;
-                DecimalFormat df = new DecimalFormat("#.#");
-                df.setRoundingMode(RoundingMode.CEILING);
-                String ftInch = df.format(result);
-                setTextToEditText(heightData,ftInch);
+                double toFt = UnitConverter.CMToFT(Double.parseDouble(heightData.getText().toString().trim()));
+                String toFt_String = convertUnitToString(toFt,1);
+                setTextToEditText(heightData,toFt_String);
 
             }else{
-                //Someone please make a method out of this and put it in the calculation class.
-                double result = currentValue * 30.48;
-                DecimalFormat df = new DecimalFormat("#");
-                df.setRoundingMode(RoundingMode.FLOOR);
-                String cm = df.format(result);
-                setTextToEditText(heightData,cm);
-
+                double toCm = UnitConverter.FTToCM(Double.parseDouble(heightData.getText().toString().trim()));
+                String toCm_String = convertUnitToString(toCm,1);
+                setTextToEditText(heightData,toCm_String);
             }
         }catch (Exception e){
             Toast.makeText(this,e.getLocalizedMessage(), LENGTH_SHORT).show();
         }
     }
+
 
 
     private void setTextToEditText(EditText editTextWidget, String textToDisplay){
@@ -275,7 +277,6 @@ public class SignUpInfoActivity extends AppCompatActivity {
 
 
     private void setUnits(){
-        int[] choiceUnits = new int[2];
         if(weightSwitch.isChecked()){
             choiceUnits[0] = 1; //if kgs
         }else{

@@ -4,6 +4,8 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.group12.fitnics.exceptions.ExerciseNotFoundException;
+import com.group12.fitnics.exceptions.InvalidExerciseException;
 import com.group12.fitnics.objects.Exercise;
 
 import java.util.ArrayList;
@@ -176,58 +178,59 @@ public class ExercisePersistenceStub implements IExercisePersistence {
     }
 
     @Override
-    public boolean insertExercise(Exercise newExercise) {
-        boolean inserted = false;
-        if(newExercise != null)
-        {
-            newExercise.setExerciseID();
-            exerciseList.add(newExercise);
-            inserted = true;
-        }
-        return inserted;
+    public void insertExercise(Exercise newExercise) throws InvalidExerciseException {
+        if(newExercise == null)
+            throw new InvalidExerciseException("The exercise is not valid. ");
+
+        newExercise.setExerciseID();
+        exerciseList.add(newExercise);
     }
 
     /*
     * Only if an exercise Item exists, then it can be updated
     * */
     @Override
-    public boolean updateExercise(int exerciseID, Exercise currentExercise) {
+    public void updateExercise(int exerciseID, Exercise currentExercise) throws InvalidExerciseException, ExerciseNotFoundException {
+        if(currentExercise == null)
+            throw new InvalidExerciseException("The exercise is not valid. ");
+
         boolean found = false;
-        boolean updated = false;
         for(int i = 0; i < exerciseList.size() && !found; i++) {
             if(exerciseList.get(i).getExerciseID() == exerciseID) {
                 Exercise prevExercise = exerciseList.get(i);
                 currentExercise.setExerciseID(currentExercise.getExerciseID());
                 exerciseList.set(i, currentExercise);
-                updated = true;
                 found = true;
             }
         }
-        return updated;
+        if(!found)
+            throw new ExerciseNotFoundException("There's no exercise with the exerciseID. ");
     }
 
     @Override
-    public boolean deleteExercise(int exerciseID) {
-        boolean deleted = false;
-        for (int i = 0; i < exerciseList.size() && !deleted; i++) {
+    public void deleteExercise(int exerciseID) throws ExerciseNotFoundException {
+        boolean found = false;
+        for (int i = 0; i < exerciseList.size() && !found; i++) {
             if(exerciseList.get(i).getExerciseID() == exerciseID){
                 exerciseList.get(i).updateId();
                 exerciseList.remove(i);
-                deleted = true;
+                found = true;
             }
         }
-        return deleted;
+        if(!found)
+            throw new ExerciseNotFoundException("There's no exercise with the exerciseID. ");
     }
 
 
     @Override
-    public boolean deleteExercise(Exercise currentExercise) {
-        boolean deleted = false;
+    public void deleteExercise(Exercise currentExercise) throws ExerciseNotFoundException {
+        boolean found = false;
         if(exerciseList.contains(currentExercise)){
             currentExercise.updateId();
             exerciseList.remove(currentExercise);
-            deleted = true;
+            found = true;
         }
-        return deleted;
+        if(!found)
+            throw new ExerciseNotFoundException("There's no exercise to delete. ");
     }
 }
