@@ -14,8 +14,9 @@
         <activity android:name=".presentation.SearchExerciseActivity" />
         <activity
             android:name=".presentation.IndividualExercise"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".presentation.HomeActivity" />
+            android:theme="@style/Theme.Fitnics.NoActionBar" />
+        <activity android:name=".presentation.HomeActivity"
+            android:theme="@style/Theme.Fitnics.NoActionBar"/>
         <activity android:name=".presentation.SignUpActiveLevelActivity" />
         <activity android:name=".presentation.SignUpInfoActivity" />
         <activity android:name=".presentation.SearchFoodActivity" />

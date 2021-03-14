@@ -1,132 +1,305 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".presentation.HomeActivity"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    tools:context=".presentation.HomeActivity">
 
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/exerciseDetailAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/greeting"
-        android:textSize="25sp"
-        android:id="@+id/textGreeting"/>
+        android:background="@color/white"
+        android:theme="@style/Theme.Fitnics"
+        android:fitsSystemWindows="true">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/caloriesRemaining"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/goal"
-        android:textSize="15sp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/textGoal"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/remaining"
-        android:textSize="15sp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/textRemaining"/>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
-        <TextView
-            android:layout_width="wrap_content"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/exerciseDetailCollapseToolBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/food"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="@string/food"
-            android:textSize="20sp"
-            android:id="@+id/textTotalIntake"/>
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/white"
+            app:expandedTitleMarginStart="15dp"
+            app:expandedTitleMarginBottom="0dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
-    </LinearLayout>
+            <include layout="@layout/home_wavy_stats_view" />
 
-    <Button
-        android:id="@+id/btnSearchFood"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/searchFood"
-        android:onClick="btnSearchFoodOnClick"/>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/exerciseDetailToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:contentInsetStartWithNavigation="2dp"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/Theme.Fitnics"/>
 
-    <Button
-        android:id="@+id/btnFoodLog"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/foodLog"
-        android:onClick="btnFoodLogOnClick"/>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-    <LinearLayout
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/exercise"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="@string/exercise"
-            android:textSize="20sp"
-            android:id="@+id/textTotalBurned"/>
+        android:overScrollMode="never"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:theme="@style/Theme.Fitnics">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/add_breakfast_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardBackgroundColor="@color/soft_white"
+                android:layout_gravity="center"
+                app:cardUseCompatPadding="true"
+                android:clickable="true"
+                android:thicknessRatio="1.9"
+                android:padding="10dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="btnSearchFoodOnClick">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/breakfast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:padding="5dp"
+                        android:fontFamily="muli_bold"
+                        android:textColor="@color/black"
+                        android:text="@string/breakfast_button_text"
+                        android:textSize="30sp" />
+
+                    <ImageView
+                        android:id="@+id/add_img_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="end"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_baseline_add_circle" />
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/add_lunch_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardBackgroundColor="@color/soft_white"
+                android:layout_gravity="center"
+                app:cardUseCompatPadding="true"
+                android:clickable="true"
+                android:thicknessRatio="1.9"
+                android:padding="10dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="btnSearchFoodOnClick">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/lunch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="muli_bold"
+                        android:textColor="@color/black"
+                        android:padding="5dp"
+                        android:text="@string/add_lunch_btn_text"
+                        android:textSize="30sp" />
+
+                    <ImageView
+                        android:id="@+id/img_create_event_icon_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="center"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_baseline_add_circle" />
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/add_dinner_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardBackgroundColor="@color/soft_white"
+                android:layout_gravity="center"
+                app:cardUseCompatPadding="true"
+                android:clickable="true"
+                android:thicknessRatio="1.9"
+                android:padding="10dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="btnSearchFoodOnClick">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/dinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:padding="5dp"
+                        android:fontFamily="muli_bold"
+                        android:textColor="@color/black"
+                        android:text="@string/add_dinner_btn_text"
+                        android:textSize="30sp" />
+
+                    <ImageView
+                        android:id="@+id/img_create_event_icon_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"
+                        android:layout_centerVertical="true"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_baseline_add_circle" />
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/add_exercise_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardBackgroundColor="@color/soft_white"
+                android:layout_gravity="center"
+                app:cardUseCompatPadding="true"
+                android:clickable="true"
+                android:thicknessRatio="1.9"
+                android:padding="10dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="btnSearchExerciseOnClick">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/exercise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:padding="5dp"
+                        android:fontFamily="muli_bold"
+                        android:textColor="@color/black"
+                        android:text="@string/add_exercise_btn_text"
+                        android:textSize="30sp" />
+
+                    <ImageView
+                        android:id="@+id/img_create_event_icon_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="end"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_baseline_add_circle" />
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardBackgroundColor="@color/soft_white"
+                android:layout_gravity="center"
+                app:cardUseCompatPadding="true"
+                android:thicknessRatio="1.9"
+                android:padding="10dp"
+                android:foreground="?attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:padding="10dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFoodLog"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/muli"
+                        android:gravity="center"
+                        android:onClick="btnFoodLogOnClick"                        android:padding="20dp"
+                        android:text="@string/foodLog"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        app:cornerRadius="50dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnExerciseLog"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/muli"
+                        android:gravity="center"
+                        android:onClick="btnExerciseLogOnClick"
+                        android:text="@string/exerciseLog"
+                        android:textStyle="bold"
+                        android:layout_weight="2"
+                        app:cornerRadius="50dp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
 
-    <Button
-        android:id="@+id/btnSearchExercise"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/searchExercise"
-        android:onClick="btnSearchExerciseOnClick"/>
+            <Button
+                android:id="@+id/btnUpdateUserInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="btnUpdateUserInfoOnClick"
+                android:text="Update Information" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-    <Button
-        android:id="@+id/btnExerciseLog"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/exerciseLog"
-        android:onClick="btnExerciseLogOnClick"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <Button
-        android:id="@+id/btnUpdateUserInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="btnUpdateUserInfoOnClick"
-        android:text="Update Information" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
-
-    </RelativeLayout>
-
-</LinearLayout>

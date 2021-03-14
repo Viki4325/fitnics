@@ -1,12 +1,17 @@
 package com.group12.fitnics.presentation;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExerciseLogs;
 import com.group12.fitnics.business.AccessFoodLogs;
@@ -18,6 +23,7 @@ import java.util.GregorianCalendar;
 
 public class HomeActivity extends AppCompatActivity {
 
+    BottomNavigationView navBar;
     private AccessUsers accessUsers;
     private AccessFoodLogs accessFoodLogs;
     private AccessExerciseLogs accessExerciseLogs;
@@ -38,12 +44,14 @@ public class HomeActivity extends AppCompatActivity {
         String username = intent.getStringExtra("username");
         selectedUser = accessUsers.getUserByName(username);
 
+
         int intake = calculateIntake();
         int burned = calculateBurned();
         paintGreeting();
         paintCalorieGoal();
         paintCaloriesInfo(intake, burned);
     }
+
 
     private int calculateIntake() {
         return accessFoodLogs.getUserTotalDailyIntake(selectedUser.getUserID(), dateToday);
@@ -53,16 +61,18 @@ public class HomeActivity extends AppCompatActivity {
         return accessExerciseLogs.getUserTotalDailyBurned(selectedUser.getUserID(), dateToday);
     }
 
+    @SuppressLint("SetTextI18n")
     private void paintGreeting() {
         TextView textGreeting = (TextView)findViewById(R.id.textGreeting);
         textGreeting.setText("Welcome, " + selectedUser.getUsername());
     }
 
     private void paintCalorieGoal() {
-        TextView textGoal = findViewById(R.id.textGoal);
-        textGoal.setText("Goal: " + selectedUser.getDailyCaloricNeeds());
+//        TextView textGoal = findViewById(R.id.textGoal);
+//        textGoal.setText("Goal: " + selectedUser.getDailyCaloricNeeds());
     }
 
+    @SuppressLint("SetTextI18n")
     private void paintCaloriesInfo(int intake, int burned) {
         TextView textRemaining = findViewById(R.id.textRemaining);
         TextView textTotalIntake = findViewById(R.id.textTotalIntake);
@@ -70,9 +80,9 @@ public class HomeActivity extends AppCompatActivity {
 
         int goal = selectedUser.getDailyCaloricNeeds();
         int remaining = goal - intake + burned;
-        textRemaining.setText("Remaining: " + remaining + " calories");
-        textTotalIntake.setText(intake + " calories");
-        textTotalBurned.setText(burned + " calories");
+        textRemaining.setText( ""+remaining );
+        textTotalIntake.setText(intake +"");
+        textTotalBurned.setText(burned + "");
     }
 
 
@@ -104,5 +114,8 @@ public class HomeActivity extends AppCompatActivity {
         intent.putExtra("userID",Integer.toString(selectedUser.getUserID()));
         startActivity(intent);
     }
+
+
+    //click listner for the bottom navigation bar
 
 }

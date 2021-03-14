@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.VideoView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group12.fitnics.R;
 import com.group12.fitnics.application.Main;
 
@@ -22,6 +23,7 @@ import java.io.InputStreamReader;
 import static com.group12.fitnics.R.layout.activity_main;
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 
 
     public void btnSignUpOnClick(View v) {
