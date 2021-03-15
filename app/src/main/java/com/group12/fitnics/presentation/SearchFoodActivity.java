@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import java.util.ArrayList;
+import java.util.List;
+
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessFood;
 import com.group12.fitnics.objects.User;
@@ -30,8 +32,7 @@ public class SearchFoodActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.Search_food);
 
-        ArrayList<Food> list = new ArrayList<>();
-        list = food.getFoodList().getFoodSequential();
+        List<Food> list = food.getFoodList();
         adapter = new ArrayAdapter<Food>(
                 this,
                 android.R.layout.simple_list_item_1,

@@ -3,7 +3,6 @@ package com.group12.fitnics.persistence.hsqldb;
 import android.util.Log;
 
 import com.group12.fitnics.objects.Food;
-import com.group12.fitnics.objects.User;
 import com.group12.fitnics.persistence.IFoodPersistence;
 
 import java.sql.Connection;
@@ -48,7 +47,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
         return foods;
@@ -65,7 +64,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
             }
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
         return null;
@@ -82,7 +81,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
             }
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
         return null;
@@ -98,7 +97,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }
@@ -114,7 +113,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }
@@ -134,7 +133,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }

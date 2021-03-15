@@ -48,7 +48,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
             }
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
         return null;
@@ -69,7 +69,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
 
@@ -92,7 +92,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
 
@@ -111,7 +111,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }
@@ -131,7 +131,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }
@@ -147,7 +147,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }

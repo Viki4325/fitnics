@@ -6,6 +6,8 @@ import com.group12.fitnics.exceptions.InvalidFoodException;
 import com.group12.fitnics.objects.Food;
 import com.group12.fitnics.persistence.IFoodPersistence;
 
+import java.util.List;
+
 public class AccessFood{
 
     private IFoodPersistence foodList;
@@ -26,9 +28,8 @@ public class AccessFood{
         return foodList.getFoodByID(foodID);
     }
 
-    // ???????????
-    public IFoodPersistence getFoodList() {
-        return foodList;
+    public List<Food> getFoodList() {
+        return foodList.getFoodSequential();
     }
     
     public void addFood(Food newFood) throws InvalidFoodException {
