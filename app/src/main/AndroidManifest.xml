@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fitnics">
-        <activity android:name=".presentation.UpdateUserInfoActivity"></activity>
+        <activity android:name=".presentation.CreateNotificationActivity" />
+        <activity android:name=".presentation.UpdateUserInfoActivity" />
         <activity android:name=".presentation.ExerciseLogActivity" />
         <activity android:name=".presentation.SearchExerciseActivity" />
         <activity
@@ -29,7 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+    <receiver android:name=".objects.Notification"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
