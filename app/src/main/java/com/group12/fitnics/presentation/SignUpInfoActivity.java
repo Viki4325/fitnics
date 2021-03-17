@@ -116,30 +116,72 @@ public class SignUpInfoActivity extends AppCompatActivity {
         });
     }
 
-    public void btnNextPage(View v) {
-        newUser.setUsername(getUserName());
-        newUser.setBirthDay(Integer.parseInt(getBirthDay().substring(0, 2)));
-        newUser.setBirthMonth(Integer.parseInt(getBirthDay().substring(3, 5)));
-        newUser.setBirthYear(Integer.parseInt(getBirthDay().substring(6, 10)));
-        newUser.setGender(getGender());
 
-        updateWeightInfo();
-        updateHeightInfo();
-        setUnits();
-        accessUsers.insertUser(newUser);
-        setupIntent();
+    public void btnNextPage(View v) {
+        try {
+            setUserName();
+            setBirthday();
+            setGender();
+            setUnits();
+            updateWeightInfo();
+            updateHeightInfo();
+            insertUserInDB();
+            setupIntent();
+
+        }catch (Exception e){
+            Messages.fatalError(this,e.getMessage());
+        }
+
     }
 
+    private void insertUserInDB(){
+        accessUsers.insertUser(newUser);
+    }
 
+    private void setGender(){
+        newUser.setGender(getGender());
+    }
+    private void setBirthday(){
+        newUser.setBirthDay(getDay());
+        newUser.setBirthMonth(getMonth());
+        newUser.setBirthYear(getYear());
+    }
 
-    private String getUserName(){
+    private void setUserName(){
+        newUser.setUsername(getUserName());
+    }
+
+    private String getUserName()   {
         EditText data = (EditText) findViewById(R.id.enterUsername);
         return data.getText().toString().trim();
     }
 
-    private String getBirthDay(){
+
+    private int getDay(){
         EditText data = (EditText) findViewById(R.id.editBirthday);
-        return data.getText().toString().trim();
+        if(data.getText().toString().trim().equals("")){
+            return 0;
+        }else{
+            return Integer.parseInt( data.getText().toString().trim().substring(0, 2) );
+        }
+    }
+
+    private int getMonth(){
+        EditText data = (EditText) findViewById(R.id.editBirthday);
+        if(data.getText().toString().trim().equals("")){
+            return 0;
+        }else{
+            return Integer.parseInt( data.getText().toString().trim().substring(3, 5) );
+        }
+    }
+
+    private int getYear(){
+        EditText data = (EditText) findViewById(R.id.editBirthday);
+        if(data.getText().toString().trim().equals("")){
+            return 0;
+        }else{
+            return Integer.parseInt( data.getText().toString().trim().substring(6, 10) );
+        }
     }
 
     private char getGender(){
@@ -147,49 +189,57 @@ public class SignUpInfoActivity extends AppCompatActivity {
         return choice.getSelectedItem().toString().charAt(0);
     }
 
-    private void updateWeightInfo(){
-        try {
-            EditText data = (EditText) findViewById(R.id.editWeight);
-            if(choiceUnits[0] == 1)
-            {//If kgs : then convert to default unit -> lbs
-                newUser.setWeight(UnitConverter.KGToLB(Double.parseDouble(data.getText().toString().trim())));
-            }else
-            {
-                newUser.setWeight(Double.parseDouble(data.getText().toString().trim()));
-            }
-        }catch (Exception e)
-        {
-            e.printStackTrace();
+    private Double getWeight()   {
+        EditText data = (EditText) findViewById(R.id.editWeight);
+        if(data.getText().toString().trim().equals("")){
+            return 0.0;
+        }else{
+            return Double.parseDouble(data.getText().toString().trim());
         }
+    }
 
+    private Double getHeight()  {
+        EditText data = (EditText) findViewById(R.id.editHeight);
+        if(data.getText().toString().trim().equals("")){
+            return 0.0;
+        }else{
+            return Double.parseDouble(data.getText().toString().trim());
+        }
+    }
+
+    private void updateWeightInfo(){
+        EditText data = (EditText) findViewById(R.id.editWeight);
+        if(choiceUnits[0] == 1)
+        {//If kgs : then convert to default unit -> lbs
+            newUser.setWeight(UnitConverter.KGToLB(getWeight()));
+        }else
+        {
+            newUser.setWeight(getWeight());
+        }
     }
 
     /*
     * User's height information stored as cm's by default
     * */
     private void updateHeightInfo(){
-        try {
-            EditText data = (EditText) findViewById(R.id.editHeight);
-            if(choiceUnits[1] == 1)
-            {//If fts : then convert to default unit -> kgs
-                newUser.setHeight(UnitConverter.FTToCM(Double.parseDouble(data.getText().toString().trim())));
-            }else
-            {
-                newUser.setHeight(Double.parseDouble(data.getText().toString().trim()));
-            }
-        }catch (Exception e)
+        EditText data = (EditText) findViewById(R.id.editHeight);
+        if(choiceUnits[1] == 1)
+        {//If fts : then convert to default unit -> kgs
+
+            newUser.setHeight(UnitConverter.FTToCM(getHeight()));
+
+        }else
         {
-            e.printStackTrace();
+            newUser.setHeight(getHeight());
         }
     }
-
 
     private void setupIntent(){
         Intent ActivityPage = new Intent(this, SignUpActiveLevelActivity.class);
         ActivityPage.putExtra("username",getUserName());
         startActivity(ActivityPage);
-    }
 
+    }
 
     private void setupUnitSwitch(){
         weightSwitch = (ToggleButton) findViewById(R.id.weightUnitSwitch);
@@ -266,7 +316,6 @@ public class SignUpInfoActivity extends AppCompatActivity {
             Toast.makeText(this,e.getLocalizedMessage(), LENGTH_SHORT).show();
         }
     }
-
 
 
     private void setTextToEditText(EditText editTextWidget, String textToDisplay){

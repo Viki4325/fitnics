@@ -16,24 +16,23 @@ import com.group12.fitnics.objects.User;
 import java.util.ArrayList;
 
 public class FoodLogActivity extends AppCompatActivity {
-    User selectedUser;
+    private User selectedUser;
     ListView listView;
-    FoodLog foodLog;
+    private FoodLog foodLog;
     ArrayAdapter<FoodLog> adapter;
-    AccessFoodLogs log = new AccessFoodLogs();
+    private AccessFoodLogs log;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_log);
 
-
-        Intent intent = getIntent();
-        String id = intent.getStringExtra("userID");
-        int userID = Integer.parseInt(id);
+        getUserLoggedIn();
+        log =  new AccessFoodLogs();;
+//        selectedUser = (User) getIntent().getSerializableExtra("userLoggedIn");
 
         listView = (ListView) findViewById(R.id.food_log);
-        ArrayList<FoodLog> list = new ArrayList<FoodLog>(log.getFoodLogByUser(userID));
+        ArrayList<FoodLog> list = new ArrayList<FoodLog>(log.getFoodLogByUser(selectedUser.getUserID()));
 
         adapter = new ArrayAdapter<FoodLog>(
                 this,
@@ -42,5 +41,9 @@ public class FoodLogActivity extends AppCompatActivity {
         );
 
         listView.setAdapter(adapter);
+    }
+
+    private void getUserLoggedIn(){
+        selectedUser = (User) getIntent().getSerializableExtra("userLoggedIn");
     }
 }

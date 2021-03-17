@@ -19,15 +19,17 @@ import com.group12.fitnics.objects.Food;
 
 public class SearchFoodActivity extends AppCompatActivity {
     ListView listView;
-    User selectedUser;
+    private User selectedUser;
     ArrayAdapter<Food> adapter;
-    AccessFood food = new AccessFood();
+    private AccessFood food;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_food);
 
+        food = new AccessFood();
+        selectedUser = (User)getIntent().getSerializableExtra("userLoggedIn");
         listView = (ListView) findViewById(R.id.Search_food);
 
         ArrayList<Food> list = new ArrayList<>();

@@ -19,7 +19,7 @@ public class UserPersistenceStub implements IUserPersistence {
         User bob = new User("bob", 2, 70, 175, 'M');
         User carol = new User("carol", 3, 47, 160, 'F');
         User david = new User("david", 1, 50, 160, 'M');
-        alice.setUserID(0); alice.setBirthYear(1998); alice.setBirthMonth(4); alice.setBirthDay(15); alice.setGoal(0);
+        alice.setUserID(0); alice.setBirthYear(1998); alice.setBirthMonth(4); alice.setBirthDay(15); alice.setGoal(0); bob.setDailyCaloricNeeds(2500);
         bob.setUserID(1);
         carol.setUserID(2);
         david.setUserID(3);

@@ -2,6 +2,8 @@ package com.group12.fitnics.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +26,7 @@ public class SignUpActiveLevelActivity extends AppCompatActivity {
         String username = intent.getStringExtra("username");
 
         accessUsers = new AccessUsers();
+
         newUser = accessUsers.getUserByName(username);
 
     }
@@ -45,9 +48,18 @@ public class SignUpActiveLevelActivity extends AppCompatActivity {
 
         newUser.setActivityLevel(activityLevel);
 
-        Intent logInToHomeIntent = new Intent(this, HomeActivity.class);
-        logInToHomeIntent.putExtra("username", newUser.getUsername());
-        logInToHomeIntent.putExtra("userID", Integer.toString(newUser.getUserID()));
-        startActivity(logInToHomeIntent);
+        //send the user to the login page with a message
+        Intent logInToHomeIntent = new Intent(this, LogInActivity.class);
+        AlertDialog welcome = Messages.welcome(this,"You are signed up. You will be redirected to the login page where you can login using your username. Thank you for signing up. \nYour goals are now our priority.","Welcome to Fitnics");
+        welcome.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                logInToHomeIntent.putExtra("username", newUser.getUsername());
+                logInToHomeIntent.putExtra("userID", Integer.toString(newUser.getUserID()));
+
+                startActivity(logInToHomeIntent);
+            }
+        });
+
     }
 }
