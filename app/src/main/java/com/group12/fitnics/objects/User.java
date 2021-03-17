@@ -1,6 +1,17 @@
 package com.group12.fitnics.objects;
 
-public class User {
+import com.group12.fitnics.exceptions.InvalidSignUpDate;
+import com.group12.fitnics.exceptions.InvalidUnits;
+import com.group12.fitnics.exceptions.InvalidUserName;
+
+import java.io.Serializable;
+
+public class User implements Serializable {
+    public final static int WEIGHT_MIN = 30;//kg
+    public final static int WEIGHT_MAX = 300;//kg
+    public final static int HEIGHT_MIN = 50;//cm
+    public final static int HEIGHT_MAX = 300;//cm
+
     private int userID;
     private String username;
     private int birthDay;
@@ -72,8 +83,13 @@ public class User {
         this.gender = gender;
     }
 
-    public void setHeight(double height) {
-        this.height = height;
+    public void setHeight(double height)  throws InvalidUnits {
+        if(!(height < WEIGHT_MIN) && !(height > WEIGHT_MAX) ){
+            this.height = height;
+        }else{
+            throw new InvalidUnits("Invalid height units. Valid range is 50 - 300");
+        }
+
     }
 
     // set the userID only when insert a user
@@ -86,12 +102,20 @@ public class User {
         this.userID = id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String username) throws InvalidUserName  {
+        if( (username==null) || (username.equals("")) ){
+            throw new InvalidUserName("The username cannot be empty!!");
+        }else{
+            this.username = username;
+        }
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public void setWeight(double weight) throws InvalidUnits {
+        if(!(weight < WEIGHT_MIN) && !(weight > WEIGHT_MAX) ){
+            this.weight = weight;
+        }else{
+            throw new InvalidUnits("Invalid weight units. Valid range is 30 - 300");
+        }
     }
 
     public int getBirthDay() {
@@ -110,16 +134,29 @@ public class User {
         return goal;
     }
 
-    public void setBirthDay(int birthDay) {
-        this.birthDay = birthDay;
+    public void setBirthDay(int birthDay) throws InvalidSignUpDate  {
+        if(birthDay > 0) {
+            this.birthDay = birthDay;
+        }else{
+            throw new InvalidSignUpDate("Invalid date choice");
+        }
     }
 
-    public void setBirthMonth(int birthMonth) {
-        this.birthMonth = birthMonth;
+    public void setBirthMonth(int birthMonth) throws InvalidSignUpDate {
+        if(birthMonth > 0) {
+            this.birthMonth = birthMonth;
+        }else{
+            throw new InvalidSignUpDate("Invalid date choice");
+        }
+
     }
 
-    public void setBirthYear(int birthYear) {
-        this.birthYear = birthYear;
+    public void setBirthYear(int birthYear) throws InvalidSignUpDate  {
+        if(birthYear > 0){
+            this.birthYear = birthYear;
+        }else{
+            throw new InvalidSignUpDate("Invalid date choice");
+        }
     }
 
     public void setGoal(int goal) {
@@ -133,4 +170,7 @@ public class User {
     public int[] getUnits() {
         return units;
     }
+
+
+
 }

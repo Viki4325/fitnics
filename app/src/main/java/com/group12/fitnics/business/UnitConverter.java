@@ -1,5 +1,7 @@
 package com.group12.fitnics.business;
 
+import com.group12.fitnics.exceptions.InvalidUnits;
+
 public class UnitConverter {
 
     public static double KGToLB(double kg) {
@@ -18,11 +20,16 @@ public class UnitConverter {
         return cm / 30.48; // 1 ft = 30.48 cm
     }
 
-    public static String convertUnitToString(double unit, int decimalPlace){
-        //Any unit and convert to specified decimal place
-        String format = "%."+decimalPlace+"f";
+    public static String convertUnitToString(double unit, int decimalPlace) throws InvalidUnits {
+        if((unit > 0.0)){
+            //Any unit and convert to specified decimal place
+            String format = "%."+decimalPlace+"f";
 
-        return String.format(format, unit);
+            return String.format(format, unit);
+        }else {
+            throw new InvalidUnits("Empty units not allowed");
+        }
+
     }
 
 }

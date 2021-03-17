@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.objects.User;
+
+import java.io.Serializable;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -33,11 +36,12 @@ public class LogInActivity extends AppCompatActivity {
             Intent logInToHomeIntent = new Intent(LogInActivity.this, HomeActivity.class);
             logInToHomeIntent.putExtra("username", selectedUser.getUsername());
             logInToHomeIntent.putExtra("userID", Integer.toString(selectedUser.getUserID()));
+            logInToHomeIntent.putExtra("userLoggedIn",  selectedUser);
             startActivity(logInToHomeIntent);
         }
         catch (Exception e){
-            Toast toast = Toast.makeText(LogInActivity.this,"Invalid User Name", Toast.LENGTH_SHORT);
-            toast.show();
+            Messages.fatalError(this,e.getMessage()+"\n No such user found.");
+
         }
     }
 }

@@ -1,9 +1,13 @@
 package com.group12.fitnics.objects;
 
+import android.annotation.SuppressLint;
+
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
-public class MyDate {
+public class MyDate implements Serializable {
     private Calendar dateInfo;
 
     public MyDate(Calendar date) {
@@ -36,10 +40,17 @@ public class MyDate {
         return dateInfo.get(Calendar.DATE);
     }
 
+    /*
+    * This method returns the current date. To be used in logs classes
+    * */
+    public static MyDate getCurrentDate(){
+        return new MyDate(new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DATE)));
+    }
+
     @Override
     public String toString() {
         String datePattern = "yyyy-MM-dd";
-        String str = new SimpleDateFormat(datePattern).format(dateInfo.getTime());
+        @SuppressLint("SimpleDateFormat") String str = new SimpleDateFormat(datePattern).format(dateInfo.getTime());
         return str;
     }
 
