@@ -1,8 +1,9 @@
 package com.group12.fitnics.objects;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class ExerciseLog {
+public class ExerciseLog implements Serializable {
     private int userID;
     private int exerciseID;
     private MyDate date;

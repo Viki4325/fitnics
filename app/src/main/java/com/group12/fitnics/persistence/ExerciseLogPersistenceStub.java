@@ -69,9 +69,9 @@ public class ExerciseLogPersistenceStub implements IExerciseLogPersistence {
         if (!checkInvariant(exerciseLog))
             throw new InvalidExerciseLogException("The exercise log has invalid userID or exerciseID or minutes. ");
 
-        // if there exists same food log already, to not allow it to be inserted
+        // if there exists same exercise log already, to not allow it to be inserted
         if (getExerciseLog(exerciseLog.getUserID(), exerciseLog.getExerciseID(), exerciseLog.getDate()) != null)
-            throw new InvalidExerciseLogException("The exercise log is duplicate. ");
+            throw new InvalidExerciseLogException("The exercise log is duplicate. You could instead increase the time for this exercise from the logs. Thank you!");
 
         exerciseLogs.add(exerciseLog);
     }

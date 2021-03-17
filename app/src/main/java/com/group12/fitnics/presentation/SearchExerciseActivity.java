@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,8 +13,10 @@ import android.widget.SearchView;
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExercises;
 import com.group12.fitnics.objects.Exercise;
+import com.group12.fitnics.objects.User;
 import com.group12.fitnics.presentation.adapters.ExerciseAdapter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,8 @@ public class SearchExerciseActivity extends AppCompatActivity {
     AccessExercises accessExercises = new AccessExercises();
     private ListView exerciseListView;
     List<Exercise> exercises = new ArrayList<>();
+    private User userLoggedIn;
+    Bundle info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +34,19 @@ public class SearchExerciseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_exercise_finder);
 
         exercises =  accessExercises.getAllExercise();
+        info = getIntent().getExtras();
 
+        getUserLoggedIn();
         setupList();
         initSearchWidgets();
         setUpOnClickListener();
 
     }
+
+    private void getUserLoggedIn(){
+        userLoggedIn =(User) getIntent().getSerializableExtra("userLoggedIn");
+    }
+
 
     private void initSearchWidgets(){
         SearchView searchView = findViewById(R.id.searchExercise);
@@ -56,6 +68,7 @@ public class SearchExerciseActivity extends AppCompatActivity {
         });
 
     }
+
     private void setUpOnClickListener(){
         exerciseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -65,11 +78,11 @@ public class SearchExerciseActivity extends AppCompatActivity {
                 Exercise selectExercise = (Exercise) (exerciseListView.getItemAtPosition(position));
 
                 //create intent to go next activity
+                //We pass the whole objects through intent
                 Intent showDetail = new Intent(getApplicationContext(), IndividualExercise.class);
-                showDetail.putExtra("exerciseTitle",selectExercise.getTitle());
-                showDetail.putExtra("exerciseDescription",selectExercise.getDescription());
-                showDetail.putExtra("exerciseCategory", selectExercise.getCategory());
-                showDetail.putExtra("exerciseLevel",selectExercise.getLevel());
+                showDetail.putExtra("userId",info.getInt("userId"));
+                showDetail.putExtra("userLoggedIn", userLoggedIn);
+                showDetail.putExtra("exerciseSelected",  selectExercise);
                 startActivity(showDetail);
 
             }

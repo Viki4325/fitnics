@@ -23,12 +23,12 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
     }
 
     @Override
-    public View getView(int position,  View convertView,  ViewGroup parent) {
+    public View getView(int position  ,View convertView,  ViewGroup parent) {
 
         Exercise exercise = getItem(position);
 
         if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.exercise_cell , parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate( R.layout.exercise_cell, parent, false);
         }
 
         TextView exerciseName = convertView.findViewById(R.id.exerciseName);

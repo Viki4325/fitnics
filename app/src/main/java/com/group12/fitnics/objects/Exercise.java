@@ -1,6 +1,10 @@
 package com.group12.fitnics.objects;
 
-public class Exercise {
+import android.widget.SearchView;
+
+import java.io.Serializable;
+
+public class Exercise implements Serializable {
     private int exerciseID;
     private String title;
     private String description;

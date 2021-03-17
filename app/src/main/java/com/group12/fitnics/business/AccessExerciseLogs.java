@@ -55,7 +55,7 @@ public class AccessExerciseLogs {
     private static int getUserTotalDailyBurned(List<ExerciseLog> logs, IExercisePersistence exercises) {
         int total = 0;
         for (int i = 0; i < logs.size(); i++) {
-            int mins = logs.get(i).getMinutes();
+            int mins = logs.get(0).getMinutes();
             int caloriesPerMins = exercises.getExerciseById(logs.get(i).getExerciseID()).getCaloriesBurn();
             total += mins * caloriesPerMins;
         }

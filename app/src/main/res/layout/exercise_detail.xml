@@ -8,14 +8,14 @@
     tools:context=".presentation.IndividualExercise">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/exerciseDetailAppBar"
+        android:id="@+id/exerciseLogDetailAppBar"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:theme="@style/Theme.Fitnics"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/exerciseDetailCollapseToolBar"
+            android:id="@+id/exerciseLogDetailCollapseToolBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -33,7 +33,7 @@
                 android:src="@drawable/ic_launcher_foreground"/>
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/exerciseDetailToolBar"
+                android:id="@+id/exerciseLogDetailToolBar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 app:contentInsetStartWithNavigation="0dp"
@@ -149,7 +149,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
-        app:layout_anchor="@id/exerciseDetailAppBar"
+        app:layout_anchor="@id/exerciseLogDetailAppBar"
         app:layout_anchorGravity="bottom|end|right"
         app:fabSize="auto" />
 
