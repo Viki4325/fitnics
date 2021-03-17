@@ -35,9 +35,11 @@ public class CreateNotificationActivity extends AppCompatActivity implements Tim
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_notification);
         String user = getIntent().getStringExtra("userID");
-        //creates popup window when the button is pressed
+
         Alertbox = (TextView) findViewById(R.id.AlertText);
+        //Initializes the timer
         c = Calendar.getInstance();
+        //opens timepicker when clicked
         Button buttonTimePicker = findViewById(R.id.timePicker);
         buttonTimePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +50,7 @@ public class CreateNotificationActivity extends AppCompatActivity implements Tim
         });
         notificationManager = NotificationManagerCompat.from(this);
     }
-
+    //the listener overrided so it can be used by the class
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
@@ -60,7 +62,7 @@ public class CreateNotificationActivity extends AppCompatActivity implements Tim
         timeText += DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
         Alertbox.setText(timeText);
     }
-
+    //creates the alarm to go off every 24hours
     public void createNotificationOnClick(View v) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this,Notification.class);
@@ -71,7 +73,7 @@ public class CreateNotificationActivity extends AppCompatActivity implements Tim
         timeText += DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
         Alertbox.setText(timeText);
     }
-
+    //deletes the alarm
     public void deleteAlarm(View v){
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this,Notification.class);

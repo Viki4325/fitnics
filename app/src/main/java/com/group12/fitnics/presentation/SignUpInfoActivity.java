@@ -80,6 +80,7 @@ public class SignUpInfoActivity extends AppCompatActivity {
                         int year = Integer.parseInt(clean.substring(4, 8));
 
                         if (mon > 12) mon = 12;
+                        if (mon < 1) mon = 1;
                         calendar.set(Calendar.MONTH, mon - 1);
 
                         year = (year < 1900) ? 1900 : (year > 2100) ? 2100 : year;
@@ -90,6 +91,7 @@ public class SignUpInfoActivity extends AppCompatActivity {
 
                         day = (day > calendar.getActualMaximum(Calendar.DATE)) ?
                                 calendar.getActualMaximum(Calendar.DATE) : day;
+                        if(day < 1) day = 1;
                         clean = String.format("%02d%02d%02d",day,mon,year);
                     }
 
@@ -134,19 +136,35 @@ public class SignUpInfoActivity extends AppCompatActivity {
         data = (EditText) findViewById(R.id.editWeight);
         choice = (Spinner) findViewById(R.id.weightUnitSpinner);
 
+        double value = Double.parseDouble(data.getText().toString().trim());
+        //set max and min weight
+        if(value > 1400 ){
+            value = 1400;
+        }else if(value < 12){
+            value = 12;
+        }
+
         if(choice.getSelectedItem().toString() == "kg")
-            newUser.setWeight(UnitConverter.KGToLB(Double.parseDouble(data.getText().toString().trim())));
+            newUser.setWeight(UnitConverter.KGToLB(value));
         else
-            newUser.setWeight(Double.parseDouble(data.getText().toString().trim()));
+            newUser.setWeight(value);
         units[0] = choice.getSelectedItemPosition();
         //Add height to new user
         data = (EditText) findViewById(R.id.editHeight);
         choice = (Spinner) findViewById(R.id.heightUnitSpinner);
 
+        value = Double.parseDouble(data.getText().toString().trim());
+        //set max and min height
+        if(value > 300){
+            value = 300;
+        }else if(value < 50){
+            value = 50;
+        }
+
         if(choice.getSelectedItem().toString() == "ft")
-            newUser.setHeight(UnitConverter.FTToCM(Double.parseDouble(data.getText().toString().trim())));
+            newUser.setHeight(UnitConverter.FTToCM(value));
         else
-            newUser.setHeight(Double.parseDouble(data.getText().toString().trim()));
+            newUser.setHeight(value);
         units[1] = choice.getSelectedItemPosition();
         newUser.setUnits(units);
         //go to next panel to get activity level

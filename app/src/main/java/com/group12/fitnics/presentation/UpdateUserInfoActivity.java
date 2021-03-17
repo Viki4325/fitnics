@@ -13,6 +13,7 @@ import android.widget.Spinner;
 
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
+import com.group12.fitnics.business.UnitConverter;
 import com.group12.fitnics.objects.User;
 
 import java.util.Calendar;
@@ -174,22 +175,39 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
         //Add weight to new user
         data = (EditText) findViewById(R.id.weightBox);
         choice = (Spinner) findViewById(R.id.weightUnitsSpinner);
+
+        double value = Double.parseDouble(data.getText().toString().trim());
+        //set max and min weight
+        if(value > 1400 ){
+            value = 1400;
+        }else if(value < 12){
+            value = 12;
+        }
+
         if(choice.getSelectedItem().toString() == "kg") {
-            selectedUser.setWeight(Double.parseDouble(data.getText().toString().trim()) * 2.205);
+            selectedUser.setWeight(UnitConverter.KGToLB(value));
         }
         else {
-            selectedUser.setWeight(Double.parseDouble(data.getText().toString().trim()));
+            selectedUser.setWeight(value);
         }
         units[0] = choice.getSelectedItemPosition();
         //Add height to new user
         data = (EditText) findViewById(R.id.heightBox);
         choice = (Spinner) findViewById(R.id.heightUnitsSpinner);
 
+        value = Double.parseDouble(data.getText().toString().trim());
+        //set max and min height
+        if(value > 300){
+            value = 300;
+        }else if(value < 50){
+            value = 50;
+        }
+
         if(choice.getSelectedItem().toString() == "ft") {
-            selectedUser.setHeight(Double.parseDouble(data.getText().toString().trim()) * 30.48);
+            selectedUser.setHeight(UnitConverter.FTToCM(value));
         }
         else {
-            selectedUser.setHeight(Double.parseDouble(data.getText().toString().trim()));
+            selectedUser.setHeight(value);
         }
         units[1] = choice.getSelectedItemPosition();
         selectedUser.setUnits(units);

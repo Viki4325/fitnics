@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 public class TimePickerFragment extends DialogFragment {
-
+    //creates a time picker and passes the hour and min to the OnTimeSetListener for further use
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
