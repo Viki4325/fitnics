@@ -73,4 +73,6 @@
     <string name="add_dinner_btn_text">Add dinner</string>
     <string name="add_exercise_btn_text">Add exercise</string>
     <string name="add_lunch_btn_text">Add lunch</string>
+    <string name="info_alert">Information</string>
+    <string name="update">UPDATE</string>
 </resources>
