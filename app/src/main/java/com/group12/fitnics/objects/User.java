@@ -18,7 +18,7 @@ public class User {
     private double height;
     // gender: 'M' - Male, 'F' - Female, 'O' - Other
     private char gender;
-    private DailyCaloricNeeds dailyCaloricNeeds;
+    private double dailyCaloricNeeds;
     // goal: 0 - Loose Weight, 1 - Maintain Weight, 2 - Gain Weight
     private int goal;
     // lastUserID is 3 because we are currently using a fake database for users.
@@ -34,7 +34,7 @@ public class User {
         this.weight = weight;
         this.height = height;
         this.gender = gender;
-        this.dailyCaloricNeeds = new DailyCaloricNeeds(this);
+        this.dailyCaloricNeeds = DailyCaloricNeeds.resetDailyCaloricNeeds(this);
     }
 
     public int getAge() {
@@ -52,8 +52,8 @@ public class User {
         return weight;
     }
 
-    public int getDailyCaloricNeeds() {
-        return dailyCaloricNeeds.getDailyCaloricNeeds();
+    public double getDailyCaloricNeeds() {
+        return dailyCaloricNeeds;
     }
 
     public int getUserID() {
@@ -76,8 +76,8 @@ public class User {
         this.activityLevel = activityLevel;
     }
 
-    public void setDailyCaloricNeeds(DailyCaloricNeeds dailyCaloricNeeds) {
-        this.dailyCaloricNeeds = dailyCaloricNeeds;
+    public void setDailyCaloricNeeds(double caloryAmount) {
+        dailyCaloricNeeds = (int) caloryAmount;
     }
 
     public void setGender(char gender) {
