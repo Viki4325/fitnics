@@ -36,6 +36,6 @@ public class Food {
     }
 
     public String toString(){
-        return foodID +". "+name +" "+ caloriesPerGram + " calories per garm";
+        return foodID +"."+name +"."+ caloriesPerGram + " calories per garm";
     }
 }
