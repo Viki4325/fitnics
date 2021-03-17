@@ -24,37 +24,59 @@ public class Services {
     private static IFoodPersistence foodPersistence = null;
     private static IExercisePersistence exercisePersistence = null;
 
+    private static boolean forProduction = false;
+
     public static IUserPersistence getUserPersistence() {
         if (userPersistence == null) {
-            userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
+            if (forProduction) {
+                userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
+            } else {
+                userPersistence = new UserPersistenceStub();
+            }
         }
         return userPersistence;
     }
 
     public static IFoodLogPersistence getFoodLogPersistence() {
         if (foodLogPersistence == null) {
-            foodLogPersistence = new FoodLogPersistenceHSQLDB(Main.getDBPathName());
+            if (forProduction) {
+                foodLogPersistence = new FoodLogPersistenceHSQLDB(Main.getDBPathName());
+            } else {
+                foodLogPersistence = new FoodLogPersistenceStub();
+            }
         }
         return foodLogPersistence;
     }
 
     public static IExerciseLogPersistence getExerciseLogPersistence() {
         if (exerciseLogPersistence == null) {
-            exerciseLogPersistence = new ExerciseLogPersistenceHSQLDB(Main.getDBPathName());
+            if (forProduction) {
+                exerciseLogPersistence = new ExerciseLogPersistenceHSQLDB(Main.getDBPathName());
+            } else {
+                exerciseLogPersistence = new ExerciseLogPersistenceStub();
+            }
         }
         return exerciseLogPersistence;
     }
 
     public static IFoodPersistence getFoodPersistence() {
         if (foodPersistence == null) {
-            foodPersistence = new FoodPersistenceHSQLDB(Main.getDBPathName());
+            if (forProduction) {
+                foodPersistence = new FoodPersistenceHSQLDB(Main.getDBPathName());
+            } else {
+                foodPersistence = new FoodPersistenceStub();
+            }
         }
         return foodPersistence;
     }
 
     public static IExercisePersistence getExercisePersistence() {
         if (exercisePersistence == null) {
-            exercisePersistence = new ExercisePersistenceHSQLDB(Main.getDBPathName());
+            if (forProduction) {
+                exercisePersistence = new ExercisePersistenceHSQLDB(Main.getDBPathName());
+            } else {
+                exercisePersistence = new ExercisePersistenceStub();
+            }
         }
         return exercisePersistence;
     }

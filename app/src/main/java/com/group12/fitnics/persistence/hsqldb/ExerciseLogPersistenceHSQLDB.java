@@ -3,6 +3,9 @@ package com.group12.fitnics.persistence.hsqldb;
 import android.util.Log;
 
 import com.group12.fitnics.business.DateHelper;
+import com.group12.fitnics.exceptions.ExerciseLogNotFoundException;
+import com.group12.fitnics.exceptions.FoodLogNotFoundException;
+import com.group12.fitnics.exceptions.InvalidExerciseLogException;
 import com.group12.fitnics.objects.ExerciseLog;
 import com.group12.fitnics.persistence.IExerciseLogPersistence;
 
@@ -48,7 +51,7 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
             }
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
         return null;
@@ -69,7 +72,7 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
 
@@ -92,7 +95,7 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
 
@@ -100,7 +103,14 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
     }
 
     @Override
-    public void insertExerciseLog(ExerciseLog exerciseLog) {
+    public void insertExerciseLog(ExerciseLog exerciseLog) throws InvalidExerciseLogException {
+        if (!checkInvariant(exerciseLog))
+            throw new InvalidExerciseLogException("The exercise log has invalid userID or exerciseID or minutes. ");
+
+        // if there exists same exercise log already, to not allow it to be inserted
+        if (getExerciseLog(exerciseLog.getUserID(), exerciseLog.getExerciseID(), exerciseLog.getDate()) != null)
+            throw new InvalidExerciseLogException("The exercise log is duplicate. ");
+
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO EXERCISELOGS VALUES(?, ?, ?, ?)");
             st.setInt(1, exerciseLog.getUserID());
@@ -111,15 +121,21 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }
 
     @Override
-    public void updateExerciseLog(int userID, int exerciseID, LocalDate date, ExerciseLog updatedLog) {
+    public void updateExerciseLog(int userID, int exerciseID, LocalDate date, ExerciseLog updatedLog) throws InvalidExerciseLogException, ExerciseLogNotFoundException {
+        if (!checkInvariant(updatedLog))
+            throw new InvalidExerciseLogException("The exercise log has invalid userID or exerciseID or minutes. ");
+
+        if (getExerciseLog(userID, exerciseID, date) == null)
+            throw new ExerciseLogNotFoundException("There is no such exercise log to update. ");
+
         try (final Connection c = connect()) {
-            final PreparedStatement st = c.prepareStatement("UPDATE EXERCISELOGS SET uid=?, eid=?, date=?, grams=? where uid=? AND eid=? AND date=?");
+            final PreparedStatement st = c.prepareStatement("UPDATE EXERCISELOGS SET uid=?, eid=?, date=?, minutes=? where uid=? AND eid=? AND date=?");
             st.setInt(1, updatedLog.getUserID());
             st.setInt(2, updatedLog.getExerciseID());
             st.setString(3, updatedLog.getDateString());
@@ -131,13 +147,16 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }
 
     @Override
-    public void deleteExerciseLog(int userID, int exerciseID, LocalDate date) {
+    public void deleteExerciseLog(int userID, int exerciseID, LocalDate date) throws ExerciseLogNotFoundException {
+        if (getExerciseLog(userID, exerciseID, date) == null)
+            throw new ExerciseLogNotFoundException("There is no such exercise log to update. ");
+
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("DELETE FROM EXERCISELOGS WHERE uid = ? AND eid = ? AND date = ?");
             st.setString(1, Integer.toString(userID));
@@ -147,7 +166,7 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
+//            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
     }

@@ -3,6 +3,8 @@ package com.group12.fitnics.persistence.hsqldb;
 import android.util.Log;
 
 import com.group12.fitnics.business.DateHelper;
+import com.group12.fitnics.exceptions.FoodLogNotFoundException;
+import com.group12.fitnics.exceptions.InvalidFoodLogException;
 import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.persistence.IFoodLogPersistence;
 
@@ -100,7 +102,14 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
     }
 
     @Override
-    public void insertFoodLog(FoodLog foodLog) {
+    public void insertFoodLog(FoodLog foodLog) throws InvalidFoodLogException {
+        if (!checkInvariant(foodLog))
+            throw new InvalidFoodLogException("The food log has invalid userID or foodID or grams. ");
+
+        // if there exists same food log already, to not allow it to be inserted
+        if (getFoodLog(foodLog.getUserID(), foodLog.getFoodID(), foodLog.getDate()) != null)
+            throw new InvalidFoodLogException("The food log is duplicate. ");
+
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO FOODLOGS VALUES(?, ?, ?, ?)");
             st.setInt(1, foodLog.getUserID());
@@ -117,7 +126,13 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
     }
 
     @Override
-    public void updateFoodLog(int userID, int foodID, LocalDate date, FoodLog updatedLog) {
+    public void updateFoodLog(int userID, int foodID, LocalDate date, FoodLog updatedLog) throws InvalidFoodLogException, FoodLogNotFoundException {
+        if (!checkInvariant(updatedLog))
+            throw new InvalidFoodLogException("The food log has invalid userID or foodID or grams. ");
+
+        if (getFoodLog(userID, foodID, date) == null)
+            throw new FoodLogNotFoundException("There is no such food log to update. ");
+
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("UPDATE FOODLOGS SET uid=?, fid=?, date=?, grams=? where uid=? AND fid=? AND date=?");
             st.setInt(1, updatedLog.getUserID());
@@ -137,7 +152,10 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
     }
 
     @Override
-    public void deleteFoodLog(int userID, int foodID, LocalDate date) {
+    public void deleteFoodLog(int userID, int foodID, LocalDate date) throws FoodLogNotFoundException {
+        if (getFoodLog(userID, foodID, date) == null)
+            throw new FoodLogNotFoundException("There is no such food log to update. ");
+
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("DELETE FROM FOODLOGS WHERE uid = ? AND fid = ? AND date = ?");
             st.setString(1, Integer.toString(userID));
@@ -151,4 +169,5 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
             e.printStackTrace();
         }
     }
+
 }

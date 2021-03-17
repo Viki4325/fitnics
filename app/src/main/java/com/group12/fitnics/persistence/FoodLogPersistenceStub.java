@@ -112,9 +112,9 @@ public class FoodLogPersistenceStub implements IFoodLogPersistence {
             throw new FoodLogNotFoundException("There is no such food log to delete. ");
     }
 
-    private boolean checkInvariant(FoodLog foodLog) {
-        if (foodLog == null || foodLog.getUserID() < 0 || foodLog.getFoodID() < 0 || foodLog.getGrams() <= 0)
-            return false;
-        return true;
-    }
+//    private boolean checkInvariant(FoodLog foodLog) {
+//        if (foodLog == null || foodLog.getUserID() < 0 || foodLog.getFoodID() < 0 || foodLog.getGrams() <= 0)
+//            return false;
+//        return true;
+//    }
 }

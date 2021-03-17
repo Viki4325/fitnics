@@ -19,4 +19,10 @@ public interface IFoodLogPersistence {
     void updateFoodLog(final int userID, final int foodID, final LocalDate date, final FoodLog updatedLog);
 
     void deleteFoodLog(final int userID, final int foodID, final LocalDate date);
+
+    default boolean checkInvariant(FoodLog foodLog) {
+        if (foodLog == null || foodLog.getUserID() < 0 || foodLog.getFoodID() < 0 || foodLog.getGrams() <= 0)
+            return false;
+        return true;
+    }
 }

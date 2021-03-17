@@ -72,7 +72,7 @@ public class ExerciseLogPersistenceStub implements IExerciseLogPersistence {
         if (!checkInvariant(exerciseLog))
             throw new InvalidExerciseLogException("The exercise log has invalid userID or exerciseID or minutes. ");
 
-        // if there exists same food log already, to not allow it to be inserted
+        // if there exists same exercise log already, to not allow it to be inserted
         if (getExerciseLog(exerciseLog.getUserID(), exerciseLog.getExerciseID(), exerciseLog.getDate()) != null)
             throw new InvalidExerciseLogException("The exercise log is duplicate. ");
 
@@ -110,9 +110,9 @@ public class ExerciseLogPersistenceStub implements IExerciseLogPersistence {
             throw new ExerciseLogNotFoundException("There is no such exercise log to delete. ");
     }
 
-    private boolean checkInvariant(ExerciseLog exerciseLog) {
-        if (exerciseLog == null || exerciseLog.getUserID() < 0 || exerciseLog.getExerciseID() < 0 || exerciseLog.getMinutes() <= 0)
-            return false;
-        return true;
-    }
+//    private boolean checkInvariant(ExerciseLog exerciseLog) {
+//        if (exerciseLog == null || exerciseLog.getUserID() < 0 || exerciseLog.getExerciseID() < 0 || exerciseLog.getMinutes() <= 0)
+//            return false;
+//        return true;
+//    }
 }

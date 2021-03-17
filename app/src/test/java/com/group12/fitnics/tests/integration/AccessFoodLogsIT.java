@@ -1,29 +1,44 @@
-package com.group12.fitnics.tests.business;
+package com.group12.fitnics.tests.integration;
 
 import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.exceptions.FoodLogNotFoundException;
 import com.group12.fitnics.exceptions.InvalidFoodLogException;
 import com.group12.fitnics.objects.FoodLog;
+import com.group12.fitnics.persistence.IFoodLogPersistence;
+import com.group12.fitnics.persistence.IFoodPersistence;
+import com.group12.fitnics.persistence.hsqldb.FoodLogPersistenceHSQLDB;
+import com.group12.fitnics.persistence.hsqldb.FoodPersistenceHSQLDB;
+import com.group12.fitnics.tests.business.AccessFoodLogsTest;
+import com.group12.fitnics.tests.utils.TestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-import static org.junit.Assert.*;
-
+import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 
-public class AccessFoodLogsTest {
+import static org.junit.Assert.*;
+
+public class AccessFoodLogsIT {
 
     private AccessFoodLogs accessFoodLogs;
     private LocalDate date;
 
     @Before
-    public void setUp() {
-        System.out.println("Starting test for AccessFoodLogs");
-        accessFoodLogs = new AccessFoodLogs();
+    public void setUp() throws Exception {
+        File tempDB = TestUtils.copyDB();
+        String dbPath = tempDB.getAbsolutePath().replace(".script", "");
+        IFoodLogPersistence foodLogPersistence = new FoodLogPersistenceHSQLDB(dbPath);
+        IFoodPersistence foodPersistence = new FoodPersistenceHSQLDB(dbPath);
+        accessFoodLogs = new AccessFoodLogs(foodLogPersistence, foodPersistence);
         date = LocalDate.of(2021, 1, 1);
+
+//        AccessFoodLogsTest test = new AccessFoodLogsTest(accessFoodLogs);
     }
+
 
     @Test
     public void testGetFoodLog() {
@@ -243,3 +258,4 @@ public class AccessFoodLogsTest {
     }
 
 }
+
