@@ -1,5 +1,11 @@
 package com.group12.fitnics.objects;
 
+import com.group12.fitnics.business.DailyCaloricNeeds;
+
+import java.time.LocalDate;
+import java.time.Period;
+
+
 public class User {
     private int userID;
     private String username;
@@ -12,7 +18,7 @@ public class User {
     private double height;
     // gender: 'M' - Male, 'F' - Female, 'O' - Other
     private char gender;
-    private int dailyCaloricNeeds;
+    private DailyCaloricNeeds dailyCaloricNeeds;
     // goal: 0 - Loose Weight, 1 - Maintain Weight, 2 - Gain Weight
     private int goal;
     // lastUserID is 3 because we are currently using a fake database for users.
@@ -28,8 +34,14 @@ public class User {
         this.weight = weight;
         this.height = height;
         this.gender = gender;
-        // ** The logic for dailyCaloricNeeds is pushed to the next iteration.
-        this.dailyCaloricNeeds = 0;
+        this.dailyCaloricNeeds = new DailyCaloricNeeds(this);
+    }
+
+    public int getAge() {
+        LocalDate birthday = LocalDate.of(birthYear, birthMonth, birthDay);
+        LocalDate today = LocalDate.now();
+        Period age = Period.between(birthday, today);
+        return age.getYears();
     }
 
     public double getHeight() {
@@ -41,7 +53,7 @@ public class User {
     }
 
     public int getDailyCaloricNeeds() {
-        return dailyCaloricNeeds;
+        return dailyCaloricNeeds.getDailyCaloricNeeds();
     }
 
     public int getUserID() {
@@ -64,7 +76,7 @@ public class User {
         this.activityLevel = activityLevel;
     }
 
-    public void setDailyCaloricNeeds(int dailyCaloricNeeds) {
+    public void setDailyCaloricNeeds(DailyCaloricNeeds dailyCaloricNeeds) {
         this.dailyCaloricNeeds = dailyCaloricNeeds;
     }
 
