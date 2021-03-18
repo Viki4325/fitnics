@@ -23,14 +23,18 @@ import java.io.InputStreamReader;
 import static com.group12.fitnics.R.layout.activity_main;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_main);
         copyDatabaseToDevice();
+        MainActivity.context = getAppContext();
+    }
 
+    public static Context getAppContext() {
+        return MainActivity.context;
     }
 
     private void copyDatabaseToDevice() {
