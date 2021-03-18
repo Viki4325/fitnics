@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    tools:context=".presentation.IndividualFoodActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/LogDetailAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:theme="@style/Theme.Fitnics"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/LogDetailCollapseToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/purple_500"
+            app:expandedTitleMarginStart="15dp"
+            app:expandedTitleMarginBottom="20dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+           >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                android:fitsSystemWindows="true"
+                android:src="@drawable/ic_launcher_foreground"/>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/LogDetailToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:contentInsetStartWithNavigation="0dp"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/Theme.Fitnics"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:theme="@style/Theme.Fitnics"
+            android:padding="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/calories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:singleLine="true"
+                    android:textSize="60sp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="89"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_toEndOf="@+id/calories"
+                    android:fontFamily="@font/muli"
+                    android:layout_marginTop="20dp"
+                    android:text="cal"
+                    android:textSize="30sp"
+                    tools:ignore="UnknownId" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/foodGrams"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textSize="40sp"
+                    android:maxLength="4"
+                    android:text="1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/parent"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_toEndOf="@+id/foodGrams"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="grams"
+                    android:textSize="30sp"
+                    tools:ignore="UnknownId" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_food"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_task_24"
+        app:layout_anchor="@id/LogDetailAppBar"
+        app:layout_anchorGravity="bottom|end|right"
+        android:onClick="updateMin"
+        app:fabSize="auto" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
