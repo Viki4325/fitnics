@@ -12,7 +12,7 @@ public interface IFoodPersistence {
 
     Food getFoodByFoodName(final String foodName);
 
-    void insertFood(final Food currentFood);
+    int insertFood(final Food currentFood);
 
     void updateFood(final int foodID, final Food currentFood);
 

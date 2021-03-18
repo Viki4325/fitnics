@@ -5,6 +5,7 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.group12.fitnics.exceptions.ExerciseNotFoundException;
+import com.group12.fitnics.exceptions.InvalidExNameException;
 import com.group12.fitnics.exceptions.InvalidExerciseException;
 import com.group12.fitnics.objects.Exercise;
 
@@ -178,12 +179,22 @@ public class ExercisePersistenceStub implements IExercisePersistence {
     }
 
     @Override
-    public void insertExercise(Exercise newExercise) throws InvalidExerciseException {
+    public int insertExercise(Exercise newExercise) throws InvalidExerciseException {
         if(newExercise == null)
             throw new InvalidExerciseException("The exercise is not valid. ");
+        if(newExercise.getTitle().length() > 20)
+            throw new InvalidExNameException("The name should be no more than 20 characters.");
+        if(newExercise.getDescription().length() > 1024)
+            throw new InvalidExNameException("The description should be no more than 1024 characters.");
+        if(newExercise.getLevel().length() > 20)
+            throw new InvalidExNameException("The level should be no more than 20 characters.");
+        if(newExercise.getCategory().length() > 20)
+            throw new InvalidExNameException("The category should be no more than 20 characters.");
 
         newExercise.setExerciseID();
         exerciseList.add(newExercise);
+
+        return newExercise.getExerciseID();
     }
 
     /*

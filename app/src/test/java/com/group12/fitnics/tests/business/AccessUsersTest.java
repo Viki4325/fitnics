@@ -67,10 +67,10 @@ public class AccessUsersTest {
     public void testInsertUser() {
         System.out.println("\nStarting testInsertUser");
         User eve = new User("eve", 1, 47, 160, 'F');
-        accessUsers.insertUser(eve);
+        int id = accessUsers.insertUser(eve);
 
         assertNotNull(accessUsers.getUserByName("eve"));
-        assertEquals(4, eve.getUserID());
+        assertEquals(id, eve.getUserID());
         assertEquals("eve", accessUsers.getUserByName("eve").getUsername());
         assertEquals(1, accessUsers.getUserByName("eve").getActivityLevel());
         assertEquals(47.0, accessUsers.getUserByName("eve").getWeight(), 0.0001);
@@ -78,7 +78,7 @@ public class AccessUsersTest {
         assertEquals('F', accessUsers.getUserByName("eve").getGender());
 
         // delete what we just added
-        accessUsers.deleteUser(4);
+        accessUsers.deleteUser(id);
         assertNull(accessUsers.getUserByName("eve"));
 
         System.out.println("Finished testInsertUser");
@@ -97,6 +97,14 @@ public class AccessUsersTest {
     public void testInsertUserNull() {
         System.out.println("\nStarting testInsertUserNull");
         accessUsers.insertUser(null);
+        System.out.println("Finished testInsertUserNull");
+    }
+
+    @Test(expected = InvalidUsernameException.class)
+    public void testInsertUserLongName() {
+        System.out.println("\nStarting testInsertUserLongName");
+        User u = new User("12345678901234567890a", 0, 50, 165, 'F');
+        accessUsers.insertUser(u);
         System.out.println("Finished testInsertUserNull");
     }
 
@@ -143,10 +151,8 @@ public class AccessUsersTest {
         // add what we just deleted
         User david = new User("david", 1, 50, 160, 'M');
         accessUsers.insertUser(david);
-        david.setUserID(3);
-        assertNotNull(accessUsers.getUserById(3));
-        assertNotNull(accessUsers.getUserByName("david"));
         assertEquals(4, accessUsers.getUsers().size());
+        assertNotNull(accessUsers.getUserByName("david"));
 
         System.out.println("Finished testDeleteUser");
     }

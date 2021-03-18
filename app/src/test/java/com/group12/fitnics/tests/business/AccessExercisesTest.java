@@ -2,6 +2,7 @@ package com.group12.fitnics.tests.business;
 
 import com.group12.fitnics.business.AccessExercises;
 import com.group12.fitnics.exceptions.ExerciseNotFoundException;
+import com.group12.fitnics.exceptions.InvalidExNameException;
 import com.group12.fitnics.exceptions.InvalidExerciseException;
 import com.group12.fitnics.objects.Exercise;
 
@@ -404,6 +405,14 @@ public class AccessExercisesTest {
         System.out.println("\nStarting testInsertExerciseNull...");
         exerciseHandler.insertExercise(null);
         System.out.println("Finished testInsertExerciseNull");
+    }
+
+    @Test(expected = InvalidExNameException.class)
+    public void testInsertExerciseLongName() {
+        System.out.println("\nStarting testInsertExerciseLongName...");
+        Exercise ex = new Exercise("12345678901234567890a", "", "", "", 10);
+        exerciseHandler.insertExercise(ex);
+        System.out.println("Finished testInsertExerciseLongName");
     }
 
     @Test

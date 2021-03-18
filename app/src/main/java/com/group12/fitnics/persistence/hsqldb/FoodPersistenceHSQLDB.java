@@ -2,6 +2,9 @@ package com.group12.fitnics.persistence.hsqldb;
 
 import android.util.Log;
 
+import com.group12.fitnics.exceptions.FoodNotFoundException;
+import com.group12.fitnics.exceptions.InvalidFdNameException;
+import com.group12.fitnics.exceptions.InvalidFoodException;
 import com.group12.fitnics.objects.Food;
 import com.group12.fitnics.persistence.IFoodPersistence;
 
@@ -88,11 +91,24 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
     }
 
     @Override
-    public void insertFood(Food currentFood) {
+    public int insertFood(Food currentFood) throws InvalidFoodException {
+        if (currentFood == null)
+            throw new InvalidFoodException("The food is not valid. ");
+
+        // if there exists same food name already, do not allow it to be inserted
+        if (getFoodByFoodName(currentFood.getName()) != null)
+            throw new InvalidFoodException("There exists duplicate food. ");
+
+        if(currentFood.getName().length() > 20)
+            throw new InvalidFdNameException("The name should be no more than 20 characters.");
+
         try (final Connection c = connect()) {
-            final PreparedStatement st = c.prepareStatement("INSERT INTO FOODS VALUES(DEFAULT, ?, ?)");
-            st.setString(1, currentFood.getName());
-            st.setDouble(2, currentFood.getCalories());
+            final PreparedStatement st = c.prepareStatement("INSERT INTO FOODS VALUES(?, ?, ?)");
+
+            currentFood.setFoodID();
+            st.setString(1, Integer.toString(currentFood.getFoodID()));
+            st.setString(2, currentFood.getName());
+            st.setDouble(3, currentFood.getCalories());
             st.executeUpdate();
             st.close();
 
@@ -100,12 +116,20 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
 //            Log.e("Connect SQL", e.getMessage() + e.getSQLState());
             e.printStackTrace();
         }
+
+        return currentFood.getFoodID();
     }
 
     @Override
-    public void updateFood(int foodID, Food currentFood) {
+    public void updateFood(int foodID, Food currentFood) throws InvalidFoodException, FoodNotFoundException {
+        if (currentFood == null)
+            throw new InvalidFoodException("The food is not valid. ");
+
+        if (getFoodByID(foodID) == null)
+            throw new FoodNotFoundException("There's no food with the foodID. ");
+
         try (final Connection c = connect()) {
-            final PreparedStatement st = c.prepareStatement("UPDATE FOODS SET name=? calPerGram=? where id=?");
+            final PreparedStatement st = c.prepareStatement("UPDATE FOODS SET name=?, calPerGram=? where id=?");
             st.setString(1, currentFood.getName());
             st.setDouble(2, currentFood.getCalories());
             st.setString(3, Integer.toString(foodID));
@@ -119,14 +143,11 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
     }
 
     @Override
-    public void deleteFood(int foodID) {
-        try (final Connection c = connect()) {
-            // Delete on cascade
-            final PreparedStatement fLogsSt = c.prepareStatement("DELETE FROM FOODLOGS WHERE fid = ?");
-            fLogsSt.setString(1, Integer.toString(foodID));
-            fLogsSt.executeUpdate();
-            fLogsSt.close();
+    public void deleteFood(int foodID) throws FoodNotFoundException {
+        if (getFoodByID(foodID) == null)
+            throw new FoodNotFoundException("There's no food with the foodID. ");
 
+        try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("DELETE FROM FOODS WHERE id = ?");
             st.setString(1, Integer.toString(foodID));
             st.executeUpdate();

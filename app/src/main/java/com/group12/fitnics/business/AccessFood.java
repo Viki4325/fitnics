@@ -32,8 +32,8 @@ public class AccessFood{
         return foodList.getFoodSequential();
     }
     
-    public void addFood(Food newFood) throws InvalidFoodException {
-        foodList.insertFood(newFood);
+    public int addFood(Food newFood) throws InvalidFoodException {
+        return foodList.insertFood(newFood);
     }
 
     public void deleteFood(int foodID) throws InvalidFoodException, FoodNotFoundException {

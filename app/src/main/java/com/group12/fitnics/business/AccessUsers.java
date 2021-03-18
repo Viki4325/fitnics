@@ -32,8 +32,8 @@ public class AccessUsers {
         return userPersistence.getUserByUsername(username);
     }
 
-    public void insertUser(User currentUser) throws InvalidUserException {
-        userPersistence.insertUser(currentUser);
+    public int insertUser(User currentUser) throws InvalidUserException {
+        return userPersistence.insertUser(currentUser);
     }
 
     public void updateUser(int userID, User currentUser) throws InvalidUserException, UserNotFoundException {

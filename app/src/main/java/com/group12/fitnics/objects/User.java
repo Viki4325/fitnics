@@ -16,7 +16,7 @@ public class User {
     // goal: 0 - Loose Weight, 1 - Maintain Weight, 2 - Gain Weight
     private int goal;
     // lastUserID is 3 because we are currently using a fake database for users.
-    private static int lastUserID = 3;
+    private static int lastUserID = -1;
     //units 0 - weight[0 - lbs, 1 - kg], 1 - height[0 - cm, 1 - ft]
     private int[] units = new int[2];
 
@@ -28,8 +28,21 @@ public class User {
         this.weight = weight;
         this.height = height;
         this.gender = gender;
-        // ** The logic for dailyCaloricNeeds is pushed to the next iteration.
         this.dailyCaloricNeeds = 0;
+    }
+
+    public User(String username, int bD, int bM, int bY, int actLvl, double w, double h, char gender, int goal, int[] units) {
+        this.username = username;
+        this.birthDay = bD;
+        this.birthMonth = bM;
+        this.birthYear = bY;
+        this.activityLevel = actLvl;
+        this.weight = w;
+        this.height = h;
+        this.gender = gender;
+        this.dailyCaloricNeeds = 0;
+        this.goal = goal;
+        this.units = units;
     }
 
     public double getHeight() {
@@ -80,6 +93,10 @@ public class User {
     public void setUserID() {
         lastUserID++;
         this.userID = lastUserID;
+    }
+
+    public static void setLastUserID(int i) {
+        lastUserID = i;
     }
 
     public void setUserID(int id) {

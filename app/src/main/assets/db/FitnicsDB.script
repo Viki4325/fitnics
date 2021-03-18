@@ -1,5 +1,5 @@
 CREATE SCHEMA PUBLIC AUTHORIZATION DBA
-CREATE MEMORY TABLE PUBLIC.USERS(id INTEGER NOT NULL PRIMARY KEY, username VARCHAR(20),birthDay INTEGER,birthMonth INTEGER,birthYear INTEGER,actLvl INTEGER,weight DOUBLE,height DOUBLE,gender VARCHAR(1),caloricNeeds INTEGER,goal INTEGER);
+CREATE MEMORY TABLE PUBLIC.USERS(id INTEGER NOT NULL PRIMARY KEY, username VARCHAR(20),birthDay INTEGER,birthMonth INTEGER,birthYear INTEGER,actLvl INTEGER,weight DOUBLE,height DOUBLE,gender VARCHAR(1),caloricNeeds INTEGER,goal INTEGER, wUnit VARCHAR(5), hUnit VARCHAR(5));
 CREATE MEMORY TABLE PUBLIC.FOODS(id INTEGER NOT NULL PRIMARY KEY, name VARCHAR(20),calPerGram DOUBLE);
 CREATE MEMORY TABLE PUBLIC.EXERCISES(id INTEGER NOT NULL PRIMARY KEY,name VARCHAR(20),description VARCHAR(1024),category VARCHAR(20),level VARCHAR(20),calPerMin INTEGER);
 CREATE MEMORY TABLE PUBLIC.FOODLOGS(uid INTEGER, fid INTEGER, date VARCHAR(10), grams INTEGER, FOREIGN KEY(uid) REFERENCES users(id), FOREIGN KEY(fid) REFERENCES foods(id));
@@ -12,10 +12,10 @@ GRANT DBA TO SA
 SET WRITE_DELAY 20
 SET FILES SCALE 32
 SET SCHEMA public
-INSERT INTO users VALUES (0, 'alice', 15, 4, 1998, 1, 55.0E0, 163.0E0, 'F', 0, 0);
-INSERT INTO users VALUES (1, 'bob', 1, 5, 2000, 2, 70.0E0, 175.0E0, 'M', 0, 1);
-INSERT INTO users VALUES (2, 'carol', 22, 7, 1995, 3, 47.0E0, 160.0E0, 'F', 0, 2);
-INSERT INTO users VALUES (3, 'david', 27, 11, 1985, 1, 50.0E0, 160.0E0, 'M', 0, 0);
+INSERT INTO users VALUES (0, 'alice', 15, 4, 1998, 1, 55.0E0, 163.0E0, 'F', 0, 0, 'kg', 'cm');
+INSERT INTO users VALUES (1, 'bob', 1, 5, 2000, 2, 70.0E0, 175.0E0, 'M', 0, 1, 'kg', 'cm');
+INSERT INTO users VALUES (2, 'carol', 22, 7, 1995, 3, 47.0E0, 160.0E0, 'F', 0, 2, 'kg', 'cm');
+INSERT INTO users VALUES (3, 'david', 27, 11, 1985, 1, 50.0E0, 160.0E0, 'M', 0, 0, 'kg', 'cm');
 INSERT INTO foods VALUES (1, 'Bread',  2.33E0);
 INSERT INTO foods VALUES (2, 'Nonfat Greek yogurt', 0.53E0);
 INSERT INTO foods VALUES (3, 'Fried Egg', 1.84E0);
@@ -27,7 +27,7 @@ INSERT INTO exercises VALUES (1, 'Brace Squat', 'Stand with feet slightly wider 
 INSERT INTO exercises VALUES (2, 'Flutter Kicks', 'Laying on the back, lift your straightened legs from the ground at a 45 degree angle. As your Left foot travels downward and nearly touches the floor, your Right foot should seek to reach a 90 degree angle, or as close to one as possible. Bring your R foot down until it nearly touches the floor, and bring your L foot upwards.  Maintain leg rigidity throughout the exercise.  Your head should stay off the ground, supported by tightened upper abdominals. (L up R down, L down R up, x2)  ^v, v^, ^v, v^ = 1 rep\n', 'Abs', 'Beginner', 120);
 INSERT INTO exercises VALUES (3, 'Bench Press', 'Lay down on a bench, the bar should be directly above your eyes, the knees are somewhat angled and the feet are firmly on the floor. Concentrate, breath deeply and grab the bar more than shoulder wide. Bring it slowly down till it briefly touches your chest at the height of your nipples. Push the bar up. If you train with a high weight it is advisable to have a spotter that can help you up if you can't lift the weight on your own. With the width of the grip you can also control which part of the chest is trained more: \t\twide grip: outer chest muscles\n \t\tnarrow grip: inner chest muscles and triceps', 'Chest', 'Beginner', 532);
 INSERT INTO exercises VALUES (4, 'Chin-Ups', 'Like pull-ups but with a reverse grip\n', 'Back', 'Beginner', 1);
-INSERT INTO exercises VALUES (5, 'Shrugs Dumbbells', 'Stand with straight body, the hands are hanging freely on the side and hold each a dumbbell. Lift from this position the shoulders as high as you can, but do not bend the arms during the movement. On the highest point, make a short pause of 1 or 2 seconds before returning slowly to the initial position. When training with a higher weight, make sure that you still do the whole movement!\n', 'Shoulders', 'Expert', 100);
+INSERT INTO exercises VALUES (5, 'Shrugs,Dumbbells', 'Stand with straight body, the hands are hanging freely on the side and hold each a dumbbell. Lift from this position the shoulders as high as you can, but do not bend the arms during the movement. On the highest point, make a short pause of 1 or 2 seconds before returning slowly to the initial position. When training with a higher weight, make sure that you still do the whole movement!\n', 'Shoulders', 'Expert', 100);
 INSERT INTO exercises VALUES (6, 'Calf Raises', 'Calf raises are a method of exercising the gastrocnemius, tibialis posterior and soleus muscles of the lower leg. The movement performed is plantar flexion, a.k.a. ankle extension.\n', 'Calves', 'Expert', 85);
 INSERT INTO foodlogs VALUES (0, 1, '2021-01-01', 25);
 INSERT INTO foodlogs VALUES (0, 2, '2021-01-01', 200);
