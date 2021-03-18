@@ -2,30 +2,29 @@ package com.group12.fitnics.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.fragment.app.DialogFragment;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 
 import com.group12.fitnics.R;
-import com.group12.fitnics.business.TimePickerFragment;
 import com.group12.fitnics.objects.Notification;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class CreateNotificationActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
+public class CreateNotificationActivity extends AppCompatActivity {
+    TimePicker picker;
     TextView Alertbox;
+    Button save;
     NotificationManagerCompat notificationManager;
     Calendar c;
 
@@ -38,30 +37,25 @@ public class CreateNotificationActivity extends AppCompatActivity implements Tim
         //creates popup window when the button is pressed
         Alertbox = (TextView) findViewById(R.id.AlertText);
         c = Calendar.getInstance();
-        Button buttonTimePicker = findViewById(R.id.timePicker);
-        buttonTimePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment timePicker = new TimePickerFragment();
-                timePicker.show(getSupportFragmentManager(), "time picker");
-            }
-        });
+        picker=(TimePicker)findViewById(R.id.timePicker);
+        save = (Button) findViewById(R.id.savebtn);
         notificationManager = NotificationManagerCompat.from(this);
     }
 
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+    public void createNotificationOnClick(View v) {
+        int hour, minute;
+        if (Build.VERSION.SDK_INT >= 23 ){
+            hour = picker.getHour();
+            minute = picker.getMinute();
+        }
+        else{
+            hour = picker.getCurrentHour();
+            minute = picker.getCurrentMinute();
+        }
 
-        c.set(Calendar.HOUR_OF_DAY,hourOfDay);
+        c.set(Calendar.HOUR_OF_DAY,hour);
         c.set(Calendar.MINUTE,minute);
         c.set(Calendar.SECOND,0);
-
-        String timeText = "Time Set: ";
-        timeText += DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
-        Alertbox.setText(timeText);
-    }
-
-    public void createNotificationOnClick(View v) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this,Notification.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,intent,0);
@@ -72,7 +66,7 @@ public class CreateNotificationActivity extends AppCompatActivity implements Tim
         Alertbox.setText(timeText);
     }
 
-    public void deleteAlarm(View v){
+    public void deleteAlarmOnClick(View v){
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this,Notification.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,intent,0);

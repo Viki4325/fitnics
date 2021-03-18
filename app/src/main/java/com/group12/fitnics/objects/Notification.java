@@ -10,10 +10,6 @@ import androidx.core.app.NotificationCompat;
 import com.group12.fitnics.business.NotificationHelper;
 
 public class Notification extends BroadcastReceiver {
-    private String description;
-    private String title;
-
-
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -21,10 +17,4 @@ public class Notification extends BroadcastReceiver {
         NotificationCompat.Builder nb = notificationHelper.getChannelNotification();
         notificationHelper.getManager().notify(0,nb.build());
     }
-
-    public Notification()
-    {
-
-    }
-
 }
