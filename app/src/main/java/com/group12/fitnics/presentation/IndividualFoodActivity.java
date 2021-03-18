@@ -26,6 +26,7 @@ import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.MyDate;
 import com.group12.fitnics.objects.User;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -160,7 +161,7 @@ public class IndividualFoodActivity extends AppCompatActivity implements View.On
 
     private void addFoodToLogs(){
         try {
-            FoodLog foodLog = new FoodLog(userLoggedIn.getUserID(), foodSelected.getFoodID(), MyDate.getCurrentDate(),getGrams());
+            FoodLog foodLog = new FoodLog(userLoggedIn.getUserID(), foodSelected.getFoodID(), LocalDate.now(),getGrams());
             foodLogs.insertFoodLog(foodLog);
             Toast.makeText(getApplicationContext(), "Food added to your Food logs!",Toast.LENGTH_SHORT).show();
             //once you add an exercise go back to the list to select more
@@ -174,8 +175,9 @@ public class IndividualFoodActivity extends AppCompatActivity implements View.On
     private void updateFoodLog(){
         try {
             //int userId, int foodId, MyDate date, int grams
-            Calendar calendar = Calendar.getInstance();
-            MyDate date = new MyDate(calendar);
+//            Calendar calendar = Calendar.getInstance();
+//            MyDate date = new MyDate(calendar);
+            LocalDate date = LocalDate.now();
             FoodLog updatedFoodLog = new FoodLog(userLoggedIn.getUserID(), foodSelected.getFoodID(), date,getGrams() );
             foodLogs.updateFoodLog(userLoggedIn.getUserID(), foodSelected.getFoodID(), date, updatedFoodLog);
 

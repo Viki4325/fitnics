@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
             assetNames = assetManager.list(DB_PATH);
             for (int i = 0; i < assetNames.length; i++) {
                 assetNames[i] = DB_PATH + "/" + assetNames[i];
+                System.out.println(assetNames[i]);
+                System.out.println();
+
             }
 
             copyAssetsToDirectory(assetNames, dataDirectory);

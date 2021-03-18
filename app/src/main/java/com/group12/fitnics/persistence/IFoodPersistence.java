@@ -3,15 +3,16 @@ package com.group12.fitnics.persistence;
 import com.group12.fitnics.objects.Food;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface IFoodPersistence {
-    ArrayList<Food> getFoodSequential();
+    List<Food> getFoodSequential();
 
     Food getFoodByID(final int foodID);
 
     Food getFoodByFoodName(final String foodName);
 
-    void insertFood(final Food currentUser);
+    int insertFood(final Food currentFood);
 
     void updateFood(final int foodID, final Food currentFood);
 

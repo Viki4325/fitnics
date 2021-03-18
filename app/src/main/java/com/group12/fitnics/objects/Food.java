@@ -6,6 +6,7 @@ public class Food implements Serializable {
     private int foodID;
     private String name;
     private double caloriesPerGram;
+    private static int lastFoodID = -1;
 
     public Food(int foodID, String name, double caloriesPerGram) {
         this.foodID = foodID;
@@ -23,6 +24,16 @@ public class Food implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    // set the foodID only when inserting a food
+    public void setFoodID() {
+        lastFoodID++;
+        this.foodID = lastFoodID;
+    }
+
+    public static void setLastFoodID(int i) {
+        lastFoodID = i;
     }
 
     public void setName(String name) {

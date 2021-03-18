@@ -4,27 +4,25 @@ import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.exceptions.FoodLogNotFoundException;
 import com.group12.fitnics.exceptions.InvalidFoodLogException;
 import com.group12.fitnics.objects.FoodLog;
-import com.group12.fitnics.objects.MyDate;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 import java.util.List;
 
 public class AccessFoodLogsTest {
 
     private AccessFoodLogs accessFoodLogs;
-    private MyDate date;
+    private LocalDate date;
 
     @Before
     public void setUp() {
         System.out.println("Starting test for AccessFoodLogs");
         accessFoodLogs = new AccessFoodLogs();
-        date = new MyDate(new GregorianCalendar(2021, 0, 1));
-
+        date = LocalDate.of(2021, 1, 1);
     }
 
     @Test
@@ -88,7 +86,9 @@ public class AccessFoodLogsTest {
         FoodLog log1 = new FoodLog(1, 2, date, 200);
 
         accessFoodLogs.insertFoodLog(log1);
-        assertEquals(log1, accessFoodLogs.getFoodLog(1, 2, date));
+        assertEquals(1, accessFoodLogs.getFoodLog(1, 2, date).getUserID());
+        assertEquals(2, accessFoodLogs.getFoodLog(1, 2, date).getFoodID());
+        assertEquals(200, accessFoodLogs.getFoodLog(1, 2, date).getGrams());
         assertEquals(1, accessFoodLogs.getFoodLogByUserDate(1, date).size());
 
         // delete what we just inserted
@@ -224,8 +224,10 @@ public class AccessFoodLogsTest {
     @Test
     public void testGetUserTotalDailyIntake() {
         System.out.println("\nStarting testGetUserTotalDailyIntake");
-        MyDate date1 = new MyDate(new GregorianCalendar(2021, 0, 1));
-        MyDate date2 = new MyDate(new GregorianCalendar(2021, 7, 19));
+//        MyDate date1 = new MyDate(new GregorianCalendar(2021, 0, 1));
+//        MyDate date2 = new MyDate(new GregorianCalendar(2021, 7, 19));
+        LocalDate date1 = LocalDate.of(2021, 1, 1);
+        LocalDate date2 = LocalDate.of(2021, 8, 19);
 
         int result = accessFoodLogs.getUserTotalDailyIntake(0, date1);
         assertEquals(164, result);

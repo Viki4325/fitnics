@@ -4,10 +4,10 @@ import com.group12.fitnics.application.Services;
 import com.group12.fitnics.exceptions.ExerciseLogNotFoundException;
 import com.group12.fitnics.exceptions.InvalidExerciseLogException;
 import com.group12.fitnics.objects.ExerciseLog;
-import com.group12.fitnics.objects.MyDate;
 import com.group12.fitnics.persistence.IExerciseLogPersistence;
 import com.group12.fitnics.persistence.IExercisePersistence;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class AccessExerciseLogs {
@@ -15,12 +15,17 @@ public class AccessExerciseLogs {
     private IExerciseLogPersistence exerciseLogPersistence;
     private IExercisePersistence exercisePersistence;
 
+    public AccessExerciseLogs(IExerciseLogPersistence exerciseLogPersistence, IExercisePersistence exercisePersistence) {
+        this.exerciseLogPersistence = exerciseLogPersistence;
+        this.exercisePersistence = exercisePersistence;
+    }
+
     public AccessExerciseLogs() {
         exerciseLogPersistence = Services.getExerciseLogPersistence();
         exercisePersistence = Services.getExercisePersistence();
     }
 
-    public ExerciseLog getExerciseLog(int userID, int exerciseID, MyDate date) {
+    public ExerciseLog getExerciseLog(int userID, int exerciseID, LocalDate date) {
         return exerciseLogPersistence.getExerciseLog(userID, exerciseID, date);
     }
 
@@ -28,7 +33,7 @@ public class AccessExerciseLogs {
         return exerciseLogPersistence.getExerciseLogByUser(userID);
     }
 
-    public List<ExerciseLog> getExerciseLogByUserDate(int userID, MyDate date) {
+    public List<ExerciseLog> getExerciseLogByUserDate(int userID, LocalDate date) {
         return exerciseLogPersistence.getExerciseLogByUserDate(userID, date);
     }
 
@@ -36,15 +41,15 @@ public class AccessExerciseLogs {
         exerciseLogPersistence.insertExerciseLog(exerciseLog);
     }
 
-    public void updateExerciseLog(int userID, int exerciseID, MyDate date, ExerciseLog updatedLog) throws InvalidExerciseLogException, ExerciseLogNotFoundException {
+    public void updateExerciseLog(int userID, int exerciseID, LocalDate date, ExerciseLog updatedLog) throws InvalidExerciseLogException, ExerciseLogNotFoundException {
         exerciseLogPersistence.updateExerciseLog(userID, exerciseID, date, updatedLog);
     }
 
-    public void deleteExerciseLog(int userID, int exerciseID, MyDate date) throws ExerciseLogNotFoundException {
+    public void deleteExerciseLog(int userID, int exerciseID, LocalDate date) throws ExerciseLogNotFoundException {
         exerciseLogPersistence.deleteExerciseLog(userID, exerciseID, date);
     }
 
-    public int getUserTotalDailyBurned(int userID, MyDate date) {
+    public int getUserTotalDailyBurned(int userID, LocalDate date) {
         List<ExerciseLog> logs = getExerciseLogByUserDate(userID, date);
         int result = 0;
         if (logs.size() > 0)

@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.group12.fitnics.exceptions.FoodNotFoundException;
+import com.group12.fitnics.exceptions.InvalidFdNameException;
 import com.group12.fitnics.exceptions.InvalidFoodException;
 import com.group12.fitnics.objects.Exercise;
 import com.group12.fitnics.objects.Food;
@@ -32,7 +33,7 @@ public class AccessFoodsTest {
         food = accessFood.searchByFoodName("Bread");
         assertEquals(food.getFoodID(),1);
         assertEquals(food.getCalories(), 2.33,0.01);
-        assertSame(food.getName(), "Bread");
+        assertEquals(food.getName(), "Bread");
         System.out.println("Finished testSearchByFoodName");
     }
 
@@ -94,7 +95,7 @@ public class AccessFoodsTest {
     public void testgetFoodBySearch(){
         System.out.println("\nStarting testgetFoodBySearch...");
 
-        List<Food> foodList =  accessFood.getFoodList().getFoodSequential();
+        List<Food> foodList =  accessFood.getFoodList();
 
         String[] searchPhrase = {
                 "bre",
@@ -127,18 +128,21 @@ public class AccessFoodsTest {
         food = accessFood.searchByFoodID(2);
         assertEquals(food.getFoodID(),2);
         assertEquals(food.getCalories(), 0.53,0.01);
-        assertSame(food.getName(), "Nonfat Greek yogurt");
+        assertEquals(food.getName(), "Nonfat Greek yogurt");
         System.out.println("Finished testSearchByFoodID");
     }
 
     @Test
     public void testAddFood(){
         System.out.println("\nStarting testAddFood");
-        accessFood.addFood(food);
-        Food test = accessFood.searchByFoodID(10);
-        assertEquals(test.getFoodID(),10);
+        int id = accessFood.addFood(food);
+        Food test = accessFood.searchByFoodID(id);
+        assertEquals(test.getFoodID(),id);
         assertEquals(test.getCalories(), 1.5,0.01);
-        assertSame(test.getName(), "Orange");
+        assertEquals(test.getName(), "Orange");
+
+        accessFood.deleteFood(id);
+        assertNull(accessFood.searchByFoodID(id));
         System.out.println("Finished testAddFood");
     }
 
@@ -156,11 +160,19 @@ public class AccessFoodsTest {
         System.out.println("Finished testAddDuplicateFood");
     }
 
+    @Test(expected = InvalidFdNameException.class)
+    public void testAddFoodLongName() {
+        System.out.println("\nStarting testAddFoodLongName");
+        accessFood.addFood(new Food(11, "12345678901234567890a",  3));
+        System.out.println("Finished testAddFoodLongName");
+    }
+
     @Test
     public void testDeleteFood(){
         System.out.println("\nStarting testDeleteFood");
-        accessFood.deleteFood(10);
-        assertNull(accessFood.searchByFoodID(10));
+        int id = accessFood.addFood(food);
+        accessFood.deleteFood(id);
+        assertNull(accessFood.searchByFoodID(id));
         System.out.println("Finished testDeleteFood");
     }
 

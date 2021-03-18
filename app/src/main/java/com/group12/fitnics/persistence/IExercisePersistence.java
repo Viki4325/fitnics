@@ -16,7 +16,7 @@ public interface IExercisePersistence {
 
     List<Exercise> getExerciseByCategory(final String exerciseCategory);
 
-    void insertExercise(final Exercise newExercise);
+    int insertExercise(final Exercise newExercise);
 
     void updateExercise(int exerciseID, Exercise currentExercise);
 
