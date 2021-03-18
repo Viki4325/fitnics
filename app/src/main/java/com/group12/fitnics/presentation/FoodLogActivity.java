@@ -17,6 +17,7 @@ import com.group12.fitnics.objects.Food;
 import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.User;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class FoodLogActivity extends AppCompatActivity {
@@ -41,8 +42,9 @@ public class FoodLogActivity extends AppCompatActivity {
     }
 
     private void setupList(){
+        LocalDate today = LocalDate.now();
         listView = (ListView) findViewById(R.id.food_log);
-        ArrayList<FoodLog> list = new ArrayList<FoodLog>(log.getFoodLogByUser(selectedUser.getUserID()));
+        ArrayList<FoodLog> list = new ArrayList<FoodLog>(log.getFoodLogByUserDate(selectedUser.getUserID(), today));
 
         adapter = new ArrayAdapter<FoodLog>(
                 this,

@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
             copyAssetsToDirectory(assetNames, dataDirectory);
 
+            System.out.println(dataDirectory.toString() + "/" + Main.getDBPathName());
+
             Main.setDBPathName(dataDirectory.toString() + "/" + Main.getDBPathName());
 
         } catch (final IOException ioe) {

@@ -43,7 +43,7 @@ public class AccessFood{
         List<Food> searchResults = new ArrayList<>(foodList.size());
 
         if(searchPhrase != null){
-            String search_Phrase = searchPhrase.toLowerCase();
+            String search_Phrase = searchPhrase; //.toLowerCase();
             for (int i = 0; i <foodList.size() ; i++) {
                 if(foodList.get(i).getName().toLowerCase().contains(search_Phrase)){
                     searchResults.add(foodList.get(i));

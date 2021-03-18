@@ -39,7 +39,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
         final List<Food> foods = new ArrayList<>();
         try (final Connection c = connect()) {
             final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM USERS");
+            final ResultSet rs = st.executeQuery("SELECT * FROM FOODS");
             while (rs.next()) {
                 final Food food = fromResultSet(rs);
                 foods.add(food);

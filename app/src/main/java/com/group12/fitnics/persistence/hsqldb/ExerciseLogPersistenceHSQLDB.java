@@ -46,6 +46,8 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
             if (rs.next()) {
                 return fromResultSet(rs);
             }
+            rs.close();
+            st.close();
 
         } catch (final SQLException e) {
             e.printStackTrace();

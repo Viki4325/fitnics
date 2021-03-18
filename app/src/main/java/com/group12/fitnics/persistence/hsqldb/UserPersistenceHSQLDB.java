@@ -72,12 +72,14 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     @Override
     public User getUserByID(int userID) {
         try (Connection c = connect()) {
-            final PreparedStatement statement = c.prepareStatement("SELECT * FROM USERS WHERE USERS.id = ?");
-            statement.setString(1, Integer.toString(userID));
-            final ResultSet rs = statement.executeQuery();
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM USERS WHERE USERS.id = ?");
+            st.setString(1, Integer.toString(userID));
+            final ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 return fromResultSet(rs);
             }
+            rs.close();
+            st.close();
 
         } catch (final SQLException e) {
             e.printStackTrace();
@@ -94,6 +96,8 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             if (rs.next()) {
                 return fromResultSet(rs);
             }
+            rs.close();
+            st.close();
 
         } catch (final SQLException e) {
             e.printStackTrace();
@@ -114,29 +118,29 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             throw new InvalidUsernameException("The username is too long, should be no more than 20 characters.");
 
         try (final Connection c = connect()) {
-            final PreparedStatement st = c.prepareStatement("INSERT INTO USERS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            final PreparedStatement st = c.prepareStatement("INSERT INTO USERS VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-            currentUser.setUserID();
+//            currentUser.setUserID();
 
-            st.setString(1, Integer.toString(currentUser.getUserID()));
-            st.setString(2, currentUser.getUsername());
-            st.setString(3, Integer.toString(currentUser.getBirthDay()));
-            st.setString(4, Integer.toString(currentUser.getBirthMonth()));
-            st.setString(5, Integer.toString(currentUser.getBirthYear()));
-            st.setInt(6, currentUser.getActivityLevel());
-            st.setDouble(7, currentUser.getWeight());
-            st.setDouble(8, currentUser.getHeight());
-            st.setString(9, String.valueOf(currentUser.getGender()));
-            st.setDouble(10, currentUser.getDailyCaloricNeeds());
-            st.setInt(11, currentUser.getGoal());
+//            st.setString(1, Integer.toString(currentUser.getUserID()));
+            st.setString(1, currentUser.getUsername());
+            st.setString(2, Integer.toString(currentUser.getBirthDay()));
+            st.setString(3, Integer.toString(currentUser.getBirthMonth()));
+            st.setString(4, Integer.toString(currentUser.getBirthYear()));
+            st.setInt(5, currentUser.getActivityLevel());
+            st.setDouble(6, currentUser.getWeight());
+            st.setDouble(7, currentUser.getHeight());
+            st.setString(8, String.valueOf(currentUser.getGender()));
+            st.setDouble(9, currentUser.getDailyCaloricNeeds());
+            st.setInt(10, currentUser.getGoal());
             String wUnit = "lbs";
             String hUnit = "cm";
             if (currentUser.getUnits()[0] == 1)
                 wUnit = "kg";
             if (currentUser.getUnits()[1] == 1)
                 hUnit = "ft";
-            st.setString(12, wUnit);
-            st.setString(13, hUnit);
+            st.setString(11, wUnit);
+            st.setString(12, hUnit);
 
             st.executeUpdate();
             st.close();
@@ -145,7 +149,8 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             e.printStackTrace();
         }
 
-        return currentUser.getUserID();
+        User created = getUserByUsername(currentUser.getUsername());
+        return created.getUserID();
     }
 
     @Override
@@ -155,6 +160,8 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
 
         if (getUserByID(userID) == null)
             throw new UserNotFoundException("There's no user with the userID. ");
+
+        currentUser.setDailyCaloricNeeds();
 
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("UPDATE USERS SET username=?, actLvl=?, weight=?, height=?, gender=?, caloricNeeds=?, goal=? WHERE id = ?");

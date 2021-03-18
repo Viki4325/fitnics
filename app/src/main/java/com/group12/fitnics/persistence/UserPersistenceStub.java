@@ -14,12 +14,13 @@ public class UserPersistenceStub implements IUserPersistence {
 
     public UserPersistenceStub() {
         this.users = new ArrayList<>();
+        int[] units = {1, 0};
 
-        User alice = new User("alice", 1, 55, 163, 'F');
-        User bob = new User("bob", 2, 70, 175, 'M');
-        User carol = new User("carol", 3, 47, 160, 'F');
-        User david = new User("david", 1, 50, 160, 'M');
-        alice.setUserID(0); alice.setBirthYear(1998); alice.setBirthMonth(4); alice.setBirthDay(15); alice.setGoal(0);
+        User alice = new User("alice", 15, 4, 1998, 1, 55, 163, 'F', 0, units);
+        User bob = new User("bob", 1, 5, 2000, 2, 70, 175, 'M', 1, units);
+        User carol = new User("carol", 22, 7, 1995, 3, 47, 160, 'F', 2, units);
+        User david = new User("david", 27, 11, 1985, 1, 50, 160, 'M', 0, units);
+        alice.setUserID(0);
         bob.setUserID(1);
         carol.setUserID(2);
         david.setUserID(3);
@@ -85,6 +86,7 @@ public class UserPersistenceStub implements IUserPersistence {
             if(users.get(i).getUserID() == userID) {
                 User prevUser = users.get(i);
                 updatedUser.setUserID(prevUser.getUserID());
+                updatedUser.setDailyCaloricNeeds();
                 users.set(i, updatedUser);
                 found = true;
             }

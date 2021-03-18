@@ -17,9 +17,9 @@ public class User implements Serializable {
 
     private int userID;
     private String username;
-    private int birthDay = 14;
-    private int birthMonth = 02;
-    private int birthYear = 2000;
+    private int birthDay;
+    private int birthMonth;
+    private int birthYear;
     // activityLevel: 0 - Not Active, 1 - Somewhat Active, 2 - Active, 3 - Very Active
     private int activityLevel;
     private double weight;
@@ -43,6 +43,7 @@ public class User implements Serializable {
         this.height = height;
         this.gender = gender;
         this.dailyCaloricNeeds = DailyCaloricNeeds.resetDailyCaloricNeeds(this);
+        this.activityLevel = 0;
     }
 
     public int getAge() {
@@ -61,9 +62,9 @@ public class User implements Serializable {
         this.weight = w;
         this.height = h;
         this.gender = gender;
-        this.dailyCaloricNeeds = 0;
         this.goal = goal;
         this.units = units;
+        this.dailyCaloricNeeds = DailyCaloricNeeds.resetDailyCaloricNeeds(this);
     }
 
     public double getHeight() {
@@ -96,6 +97,10 @@ public class User implements Serializable {
 
     public void setActivityLevel(int activityLevel) {
         this.activityLevel = activityLevel;
+    }
+
+    public void setDailyCaloricNeeds() {
+        this.dailyCaloricNeeds = DailyCaloricNeeds.resetDailyCaloricNeeds(this);
     }
 
     public void setDailyCaloricNeeds(double caloryAmount) {

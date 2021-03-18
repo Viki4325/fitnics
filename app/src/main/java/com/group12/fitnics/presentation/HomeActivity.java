@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
         accessFoodLogs = new AccessFoodLogs();
         accessExerciseLogs = new AccessExerciseLogs();
 
-        dateToday = LocalDate.of(2021, 1, 1);
+        dateToday = LocalDate.now(); //LocalDate.of(2021, 1, 1);
         userLoggedIn();
         rem = (int)selectedUser.getDailyCaloricNeeds();
 

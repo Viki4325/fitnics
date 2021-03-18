@@ -81,6 +81,8 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
             if (rs.next()) {
                 return fromResultSet(rs);
             }
+            rs.close();
+            st.close();
 
         } catch (final SQLException e) {
             e.printStackTrace();
@@ -97,6 +99,8 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
             if (rs.next()) {
                 return fromResultSet(rs);
             }
+            rs.close();
+            st.close();
 
         } catch (final SQLException e) {
             e.printStackTrace();

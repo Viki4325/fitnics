@@ -29,7 +29,8 @@ import static org.junit.Assert.assertNull;
 public class AccessUsersIT {
 
     private AccessUsers accessUsers;
-    String dbPath;
+    private String dbPath;
+    private final int[] units = {1, 0};
 
     @Before
     public void setUp() throws Exception {
@@ -84,11 +85,11 @@ public class AccessUsersIT {
     @Test
     public void testInsertUser() {
         System.out.println("\nStarting testInsertUser");
-        User eve = new User("eve", 1, 47, 160, 'F');
+        User eve = new User("eve", 15, 4, 1998, 1, 47, 160, 'F', 1, units);
         int id = accessUsers.insertUser(eve);
 
         assertNotNull(accessUsers.getUserByName("eve"));
-        assertEquals(id, eve.getUserID());
+        assertEquals(id, accessUsers.getUserByName("eve").getUserID());
         assertEquals("eve", accessUsers.getUserByName("eve").getUsername());
         assertEquals(1, accessUsers.getUserByName("eve").getActivityLevel());
         assertEquals(47.0, accessUsers.getUserByName("eve").getWeight(), 0.0001);
@@ -106,7 +107,7 @@ public class AccessUsersIT {
     public void testInsertDuplicateUser() {
         System.out.println("\nStarting testInsertDuplicateUser");
         // A user with existing name can not be inserted
-        User alice2 = new User("alice", 0, 50, 165, 'F');
+        User alice2 = new User("alice", 15, 4, 1998, 0, 50, 165, 'F', 1, units);
         accessUsers.insertUser(alice2);
         System.out.println("Finished InvalidUsernameException");
     }
@@ -121,7 +122,7 @@ public class AccessUsersIT {
     @Test(expected = InvalidUsernameException.class)
     public void testInsertUserLongName() {
         System.out.println("\nStarting testInsertUserLongName");
-        User u = new User("12345678901234567890a", 0, 50, 165, 'F');
+        User u = new User("12345678901234567890a", 15, 4, 1998, 0, 50, 165, 'F', 1, units);
         accessUsers.insertUser(u);
         System.out.println("Finished testInsertUserLongName");
     }
@@ -129,7 +130,7 @@ public class AccessUsersIT {
     @Test
     public void testUpdateUser() {
         System.out.println("\nStarting testUpdateUser");
-        User updatedAlice = new User("alice", 2, 49, 163, 'F');
+        User updatedAlice = new User("alice", 15, 4, 1998, 2, 49, 163, 'F', 1, units);
         accessUsers.updateUser(0, updatedAlice);
 
         User alice = accessUsers.getUserByName("alice");
@@ -138,7 +139,7 @@ public class AccessUsersIT {
         assertEquals(163, alice.getHeight(), 0.0001);
 
         // un-do the update
-        accessUsers.updateUser(0, new User("alice", 1, 55, 163, 'F'));
+        accessUsers.updateUser(0, new User("alice", 15, 4, 1998, 1, 55, 163, 'F', 0, units));
 
         System.out.println("Finished testUpdateUser");
     }
@@ -153,8 +154,8 @@ public class AccessUsersIT {
     @Test(expected = UserNotFoundException.class)
     public void testUpdateNotFoundUser() {
         System.out.println("\nStarting testUpdateNotFoundUser");
-        User updatedAlice = new User("alice", 2, 49, 163, 'F');
-        accessUsers.updateUser(7, updatedAlice); // not found
+        User updatedAlice = new User("alice", 15, 4, 1998, 2, 49, 163, 'F', 1, units);
+        accessUsers.updateUser(709, updatedAlice); // not found
         System.out.println("Finished testUpdateNotFoundUser");
     }
 
@@ -167,7 +168,7 @@ public class AccessUsersIT {
         assertEquals(3, accessUsers.getUsers().size());
 
         // add what we just deleted
-        User david = new User("david", 1, 50, 160, 'M');
+        User david = new User("david", 27, 11, 1985, 1, 50, 160, 'M', 0, units);
         int id = accessUsers.insertUser(david);
         assertEquals(4, accessUsers.getUsers().size());
         assertNotNull(accessUsers.getUserByName("david"));
