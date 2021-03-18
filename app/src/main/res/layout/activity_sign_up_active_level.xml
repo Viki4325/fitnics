@@ -4,119 +4,216 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/purple_love"
     tools:context=".presentation.SignUpActiveLevelActivity">
 
-    <TextView
-        android:id="@+id/NotActiveText"
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_weight="1"
-        android:text="@string/not_active"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/SomewhatActiveText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_weight="1"
-        android:text="@string/somewhat_active"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NotActivebtn"
-        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/ActiveText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_weight="1"
-        android:text="@string/active"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SomewhatActivebtn"
-        app:layout_constraintVertical_bias="0.0" />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="center"
+            app:cardElevation="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="15dp"
+            tools:ignore="MissingConstraints">
 
-    <TextView
-        android:id="@+id/VeryActive"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_weight="1"
-        android:text="@string/very_active"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Activebtn"
-        app:layout_constraintVertical_bias="0.0" />
+            <LinearLayout
+                android:layout_width="348dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:padding="20dp">
 
-    <Button
-        android:id="@+id/NotActivebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="btnComplete"
-        android:text="@string/not_activebtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NotActiveText"
-        app:layout_constraintVertical_bias="0.0" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/NotActiveText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:lineSpacingExtra="5dp"
+                    android:fontFamily="@font/muli"
+                    android:text="@string/not_active"
+                    android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/SomewhatActivebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="btnComplete"
-        android:text="@string/somewhat_activebtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SomewhatActiveText"
-        app:layout_constraintVertical_bias="0.0" />
+                <Button
+                    android:id="@+id/NotActivebtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/purple_love"
+                    android:fontFamily="@font/muli"
+                    android:gravity="center"
+                    android:onClick="btnComplete"
+                    android:text="@string/not_activebtn"
+                    android:padding="10dp"
+                    android:layout_marginTop="7dp"
+                    />
 
-    <Button
-        android:id="@+id/Activebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="btnComplete"
-        android:text="@string/activebtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ActiveText"
-        app:layout_constraintVertical_bias="0.0" />
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/VeryActivebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="btnComplete"
-        android:text="@string/very_activebtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/VeryActive"
-        app:layout_constraintVertical_bias="0.0" />
+        </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.card.MaterialCardView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="center"
+            app:cardElevation="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="15dp"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="348dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:padding="20dp">
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/SomewhatActiveText"
+                    android:text="@string/somewhat_active"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:lineSpacingExtra="5dp"
+                    android:fontFamily="@font/muli"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/SomewhatActivebtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/purple_love"
+                    android:fontFamily="@font/muli"
+                    android:onClick="btnComplete"
+                    android:text="@string/somewhat_activebtn"
+                    android:padding="10dp"
+                    android:layout_marginTop="7dp"
+                    />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="center"
+            app:cardElevation="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="15dp"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="348dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:padding="20dp">
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/ActiveText"
+                    android:text="@string/active"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:lineSpacingExtra="5dp"
+                    android:fontFamily="@font/muli"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/Activebtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/purple_love"
+                    android:fontFamily="@font/muli"
+                    android:onClick="btnComplete"
+                    android:text="@string/somewhat_activebtn"
+                    android:padding="10dp"
+                    android:layout_marginTop="7dp"
+                    />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="center"
+            app:cardElevation="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="15dp"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="348dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/VeryActive"
+                    android:text="@string/very_active"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:lineSpacingExtra="5dp"
+                    android:fontFamily="@font/muli"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/VeryActivebtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/purple_love"
+                    android:fontFamily="@font/muli"
+                    android:onClick="btnComplete"
+                    android:text="@string/very_activebtn"
+                    android:padding="10dp"
+                    android:layout_marginTop="7dp"
+                    />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

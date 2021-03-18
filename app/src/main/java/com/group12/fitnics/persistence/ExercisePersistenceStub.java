@@ -24,7 +24,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
                 "Grab dumbbells and extend arms to side and hold as long as you can",
                 "Arms",
                 "Intermediate",
-                 500
+                 50
         );
 
         Exercise  braced_squat = new Exercise(
@@ -34,7 +34,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
                 "Now, push hips back and bend knees down into a squat as far as you can. Hold for a few moments and bring yourself back up to the starting position.\n",
                 "Legs",
                 "Intermediate",
-                222
+                22
         );
 
         Exercise flutter_kicks = new Exercise(

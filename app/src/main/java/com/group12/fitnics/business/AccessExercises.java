@@ -26,6 +26,7 @@ public class AccessExercises {
         searchPhrase = null;
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void setFilter(String newFilter){
         filter.add(newFilter);
@@ -102,7 +103,7 @@ public class AccessExercises {
    }
 
    public Exercise getExerciseById(int exerciseId){
-        if(exerciseId > 0){
+        if(exerciseId >= 0){
             return exercisePersistence.getExerciseById(exerciseId);
         }
         return null;

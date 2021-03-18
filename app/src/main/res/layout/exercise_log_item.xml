@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@color/soft_white"
+    android:layout_marginTop="2dp">
+
+    <TextView
+        android:id="@+id/exerciseName"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:gravity="center_vertical"
+        android:text="Exercise name"
+        android:textSize="20sp"
+        tools:ignore="RelativeOverlap" />
+
+    <TextView
+        android:id="@+id/exerciseCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_toEndOf="@+id/exerciseName"
+        android:text="" />
+
+
+    <TextView
+        android:id="@+id/exerciseTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exerciseCalories"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/exerciseName"
+        android:text="" />
+
+
+</RelativeLayout>

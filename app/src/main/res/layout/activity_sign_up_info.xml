@@ -1,214 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.SignUpInfoActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".presentation.SignUpInfoActivity"
+android:scrollbars="none"
+android:padding="10dp">
 
-    <Button
-        android:id="@+id/nextPagebtn"
-        android:layout_width="298dp"
-        android:layout_height="wrap_content"
-        android:onClick="btnNextPage"
-        android:text="@string/next_page"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.539"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.953" />
 
-    <TextView
-        android:id="@+id/EnterUsernameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_weight="0.5"
-        android:text="@string/enter_a_username"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/enterUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_weight="0.25"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EnterUsernameText"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/EnterBirthdayText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:layout_weight="0.5"
-        android:text="@string/enter_date_of_birth"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterUsername"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/editBirthday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_weight="0.25"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="DD/MM/YYYY"
-        android:inputType="date"
-        app:layout_constraintBottom_toBottomOf="@+id/nextPagebtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EnterBirthdayText"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/ChooseGenderText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:layout_weight=".5"
-        android:text="@string/choose_gender"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editBirthday"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Spinner
-        android:id="@+id/chooseGender"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_weight="0.25"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ChooseGenderText"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/enterWeightText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:layout_weight="0.5"
-        android:text="@string/enter_weight_in_lbs"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chooseGender"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/enterHeightText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:layout_weight="0.5"
-        android:text="@string/enter_height_in_cm"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="391dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterWeightText">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editWeight"
+        <ImageView
+            android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="0.5"
-            android:autofillHints="123.45"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:inputType="numberDecimal" />
+            android:clickable="true"
+            android:onClick="closePage"
+            android:src="@drawable/ic_baseline_close"/>
 
-        <Spinner
-            android:id="@+id/weightUnitSpinner"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_weight="0.25" />
+            android:gravity="center"
+            android:text="YOUR INFO"
+            android:fontFamily="@font/muli"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+           android:layout_marginTop="10dp"
+            android:layout_marginBottom="70dp"
+            android:text="Let's get started with the basics"
+            android:fontFamily="@font/muli"
+            android:textStyle="italic"
+            android:textColor="@color/black"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enter_a_username"
+            android:fontFamily="@font/muli"
+            android:textColor="@color/purple_700"
+        />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:hint="Enter a username of your choice"
+            app:boxBackgroundColor="#F8F8FF"
+            app:boxStrokeColor="@color/design_default_color_secondary"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:hintTextColor="#756D6D"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/enterUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/enter_date_of_birth"
+            android:fontFamily="@font/muli"
+            android:textColor="@color/purple_700"
+            />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:hint="DD/MM/YYYY"
+            app:boxBackgroundColor="#F8F8FF"
+            app:boxStrokeColor="@color/design_default_color_secondary"
+            app:hintTextColor="#756D6D"
+            app:endIconMode="clear_text"
+            app:boxStrokeWidthFocused="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editBirthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:inputType = "date"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/choose_gender"
+            android:fontFamily="@font/muli"
+            android:textColor="@color/purple_700"
+            />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/chooseGender"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:dropDownWidth="wrap_content">
+        </androidx.appcompat.widget.AppCompatSpinner>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/enter_weight_in_lbs"
+            android:fontFamily="@font/muli"
+            android:textColor="@color/purple_700"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editWeightLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="333dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:hint="Enter your weight"
+                app:boxBackgroundColor="#F8F8FF"
+                app:boxStrokeColor="@color/design_default_color_secondary"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconMode="clear_text"
+                app:hintTextColor="#756D6D">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ToggleButton
+                android:id="@+id/weightUnitSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_toEndOf="@+id/editWeightLayout"
+                android:checkable="true">
+
+            </ToggleButton>
+
+        </RelativeLayout>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/enter_height_in_cm"
+            android:fontFamily="@font/muli"
+            android:textColor="@color/purple_700"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editHeightLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="333dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:hint="Enter your height"
+                app:boxBackgroundColor="#F8F8FF"
+                app:boxStrokeColor="@color/design_default_color_secondary"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconMode="clear_text"
+                app:hintTextColor="#756D6D">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ToggleButton
+                android:id="@+id/heightUnitSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_toEndOf="@+id/editHeightLayout"
+                android:checkable="true"
+                android:gravity="center"
+                 />
+        </RelativeLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:elevation="10dp"
+            android:fontFamily="@font/muli"
+            android:gravity="center"
+            android:onClick="btnNextPage"
+            android:padding="20dp"
+            android:text="CONTINUE"
+            android:textStyle="bold"
+            app:cornerRadius="50dp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="393dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterHeightText"
-        app:layout_constraintVertical_bias="0.0">
-
-        <EditText
-            android:id="@+id/editHeight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="0.5"
-            android:autofillHints="123.45"
-            android:ems="10"
-            android:inputType="numberDecimal" />
-
-        <Spinner
-            android:id="@+id/heightUnitSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_weight="0.25" />
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

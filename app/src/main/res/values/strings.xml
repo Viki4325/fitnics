@@ -65,4 +65,16 @@
     <string name="search" />
 
     <string name="searchExerciseHint">Search Exercise</string>
+    <string name="goal_loose_weight">Loose Weight</string>
+    <string name="goal_maintain_weight">Maintain Weight  </string>
+    <string name="goal_gain_weight">Gain Weight  </string>
+    <string name="breakfast_button_text">Add breakfast</string>
+    <string name="add_exercise_button">Add exercise</string>
+    <string name="add_dinner_btn_text">Add dinner</string>
+    <string name="add_exercise_btn_text">Add exercise</string>
+    <string name="add_lunch_btn_text">Add lunch</string>
+    <string name="info_alert">Information</string>
+    <string name="update">UPDATE</string>
+    <string name="notification_note">You can set times when you want to be notified with our app. This will help you to follow your routine and hence easier to achieve goals</string>
+    <string name="notification_btn_text">Set Notification</string>
 </resources>

@@ -72,7 +72,7 @@ public class FoodLogPersistenceStub implements IFoodLogPersistence {
 
         // if there exists same food log already, to not allow it to be inserted
         if (getFoodLog(foodLog.getUserID(), foodLog.getFoodID(), foodLog.getDate()) != null)
-            throw new InvalidFoodLogException("The food log is duplicate. ");
+            throw new InvalidFoodLogException("The food log is duplicate. \n You can instead go to FoodLog and add extra amount of grams consumed. Thank you!");
 
         foodLogs.add(foodLog);
     }

@@ -21,7 +21,7 @@ public class UserTest {
         assertEquals(47, eve.getWeight(), 0.0001);
         assertEquals(160, eve.getHeight(), 0.0001);
         assertEquals('F', eve.getGender());
-        assertEquals(0, eve.getDailyCaloricNeeds());
+        assertEquals(1591.12, eve.getDailyCaloricNeeds(),0.0);
 
         User frank = new User("frank", 2, 66, 174, 'M');
 
@@ -31,7 +31,7 @@ public class UserTest {
         assertEquals(66, frank.getWeight(), 0.0001);
         assertEquals(174, frank.getHeight(), 0.0001);
         assertEquals('M', frank.getGender());
-        assertEquals(0, frank.getDailyCaloricNeeds());
+        assertEquals(3706.71, frank.getDailyCaloricNeeds(),0);
 
         System.out.println("Finished testUserCreation");
     }
@@ -53,7 +53,7 @@ public class UserTest {
         assertEquals(15, alice.getBirthDay());
         assertEquals(0, alice.getGoal());
         assertEquals('F', alice.getGender());
-        assertEquals(0, alice.getDailyCaloricNeeds());
+        assertEquals(1666.295, alice.getDailyCaloricNeeds(),0.0);
 
         System.out.println("Finished testUserCreation");
     }
@@ -85,7 +85,7 @@ public class UserTest {
         assertEquals(14, eve.getBirthDay());
         assertEquals(2, eve.getGoal());
         assertEquals('O', eve.getGender());
-        assertEquals(2400, eve.getDailyCaloricNeeds());
+        assertEquals(2400, (int)eve.getDailyCaloricNeeds());
 
         System.out.println("Finished testUserSetters");
     }

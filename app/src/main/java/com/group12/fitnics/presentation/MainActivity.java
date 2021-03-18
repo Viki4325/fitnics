@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.VideoView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.group12.fitnics.R;
 import com.group12.fitnics.application.Main;
 
@@ -16,13 +20,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import static com.group12.fitnics.R.layout.activity_main;
+
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(activity_main);
         copyDatabaseToDevice();
+
     }
 
     private void copyDatabaseToDevice() {
@@ -75,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
 
     public void btnSignUpOnClick(View v) {
         Intent signUpIntent = new Intent(MainActivity.this, SignUpActivity.class);

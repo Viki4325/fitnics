@@ -1,6 +1,8 @@
 package com.group12.fitnics.objects;
 
-public class Food {
+import java.io.Serializable;
+
+public class Food implements Serializable {
     private int foodID;
     private String name;
     private double caloriesPerGram;
@@ -36,6 +38,6 @@ public class Food {
     }
 
     public String toString(){
-        return foodID +". "+name +" "+ caloriesPerGram + " calories per garm";
+        return foodID +"."+name +".\n"+ caloriesPerGram + " calories per gram";
     }
 }

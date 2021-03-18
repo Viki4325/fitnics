@@ -5,13 +5,19 @@ import org.junit.Test;
 
 import com.group12.fitnics.exceptions.FoodNotFoundException;
 import com.group12.fitnics.exceptions.InvalidFoodException;
+import com.group12.fitnics.objects.Exercise;
 import com.group12.fitnics.objects.Food;
 import com.group12.fitnics.business.AccessFood;
+import com.group12.fitnics.persistence.IExercisePersistence;
+
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class AccessFoodsTest {
     private Food food;
     AccessFood accessFood;
+
 
     @Before
     public void setUp() throws Exception {
@@ -29,6 +35,90 @@ public class AccessFoodsTest {
         assertSame(food.getName(), "Bread");
         System.out.println("Finished testSearchByFoodName");
     }
+
+    @Test
+    public void testSetSearch(){
+        System.out.println("\nStarting testSetSearch...");
+
+        String[] testSearchStrings = {
+                "bread",
+                "non",
+                "greek",
+                "yoghurt"
+        };
+
+        assertNotNull(testSearchStrings);
+
+        for (String testSearchPhrase : testSearchStrings) {
+            accessFood.setSearchPhrase(testSearchPhrase);
+            assertEquals("The search phrase has been set, therefore should be equal", accessFood.getSearchPhrase(), testSearchPhrase);
+        }
+
+        //Does not break if set to null
+        accessFood.setSearchPhrase(null);
+        assertNull("Search phrase was set to null. Should get a search phrase equal to null",accessFood.getSearchPhrase());
+
+        System.out.println("\nFinished testSetSearch...");
+    }
+
+    @Test
+    public void testGetSearch(){
+        System.out.println("\nStarting testGetSearch");
+
+        String search_Phrase_1 = "yoghurt";
+        String search_phrase_2 = "EGGS";
+        String search_phrase_3 = "greek";
+
+        assertNull("Should be equal to null, since no search phrase has been set", accessFood.getSearchPhrase());
+        //Get and compare taking into consideration the case
+        accessFood.setSearchPhrase(search_Phrase_1);
+        assertEquals("Search phrase has been set. Should not be equal to null",accessFood.getSearchPhrase(),search_Phrase_1);
+        assertNotEquals("Search phrase has been set and compared with the opposite case(UPPERCASE/lowercase) of what was used to set",accessFood.getSearchPhrase(),search_Phrase_1.toUpperCase());
+
+        accessFood.setSearchPhrase(search_phrase_2);
+        assertEquals("Search phrase has been set. Should not be equal to null",accessFood.getSearchPhrase(),search_phrase_2);
+        assertNotEquals("Search phrase has been set and compared with the opposite case(UPPERCASE/lowercase) of what was used to set",accessFood.getSearchPhrase(),search_phrase_2.toLowerCase());
+
+        accessFood.setSearchPhrase(search_phrase_3);
+        assertEquals("Search phrase has been set. Should not be equal to null",accessFood.getSearchPhrase(),search_phrase_3);
+        assertNotEquals("Search phrase has been set and compared with the opposite case(UPPERCASE/lowercase) of what was used to set",accessFood.getSearchPhrase(),search_phrase_3.toUpperCase());
+
+        //Null is returned if set a null phrase
+        accessFood.setSearchPhrase(null);
+        assertNull("Search phrase was set to null. Should get a search phrase equal to null",accessFood.getSearchPhrase());
+
+        System.out.println("Finished testGetSearch");
+    }
+
+    @Test
+    public void testgetFoodBySearch(){
+        System.out.println("\nStarting testgetFoodBySearch...");
+
+        List<Food> foodList =  accessFood.getFoodList().getFoodSequential();
+
+        String[] searchPhrase = {
+                "bre",
+                "yog",
+        };
+
+        List<Food> searchResult;
+        //brute-force testing
+        accessFood.setSearchPhrase(searchPhrase[0]);
+        searchResult = accessFood.getFoodBySearch(foodList);
+        assertEquals("Set searchPhrase that should only return ONE food object, should contain 'bre' ", searchResult.size(), 2);
+        assertEquals("Set searchPhrase that should only return ONE food object, should contain 'bread' ", searchResult.get(0).getName(), "Bread");
+        assertEquals("Bread", searchResult.get(0).getName());
+        assertEquals("Grilled chicken breast", searchResult.get(1).getName());
+
+        accessFood.setSearchPhrase(searchPhrase[1]);
+        searchResult = accessFood.getFoodBySearch(foodList);
+        assertEquals("Set searchPhrase that should only return ONE food object, should contain 'yogh' ", searchResult.size(), 1);
+        assertEquals("Set searchPhrase that should only return ONE food object, should contain 'yoghurt' ", searchResult.get(0).getName(), "Nonfat Greek yogurt");
+        assertEquals("Nonfat Greek yogurt", searchResult.get(0).getName());
+
+        System.out.println("Finished testFoodBySearch");
+    }
+
 
     @Test
     // test search by food id

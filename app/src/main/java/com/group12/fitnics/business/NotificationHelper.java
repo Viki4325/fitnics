@@ -37,7 +37,7 @@ public class NotificationHelper extends ContextWrapper
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setContentTitle("Fitnics Alarm!")
                 .setContentText("Time to workout.")
-                .setSmallIcon(R.drawable.ic_add);
+                .setSmallIcon(R.mipmap.ic_fitnics_logo_round);
     }
 
 }

@@ -1,201 +1,555 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@drawable/purple_love"
+    android:scrollbars="none"
     tools:context=".presentation.UpdateUserInfoActivity">
 
-    <Button
-        android:id="@+id/Savebtn"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="btnSaveUpdatesOnClick"
-        android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.929" />
+        android:orientation="vertical">
 
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="359dp"
-        android:layout_height="481dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-        <TableRow
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardElevation="10dp"
+            android:background="@color/white"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:cardCornerRadius="15dp">
 
-            <TextView
-                android:id="@+id/updateUsername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Username" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/usernameBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:gravity="center"
-                android:inputType="textPersonName" />
-        </TableRow>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profilePic"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="15dp"
+                    android:clickable="true"
+                    android:src="@drawable/profile"
+                    android:layout_gravity="center"
+                    app:srcCompat="@android:drawable/sym_def_app_icon" />
 
-        <TableRow
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="30dp"
+                    android:layout_toEndOf="@+id/profilePic"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/userName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="40sp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/muli_bold"
+                        android:text="Viki"
+                        />
+
+                    <TextView
+                        android:id="@+id/goal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/muli"
+                        android:text="Goal"
+                        />
+
+                    <TextView
+                        android:id="@+id/activityLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/muli"
+                        android:singleLine="true"
+                        android:text="Activity level"
+                        />
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardElevation="10dp"
+            android:background="@color/white"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:cardCornerRadius="15dp">
 
-            <TextView
-                android:id="@+id/updateBirthday"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Birthday" />
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/birthdayBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:gravity="center"
-                android:inputType="date" />
+                <LinearLayout
+                    android:id="@+id/fancyText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
 
-        </TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/muli_bold"
+                        android:text="Update Weight"
+                        android:textSize="30sp" />
 
-        <TableRow
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/muli"
+                        android:gravity="center"
+                        android:text="Every kilo starts with a gram, don't forget to keep us updated on your progress"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/fancyText"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/editWeightLayout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:hint="Update your weight"
+                            app:boxBackgroundColor="#F8F8FF"
+                            app:boxStrokeColor="@color/design_default_color_secondary"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:endIconMode="clear_text"
+                            app:hintTextColor="#756D6D">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editWeight"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:imeOptions="actionNext"
+                                android:maxLength="3"
+                                android:inputType="numberDecimal"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <ToggleButton
+                            android:id="@+id/weightUnitSwitch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:layout_toEndOf="@+id/editWeightLayout"
+                            android:checkable="true">
+                        </ToggleButton>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/muli_bold"
+                        android:text="Update Height"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/muli"
+                        android:gravity="center"
+                        android:text="Your height makes a difference in your daily caloric needs. Don't forget to update us"
+                        android:textSize="15sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/editHeightLayout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:hint="Update your height"
+                            app:boxBackgroundColor="#F8F8FF"
+                            app:boxStrokeColor="@color/design_default_color_secondary"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:endIconMode="clear_text"
+                            app:hintTextColor="#756D6D">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editHeight"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:imeOptions="actionNext"
+                                android:maxLength="3"
+                                android:inputType="numberDecimal"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <ToggleButton
+                            android:id="@+id/heightUnitSwitch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:layout_toEndOf="@+id/editHeightLayout"
+                            android:checkable="true"
+                            android:gravity="center"
+                            />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardElevation="10dp"
+            android:background="@color/white"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:cardCornerRadius="15dp">
 
-            <TextView
-                android:id="@+id/updateGender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Gender" />
-
-            <Spinner
-                android:id="@+id/genderSpinner"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" />
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/profilePic"
+                android:orientation="vertical">
 
-        </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:singleLine="true"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="Update Personal Info"
+                    />
 
-        <TableRow
+                <TextView
+                    android:id="@+id/updateGoal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="20sp"
+                    android:singleLine="true"
+                    android:fontFamily="@font/muli"
+                    android:text="Goal"
+                    />
+
+
+                <Spinner
+                    android:id="@+id/goalSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:backgroundTint="#808080"
+                    android:autofillHints="Acitivity Level">
+
+                </Spinner>
+
+                <TextView
+                    android:id="@+id/updateActivityLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/muli"
+                    android:singleLine="true"
+                    android:drawableRight="@drawable/ic_outline_info_24"
+                    android:text="Activity level"
+                    />
+
+                <Spinner
+                    android:id="@+id/activityLevelSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:backgroundTint="#808080"
+                    android:autofillHints="Acitivity Level">
+
+                </Spinner>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/muli"
+                    android:singleLine="true"
+                    android:text="Gender"
+                    />
+
+                 <Spinner
+                     android:id="@+id/genderSpinner"
+                     android:layout_width="match_parent"
+                     android:layout_height="50dp"
+                     android:layout_weight="1"
+                     android:backgroundTint="#808080"
+                     android:gravity="center"
+                     android:autofillHints="Gender">
+
+                 </Spinner>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveButton"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:elevation="10dp"
+            android:fontFamily="@font/muli"
+            android:gravity="center"
+            android:onClick="btnSaveUpdatesOnClick"
+            android:padding="20dp"
+            android:text="SAVE"
+            android:textStyle="bold"
+            app:cornerRadius="50dp" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/updateWeight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Weight" />
+</ScrollView>
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".presentation.UpdateUserInfoActivity">-->
 
-            <EditText
-                android:id="@+id/weightBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:gravity="center"
-                android:inputType="numberDecimal" />
+<!--    <Button-->
+<!--        android:id="@+id/Savebtn"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:onClick="btnSaveUpdatesOnClick"-->
+<!--        android:text="Save"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.929" />-->
 
-            <Spinner
-                android:id="@+id/weightUnitsSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-        </TableRow>
+<!--    <TableLayout-->
+<!--        android:id="@+id/tableLayout"-->
+<!--        android:layout_width="359dp"-->
+<!--        android:layout_height="481dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.0">-->
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1">-->
 
-            <TextView
-                android:id="@+id/updateHeight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Height" />
+<!--            <TextView-->
+<!--                android:id="@+id/updateUsername"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Username" />-->
 
-            <EditText
-                android:id="@+id/heightBox"
-                android:layout_width="185dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:gravity="center"
-                android:inputType="numberDecimal" />
+<!--            <EditText-->
+<!--                android:id="@+id/usernameBox"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:ems="10"-->
+<!--                android:gravity="center"-->
+<!--                android:inputType="textPersonName" />-->
+<!--        </TableRow>-->
 
-            <Spinner
-                android:id="@+id/heightUnitsSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-        </TableRow>
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1">-->
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+<!--            <TextView-->
+<!--                android:id="@+id/updateBirthday"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Birthday" />-->
 
-            <TextView
-                android:id="@+id/UpdateGoal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Goal" />
+<!--            <EditText-->
+<!--                android:id="@+id/birthdayBox"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:ems="10"-->
+<!--                android:gravity="center"-->
+<!--                android:inputType="date" />-->
 
-            <Spinner
-                android:id="@+id/goalSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" />
-        </TableRow>
+<!--        </TableRow>-->
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1">-->
 
-            <TextView
-                android:id="@+id/updateActivityLevel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Activity Level" />
+<!--            <TextView-->
+<!--                android:id="@+id/updateGender"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Gender" />-->
 
-            <Spinner
-                android:id="@+id/activityLevelSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" />
-        </TableRow>
+<!--            <Spinner-->
+<!--                android:id="@+id/genderSpinner"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center" />-->
 
-    </TableLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+<!--        </TableRow>-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/updateWeight"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Weight" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/weightBox"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:ems="10"-->
+<!--                android:gravity="center"-->
+<!--                android:inputType="numberDecimal" />-->
+
+<!--            <Spinner-->
+<!--                android:id="@+id/weightUnitsSpinner"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1" />-->
+<!--        </TableRow>-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/updateHeight"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Height" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/heightBox"-->
+<!--                android:layout_width="185dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:ems="10"-->
+<!--                android:gravity="center"-->
+<!--                android:inputType="numberDecimal" />-->
+
+<!--            <Spinner-->
+<!--                android:id="@+id/heightUnitsSpinner"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1" />-->
+<!--        </TableRow>-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/UpdateGoal"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Goal" />-->
+
+<!--            <Spinner-->
+<!--                android:id="@+id/goalSpinner"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center" />-->
+<!--        </TableRow>-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/updateActivityLevel"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Activity Level" />-->
+
+<!--            <Spinner-->
+<!--                android:id="@+id/activityLevelSpinner"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center" />-->
+<!--        </TableRow>-->
+
+<!--    </TableLayout>-->
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

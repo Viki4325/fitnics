@@ -7,11 +7,20 @@
     android:orientation="vertical"
     tools:context=".presentation.SearchFoodActivity">
 
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchFood"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search Food Items">
+    </SearchView>
+
     <ListView
         android:id="@+id/Search_food"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:padding="20dp"
-        tools:listitem="@android:layout/simple_list_item_activated_1" />
+        tools:listitem="@layout/list_item" />
 </LinearLayout>
+
