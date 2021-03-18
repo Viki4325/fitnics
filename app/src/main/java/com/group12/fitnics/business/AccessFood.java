@@ -3,7 +3,6 @@ package com.group12.fitnics.business;
 import com.group12.fitnics.application.Services;
 import com.group12.fitnics.exceptions.FoodNotFoundException;
 import com.group12.fitnics.exceptions.InvalidFoodException;
-import com.group12.fitnics.objects.Exercise;
 import com.group12.fitnics.objects.Food;
 import com.group12.fitnics.persistence.IFoodPersistence;
 
@@ -14,6 +13,10 @@ public class AccessFood{
 
     private IFoodPersistence foodList;
     private String searchPhrase;
+
+    public AccessFood(IFoodPersistence foodList) {
+        this.foodList = foodList;
+    }
 
     public AccessFood(){
         foodList = Services.getFoodPersistence();
@@ -28,9 +31,8 @@ public class AccessFood{
         return foodList.getFoodByID(foodID);
     }
 
-    // ???????????
-    public IFoodPersistence getFoodList() {
-        return foodList;
+    public List<Food> getFoodList() {
+        return foodList.getFoodSequential();
     }
 
     /*
@@ -58,12 +60,9 @@ public class AccessFood{
     public String getSearchPhrase(){
         return this.searchPhrase;
     }
-
-
-
-
-    public void addFood(Food newFood) throws InvalidFoodException {
-        foodList.insertFood(newFood);
+    
+    public int addFood(Food newFood) throws InvalidFoodException {
+        return foodList.insertFood(newFood);
     }
 
     public void deleteFood(int foodID) throws InvalidFoodException, FoodNotFoundException {

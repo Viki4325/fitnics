@@ -60,7 +60,7 @@ public class FoodLogActivity extends AppCompatActivity {
 
                 //To get the food we have selected
                 FoodLog selectFoodLog = (FoodLog) (listView.getItemAtPosition(position));
-                Food foodFromLog = (Food) foods.getFoodList().getFoodByID(selectFoodLog.getFoodID());
+                Food foodFromLog = (Food) foods.searchByFoodID(selectFoodLog.getFoodID());
                 //create intent to go next activity
                 //We pass the whole objects through intent
                 Intent showDetail = new Intent(getApplicationContext(), IndividualFoodActivity.class);

@@ -19,6 +19,11 @@ public class AccessExercises {
     private String searchPhrase;
     private List<String> filter;
 
+    public AccessExercises(IExercisePersistence exercisePersistence){
+        this.exercisePersistence = exercisePersistence;
+        filter = new ArrayList<>();
+        searchPhrase = null;
+    }
 
     public AccessExercises(){
         exercisePersistence = Services.getExercisePersistence();

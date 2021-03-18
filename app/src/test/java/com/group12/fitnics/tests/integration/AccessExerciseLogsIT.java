@@ -1,30 +1,46 @@
-package com.group12.fitnics.tests.business;
+package com.group12.fitnics.tests.integration;
 
 import com.group12.fitnics.business.AccessExerciseLogs;
+import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.exceptions.ExerciseLogNotFoundException;
 import com.group12.fitnics.exceptions.InvalidExerciseLogException;
-import com.group12.fitnics.exceptions.InvalidFoodLogException;
 import com.group12.fitnics.objects.ExerciseLog;
+import com.group12.fitnics.persistence.IExerciseLogPersistence;
+import com.group12.fitnics.persistence.IExercisePersistence;
+import com.group12.fitnics.persistence.IFoodLogPersistence;
+import com.group12.fitnics.persistence.IFoodPersistence;
+import com.group12.fitnics.persistence.hsqldb.ExerciseLogPersistenceHSQLDB;
+import com.group12.fitnics.persistence.hsqldb.ExercisePersistenceHSQLDB;
+import com.group12.fitnics.persistence.hsqldb.FoodLogPersistenceHSQLDB;
+import com.group12.fitnics.persistence.hsqldb.FoodPersistenceHSQLDB;
+import com.group12.fitnics.tests.utils.TestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
+import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 
-public class AccessExerciseLogsTest {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
+public class AccessExerciseLogsIT {
 
     private AccessExerciseLogs accessExerciseLogs;
     private LocalDate date;
 
     @Before
-    public void setUp() {
-        System.out.println("Starting test for AccessExerciseLogs");
-        accessExerciseLogs = new AccessExerciseLogs();
+    public void setUp() throws Exception {
+        File tempDB = TestUtils.copyDB();
+        String dbPath = tempDB.getAbsolutePath().replace(".script", "");
+        IExerciseLogPersistence exerciseLogPersistence = new ExerciseLogPersistenceHSQLDB(dbPath);
+        IExercisePersistence exercisePersistence = new ExercisePersistenceHSQLDB(dbPath);
+        accessExerciseLogs = new AccessExerciseLogs(exerciseLogPersistence, exercisePersistence);
         date = LocalDate.of(2021, 1, 1);
     }
+
 
     @Test
     public void testGetExerciseLog() {

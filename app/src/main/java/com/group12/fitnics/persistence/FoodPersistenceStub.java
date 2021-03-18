@@ -1,6 +1,7 @@
 package com.group12.fitnics.persistence;
 
 import com.group12.fitnics.exceptions.FoodNotFoundException;
+import com.group12.fitnics.exceptions.InvalidFdNameException;
 import com.group12.fitnics.exceptions.InvalidFoodException;
 import com.group12.fitnics.objects.Food;
 
@@ -23,6 +24,7 @@ public class FoodPersistenceStub implements IFoodPersistence {
         foods.add(banana);
         foods.add(rice);
         foods.add(chicken);
+        Food.setLastFoodID(6);
     }
 
     public ArrayList<Food> getFoodSequential() {
@@ -51,7 +53,7 @@ public class FoodPersistenceStub implements IFoodPersistence {
     }
 
     @Override
-    public void insertFood(Food food) throws InvalidFoodException {
+    public int insertFood(Food food) throws InvalidFoodException {
         if (food == null)
             throw new InvalidFoodException("The food is not valid. ");
 
@@ -59,7 +61,13 @@ public class FoodPersistenceStub implements IFoodPersistence {
         if (getFoodByFoodName(food.getName()) != null)
             throw new InvalidFoodException("There exists duplicate food. ");
 
+        if(food.getName().length() > 20)
+            throw new InvalidFdNameException("The name should be no more than 20 characters.");
+
+        food.setFoodID();
         foods.add(food);
+
+        return food.getFoodID();
     }
 
     // update food with foodID

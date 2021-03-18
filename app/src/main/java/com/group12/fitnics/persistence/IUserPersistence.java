@@ -12,7 +12,7 @@ public interface IUserPersistence {
 
     User getUserByUsername(final String username);
 
-    void insertUser(final User currentUser);
+    int insertUser(final User currentUser);
 
     void updateUser(final int userID, final User currentUser);
 

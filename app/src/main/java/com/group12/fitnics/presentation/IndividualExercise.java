@@ -18,6 +18,7 @@ import com.group12.fitnics.objects.ExerciseLog;
 import com.group12.fitnics.objects.MyDate;
 import com.group12.fitnics.objects.User;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class IndividualExercise extends AppCompatActivity implements View.OnClickListener{
@@ -90,7 +91,8 @@ public class IndividualExercise extends AppCompatActivity implements View.OnClic
 
     private void addExerciseToLogs(){
         try {
-            ExerciseLog exerciseLog = new ExerciseLog(userLoggedIn.getUserID(), exerciseSelected.getExerciseID(),MyDate.getCurrentDate(),30);
+            LocalDate date = LocalDate.now();
+            ExerciseLog exerciseLog = new ExerciseLog(userLoggedIn.getUserID(), exerciseSelected.getExerciseID(), date, 30);
             exerciseLogs.insertExerciseLog(exerciseLog);
             Toast.makeText(getApplicationContext(), "Exercise added to your logs!",Toast.LENGTH_SHORT).show();
             //once you add an exercise go back to the list to select more

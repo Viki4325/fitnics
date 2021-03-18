@@ -23,6 +23,7 @@ public class UserPersistenceStub implements IUserPersistence {
         bob.setUserID(1);
         carol.setUserID(2);
         david.setUserID(3);
+        User.setLastUserID(3);
         users.add(alice);
         users.add(bob);
         users.add(carol);
@@ -56,7 +57,7 @@ public class UserPersistenceStub implements IUserPersistence {
     }
 
     @Override
-    public void insertUser(User currentUser) throws InvalidUserException {
+    public int insertUser(User currentUser) throws InvalidUserException {
         if (currentUser == null)
             throw new InvalidUserException("The user is not valid. ");
 
@@ -64,8 +65,13 @@ public class UserPersistenceStub implements IUserPersistence {
         if (getUserByUsername(currentUser.getUsername()) != null)
             throw new InvalidUsernameException("There exists duplicate username. ");
 
+        if (currentUser.getUsername().length() > 20)
+            throw new InvalidUsernameException("The username is too long, should be no more than 20 characters.");
+
         currentUser.setUserID();
         users.add(currentUser);
+
+        return currentUser.getUserID();
     }
 
     // update a user with userID to the updatedUser

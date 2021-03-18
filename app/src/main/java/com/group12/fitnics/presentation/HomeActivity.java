@@ -11,11 +11,10 @@ import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExerciseLogs;
 import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.business.AccessUsers;
-import com.group12.fitnics.objects.MyDate;
 import com.group12.fitnics.objects.User;
 import com.timqi.sectorprogressview.ColorfulRingProgressView;
 
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -23,10 +22,9 @@ public class HomeActivity extends AppCompatActivity {
     private AccessFoodLogs accessFoodLogs;
     private AccessExerciseLogs accessExerciseLogs;
     private ColorfulRingProgressView crpv;
-    private MyDate dateToday;
     private int rem;
     private User selectedUser;
-
+    private LocalDate dateToday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +35,8 @@ public class HomeActivity extends AppCompatActivity {
         accessUsers = new AccessUsers();
         accessFoodLogs = new AccessFoodLogs();
         accessExerciseLogs = new AccessExerciseLogs();
-//        dateToday = new MyDate(Calendar.getInstance());
-        dateToday = new MyDate(new GregorianCalendar(2021, 0, 1));
+
+        dateToday = LocalDate.of(2021, 1, 1);
         userLoggedIn();
         rem = (int)selectedUser.getDailyCaloricNeeds();
 

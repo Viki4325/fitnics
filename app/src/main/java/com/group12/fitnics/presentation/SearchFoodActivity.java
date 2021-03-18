@@ -20,8 +20,6 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import com.group12.fitnics.R;
@@ -41,18 +39,17 @@ public class SearchFoodActivity extends AppCompatActivity {
     private ListView listView;
     private User selectedUser;
     private AccessFood food;
-    ArrayList<Food> foodList;
+    List<Food> foodList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_food);
 
-
         food = new AccessFood();
         selectedUser = (User)getIntent().getSerializableExtra("userLoggedIn");
         listView = (ListView) findViewById(R.id.Search_food);
-        foodList = food.getFoodList().getFoodSequential();
+        foodList = food.getFoodList();
         FoodAdapter adapter = new FoodAdapter(getApplicationContext(), 0, foodList);
         listView.setAdapter(adapter);
         setUpOnClickListener();

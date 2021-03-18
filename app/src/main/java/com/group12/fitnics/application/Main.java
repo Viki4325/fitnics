@@ -2,7 +2,7 @@ package com.group12.fitnics.application;
 
 public class Main {
 
-    private static String dbName = "FT";
+    private static String dbName = "FitnicsDB";
 
     public static void main(String[] args) {
         System.out.println();
@@ -21,5 +21,7 @@ public class Main {
         dbName = name;
     }
 
-    public static String getDBPathName() {return dbName;}
+    public static String getDBPathName() {
+        return dbName;
+    }
 }

@@ -1,26 +1,44 @@
-package com.group12.fitnics.tests.business;
+package com.group12.fitnics.tests.integration;
 
+import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.exceptions.InvalidUserException;
 import com.group12.fitnics.exceptions.InvalidUsernameException;
 import com.group12.fitnics.exceptions.UserNotFoundException;
+import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.User;
+import com.group12.fitnics.persistence.IFoodLogPersistence;
+import com.group12.fitnics.persistence.IFoodPersistence;
+import com.group12.fitnics.persistence.IUserPersistence;
+import com.group12.fitnics.persistence.hsqldb.FoodLogPersistenceHSQLDB;
+import com.group12.fitnics.persistence.hsqldb.FoodPersistenceHSQLDB;
+import com.group12.fitnics.persistence.hsqldb.UserPersistenceHSQLDB;
+import com.group12.fitnics.tests.utils.TestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
+import java.io.File;
+import java.time.LocalDate;
 import java.util.List;
 
-public class AccessUsersTest {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
+public class AccessUsersIT {
 
     private AccessUsers accessUsers;
+    String dbPath;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         System.out.println("Starting test for AccessUsers");
-        accessUsers = new AccessUsers();
+        File tempDB = TestUtils.copyDB();
+        dbPath = tempDB.getAbsolutePath().replace(".script", "");
+        IUserPersistence userPersistence = new UserPersistenceHSQLDB(dbPath);
+        accessUsers = new AccessUsers(userPersistence);
+        User.setLastUserID(3);
     }
 
     @Test
@@ -105,7 +123,7 @@ public class AccessUsersTest {
         System.out.println("\nStarting testInsertUserLongName");
         User u = new User("12345678901234567890a", 0, 50, 165, 'F');
         accessUsers.insertUser(u);
-        System.out.println("Finished testInsertUserNull");
+        System.out.println("Finished testInsertUserLongName");
     }
 
     @Test
@@ -150,11 +168,41 @@ public class AccessUsersTest {
 
         // add what we just deleted
         User david = new User("david", 1, 50, 160, 'M');
-        accessUsers.insertUser(david);
+        int id = accessUsers.insertUser(david);
         assertEquals(4, accessUsers.getUsers().size());
         assertNotNull(accessUsers.getUserByName("david"));
 
         System.out.println("Finished testDeleteUser");
+    }
+
+    @Test
+    public void testDeleteUserCascade() {
+        System.out.println("\nStarting testDeleteUserCascade");
+        IFoodLogPersistence foodLogPersistence = new FoodLogPersistenceHSQLDB(dbPath);
+        IFoodPersistence foodPersistence = new FoodPersistenceHSQLDB(dbPath);
+        AccessFoodLogs accessFoodLogs = new AccessFoodLogs(foodLogPersistence, foodPersistence);
+
+        List<FoodLog> logs = accessFoodLogs.getFoodLogByUser(0);
+        assertEquals("Before delete the user: ", 2, logs.size());
+        accessUsers.deleteUser(0);
+        logs = accessFoodLogs.getFoodLogByUser(0);
+        assertEquals("After delete the user: ", 0, logs.size());
+
+        // add what we just deleted
+        int[] units = {1, 0};
+        User alice = new User("alice", 15, 4, 1998, 1, 55.0, 163.0, 'F', 0, units);
+        int id = accessUsers.insertUser(alice);
+        assertEquals(4, accessUsers.getUsers().size());
+        assertNotNull(accessUsers.getUserByName("alice"));
+
+        FoodLog fl1 = new FoodLog(id , 1, LocalDate.of(2021, 1, 1), 25);
+        FoodLog fl2 = new FoodLog(id , 2, LocalDate.of(2021, 1, 1), 200);
+        accessFoodLogs.insertFoodLog(fl1);
+        accessFoodLogs.insertFoodLog(fl2);
+        logs = accessFoodLogs.getFoodLogByUser(id);
+        assertEquals(2, logs.size());
+
+        System.out.println("Finished testDeleteUserCascade");
     }
 
     @Test(expected = UserNotFoundException.class)
@@ -163,4 +211,5 @@ public class AccessUsersTest {
         accessUsers.deleteUser(7); // not found
         System.out.println("Finished testDeleteNotFoundUser");
     }
+
 }

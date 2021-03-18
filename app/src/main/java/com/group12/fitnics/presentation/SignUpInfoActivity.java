@@ -241,9 +241,6 @@ public class SignUpInfoActivity extends AppCompatActivity {
 
     }
 
-
-
-
     private void setupUnitSwitch(){
         weightSwitch = (ToggleButton) findViewById(R.id.weightUnitSwitch);
         weightSwitch.setText("lbs");
