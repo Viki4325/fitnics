@@ -74,67 +74,67 @@ Logic Layer
 ### Exceptions
 
 #### User-related 
-[InvalidUserException]()
+[InvalidUserException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidUserException.java)
  - The exception class for invalid User object (null)
  
-[InvalidUserInfoException]()
- - The exception class 
+[InvalidUserInfoException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidUserInfoException.java)
+ - The exception class for invalid user information
  
-[InvalidUserNameException]()
+[InvalidUserNameException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidUserNameException.java)
  - The exception class for checking that the user name is empty or too long
  
-[InvalidSignUpDateException]()
+[InvalidSignUpDateException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidSignUpDateException.java)
  - The exception class for invalid date
  
-[UserNotFoundException]()
+[UserNotFoundException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/UserNotFoundException.java)
  - The exception class for when a User object requested was not found
 
 #### Food-related 
-[InvalidFoodException]()
+[InvalidFoodException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidFoodException.java)
  - The exception class for invalid Food object (null)
  
-[InvalidFdNameException]()
+[InvalidFdNameException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidFdNameException.java)
  - The exception class for checking that the food name is too long
  
-[FoodNotFoundException]()
+[FoodNotFoundException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/FoodNotFoundException.java)
  - The exception class for when a Food object requested was not found
 
 #### Exercise-related 
-[InvalidExerciseException]()
+[InvalidExerciseException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidExerciseException.java)
  - The exception class for invalid Food object (null)
  
-[InvalidExNameException]()
+[InvalidExNameException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidExNameException.java)
  - The exception class for checking that the title of the exercise is too long
  
-[InvalidExDescException]()
+[InvalidExDescException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidExDescException.java)
  - The exception class for checking that the description of the exercise is too long
  
-[InvalidExCategoryException]()
+[InvalidExCategoryException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidExCategoryException.java)
  - The exception class for checking that the category name of the exercise is too long
  
-[InvalidExLevelException]()
+[InvalidExLevelException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidExLevelException.java)
  - The exception class for checking that the level of the exercise is too long
  
-[ExerciseNotFoundException]()
+[ExerciseNotFoundException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/ExerciseNotFoundException.java)
  - The exception class for when an Exercise object requested was not found
 
 #### FoodLog-related 
-[InvalidFoodLogException]()
+[InvalidFoodLogException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidFoodLogException.java)
  - The exception class for invalid FoodLog object (null)
  
-[FoodLogNotFoundException]()
+[FoodLogNotFoundException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/FoodLogNotFoundException.java)
  - The exception class for when an FoodLog object requested was not found
 
 #### ExerciseLog-related 
-[InvalidExerciseLogException]()
+[InvalidExerciseLogException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidExerciseLogException.java)
  - The exception class for invalid ExerciseLog object (null)
  
-[ExerciseLogNotFoundException]()
+[ExerciseLogNotFoundException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/ExerciseLogNotFoundException.java)
  - The exception class for when an ExerciseLog object requested was not found
  
 #### Other
-[InvalidUnitsException]()
- - The exception class for
+[InvalidUnitsException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidUnitsException.java)
+ - The exception class for when the weight or height is out of the allowable number range
  
  
 Persistence Layer
@@ -171,19 +171,19 @@ Persistence Layer
  - Current ExerciseLog implementation for the "database" for the app
  
 ### hsqldb
-[UserPersistenceHSQLDB]()
+[UserPersistenceHSQLDB](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/hsqldb/UserPersistenceHSQLDB.java)
  - Current User database implementation
 
-[FoodPersistenceHSQLDB]()
+[FoodPersistenceHSQLDB](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/hsqldb/FoodPersistenceHSQLDB.java)
  - Current Food database implementation
 
-[ExercisePersistenceHSQLDB]()
+[ExercisePersistenceHSQLDB](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/hsqldb/ExercisePersistenceHSQLDB.java)
  - Current Exercise database implementation
 
-[FoodLogPersistenceHSQLDB]()
+[FoodLogPersistenceHSQLDB](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/hsqldb/FoodLogPersistenceHSQLDB.java)
  - Current FoodLog database implementation
  
-[ExerciseLogPersistenceHSQLDB]()
+[ExerciseLogPersistenceHSQLDB](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/hsqldb/ExerciseLogPersistenceHSQLDB.java)
  - Current ExecriceLog database implementation
 
    
