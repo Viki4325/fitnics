@@ -83,6 +83,7 @@ public class SignUpInfoActivity extends AppCompatActivity {
                         int year = Integer.parseInt(clean.substring(4, 8));
 
                         if (mon > 12) mon = 12;
+                        if (mon < 1) mon = 1;
                         calendar.set(Calendar.MONTH, mon - 1);
 
                         year = (year < 1900) ? 1900 : Math.min(year, 2100);

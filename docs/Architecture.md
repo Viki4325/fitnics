@@ -61,16 +61,13 @@ Logic Layer
 [AccessExerciseLogs](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/AccessExerciseLogs.java)
  - The class the representation layer calls to do exercise logs-related things
 
-[DailyCaloricNeeds]()
+[DailyCaloricNeeds](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/DailyCaloricNeeds.java)
  - The helper class to calculate daily calorie needs based on a user information
  
-[DateHelper]()
+[DateHelper](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/DateHelper.java)
  - The helper class that converts LocalDate objects into strings or strings representing dates into LocalDate objects.
 
-[NotificationHelper]()
- - The class that
-
-[UnitConverter]()
+[UnitConverter](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/UnitConverter.java)
  - The helper class responsible for unit conversion of weight(lbs, kg) and height(cm, ft). 
  
 

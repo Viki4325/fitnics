@@ -157,9 +157,9 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
             double toKg = UnitConverter.LBToKg(read);
             String toKgString = convertUnitToString(toKg,1);
             weightData.setText(toKgString);
-        }else{
+        }else {
             double toLbs = UnitConverter.KGToLB(read);
-            String toLbsString = convertUnitToString(toLbs,1);
+            String toLbsString = convertUnitToString(toLbs, 1);
             weightData.setText(toLbsString);
         }
 
