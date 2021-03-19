@@ -1,8 +1,5 @@
 package com.group12.fitnics.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +8,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExerciseLogs;
@@ -34,7 +35,7 @@ public class IndividualExerciseLogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_log_details);
-        Toolbar toolbar = findViewById(R.id.LogDetailToolBar);
+        Toolbar toolbar = findViewById(R.id.logDetailToolBar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
@@ -50,6 +51,7 @@ public class IndividualExerciseLogActivity extends AppCompatActivity {
         minutes_editText = (EditText) findViewById(R.id.exerciseMinutes);
         calories_textView = (TextView) findViewById(R.id.calories);
         displayMins();
+        displayLog();
         displayCals(exerciseLog_sel.getMinutes());
 
         minutes_editText.addTextChangedListener(new TextWatcher() {
@@ -101,6 +103,11 @@ public class IndividualExerciseLogActivity extends AppCompatActivity {
         int calsPerMin = accessExercises.getExerciseById( exerciseLog_sel.getExerciseID()).getCaloriesBurn();
         int total = calsPerMin * min;
         calories_textView.setText(String.valueOf(total));
+    }
+
+    private void displayLog(){
+        final CollapsingToolbarLayout layout = findViewById(R.id.logDetailCollapseToolBar);
+        layout.setTitle(accessExercises.getExerciseById(exerciseLog_sel.getExerciseID()).getTitle());
     }
 
     private void displayMins(){

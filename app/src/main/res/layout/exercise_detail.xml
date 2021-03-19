@@ -15,7 +15,7 @@
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/LogDetailCollapseToolBar"
+            android:id="@+id/exerciseDetailCollapseToolBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -33,7 +33,7 @@
                 android:src="@drawable/ic_launcher_foreground"/>
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/LogDetailToolBar"
+                android:id="@+id/exerciseDetailToolBar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 app:contentInsetStartWithNavigation="0dp"
@@ -75,7 +75,7 @@
                 android:layout_margin="16dp"
                 android:clickable="false"
                 android:fontFamily="@font/muli"
-                android:text="Description"
+                android:text="@string/ex_description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#000000"
                 android:textSize="24sp"
@@ -99,7 +99,7 @@
                 android:layout_margin="16dp"
                 android:clickable="false"
                 android:fontFamily="@font/muli"
-                android:text="Category"
+                android:text="@string/ex_category"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#000000"
                 android:textSize="24sp"
@@ -123,7 +123,7 @@
                 android:layout_margin="16dp"
                 android:clickable="false"
                 android:fontFamily="@font/muli"
-                android:text="Level"
+                android:text="@string/ex_level"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#000000"
                 android:textSize="24sp"
@@ -151,6 +151,7 @@
         android:src="@drawable/ic_add"
         app:layout_anchor="@id/LogDetailAppBar"
         app:layout_anchorGravity="bottom|end|right"
-        app:fabSize="auto" />
+        app:fabSize="auto"
+        android:contentDescription="Add exercise" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

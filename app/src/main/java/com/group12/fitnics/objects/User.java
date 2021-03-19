@@ -135,9 +135,11 @@ public class User implements Serializable {
     }
 
     public void setUsername(String username) throws InvalidUserName  {
-        if( (username==null) || (username.equals("")) ){
-            throw new InvalidUserName("The username cannot be empty!!");
-        }else{
+        if( (username==null) || (username.equals("")) ) {
+            throw new InvalidUserName("The username cannot be empty");
+        }else if(username.length() > 20){
+            throw new InvalidUserName("The username is too long, should be no more than 20 characters.");
+        } else{
             this.username = username;
         }
     }

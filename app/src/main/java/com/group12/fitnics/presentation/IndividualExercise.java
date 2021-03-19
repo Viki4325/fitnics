@@ -15,7 +15,6 @@ import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExerciseLogs;
 import com.group12.fitnics.objects.Exercise;
 import com.group12.fitnics.objects.ExerciseLog;
-import com.group12.fitnics.objects.MyDate;
 import com.group12.fitnics.objects.User;
 
 import java.time.LocalDate;
@@ -31,7 +30,7 @@ public class IndividualExercise extends AppCompatActivity implements View.OnClic
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_detail);
-        Toolbar toolbar = findViewById(R.id.LogDetailToolBar);
+        Toolbar toolbar = findViewById(R.id.exerciseDetailToolBar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
@@ -62,7 +61,7 @@ public class IndividualExercise extends AppCompatActivity implements View.OnClic
     * and sets them to the required views.
     * */
     private void setExerciseInfo(){
-        final CollapsingToolbarLayout layout = findViewById(R.id.LogDetailCollapseToolBar);
+        final CollapsingToolbarLayout layout = findViewById(R.id.exerciseDetailCollapseToolBar);
         layout.setTitle(exerciseSelected.getTitle());
 
         final TextView title = findViewById(R.id.exerciseTitle);

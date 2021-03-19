@@ -77,4 +77,8 @@
     <string name="update">UPDATE</string>
     <string name="notification_note">You can set times when you want to be notified with our app. This will help you to follow your routine and hence easier to achieve goals</string>
     <string name="notification_btn_text">Set Notification</string>
+    <string name="ex_description">Description</string>
+    <string name="ex_category">Category</string>
+    <string name="ex_level">Level</string>
+    <string name="default_grams_consumed">1</string>
 </resources>

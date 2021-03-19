@@ -1,13 +1,13 @@
 package com.group12.fitnics.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExerciseLogs;
@@ -18,7 +18,6 @@ import com.group12.fitnics.presentation.adapters.ExerciseLogItemAdapter;
 
 public class ExerciseLogActivity extends AppCompatActivity {
     ListView exerciseLogListView;
-
     private AccessExerciseLogs log;
     private User userLoggedIn;
 
@@ -38,10 +37,9 @@ public class ExerciseLogActivity extends AppCompatActivity {
 
     private void setupList(){
         exerciseLogListView = (ListView) findViewById(R.id.exerciseLog);
-
         ExerciseLogItemAdapter adapter = (ExerciseLogItemAdapter) new ExerciseLogItemAdapter(getApplicationContext(),0, log.getExerciseLogByUser(userLoggedIn.getUserID()));
-
         exerciseLogListView.setAdapter(adapter);
+
     }
 
 

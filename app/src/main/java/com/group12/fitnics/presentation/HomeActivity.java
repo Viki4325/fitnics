@@ -1,16 +1,17 @@
 package com.group12.fitnics.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExerciseLogs;
 import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.business.AccessUsers;
+import com.group12.fitnics.business.UnitConverter;
 import com.group12.fitnics.objects.User;
 import com.timqi.sectorprogressview.ColorfulRingProgressView;
 
@@ -70,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void paintGreeting() {
         TextView textGreeting = (TextView)findViewById(R.id.textGreeting);
-        textGreeting.setText("Welcome, " + selectedUser.getUsername());
+        textGreeting.setText(String.format("Welcome, %s", selectedUser.getUsername()));
     }
 
     /*
@@ -107,7 +108,14 @@ public class HomeActivity extends AppCompatActivity {
     * It is also used here only.
     * */
     private void printRingGraph(){
-        int remaining_per = (int)(- calculateIntake() + calculateBurned());
+        double goal = selectedUser.getDailyCaloricNeeds();
+        int burned = calculateBurned();
+        int intake = calculateIntake();
+        double remaining =  (goal - intake + burned);
+        int remaining_per = UnitConverter.calculatePercent(selectedUser.getDailyCaloricNeeds(), remaining);
+        if(remaining_per < 0){
+            remaining_per = 0;
+        }
         crpv.setPercent (remaining_per); //WE NEED A WAY TO CONVERT THE DIGITS TO % . An active listener that always listens for these changes
 
     }
@@ -135,7 +143,8 @@ public class HomeActivity extends AppCompatActivity {
     /*
     * This method generates intent,and passes the current logged in user, since we need that info everywhere
     * */
-    private void generateIntent ( Class to){
+    @SuppressWarnings("rawtypes")
+    private void generateIntent (Class to){
 
         Intent intent = new Intent(HomeActivity.this, to);
         intent.putExtra("userLoggedIn", selectedUser);

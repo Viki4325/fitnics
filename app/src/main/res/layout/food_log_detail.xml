@@ -15,7 +15,7 @@
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/LogDetailCollapseToolBar"
+            android:id="@+id/exerciseDetailCollapseToolBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -34,7 +34,7 @@
                 android:src="@drawable/ic_launcher_foreground"/>
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/LogDetailToolBar"
+                android:id="@+id/exerciseDetailToolBar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 app:contentInsetStartWithNavigation="0dp"
@@ -101,12 +101,11 @@
                     android:singleLine="true"
                     android:textSize="40sp"
                     android:maxLength="4"
-                    android:text="1"/>
+                    android:text="@string/default_grams_consumed"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/parent"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="40dp"
                     android:layout_toEndOf="@+id/foodGrams"
@@ -129,7 +128,6 @@
         android:src="@drawable/ic_baseline_add_task_24"
         app:layout_anchor="@id/LogDetailAppBar"
         app:layout_anchorGravity="bottom|end|right"
-        android:onClick="updateMin"
         app:fabSize="auto" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

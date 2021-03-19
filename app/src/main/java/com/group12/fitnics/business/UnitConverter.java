@@ -29,7 +29,10 @@ public class UnitConverter {
         }else {
             throw new InvalidUnits("Empty units not allowed");
         }
+    }
 
+    public static int calculatePercent(Double oldValue, Double newValue){
+        return (int)Math.round(((oldValue - newValue)/(oldValue))*100);
     }
 
 }
