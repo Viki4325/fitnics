@@ -79,52 +79,66 @@ Logic Layer
 #### User-related 
 [InvalidUserException]()
  - The exception class for invalid User object (null)
+ 
 [InvalidUserInfoException]()
  - The exception class 
+ 
 [InvalidUserNameException]()
  - The exception class for checking that the user name is empty or too long
+ 
 [InvalidSignUpDateException]()
  - The exception class for invalid date
+ 
 [UserNotFoundException]()
  - The exception class for when a User object requested was not found
 
 #### Food-related 
 [InvalidFoodException]()
  - The exception class for invalid Food object (null)
+ 
 [InvalidFdNameException]()
  - The exception class for checking that the food name is too long
+ 
 [FoodNotFoundException]()
  - The exception class for when a Food object requested was not found
 
 #### Exercise-related 
 [InvalidExerciseException]()
  - The exception class for invalid Food object (null)
+ 
 [InvalidExNameException]()
  - The exception class for checking that the title of the exercise is too long
+ 
 [InvalidExDescException]()
  - The exception class for checking that the description of the exercise is too long
+ 
 [InvalidExCategoryException]()
  - The exception class for checking that the category name of the exercise is too long
+ 
 [InvalidExLevelException]()
  - The exception class for checking that the level of the exercise is too long
+ 
 [ExerciseNotFoundException]()
  - The exception class for when an Exercise object requested was not found
 
 #### FoodLog-related 
 [InvalidFoodLogException]()
  - The exception class for invalid FoodLog object (null)
+ 
 [FoodLogNotFoundException]()
  - The exception class for when an FoodLog object requested was not found
 
 #### ExerciseLog-related 
 [InvalidExerciseLogException]()
  - The exception class for invalid ExerciseLog object (null)
+ 
 [ExerciseLogNotFoundException]()
  - The exception class for when an ExerciseLog object requested was not found
  
-#### etc.
+#### Other
 [InvalidUnitsException]()
  - The exception class for
+ 
  
 Persistence Layer
 -----------------
