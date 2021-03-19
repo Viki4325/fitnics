@@ -1,6 +1,10 @@
 Architecture
 ============
 
+Iteration 2 Diagram
+-------------------
+![architecture](Architecture_i2.png)
+
 Iteration 1 Diagram
 -------------------
 ![architecture](Architecture_i1.png)
@@ -40,7 +44,7 @@ Application Layer
 [Services](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/application/Services.java)
  - The class that provides persistence objects
 
-Business Layer
+Logic Layer
 --------------
 [AccessUsers](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/AccessUsers.java)
  - The class the representation layer calls to do users-related things
@@ -57,6 +61,71 @@ Business Layer
 [AccessExerciseLogs](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/AccessExerciseLogs.java)
  - The class the representation layer calls to do exercise logs-related things
 
+[DailyCaloricNeeds]()
+ - The helper class to calculate daily calorie needs based on a user information
+ 
+[DateHelper]()
+ - The helper class that converts LocalDate objects into strings or strings representing dates into LocalDate objects.
+
+[NotificationHelper]()
+ - The class that
+
+[UnitConverter]()
+ - The helper class responsible for unit conversion of weight(lbs, kg) and height(cm, ft). 
+ 
+
+### Exceptions
+
+#### User-related 
+[InvalidUserException]()
+ - The exception class for invalid User object (null)
+[InvalidUserInfoException]()
+ - The exception class 
+[InvalidUserNameException]()
+ - The exception class for checking that the user name is empty or too long
+[InvalidSignUpDateException]()
+ - The exception class for invalid date
+[UserNotFoundException]()
+ - The exception class for when a User object requested was not found
+
+#### Food-related 
+[InvalidFoodException]()
+ - The exception class for invalid Food object (null)
+[InvalidFdNameException]()
+ - The exception class for checking that the food name is too long
+[FoodNotFoundException]()
+ - The exception class for when a Food object requested was not found
+
+#### Exercise-related 
+[InvalidExerciseException]()
+ - The exception class for invalid Food object (null)
+[InvalidExNameException]()
+ - The exception class for checking that the title of the exercise is too long
+[InvalidExDescException]()
+ - The exception class for checking that the description of the exercise is too long
+[InvalidExCategoryException]()
+ - The exception class for checking that the category name of the exercise is too long
+[InvalidExLevelException]()
+ - The exception class for checking that the level of the exercise is too long
+[ExerciseNotFoundException]()
+ - The exception class for when an Exercise object requested was not found
+
+#### FoodLog-related 
+[InvalidFoodLogException]()
+ - The exception class for invalid FoodLog object (null)
+[FoodLogNotFoundException]()
+ - The exception class for when an FoodLog object requested was not found
+
+#### ExerciseLog-related 
+[InvalidExerciseLogException]()
+ - The exception class for invalid ExerciseLog object (null)
+[ExerciseLogNotFoundException]()
+ - The exception class for when an ExerciseLog object requested was not found
+ 
+#### etc.
+[InvalidUnitsException]()
+ - The exception class for
+ 
 Persistence Layer
 -----------------
 [IUserPersistence](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/IUserPersistence.java)
@@ -89,7 +158,24 @@ Persistence Layer
 
 [ExerciseLogPersistenceStub](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/ExerciseLogPersistenceStub.java)
  - Current ExerciseLog implementation for the "database" for the app
+ 
+### hsqldb
+[UserPersistenceHSQLDB]()
+ - Current User database implementation
 
+[FoodPersistenceHSQLDB]()
+ - Current Food database implementation
+
+[ExercisePersistenceHSQLDB]()
+ - Current Exercise database implementation
+
+[FoodLogPersistenceHSQLDB]()
+ - Current FoodLog database implementation
+ 
+[ExerciseLogPersistenceHSQLDB]()
+ - Current ExecriceLog database implementation
+
+   
 Domain Specific Objects
 -----------------------
 [User](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/objects/User.java)
@@ -106,6 +192,3 @@ Domain Specific Objects
 
 [ExerciseLog](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/objects/ExerciseLog.java)
  - The object indicating which user did what exercise and how many minutes on what date
-
-[MyDate](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/objects/MyDate.java)
- - The object for representing dates in FoodLog and ExerciseLog
