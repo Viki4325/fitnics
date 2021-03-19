@@ -21,10 +21,9 @@ SOLID violation in the project of A02 Group 12: [Link](https://code.cs.umanitoba
 
 Retrospective
 -------------
-- In the last iteration, we found that we underestimated the time required to complete the user story. At the end of iteration 1, we had to transfer several important features and user stories to the next iteration. So in this iteration, we slightly increased the estimated time required to complete each user story. 
-- We also realized that we need to do our best to write neat code. In this way, we can understand more clearly how to increase the readability and maintainability of the code and collaborate in a team setting. 
-- In the last few days of Iteration 1, because of the lack of communication and cooperation, we have to fix a lot of conflicts in the last few days. In order to solve this problem, we will communicate more frequently, and decide to push to the repository immediately after each feature or user story is completed to test and fix the conflicts with other team members.
-
+- In the last iteration, we found that we underestimated the time required to complete the user story. At the end of iteration 1, we had to transfer several important features and user stories to the next iteration. So in this iteration, we slightly increased the estimated time required to complete each user story. [Food logger (#25) · Issues](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/issues/25)
+- We also realized that we need to do our best to write neat code. In this way, we can understand more clearly how to increase the readability and maintainability of the code and collaborate in a team setting. *The relevant evidence is at the bottom of gather's shared document*.
+- In the last few days of Iteration 1, because of the lack of communication and cooperation, we have to fix a lot of conflicts in the last few days. In order to solve this problem, we will communicate more frequently, and decide to push to the repository immediately after each feature or user story is completed to test and fix the conflicts with other team members.[Commits · master](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/commits/master)
 
 Design Patterns
 ---------------
