@@ -9,6 +9,7 @@ Iteration 1 Diagram
 -------------------
 ![architecture](Architecture_i1.png)
 
+
 Presentation Layer
 ------------------
 [MainActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/MainActivity.java)
@@ -25,16 +26,25 @@ Presentation Layer
 
 [SearchFoodActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/SearchFoodActivity.java)
  - A screen where to search for food to get information
+ 
+[IndividualFoodActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/IndividualFoodActivity.java)
+ - A screen where user can add a food item to their list of foods eaten
 
 [FoodLogActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/FoodLogActivity.java)
  - A place where the types and amounts of foods eaten during the day are listed
 
 [SearchExerciseActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/SearchExerciseActivity.java)
  -  A screen where to search for exercise to get information
+ 
+[IndividualExercise](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/IndividualExercise.java)
+ - A screen where user can add an exercise item to their list of exercises done
 
 [ExerciseLogActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/ExerciseLogActivity.java)
  - A place where the types and amounts of exercises done during the day are listed
-
+ 
+[UpdateUserInfoActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/UpdateUserInfoActivity.java)
+ - A screen where user can update their information
+ 
 
 Application Layer
 -----------------
