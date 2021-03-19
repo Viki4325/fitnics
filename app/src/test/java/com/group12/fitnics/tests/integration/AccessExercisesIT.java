@@ -18,6 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -53,7 +54,7 @@ public class AccessExercisesIT {
     }
 
     @Before
-    public void setup() throws Exception {
+    public void setup() throws IOException {
         File tempDB = TestUtils.copyDB();
         String dbPath = tempDB.getAbsolutePath().replace(".script", "");
         IExercisePersistence exercisePersistence = new ExercisePersistenceHSQLDB(dbPath);

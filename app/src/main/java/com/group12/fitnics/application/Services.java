@@ -24,7 +24,7 @@ public class Services {
     private static IFoodPersistence foodPersistence = null;
     private static IExercisePersistence exercisePersistence = null;
 
-    private static final boolean forProduction = false;
+    private static final boolean forProduction = true;
 
     public static IUserPersistence getUserPersistence() {
         if (userPersistence == null) {

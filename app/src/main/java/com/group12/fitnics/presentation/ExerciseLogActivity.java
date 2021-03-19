@@ -15,12 +15,14 @@ import com.group12.fitnics.objects.ExerciseLog;
 import com.group12.fitnics.objects.User;
 import com.group12.fitnics.presentation.adapters.ExerciseLogItemAdapter;
 
+import java.time.LocalDate;
+
 
 public class ExerciseLogActivity extends AppCompatActivity {
     ListView exerciseLogListView;
     private AccessExerciseLogs log;
     private User userLoggedIn;
-
+    private LocalDate date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class ExerciseLogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_exercise_log);
 
         log  = new AccessExerciseLogs();
+        date = LocalDate.now();
 
         getUserLoggedIn();
         setupList();
@@ -37,7 +40,7 @@ public class ExerciseLogActivity extends AppCompatActivity {
 
     private void setupList(){
         exerciseLogListView = (ListView) findViewById(R.id.exerciseLog);
-        ExerciseLogItemAdapter adapter = (ExerciseLogItemAdapter) new ExerciseLogItemAdapter(getApplicationContext(),0, log.getExerciseLogByUser(userLoggedIn.getUserID()));
+        ExerciseLogItemAdapter adapter = (ExerciseLogItemAdapter) new ExerciseLogItemAdapter(getApplicationContext(),0, log.getExerciseLogByUserDate(userLoggedIn.getUserID(), date));
         exerciseLogListView.setAdapter(adapter);
 
     }

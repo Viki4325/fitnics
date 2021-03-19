@@ -25,7 +25,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
                 "Grab dumbbells and extend arms to side and hold as long as you can",
                 "Arms",
                 "Intermediate",
-                 50
+                 5
         );
 
         Exercise  braced_squat = new Exercise(
@@ -46,7 +46,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
                 "(L up R down, L down R up, x2)  ^v, v^, ^v, v^ = 1 rep\n" ,
                 "Abs",
                 "Beginner",
-                120
+                12
         );
 
         Exercise bench_press = new Exercise(
@@ -62,7 +62,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
                         "\t\tnarrow grip: inner chest muscles and triceps",
                 "Chest",
                 "Beginner",
-                532
+                32
         );
 
         Exercise chin_ups = new Exercise(
@@ -81,7 +81,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
                 "When training with a higher weight, make sure that you still do the whole movement!\n" ,
                 "Shoulders",
                 "Expert",
-                100
+                10
         );
 
         Exercise calf_raises = new Exercise(
@@ -90,7 +90,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
                  "Calf raises are a method of exercising the gastrocnemius, tibialis posterior and soleus muscles of the lower leg. The movement performed is plantar flexion, a.k.a. ankle extension.\n",
                 "Calves",
                 "Expert",
-                85
+                8
         );
 
         axe_Hold.setExerciseID(0);

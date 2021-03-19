@@ -17,6 +17,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class AccessFoodLogsIT {
     private LocalDate date;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws IOException {
         File tempDB = TestUtils.copyDB();
         String dbPath = tempDB.getAbsolutePath().replace(".script", "");
         IFoodLogPersistence foodLogPersistence = new FoodLogPersistenceHSQLDB(dbPath);

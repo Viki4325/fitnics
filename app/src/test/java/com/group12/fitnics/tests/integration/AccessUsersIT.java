@@ -19,6 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class AccessUsersIT {
     private final int[] units = {1, 0};
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws IOException {
         System.out.println("Starting test for AccessUsers");
         File tempDB = TestUtils.copyDB();
         dbPath = tempDB.getAbsolutePath().replace(".script", "");

@@ -26,7 +26,7 @@ public class UserTest {
         assertEquals(1, eve.getGoal());
         assertEquals(2333.83, eve.getDailyCaloricNeeds(),0.01);
 
-        User frank = new User("frank", 15, 8, 2000, 2, 66, 174, 'M', 2, units);
+        User frank = new User("frank", 15, 8, 2000, 2, 66, 174, 'M', 1, units);
 
         assertNotNull(frank);
         assertEquals("frank", frank.getUsername());
@@ -34,8 +34,8 @@ public class UserTest {
         assertEquals(66, frank.getWeight(), 0.0001);
         assertEquals(174, frank.getHeight(), 0.0001);
         assertEquals('M', frank.getGender());
-        assertEquals(2, frank.getGoal());
-        assertEquals(5218.44, frank.getDailyCaloricNeeds(),0.01);
+        assertEquals(1, frank.getGoal());
+        assertEquals(4468.44, frank.getDailyCaloricNeeds(),0.01);
 
         System.out.println("Finished testUserCreation");
     }

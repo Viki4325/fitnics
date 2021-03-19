@@ -11,7 +11,7 @@ public class FoodTest {
     private Food food;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         food = new Food(10, "Orange", 1.5);
     }
 

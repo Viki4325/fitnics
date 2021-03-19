@@ -71,7 +71,7 @@ public class AccessUsersTest {
         int id = accessUsers.insertUser(eve);
 
         assertNotNull(accessUsers.getUserByName("eve"));
-        assertEquals(id, eve.getUserID());
+        assertEquals(id, accessUsers.getUserByName("eve").getUserID());
         assertEquals("eve", accessUsers.getUserByName("eve").getUsername());
         assertEquals(1, accessUsers.getUserByName("eve").getActivityLevel());
         assertEquals(47.0, accessUsers.getUserByName("eve").getWeight(), 0.0001);
@@ -106,7 +106,7 @@ public class AccessUsersTest {
         System.out.println("\nStarting testInsertUserLongName");
         User u = new User("12345678901234567890a", 15, 4, 1998, 0, 50, 165, 'F', 1, units);
         accessUsers.insertUser(u);
-        System.out.println("Finished testInsertUserNull");
+        System.out.println("Finished testInsertUserLongName");
     }
 
     @Test
@@ -137,7 +137,7 @@ public class AccessUsersTest {
     public void testUpdateNotFoundUser() {
         System.out.println("\nStarting testUpdateNotFoundUser");
         User updatedAlice = new User("alice", 15, 4, 1998, 2, 49, 163, 'F', 1, units);
-        accessUsers.updateUser(7, updatedAlice); // not found
+        accessUsers.updateUser(709, updatedAlice); // not found
         System.out.println("Finished testUpdateNotFoundUser");
     }
 
@@ -151,7 +151,7 @@ public class AccessUsersTest {
 
         // add what we just deleted
         User david = new User("david", 27, 11, 1985, 1, 50, 160, 'M', 0, units);
-        accessUsers.insertUser(david);
+        int id = accessUsers.insertUser(david);
         assertEquals(4, accessUsers.getUsers().size());
         assertNotNull(accessUsers.getUserByName("david"));
 

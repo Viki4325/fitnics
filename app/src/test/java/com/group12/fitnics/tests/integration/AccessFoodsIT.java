@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -21,7 +22,7 @@ public class AccessFoodsIT {
     AccessFood accessFood;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws IOException {
         File tempDB = TestUtils.copyDB();
         String dbPath = tempDB.getAbsolutePath().replace(".script", "");
         IFoodPersistence foodPersistence = new FoodPersistenceHSQLDB(dbPath);

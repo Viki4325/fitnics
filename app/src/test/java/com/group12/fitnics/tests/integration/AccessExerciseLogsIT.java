@@ -19,6 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class AccessExerciseLogsIT {
     private LocalDate date;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws IOException {
         File tempDB = TestUtils.copyDB();
         String dbPath = tempDB.getAbsolutePath().replace(".script", "");
         IExerciseLogPersistence exerciseLogPersistence = new ExerciseLogPersistenceHSQLDB(dbPath);
@@ -245,7 +246,7 @@ public class AccessExerciseLogsIT {
         LocalDate date2 = LocalDate.of(2021, 8, 19);
 
         int result = accessExerciseLogs.getUserTotalDailyBurned(2, date1);
-        assertEquals(1600, result);
+        assertEquals(160, result);
 
         result = accessExerciseLogs.getUserTotalDailyBurned(3, date1); // no logs
         assertEquals(0, result);

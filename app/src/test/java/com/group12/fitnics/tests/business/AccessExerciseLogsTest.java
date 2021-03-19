@@ -229,7 +229,7 @@ public class AccessExerciseLogsTest {
         LocalDate date2 = LocalDate.of(2021, 8, 19);
 
         int result = accessExerciseLogs.getUserTotalDailyBurned(2, date1);
-        assertEquals(1600, result);
+        assertEquals(160, result);
 
         result = accessExerciseLogs.getUserTotalDailyBurned(3, date1); // no logs
         assertEquals(0, result);
