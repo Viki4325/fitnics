@@ -10,10 +10,12 @@ import static org.junit.Assert.assertNotNull;
 
 public class UserTest {
 
+    private final int[] units = {1, 0};
+
     @Test
     public void testUserCreation() {
         System.out.println("\nStarting testUserCreation");
-        User eve = new User("eve", 1, 47, 160, 'F');
+        User eve = new User("eve", 15, 4, 1998, 1, 47, 160, 'F', 1, units);
 
         assertNotNull(eve);
         assertEquals("eve", eve.getUsername());
@@ -21,17 +23,19 @@ public class UserTest {
         assertEquals(47, eve.getWeight(), 0.0001);
         assertEquals(160, eve.getHeight(), 0.0001);
         assertEquals('F', eve.getGender());
-        assertEquals(1591.12, eve.getDailyCaloricNeeds(),0.0);
+        assertEquals(1, eve.getGoal());
+        assertEquals(2333.83, eve.getDailyCaloricNeeds(),0.01);
 
-        User frank = new User("frank", 2, 66, 174, 'M');
+        User frank = new User("frank", 15, 8, 2000, 2, 66, 174, 'M', 2, units);
 
-        assertNotNull(eve);
+        assertNotNull(frank);
         assertEquals("frank", frank.getUsername());
         assertEquals(2, frank.getActivityLevel());
         assertEquals(66, frank.getWeight(), 0.0001);
         assertEquals(174, frank.getHeight(), 0.0001);
         assertEquals('M', frank.getGender());
-        assertEquals(3706.71, frank.getDailyCaloricNeeds(),0);
+        assertEquals(2, frank.getGoal());
+        assertEquals(5218.44, frank.getDailyCaloricNeeds(),0.01);
 
         System.out.println("Finished testUserCreation");
     }
@@ -53,7 +57,7 @@ public class UserTest {
         assertEquals(15, alice.getBirthDay());
         assertEquals(0, alice.getGoal());
         assertEquals('F', alice.getGender());
-        assertEquals(1666.295, alice.getDailyCaloricNeeds(),0.0);
+        assertEquals(1659.01, alice.getDailyCaloricNeeds(),0.001);
 
         System.out.println("Finished testUserCreation");
     }
@@ -61,7 +65,8 @@ public class UserTest {
     @Test
     public void testUserSetters() {
         System.out.println("\nStarting testUserSetters");
-        User eve = new User("eve", 1, 47, 160, 'F');
+        User eve = new User("eve", 15, 4, 1998, 1, 47, 160, 'F', 1, units);
+
         eve.setActivityLevel(2);
         eve.setUserID(7);
         eve.setUsername("eve77");
