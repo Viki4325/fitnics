@@ -1,13 +1,9 @@
 package com.group12.fitnics.persistence;
 
-import com.group12.fitnics.exceptions.ExerciseLogNotFoundException;
-import com.group12.fitnics.exceptions.InvalidExerciseLogException;
 import com.group12.fitnics.objects.ExerciseLog;
-import com.group12.fitnics.objects.MyDate;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ExerciseLogPersistenceStub implements IExerciseLogPersistence {

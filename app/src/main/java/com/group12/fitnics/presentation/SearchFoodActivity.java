@@ -1,37 +1,21 @@
 package com.group12.fitnics.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessFood;
-import com.group12.fitnics.business.AccessFoodLogs;
-import com.group12.fitnics.objects.Exercise;
-import com.group12.fitnics.objects.ExerciseLog;
-import com.group12.fitnics.objects.FoodLog;
-import com.group12.fitnics.objects.MyDate;
 import com.group12.fitnics.objects.User;
 import com.group12.fitnics.objects.Food;
-import com.group12.fitnics.presentation.adapters.ExerciseAdapter;
 import com.group12.fitnics.presentation.adapters.FoodAdapter;
 
 public class SearchFoodActivity extends AppCompatActivity {

@@ -12,13 +12,16 @@ import com.group12.fitnics.tests.objects.ExerciseLogTest;
 import com.group12.fitnics.tests.objects.ExerciseTest;
 import com.group12.fitnics.tests.objects.FoodLogTest;
 import com.group12.fitnics.tests.objects.FoodTest;
-import com.group12.fitnics.tests.objects.MyDateTest;
 import com.group12.fitnics.tests.objects.UserTest;
+
+/**
+ * Before running any unit tests, please be sure to set
+ * the value of 'forProduction' to false in application/Services class.
+ * **/
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         UserTest.class,
-        MyDateTest.class,
         FoodTest.class,
         FoodLogTest.class,
         ExerciseTest.class,
@@ -29,6 +32,7 @@ import com.group12.fitnics.tests.objects.UserTest;
         AccessExercisesTest.class,
         AccessExerciseLogsTest.class
 })
+
 
 public class AllTests {
 
