@@ -29,7 +29,6 @@
         <activity android:name=".presentation.FoodLogActivity" />
         <activity android:name=".presentation.SignUpActivity" />
         <activity android:name=".presentation.LogInActivity" />
-        <activity android:name=".presentation.CreateNotificationActivity" />
         <activity android:name=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,8 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <receiver android:name=".objects.Notification" />
 
         <meta-data
             android:name="preloaded_fonts"

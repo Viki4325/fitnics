@@ -303,38 +303,39 @@
                 android:padding="10dp"
                 android:foreground="?attr/selectableItemBackground">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center"
-                    android:padding="10dp">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:padding="10dp">-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="@string/notification_note"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/muli"/>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="@string/notification_note"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:fontFamily="@font/muli"/>-->
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/Notificationbtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:padding="10dp"
-                        android:elevation="10dp"
-                        android:fontFamily="@font/muli"
-                        android:gravity="center"
-                        android:onClick="btnSetNotificationsOnClick"
-                        android:text="@string/notification_btn_text"
-                        android:textStyle="bold"
-                        android:layout_weight="2"
-                        app:cornerRadius="50dp" />
+<!--                    <com.google.android.material.button.MaterialButton-->
+<!--                        android:id="@+id/Notificationbtn"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:padding="10dp"-->
+<!--                        android:elevation="10dp"-->
+<!--                        android:fontFamily="@font/muli"-->
+<!--                        android:gravity="center"-->
+<!--                        android:onClick="btnSetNotificationsOnClick"-->
+<!--                        android:text="@string/notification_btn_text"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:layout_weight="2"-->
+<!--                        app:cornerRadius="50dp" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
+
             </com.google.android.material.card.MaterialCardView>
 
             <Button
