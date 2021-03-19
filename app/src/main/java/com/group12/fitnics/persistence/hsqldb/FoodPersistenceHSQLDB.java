@@ -39,7 +39,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
         final List<Food> foods = new ArrayList<>();
         try (final Connection c = connect()) {
             final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM USERS");
+            final ResultSet rs = st.executeQuery("SELECT * FROM FOODS");
             while (rs.next()) {
                 final Food food = fromResultSet(rs);
                 foods.add(food);
@@ -86,16 +86,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
     }
 
     @Override
-    public int insertFood(Food currentFood) throws InvalidFoodException {
-        if (currentFood == null)
-            throw new InvalidFoodException("The food is not valid. ");
-
-        // if there exists same food name already, do not allow it to be inserted
-        if (getFoodByFoodName(currentFood.getName()) != null)
-            throw new InvalidFoodException("There exists duplicate food. ");
-
-        if(currentFood.getName().length() > 20)
-            throw new InvalidFdNameException("The name should be no more than 20 characters.");
+    public int insertFood(Food currentFood) {
 
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO FOODS VALUES(?, ?, ?)");
@@ -115,12 +106,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
     }
 
     @Override
-    public void updateFood(int foodID, Food currentFood) throws InvalidFoodException, FoodNotFoundException {
-        if (currentFood == null)
-            throw new InvalidFoodException("The food is not valid. ");
-
-        if (getFoodByID(foodID) == null)
-            throw new FoodNotFoundException("There's no food with the foodID. ");
+    public void updateFood(int foodID, Food currentFood) {
 
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("UPDATE FOODS SET name=?, calPerGram=? where id=?");
@@ -136,9 +122,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
     }
 
     @Override
-    public void deleteFood(int foodID) throws FoodNotFoundException {
-        if (getFoodByID(foodID) == null)
-            throw new FoodNotFoundException("There's no food with the foodID. ");
+    public void deleteFood(int foodID) {
 
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("DELETE FROM FOODS WHERE id = ?");

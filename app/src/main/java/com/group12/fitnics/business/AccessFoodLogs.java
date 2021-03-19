@@ -38,14 +38,30 @@ public class AccessFoodLogs {
     }
 
     public void insertFoodLog(FoodLog foodLog) throws InvalidFoodLogException {
+        if (!checkInvariant(foodLog))
+            throw new InvalidFoodLogException("The food log has invalid userID or foodID or grams. ");
+
+        // if there exists same food log already, to not allow it to be inserted
+        if (getFoodLog(foodLog.getUserID(), foodLog.getFoodID(), foodLog.getDate()) != null)
+            throw new InvalidFoodLogException("The food log is duplicate. \n You can instead go to FoodLog and add extra amount of grams consumed. Thank you!");
+
         foodLogPersistence.insertFoodLog(foodLog);
     }
 
     public void updateFoodLog(int userID, int foodID, LocalDate date, FoodLog updatedLog) throws InvalidFoodLogException, FoodLogNotFoundException {
+        if (!checkInvariant(updatedLog))
+            throw new InvalidFoodLogException("The food log has invalid userID or foodID or grams. ");
+
+        if (getFoodLog(userID, foodID, date) == null)
+            throw new FoodLogNotFoundException("There is no such food log to update. ");
+
         foodLogPersistence.updateFoodLog(userID, foodID, date, updatedLog);
     }
 
     public void deleteFoodLog(int userID, int foodID, LocalDate date) throws FoodLogNotFoundException {
+        if (getFoodLog(userID, foodID, date) == null)
+            throw new FoodLogNotFoundException("There is no such food log to update. ");
+
         foodLogPersistence.deleteFoodLog(userID, foodID, date);
     }
 
@@ -67,5 +83,9 @@ public class AccessFoodLogs {
         return total;
     }
 
-
+    private boolean checkInvariant(FoodLog foodLog) {
+        if (foodLog == null || foodLog.getUserID() < 0 || foodLog.getFoodID() < 0 || foodLog.getGrams() <= 0)
+            return false;
+        return true;
+    }
 }

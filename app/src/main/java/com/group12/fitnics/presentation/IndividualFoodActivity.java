@@ -1,33 +1,26 @@
 package com.group12.fitnics.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.group12.fitnics.R;
-import com.group12.fitnics.business.AccessExerciseLogs;
-import com.group12.fitnics.business.AccessExercises;
 import com.group12.fitnics.business.AccessFood;
 import com.group12.fitnics.business.AccessFoodLogs;
-import com.group12.fitnics.objects.Exercise;
-import com.group12.fitnics.objects.ExerciseLog;
 import com.group12.fitnics.objects.Food;
 import com.group12.fitnics.objects.FoodLog;
-import com.group12.fitnics.objects.MyDate;
 import com.group12.fitnics.objects.User;
 
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Objects;
 
 public class IndividualFoodActivity extends AppCompatActivity implements View.OnClickListener {
@@ -46,7 +39,7 @@ public class IndividualFoodActivity extends AppCompatActivity implements View.On
         getFoodSelected();
         getUserLoggedIn();
 
-        Toolbar toolbar = findViewById(R.id.LogDetailToolBar);
+        Toolbar toolbar = findViewById(R.id.exerciseDetailToolBar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
@@ -113,7 +106,7 @@ public class IndividualFoodActivity extends AppCompatActivity implements View.On
      * and sets them to the required views.
      * */
     private void setFoodInfo(){
-        final CollapsingToolbarLayout layout = findViewById(R.id.LogDetailCollapseToolBar);
+        final CollapsingToolbarLayout layout = findViewById(R.id.exerciseDetailCollapseToolBar);
         layout.setTitle(foodSelected.getName());
 
         final TextView calories = findViewById(R.id.calories);

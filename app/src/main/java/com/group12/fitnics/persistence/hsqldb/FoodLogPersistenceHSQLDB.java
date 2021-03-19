@@ -46,6 +46,8 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
             if (rs.next()) {
                 return fromResultSet(rs);
             }
+            rs.close();
+            st.close();
 
         } catch (final SQLException e) {
             e.printStackTrace();
@@ -97,13 +99,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
     }
 
     @Override
-    public void insertFoodLog(FoodLog foodLog) throws InvalidFoodLogException {
-        if (!checkInvariant(foodLog))
-            throw new InvalidFoodLogException("The food log has invalid userID or foodID or grams. ");
-
-        // if there exists same food log already, to not allow it to be inserted
-        if (getFoodLog(foodLog.getUserID(), foodLog.getFoodID(), foodLog.getDate()) != null)
-            throw new InvalidFoodLogException("The food log is duplicate. ");
+    public void insertFoodLog(FoodLog foodLog) {
 
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO FOODLOGS VALUES(?, ?, ?, ?)");
@@ -120,12 +116,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
     }
 
     @Override
-    public void updateFoodLog(int userID, int foodID, LocalDate date, FoodLog updatedLog) throws InvalidFoodLogException, FoodLogNotFoundException {
-        if (!checkInvariant(updatedLog))
-            throw new InvalidFoodLogException("The food log has invalid userID or foodID or grams. ");
-
-        if (getFoodLog(userID, foodID, date) == null)
-            throw new FoodLogNotFoundException("There is no such food log to update. ");
+    public void updateFoodLog(int userID, int foodID, LocalDate date, FoodLog updatedLog) {
 
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("UPDATE FOODLOGS SET uid=?, fid=?, date=?, grams=? where uid=? AND fid=? AND date=?");
@@ -145,10 +136,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
     }
 
     @Override
-    public void deleteFoodLog(int userID, int foodID, LocalDate date) throws FoodLogNotFoundException {
-        if (getFoodLog(userID, foodID, date) == null)
-            throw new FoodLogNotFoundException("There is no such food log to update. ");
-
+    public void deleteFoodLog(int userID, int foodID, LocalDate date) {
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("DELETE FROM FOODLOGS WHERE uid = ? AND fid = ? AND date = ?");
             st.setString(1, Integer.toString(userID));

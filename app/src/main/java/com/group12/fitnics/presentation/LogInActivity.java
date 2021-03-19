@@ -1,19 +1,15 @@
 package com.group12.fitnics.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.objects.User;
-
-import java.io.Serializable;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -26,7 +22,7 @@ public class LogInActivity extends AppCompatActivity {
         accessUsers = new AccessUsers();
     }
 
-    public void btnLogInToHomeOnClick(View v) throws Exception {
+    public void btnLogInToHomeOnClick(View v)  {
         try {
             EditText editUsername = (EditText) findViewById(R.id.editUsername);
             User selectedUser = accessUsers.getUserByName(editUsername.getText().toString());
@@ -34,8 +30,6 @@ public class LogInActivity extends AppCompatActivity {
                 throw new Exception("Invalid User Name");
             }
             Intent logInToHomeIntent = new Intent(LogInActivity.this, HomeActivity.class);
-//            logInToHomeIntent.putExtra("username", selectedUser.getUsername());
-//            logInToHomeIntent.putExtra("userID", Integer.toString(selectedUser.getUserID()));
             logInToHomeIntent.putExtra("userLoggedIn",  selectedUser);
             startActivity(logInToHomeIntent);
         }

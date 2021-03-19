@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi;
 
 import com.group12.fitnics.application.Services;
 import com.group12.fitnics.exceptions.ExerciseNotFoundException;
+import com.group12.fitnics.exceptions.InvalidExNameException;
 import com.group12.fitnics.exceptions.InvalidExerciseException;
 import com.group12.fitnics.objects.Exercise;
 import com.group12.fitnics.persistence.IExercisePersistence;
@@ -119,6 +120,17 @@ public class AccessExercises {
    }
 
     public void insertExercise(Exercise exercise) throws InvalidExerciseException {
+        if(exercise == null)
+            throw new InvalidExerciseException("The exercise is not valid. ");
+        if(exercise.getTitle().length() > 20)
+            throw new InvalidExNameException("The name should be no more than 20 characters.");
+        if(exercise.getDescription().length() > 1024)
+            throw new InvalidExNameException("The description should be no more than 1024 characters.");
+        if(exercise.getLevel().length() > 20)
+            throw new InvalidExNameException("The level should be no more than 20 characters.");
+        if(exercise.getCategory().length() > 20)
+            throw new InvalidExNameException("The category should be no more than 20 characters.");
+
         exercisePersistence.insertExercise(exercise);
     }
 
@@ -139,6 +151,10 @@ public class AccessExercises {
     public void deleteExerciseById(int exerciseId) throws InvalidExerciseException, ExerciseNotFoundException {
         if(exerciseId < 0)
             throw new InvalidExerciseException("The exercise id is not valid. ");
+
+        Exercise result = exercisePersistence.getExerciseById(exerciseId);
+        if(result == null)
+            throw new ExerciseNotFoundException("There's no exercise with the id. ");
 
         exercisePersistence.deleteExercise(exerciseId);
     }

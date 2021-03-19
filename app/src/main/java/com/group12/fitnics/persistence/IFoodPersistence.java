@@ -2,7 +2,6 @@ package com.group12.fitnics.persistence;
 
 import com.group12.fitnics.objects.Food;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface IFoodPersistence {

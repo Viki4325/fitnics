@@ -1,7 +1,7 @@
 package com.group12.fitnics.exceptions;
 
-public class InvalidUnits extends RuntimeException{
-    public InvalidUnits(String error) {
+public class InvalidUnitsException extends RuntimeException{
+    public InvalidUnitsException(String error) {
         super("Numbers out of range. Number  not supported: \n"+error);
     }
 }

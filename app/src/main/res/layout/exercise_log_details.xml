@@ -15,7 +15,7 @@
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/LogDetailCollapseToolBar"
+            android:id="@+id/logDetailCollapseToolBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -33,7 +33,7 @@
                 android:src="@drawable/ic_launcher_foreground"/>
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/LogDetailToolBar"
+                android:id="@+id/logDetailToolBar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 app:contentInsetStartWithNavigation="0dp"

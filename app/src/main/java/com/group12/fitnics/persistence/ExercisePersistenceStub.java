@@ -25,7 +25,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
                 "Grab dumbbells and extend arms to side and hold as long as you can",
                 "Arms",
                 "Intermediate",
-                 50
+                 5
         );
 
         Exercise  braced_squat = new Exercise(
@@ -46,7 +46,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
                 "(L up R down, L down R up, x2)  ^v, v^, ^v, v^ = 1 rep\n" ,
                 "Abs",
                 "Beginner",
-                120
+                12
         );
 
         Exercise bench_press = new Exercise(
@@ -62,7 +62,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
                         "\t\tnarrow grip: inner chest muscles and triceps",
                 "Chest",
                 "Beginner",
-                532
+                32
         );
 
         Exercise chin_ups = new Exercise(
@@ -81,7 +81,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
                 "When training with a higher weight, make sure that you still do the whole movement!\n" ,
                 "Shoulders",
                 "Expert",
-                100
+                10
         );
 
         Exercise calf_raises = new Exercise(
@@ -90,7 +90,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
                  "Calf raises are a method of exercising the gastrocnemius, tibialis posterior and soleus muscles of the lower leg. The movement performed is plantar flexion, a.k.a. ankle extension.\n",
                 "Calves",
                 "Expert",
-                85
+                8
         );
 
         axe_Hold.setExerciseID(0);
@@ -179,17 +179,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
     }
 
     @Override
-    public int insertExercise(Exercise newExercise) throws InvalidExerciseException {
-        if(newExercise == null)
-            throw new InvalidExerciseException("The exercise is not valid. ");
-        if(newExercise.getTitle().length() > 20)
-            throw new InvalidExNameException("The name should be no more than 20 characters.");
-        if(newExercise.getDescription().length() > 1024)
-            throw new InvalidExNameException("The description should be no more than 1024 characters.");
-        if(newExercise.getLevel().length() > 20)
-            throw new InvalidExNameException("The level should be no more than 20 characters.");
-        if(newExercise.getCategory().length() > 20)
-            throw new InvalidExNameException("The category should be no more than 20 characters.");
+    public int insertExercise(Exercise newExercise) {
 
         newExercise.setExerciseID();
         exerciseList.add(newExercise);
@@ -219,7 +209,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
     }
 
     @Override
-    public void deleteExercise(int exerciseID) throws ExerciseNotFoundException {
+    public void deleteExercise(int exerciseID)  {
         boolean found = false;
         for (int i = 0; i < exerciseList.size() && !found; i++) {
             if(exerciseList.get(i).getExerciseID() == exerciseID){
@@ -228,20 +218,14 @@ public class ExercisePersistenceStub implements IExercisePersistence {
                 found = true;
             }
         }
-        if(!found)
-            throw new ExerciseNotFoundException("There's no exercise with the exerciseID. ");
     }
 
 
     @Override
-    public void deleteExercise(Exercise currentExercise) throws ExerciseNotFoundException {
-        boolean found = false;
+    public void deleteExercise(Exercise currentExercise) {
         if(exerciseList.contains(currentExercise)){
             currentExercise.updateId();
             exerciseList.remove(currentExercise);
-            found = true;
         }
-        if(!found)
-            throw new ExerciseNotFoundException("There's no exercise to delete. ");
     }
 }

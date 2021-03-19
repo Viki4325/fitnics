@@ -1,15 +1,12 @@
 package com.group12.fitnics.presentation.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExercises;
@@ -26,6 +23,7 @@ public class ExerciseLogItemAdapter extends ArrayAdapter<ExerciseLog> {
         super(context, resource, exerciseLog);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public View getView(int position ,View convertView,  ViewGroup parent) {
 
@@ -43,9 +41,9 @@ public class ExerciseLogItemAdapter extends ArrayAdapter<ExerciseLog> {
 
 
         //set the calories to if 30min -> xxx cals what about Y min?
-        exerciseCalories.setText(String.valueOf(exerciseObj.getCaloriesBurn())+" calories");
+        exerciseCalories.setText(String.format("%s calories", exerciseObj.getCaloriesBurn()));
         exerciseName.setText(exerciseObj.getTitle());
-        exerciseTime.setText(String.valueOf(exerciseLog.getMinutes())+" minutes");
+        exerciseTime.setText(String.format("%d minutes", exerciseLog.getMinutes()));
 
         return convertView;
     }

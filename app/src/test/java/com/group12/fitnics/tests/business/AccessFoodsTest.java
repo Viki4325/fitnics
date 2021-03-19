@@ -21,7 +21,7 @@ public class AccessFoodsTest {
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         accessFood = new AccessFood();
         food = new Food(10, "Orange", 1.5);
     }

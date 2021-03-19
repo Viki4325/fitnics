@@ -38,14 +38,30 @@ public class AccessExerciseLogs {
     }
 
     public void insertExerciseLog(ExerciseLog exerciseLog) throws InvalidExerciseLogException {
+        if (!checkInvariant(exerciseLog))
+            throw new InvalidExerciseLogException("The exercise log has invalid userID or exerciseID or minutes. ");
+
+        // if there exists same exercise log already, to not allow it to be inserted
+        if (getExerciseLog(exerciseLog.getUserID(), exerciseLog.getExerciseID(), exerciseLog.getDate()) != null)
+            throw new InvalidExerciseLogException("The exercise log is duplicate. You could instead increase the time for this exercise from the logs. Thank you!");
+
         exerciseLogPersistence.insertExerciseLog(exerciseLog);
     }
 
     public void updateExerciseLog(int userID, int exerciseID, LocalDate date, ExerciseLog updatedLog) throws InvalidExerciseLogException, ExerciseLogNotFoundException {
+        if (!checkInvariant(updatedLog))
+            throw new InvalidExerciseLogException("The exercise log has invalid userID or exerciseID or minutes. ");
+
+        if (getExerciseLog(userID, exerciseID, date) == null)
+            throw new ExerciseLogNotFoundException("There is no such exercise log to update. ");
+
         exerciseLogPersistence.updateExerciseLog(userID, exerciseID, date, updatedLog);
     }
 
     public void deleteExerciseLog(int userID, int exerciseID, LocalDate date) throws ExerciseLogNotFoundException {
+        if (getExerciseLog(userID, exerciseID, date) == null)
+            throw new ExerciseLogNotFoundException("There is no such exercise log to update. ");
+
         exerciseLogPersistence.deleteExerciseLog(userID, exerciseID, date);
     }
 
@@ -65,5 +81,11 @@ public class AccessExerciseLogs {
             total += mins * caloriesPerMins;
         }
         return total;
+    }
+
+    private boolean checkInvariant(ExerciseLog exerciseLog) {
+        if (exerciseLog == null || exerciseLog.getUserID() < 0 || exerciseLog.getExerciseID() < 0 || exerciseLog.getMinutes() <= 0)
+            return false;
+        return true;
     }
 }

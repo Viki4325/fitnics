@@ -1,9 +1,9 @@
 package com.group12.fitnics.objects;
 
 import com.group12.fitnics.business.DailyCaloricNeeds;
-import com.group12.fitnics.exceptions.InvalidSignUpDate;
-import com.group12.fitnics.exceptions.InvalidUnits;
-import com.group12.fitnics.exceptions.InvalidUserName;
+import com.group12.fitnics.exceptions.InvalidSignUpDateException;
+import com.group12.fitnics.exceptions.InvalidUnitsException;
+import com.group12.fitnics.exceptions.InvalidUserNameException;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -17,9 +17,9 @@ public class User implements Serializable {
 
     private int userID;
     private String username;
-    private int birthDay = 14;
-    private int birthMonth = 02;
-    private int birthYear = 2000;
+    private int birthDay;
+    private int birthMonth;
+    private int birthYear;
     // activityLevel: 0 - Not Active, 1 - Somewhat Active, 2 - Active, 3 - Very Active
     private int activityLevel;
     private double weight;
@@ -43,6 +43,7 @@ public class User implements Serializable {
         this.height = height;
         this.gender = gender;
         this.dailyCaloricNeeds = DailyCaloricNeeds.resetDailyCaloricNeeds(this);
+        this.activityLevel = 0;
     }
 
     public int getAge() {
@@ -61,9 +62,9 @@ public class User implements Serializable {
         this.weight = w;
         this.height = h;
         this.gender = gender;
-        this.dailyCaloricNeeds = 0;
         this.goal = goal;
         this.units = units;
+        this.dailyCaloricNeeds = DailyCaloricNeeds.resetDailyCaloricNeeds(this);
     }
 
     public double getHeight() {
@@ -98,6 +99,10 @@ public class User implements Serializable {
         this.activityLevel = activityLevel;
     }
 
+    public void setDailyCaloricNeeds() {
+        this.dailyCaloricNeeds = DailyCaloricNeeds.resetDailyCaloricNeeds(this);
+    }
+
     public void setDailyCaloricNeeds(double caloryAmount) {
         dailyCaloricNeeds = (int) caloryAmount;
     }
@@ -106,11 +111,11 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-    public void setHeight(double height)  throws InvalidUnits {
+    public void setHeight(double height)  throws InvalidUnitsException {
         if(!(height < WEIGHT_MIN) && !(height > WEIGHT_MAX) ){
             this.height = height;
         }else{
-            throw new InvalidUnits("Invalid height units. Valid range is 50 - 300");
+            throw new InvalidUnitsException("Invalid height units. Valid range is 50 - 300");
         }
 
     }
@@ -129,19 +134,21 @@ public class User implements Serializable {
         this.userID = id;
     }
 
-    public void setUsername(String username) throws InvalidUserName  {
-        if( (username==null) || (username.equals("")) ){
-            throw new InvalidUserName("The username cannot be empty!!");
-        }else{
+    public void setUsername(String username) throws InvalidUserNameException {
+        if( (username==null) || (username.equals("")) ) {
+            throw new InvalidUserNameException("The username cannot be empty");
+        }else if(username.length() > 20){
+            throw new InvalidUserNameException("The username is too long, should be no more than 20 characters.");
+        } else{
             this.username = username;
         }
     }
 
-    public void setWeight(double weight) throws InvalidUnits {
+    public void setWeight(double weight) throws InvalidUnitsException {
         if(!(weight < WEIGHT_MIN) && !(weight > WEIGHT_MAX) ){
             this.weight = weight;
         }else{
-            throw new InvalidUnits("Invalid weight units. Valid range is 30 - 300");
+            throw new InvalidUnitsException("Invalid weight units. Valid range is 30 - 300");
         }
     }
 
@@ -161,28 +168,28 @@ public class User implements Serializable {
         return goal;
     }
 
-    public void setBirthDay(int birthDay) throws InvalidSignUpDate  {
+    public void setBirthDay(int birthDay) throws InvalidSignUpDateException {
         if(birthDay > 0) {
             this.birthDay = birthDay;
         }else{
-            throw new InvalidSignUpDate("Invalid date choice");
+            throw new InvalidSignUpDateException("Invalid date choice");
         }
     }
 
-    public void setBirthMonth(int birthMonth) throws InvalidSignUpDate {
+    public void setBirthMonth(int birthMonth) throws InvalidSignUpDateException {
         if(birthMonth > 0) {
             this.birthMonth = birthMonth;
         }else{
-            throw new InvalidSignUpDate("Invalid date choice");
+            throw new InvalidSignUpDateException("Invalid date choice");
         }
 
     }
 
-    public void setBirthYear(int birthYear) throws InvalidSignUpDate  {
+    public void setBirthYear(int birthYear) throws InvalidSignUpDateException {
         if(birthYear > 0){
             this.birthYear = birthYear;
         }else{
-            throw new InvalidSignUpDate("Invalid date choice");
+            throw new InvalidSignUpDateException("Invalid date choice");
         }
     }
 

@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessFood;
 import com.group12.fitnics.business.AccessFoodLogs;
@@ -17,14 +16,15 @@ import com.group12.fitnics.objects.Food;
 import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.User;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class FoodLogActivity extends AppCompatActivity {
     private final static int UPDATE_CODE = 30;
     private User selectedUser;
     ListView listView;
-    private AccessFood foods;
     ArrayAdapter<FoodLog> adapter;
+    private AccessFood foods;
     private AccessFoodLogs log;
 
     @Override
@@ -34,17 +34,18 @@ public class FoodLogActivity extends AppCompatActivity {
 
         foods = new AccessFood();
         getUserLoggedIn();
-        log =  new AccessFoodLogs();;
+        log =  new AccessFoodLogs();
 
         setupList();
         setUpOnClickListener();
     }
 
     private void setupList(){
+        LocalDate today = LocalDate.now();
         listView = (ListView) findViewById(R.id.food_log);
-        ArrayList<FoodLog> list = new ArrayList<FoodLog>(log.getFoodLogByUser(selectedUser.getUserID()));
+        ArrayList<FoodLog> list = new ArrayList<>(log.getFoodLogByUserDate(selectedUser.getUserID(), today));
 
-        adapter = new ArrayAdapter<FoodLog>(
+        adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 list

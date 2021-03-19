@@ -1,14 +1,14 @@
 package com.group12.fitnics.application;
 
+import com.group12.fitnics.persistence.ExerciseLogPersistenceStub;
+import com.group12.fitnics.persistence.ExercisePersistenceStub;
+import com.group12.fitnics.persistence.FoodLogPersistenceStub;
+import com.group12.fitnics.persistence.FoodPersistenceStub;
 import com.group12.fitnics.persistence.IExerciseLogPersistence;
 import com.group12.fitnics.persistence.IExercisePersistence;
 import com.group12.fitnics.persistence.IFoodLogPersistence;
 import com.group12.fitnics.persistence.IFoodPersistence;
 import com.group12.fitnics.persistence.IUserPersistence;
-import com.group12.fitnics.persistence.ExerciseLogPersistenceStub;
-import com.group12.fitnics.persistence.ExercisePersistenceStub;
-import com.group12.fitnics.persistence.FoodLogPersistenceStub;
-import com.group12.fitnics.persistence.FoodPersistenceStub;
 import com.group12.fitnics.persistence.UserPersistenceStub;
 import com.group12.fitnics.persistence.hsqldb.ExerciseLogPersistenceHSQLDB;
 import com.group12.fitnics.persistence.hsqldb.ExercisePersistenceHSQLDB;
@@ -24,7 +24,7 @@ public class Services {
     private static IFoodPersistence foodPersistence = null;
     private static IExercisePersistence exercisePersistence = null;
 
-    private static boolean forProduction = true;
+    private static final boolean forProduction = false;
 
     public static IUserPersistence getUserPersistence() {
         if (userPersistence == null) {

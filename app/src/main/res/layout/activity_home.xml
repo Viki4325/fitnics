@@ -16,7 +16,7 @@
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/LogDetailCollapseToolBar"
+            android:id="@+id/exerciseDetailCollapseToolBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
@@ -28,7 +28,7 @@
             <include layout="@layout/home_wavy_stats_view" />
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/LogDetailToolBar"
+                android:id="@+id/exerciseDetailToolBar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 app:contentInsetStartWithNavigation="2dp"

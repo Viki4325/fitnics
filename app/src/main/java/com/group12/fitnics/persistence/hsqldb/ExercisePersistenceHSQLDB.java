@@ -81,6 +81,8 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
             if (rs.next()) {
                 return fromResultSet(rs);
             }
+            rs.close();
+            st.close();
 
         } catch (final SQLException e) {
             e.printStackTrace();
@@ -97,6 +99,8 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
             if (rs.next()) {
                 return fromResultSet(rs);
             }
+            rs.close();
+            st.close();
 
         } catch (final SQLException e) {
             e.printStackTrace();
@@ -147,17 +151,7 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
     }
 
     @Override
-    public int insertExercise(Exercise newExercise) throws InvalidExerciseException {
-        if(newExercise == null)
-            throw new InvalidExerciseException("The exercise is not valid. ");
-        if(newExercise.getTitle().length() > 20)
-            throw new InvalidExNameException("The name should be no more than 20 characters.");
-        if(newExercise.getDescription().length() > 1024)
-            throw new InvalidExNameException("The description should be no more than 1024 characters.");
-        if(newExercise.getLevel().length() > 20)
-            throw new InvalidExNameException("The level should be no more than 20 characters.");
-        if(newExercise.getCategory().length() > 20)
-            throw new InvalidExNameException("The category should be no more than 20 characters.");
+    public int insertExercise(Exercise newExercise) {
 
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO EXERCISES VALUES(?, ?, ?, ?, ?, ?)");
@@ -206,9 +200,7 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
     }
 
     @Override
-    public void deleteExercise(int exerciseID) throws ExerciseNotFoundException {
-        if (getExerciseById(exerciseID) == null)
-            throw new ExerciseNotFoundException("There's no exercise with the exerciseID. ");
+    public void deleteExercise(int exerciseID) {
 
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("DELETE FROM EXERCISES WHERE id = ?");
@@ -222,9 +214,7 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
     }
 
     @Override
-    public void deleteExercise(Exercise currentExercise) throws ExerciseNotFoundException {
-        if (getExerciseById(currentExercise.getExerciseID()) == null)
-            throw new ExerciseNotFoundException("There's no exercise to delete. ");
+    public void deleteExercise(Exercise currentExercise) {
 
         deleteExercise(currentExercise.getExerciseID());
     }

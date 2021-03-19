@@ -1,7 +1,5 @@
 package com.group12.fitnics.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,19 +7,22 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExerciseLogs;
 import com.group12.fitnics.objects.ExerciseLog;
 import com.group12.fitnics.objects.User;
 import com.group12.fitnics.presentation.adapters.ExerciseLogItemAdapter;
 
+import java.time.LocalDate;
+
 
 public class ExerciseLogActivity extends AppCompatActivity {
     ListView exerciseLogListView;
-
     private AccessExerciseLogs log;
     private User userLoggedIn;
-
+    private LocalDate date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class ExerciseLogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_exercise_log);
 
         log  = new AccessExerciseLogs();
+        date = LocalDate.now();
 
         getUserLoggedIn();
         setupList();
@@ -38,10 +40,9 @@ public class ExerciseLogActivity extends AppCompatActivity {
 
     private void setupList(){
         exerciseLogListView = (ListView) findViewById(R.id.exerciseLog);
-
-        ExerciseLogItemAdapter adapter = (ExerciseLogItemAdapter) new ExerciseLogItemAdapter(getApplicationContext(),0, log.getExerciseLogByUser(userLoggedIn.getUserID()));
-
+        ExerciseLogItemAdapter adapter = (ExerciseLogItemAdapter) new ExerciseLogItemAdapter(getApplicationContext(),0, log.getExerciseLogByUserDate(userLoggedIn.getUserID(), date));
         exerciseLogListView.setAdapter(adapter);
+
     }
 
 
@@ -53,7 +54,7 @@ public class ExerciseLogActivity extends AppCompatActivity {
 
                 //To get the exercise we have selected
                 ExerciseLog selectExerciseLog = (ExerciseLog) (exerciseLogListView.getItemAtPosition(position));
-                Toast.makeText(getApplicationContext(),selectExerciseLog.getExerciseID()+" "+position,Toast.LENGTH_SHORT).show();
+                
 
                 //create intent to go next activity
                 //We pass the whole objects through intent

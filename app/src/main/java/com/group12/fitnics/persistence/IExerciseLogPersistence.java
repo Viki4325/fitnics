@@ -1,7 +1,6 @@
 package com.group12.fitnics.persistence;
 
 import com.group12.fitnics.objects.ExerciseLog;
-import com.group12.fitnics.objects.MyDate;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,9 +19,4 @@ public interface IExerciseLogPersistence {
 
     void deleteExerciseLog(final int userID, final int exerciseID, final LocalDate date);
 
-    default boolean checkInvariant(ExerciseLog exerciseLog) {
-        if (exerciseLog == null || exerciseLog.getUserID() < 0 || exerciseLog.getExerciseID() < 0 || exerciseLog.getMinutes() <= 0)
-            return false;
-        return true;
-    }
 }

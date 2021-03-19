@@ -53,17 +53,7 @@ public class FoodPersistenceStub implements IFoodPersistence {
     }
 
     @Override
-    public int insertFood(Food food) throws InvalidFoodException {
-        if (food == null)
-            throw new InvalidFoodException("The food is not valid. ");
-
-        // if there exists same food name already, do not allow it to be inserted
-        if (getFoodByFoodName(food.getName()) != null)
-            throw new InvalidFoodException("There exists duplicate food. ");
-
-        if(food.getName().length() > 20)
-            throw new InvalidFdNameException("The name should be no more than 20 characters.");
-
+    public int insertFood(Food food) {
         food.setFoodID();
         foods.add(food);
 
@@ -72,10 +62,7 @@ public class FoodPersistenceStub implements IFoodPersistence {
 
     // update food with foodID
     @Override
-    public void updateFood(int foodID, Food food) throws InvalidFoodException, FoodNotFoundException {
-        if (food == null)
-            throw new InvalidFoodException("The food is not valid. ");
-
+    public void updateFood(int foodID, Food food) {
         boolean found = false;
         for(int i = 0; i < foods.size() && !found; i++) {
             if(foods.get(i).getFoodID() == foodID) {
@@ -85,13 +72,11 @@ public class FoodPersistenceStub implements IFoodPersistence {
                 found = true;
             }
         }
-        if (!found)
-            throw new FoodNotFoundException("There's no food with the foodID. ");
     }
 
     // delete food by foodID
     @Override
-    public void deleteFood(int foodID) throws FoodNotFoundException {
+    public void deleteFood(int foodID) {
         boolean found = false;
         for(int i = 0; i < foods.size() && !found; i++) {
             if(foods.get(i).getFoodID() == foodID) {
@@ -99,7 +84,5 @@ public class FoodPersistenceStub implements IFoodPersistence {
                 found = true;
             }
         }
-        if (!found)
-            throw new FoodNotFoundException("There's no food with the foodID. ");
     }
 }

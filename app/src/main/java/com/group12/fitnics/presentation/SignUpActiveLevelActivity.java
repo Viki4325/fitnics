@@ -48,6 +48,8 @@ public class SignUpActiveLevelActivity extends AppCompatActivity {
 
         newUser.setActivityLevel(activityLevel);
 
+        accessUsers.updateUser(newUser.getUserID(), newUser);
+
         //send the user to the login page with a message
         Intent logInToHomeIntent = new Intent(this, LogInActivity.class);
         AlertDialog welcome = Messages.welcome(this,"You are signed up. You will be redirected to the login page where you can login using your username. Thank you for signing up. \nYour goals are now our priority.","Welcome to Fitnics");

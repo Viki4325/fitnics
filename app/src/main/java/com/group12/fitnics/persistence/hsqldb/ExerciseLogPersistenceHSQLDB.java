@@ -46,6 +46,8 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
             if (rs.next()) {
                 return fromResultSet(rs);
             }
+            rs.close();
+            st.close();
 
         } catch (final SQLException e) {
             e.printStackTrace();
@@ -97,13 +99,7 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
     }
 
     @Override
-    public void insertExerciseLog(ExerciseLog exerciseLog) throws InvalidExerciseLogException {
-        if (!checkInvariant(exerciseLog))
-            throw new InvalidExerciseLogException("The exercise log has invalid userID or exerciseID or minutes. ");
-
-        // if there exists same exercise log already, to not allow it to be inserted
-        if (getExerciseLog(exerciseLog.getUserID(), exerciseLog.getExerciseID(), exerciseLog.getDate()) != null)
-            throw new InvalidExerciseLogException("The exercise log is duplicate. ");
+    public void insertExerciseLog(ExerciseLog exerciseLog) {
 
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO EXERCISELOGS VALUES(?, ?, ?, ?)");
@@ -120,12 +116,7 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
     }
 
     @Override
-    public void updateExerciseLog(int userID, int exerciseID, LocalDate date, ExerciseLog updatedLog) throws InvalidExerciseLogException, ExerciseLogNotFoundException {
-        if (!checkInvariant(updatedLog))
-            throw new InvalidExerciseLogException("The exercise log has invalid userID or exerciseID or minutes. ");
-
-        if (getExerciseLog(userID, exerciseID, date) == null)
-            throw new ExerciseLogNotFoundException("There is no such exercise log to update. ");
+    public void updateExerciseLog(int userID, int exerciseID, LocalDate date, ExerciseLog updatedLog) {
 
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("UPDATE EXERCISELOGS SET uid=?, eid=?, date=?, minutes=? where uid=? AND eid=? AND date=?");
@@ -145,9 +136,7 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
     }
 
     @Override
-    public void deleteExerciseLog(int userID, int exerciseID, LocalDate date) throws ExerciseLogNotFoundException {
-        if (getExerciseLog(userID, exerciseID, date) == null)
-            throw new ExerciseLogNotFoundException("There is no such exercise log to update. ");
+    public void deleteExerciseLog(int userID, int exerciseID, LocalDate date) {
 
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("DELETE FROM EXERCISELOGS WHERE uid = ? AND eid = ? AND date = ?");
