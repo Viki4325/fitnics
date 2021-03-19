@@ -1,8 +1,5 @@
 package com.group12.fitnics.persistence.hsqldb;
 
-import com.group12.fitnics.exceptions.InvalidUserException;
-import com.group12.fitnics.exceptions.InvalidUsernameException;
-import com.group12.fitnics.exceptions.UserNotFoundException;
 import com.group12.fitnics.objects.User;
 import com.group12.fitnics.persistence.IUserPersistence;
 
@@ -106,16 +103,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     }
 
     @Override
-    public int insertUser(User currentUser) throws InvalidUserException {
-        if (currentUser == null)
-            throw new InvalidUserException("The user is not valid. ");
-
-        // if there exists same username already, do not allow it to be inserted
-        if (getUserByUsername(currentUser.getUsername()) != null)
-            throw new InvalidUsernameException("There exists duplicate username. ");
-
-        if (currentUser.getUsername().length() > 20)
-            throw new InvalidUsernameException("The username is too long, should be no more than 20 characters.");
+    public int insertUser(User currentUser) {
 
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO USERS VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -154,14 +142,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     }
 
     @Override
-    public void updateUser(int userID, User currentUser) throws InvalidUserException, UserNotFoundException {
-        if (currentUser == null)
-            throw new InvalidUserException("The user is not valid. ");
-
-        if (getUserByID(userID) == null)
-            throw new UserNotFoundException("There's no user with the userID. ");
-
-        currentUser.setDailyCaloricNeeds();
+    public void updateUser(int userID, User currentUser) {
 
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("UPDATE USERS SET username=?, actLvl=?, weight=?, height=?, gender=?, caloricNeeds=?, goal=? WHERE id = ?");
@@ -182,9 +163,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     }
 
     @Override
-    public void deleteUser(int userID) throws UserNotFoundException {
-        if (getUserByID(userID) == null)
-            throw new UserNotFoundException("There's no user with the userID. ");
+    public void deleteUser(int userID) {
 
         try (final Connection c = connect()) {
             // Delete on cascade

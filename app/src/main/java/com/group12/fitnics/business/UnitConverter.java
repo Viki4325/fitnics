@@ -1,6 +1,6 @@
 package com.group12.fitnics.business;
 
-import com.group12.fitnics.exceptions.InvalidUnits;
+import com.group12.fitnics.exceptions.InvalidUnitsException;
 
 public class UnitConverter {
 
@@ -20,14 +20,14 @@ public class UnitConverter {
         return cm / 30.48; // 1 ft = 30.48 cm
     }
 
-    public static String convertUnitToString(double unit, int decimalPlace) throws InvalidUnits {
+    public static String convertUnitToString(double unit, int decimalPlace) throws InvalidUnitsException {
         if((unit > 0.0)){
             //Any unit and convert to specified decimal place
             String format = "%."+decimalPlace+"f";
 
             return String.format(format, unit);
         }else {
-            throw new InvalidUnits("Empty units not allowed");
+            throw new InvalidUnitsException("Empty units not allowed");
         }
     }
 

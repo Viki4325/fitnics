@@ -179,17 +179,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
     }
 
     @Override
-    public int insertExercise(Exercise newExercise) throws InvalidExerciseException {
-        if(newExercise == null)
-            throw new InvalidExerciseException("The exercise is not valid. ");
-        if(newExercise.getTitle().length() > 20)
-            throw new InvalidExNameException("The name should be no more than 20 characters.");
-        if(newExercise.getDescription().length() > 1024)
-            throw new InvalidExNameException("The description should be no more than 1024 characters.");
-        if(newExercise.getLevel().length() > 20)
-            throw new InvalidExNameException("The level should be no more than 20 characters.");
-        if(newExercise.getCategory().length() > 20)
-            throw new InvalidExNameException("The category should be no more than 20 characters.");
+    public int insertExercise(Exercise newExercise) {
 
         newExercise.setExerciseID();
         exerciseList.add(newExercise);
@@ -219,7 +209,7 @@ public class ExercisePersistenceStub implements IExercisePersistence {
     }
 
     @Override
-    public void deleteExercise(int exerciseID) throws ExerciseNotFoundException {
+    public void deleteExercise(int exerciseID)  {
         boolean found = false;
         for (int i = 0; i < exerciseList.size() && !found; i++) {
             if(exerciseList.get(i).getExerciseID() == exerciseID){
@@ -228,20 +218,14 @@ public class ExercisePersistenceStub implements IExercisePersistence {
                 found = true;
             }
         }
-        if(!found)
-            throw new ExerciseNotFoundException("There's no exercise with the exerciseID. ");
     }
 
 
     @Override
-    public void deleteExercise(Exercise currentExercise) throws ExerciseNotFoundException {
-        boolean found = false;
+    public void deleteExercise(Exercise currentExercise) {
         if(exerciseList.contains(currentExercise)){
             currentExercise.updateId();
             exerciseList.remove(currentExercise);
-            found = true;
         }
-        if(!found)
-            throw new ExerciseNotFoundException("There's no exercise to delete. ");
     }
 }

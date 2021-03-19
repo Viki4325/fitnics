@@ -2,6 +2,7 @@ package com.group12.fitnics.business;
 
 import com.group12.fitnics.application.Services;
 import com.group12.fitnics.exceptions.FoodNotFoundException;
+import com.group12.fitnics.exceptions.InvalidFdNameException;
 import com.group12.fitnics.exceptions.InvalidFoodException;
 import com.group12.fitnics.objects.Food;
 import com.group12.fitnics.persistence.IFoodPersistence;
@@ -62,14 +63,33 @@ public class AccessFood{
     }
     
     public int addFood(Food newFood) throws InvalidFoodException {
+        if (newFood == null)
+            throw new InvalidFoodException("The food is not valid. ");
+
+        // if there exists same food name already, do not allow it to be inserted
+        if (foodList.getFoodByFoodName(newFood.getName()) != null)
+            throw new InvalidFoodException("There exists duplicate food. ");
+
+        if(newFood.getName().length() > 20)
+            throw new InvalidFdNameException("The name should be no more than 20 characters.");
+
         return foodList.insertFood(newFood);
     }
 
-    public void deleteFood(int foodID) throws InvalidFoodException, FoodNotFoundException {
+    public void deleteFood(int foodID) throws FoodNotFoundException {
+        if (foodList.getFoodByID(foodID) == null)
+            throw new FoodNotFoundException("There's no food with the foodID. ");
+
         foodList.deleteFood(foodID);
     }
 
-    public void updateFood(int foodID, Food newFood) throws FoodNotFoundException {
+    public void updateFood(int foodID, Food newFood) throws InvalidFoodException, FoodNotFoundException {
+        if (newFood == null)
+            throw new InvalidFoodException("The food is not valid. ");
+
+        if (foodList.getFoodByID(foodID) == null)
+            throw new FoodNotFoundException("There's no food with the foodID. ");
+
         foodList.updateFood(foodID, newFood);
     }
 }

@@ -3,7 +3,7 @@ package com.group12.fitnics.tests.integration;
 import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.exceptions.InvalidUserException;
-import com.group12.fitnics.exceptions.InvalidUsernameException;
+import com.group12.fitnics.exceptions.InvalidUserNameException;
 import com.group12.fitnics.exceptions.UserNotFoundException;
 import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.User;
@@ -103,7 +103,7 @@ public class AccessUsersIT {
         System.out.println("Finished testInsertUser");
     }
 
-    @Test(expected = InvalidUsernameException.class)
+    @Test(expected = InvalidUserNameException.class)
     public void testInsertDuplicateUser() {
         System.out.println("\nStarting testInsertDuplicateUser");
         // A user with existing name can not be inserted
@@ -119,7 +119,7 @@ public class AccessUsersIT {
         System.out.println("Finished testInsertUserNull");
     }
 
-    @Test(expected = InvalidUsernameException.class)
+    @Test(expected = InvalidUserNameException.class)
     public void testInsertUserLongName() {
         System.out.println("\nStarting testInsertUserLongName");
         User u = new User("12345678901234567890a", 15, 4, 1998, 0, 50, 165, 'F', 1, units);

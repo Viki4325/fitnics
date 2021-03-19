@@ -3,11 +3,9 @@ package com.group12.fitnics.persistence;
 import com.group12.fitnics.exceptions.FoodLogNotFoundException;
 import com.group12.fitnics.exceptions.InvalidFoodLogException;
 import com.group12.fitnics.objects.FoodLog;
-import com.group12.fitnics.objects.MyDate;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class FoodLogPersistenceStub implements IFoodLogPersistence {
@@ -16,9 +14,6 @@ public class FoodLogPersistenceStub implements IFoodLogPersistence {
     public FoodLogPersistenceStub() {
         foodLogs = new ArrayList<>();
 
-//        MyDate date1 = new MyDate(new GregorianCalendar(2021, 0, 1));
-//        MyDate date2 = new MyDate(new GregorianCalendar(2021, 0, 2));
-//        MyDate date3 = new MyDate(new GregorianCalendar(2021, 1, 17));
         LocalDate date1 = LocalDate.of(2021, 1, 1);
         LocalDate date2 = LocalDate.of(2021, 1, 2);
         LocalDate date3 = LocalDate.of(2021, 1, 17);
@@ -70,22 +65,13 @@ public class FoodLogPersistenceStub implements IFoodLogPersistence {
     }
 
     @Override
-    public void insertFoodLog(FoodLog foodLog) throws InvalidFoodLogException {
-        if (!checkInvariant(foodLog))
-            throw new InvalidFoodLogException("The food log has invalid userID or foodID or grams. ");
-
-        // if there exists same food log already, to not allow it to be inserted
-        if (getFoodLog(foodLog.getUserID(), foodLog.getFoodID(), foodLog.getDate()) != null)
-            throw new InvalidFoodLogException("The food log is duplicate. \n You can instead go to FoodLog and add extra amount of grams consumed. Thank you!");
+    public void insertFoodLog(FoodLog foodLog)  {
 
         foodLogs.add(foodLog);
     }
 
     @Override
-    public void updateFoodLog(int userID, int foodID, LocalDate date, FoodLog updatedLog) throws InvalidFoodLogException, FoodLogNotFoundException {
-        if (!checkInvariant(updatedLog))
-            throw new InvalidFoodLogException("The food log has invalid userID or foodID or grams. ");
-
+    public void updateFoodLog(int userID, int foodID, LocalDate date, FoodLog updatedLog) {
         boolean found = false;
         for (int i = 0; i < foodLogs.size() && !found; i++) {
             FoodLog log = foodLogs.get(i);
@@ -94,12 +80,10 @@ public class FoodLogPersistenceStub implements IFoodLogPersistence {
                 found = true;
             }
         }
-        if (!found)
-            throw new FoodLogNotFoundException("There is no such food log to update. ");
     }
 
     @Override
-    public void deleteFoodLog(int userID, int foodID, LocalDate date) throws FoodLogNotFoundException {
+    public void deleteFoodLog(int userID, int foodID, LocalDate date) {
         boolean found = false;
         for (int i = 0; i < foodLogs.size() && !found; i++) {
             FoodLog log = foodLogs.get(i);
@@ -108,13 +92,7 @@ public class FoodLogPersistenceStub implements IFoodLogPersistence {
                 found = true;
             }
         }
-        if (!found)
-            throw new FoodLogNotFoundException("There is no such food log to delete. ");
     }
 
-//    private boolean checkInvariant(FoodLog foodLog) {
-//        if (foodLog == null || foodLog.getUserID() < 0 || foodLog.getFoodID() < 0 || foodLog.getGrams() <= 0)
-//            return false;
-//        return true;
-//    }
+
 }
