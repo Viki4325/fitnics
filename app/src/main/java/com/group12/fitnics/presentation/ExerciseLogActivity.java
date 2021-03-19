@@ -51,7 +51,7 @@ public class ExerciseLogActivity extends AppCompatActivity {
 
                 //To get the exercise we have selected
                 ExerciseLog selectExerciseLog = (ExerciseLog) (exerciseLogListView.getItemAtPosition(position));
-                Toast.makeText(getApplicationContext(),selectExerciseLog.getExerciseID()+" "+position,Toast.LENGTH_SHORT).show();
+                
 
                 //create intent to go next activity
                 //We pass the whole objects through intent
