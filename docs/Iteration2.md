@@ -12,8 +12,7 @@ Paying off Technical Dept
 
 SOLID
 -----
-
-
+SOLID violation in the project of A02 Group 12: [Link](https://code.cs.umanitoba.ca/3350-winter-2021-a02/group-12/good-habits-a02-12/-/issues/39)
 
 
 Retrospective
