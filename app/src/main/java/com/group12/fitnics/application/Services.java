@@ -1,15 +1,15 @@
 package com.group12.fitnics.application;
 
-import com.group12.fitnics.persistence.ExerciseLogPersistenceStub;
-import com.group12.fitnics.persistence.ExercisePersistenceStub;
-import com.group12.fitnics.persistence.FoodLogPersistenceStub;
-import com.group12.fitnics.persistence.FoodPersistenceStub;
+import com.group12.fitnics.persistence.stub.ExerciseLogPersistenceStub;
+import com.group12.fitnics.persistence.stub.ExercisePersistenceStub;
+import com.group12.fitnics.persistence.stub.FoodLogPersistenceStub;
+import com.group12.fitnics.persistence.stub.FoodPersistenceStub;
 import com.group12.fitnics.persistence.IExerciseLogPersistence;
 import com.group12.fitnics.persistence.IExercisePersistence;
 import com.group12.fitnics.persistence.IFoodLogPersistence;
 import com.group12.fitnics.persistence.IFoodPersistence;
 import com.group12.fitnics.persistence.IUserPersistence;
-import com.group12.fitnics.persistence.UserPersistenceStub;
+import com.group12.fitnics.persistence.stub.UserPersistenceStub;
 import com.group12.fitnics.persistence.hsqldb.ExerciseLogPersistenceHSQLDB;
 import com.group12.fitnics.persistence.hsqldb.ExercisePersistenceHSQLDB;
 import com.group12.fitnics.persistence.hsqldb.FoodLogPersistenceHSQLDB;

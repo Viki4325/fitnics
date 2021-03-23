@@ -1,6 +1,7 @@
-package com.group12.fitnics.persistence;
+package com.group12.fitnics.persistence.stub;
 
 import com.group12.fitnics.objects.ExerciseLog;
+import com.group12.fitnics.persistence.IExerciseLogPersistence;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -154,16 +154,16 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
     public int insertExercise(Exercise newExercise) {
 
         try (final Connection c = connect()) {
-            final PreparedStatement st = c.prepareStatement("INSERT INTO EXERCISES VALUES(?, ?, ?, ?, ?, ?)");
+            final PreparedStatement st = c.prepareStatement("INSERT INTO EXERCISES VALUES(DEFAULT, ?, ?, ?, ?, ?)");
 
-            newExercise.setExerciseID();
+//            newExercise.setExerciseID();
 
-            st.setString(1, Integer.toString(newExercise.getExerciseID()));
-            st.setString(2, newExercise.getTitle());
-            st.setString(3, newExercise.getDescription());
-            st.setString(4, newExercise.getCategory());
-            st.setString(5, newExercise.getLevel());
-            st.setInt(6, newExercise.getCaloriesBurn());
+//            st.setString(1, Integer.toString(newExercise.getExerciseID()));
+            st.setString(1, newExercise.getTitle());
+            st.setString(2, newExercise.getDescription());
+            st.setString(3, newExercise.getCategory());
+            st.setString(4, newExercise.getLevel());
+            st.setInt(5, newExercise.getCaloriesBurn());
             st.executeUpdate();
             st.close();
 
@@ -171,7 +171,9 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
             e.printStackTrace();
         }
 
-        return newExercise.getExerciseID();
+        Exercise created = getExerciseByName(newExercise.getTitle());
+
+        return created.getExerciseID();
     }
 
     @Override

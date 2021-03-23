@@ -89,12 +89,12 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
     public int insertFood(Food currentFood) {
 
         try (final Connection c = connect()) {
-            final PreparedStatement st = c.prepareStatement("INSERT INTO FOODS VALUES(?, ?, ?)");
+            final PreparedStatement st = c.prepareStatement("INSERT INTO FOODS VALUES(DEFAULT, ?, ?)");
 
-            currentFood.setFoodID();
-            st.setString(1, Integer.toString(currentFood.getFoodID()));
-            st.setString(2, currentFood.getName());
-            st.setDouble(3, currentFood.getCalories());
+//            currentFood.setFoodID();
+//            st.setString(1, Integer.toString(currentFood.getFoodID()));
+            st.setString(1, currentFood.getName());
+            st.setDouble(2, currentFood.getCalories());
             st.executeUpdate();
             st.close();
 
@@ -102,7 +102,8 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
             e.printStackTrace();
         }
 
-        return currentFood.getFoodID();
+        Food created = getFoodByFoodName(currentFood.getName());
+        return created.getFoodID();
     }
 
     @Override
