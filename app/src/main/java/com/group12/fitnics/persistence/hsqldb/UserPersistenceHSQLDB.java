@@ -1,5 +1,6 @@
 package com.group12.fitnics.persistence.hsqldb;
 
+import com.group12.fitnics.exceptions.HSQLDBException;
 import com.group12.fitnics.objects.User;
 import com.group12.fitnics.persistence.IUserPersistence;
 
@@ -61,7 +62,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return users;
     }
@@ -79,7 +80,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return null;
     }
@@ -97,7 +98,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return null;
     }
@@ -131,7 +132,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
 
         User created = getUserByUsername(currentUser.getUsername());
@@ -155,7 +156,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 
@@ -181,7 +182,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 }
