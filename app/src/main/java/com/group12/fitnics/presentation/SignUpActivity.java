@@ -18,7 +18,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void btnSetGoal(View v) {
         int goal = -1;
-        if(v == findViewById(R.id.looseWeightbtn))
+        if(v == findViewById(R.id.loseWeightbtn))
             goal = 0;
         else if(v == findViewById(R.id.maintianWeightbtn))
             goal = 1;

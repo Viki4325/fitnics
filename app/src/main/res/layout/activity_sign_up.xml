@@ -34,7 +34,7 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/looseWeightbtn"
+            android:id="@+id/loseWeightbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -45,7 +45,7 @@
             android:fontFamily="@font/muli"
             android:textStyle="bold"
             app:cornerRadius="50dp"
-            android:text="@string/goal_loose_weight" />
+            android:text="@string/goal_lose_weight" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/maintianWeightbtn"
