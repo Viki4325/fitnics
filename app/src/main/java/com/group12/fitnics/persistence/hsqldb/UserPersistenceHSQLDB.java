@@ -108,9 +108,6 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO USERS VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-//            currentUser.setUserID();
-
-//            st.setString(1, Integer.toString(currentUser.getUserID()));
             st.setString(1, currentUser.getUsername());
             st.setString(2, Integer.toString(currentUser.getBirthDay()));
             st.setString(3, Integer.toString(currentUser.getBirthMonth()));

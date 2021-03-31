@@ -120,7 +120,6 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
                 try {
                     updateWeight(convertToKgs);
                 }catch (Exception e){
-//                    Messages.fatalError(, e.getMessage());
                     callDialogMessages(e.getMessage());
                 }
 
@@ -137,7 +136,6 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
                 try {
                     updateHeight(convertToFts);
                 }catch (Exception e){
-//                    Messages.fatalError(getParent(), e.getMessage());
                     callDialogMessages(e.getMessage());
                 }
             }

@@ -80,7 +80,6 @@ public class SearchExerciseActivity extends AppCompatActivity {
                 //create intent to go next activity
                 //We pass the whole objects through intent
                 Intent showDetail = new Intent(getApplicationContext(), IndividualExercise.class);
-//                showDetail.putExtra("userId",info.getInt("userId"));
                 showDetail.putExtra("userLoggedIn", userLoggedIn);
                 showDetail.putExtra("exerciseSelected",  selectExercise);
                 startActivity(showDetail);

@@ -84,8 +84,6 @@ public class AccessExerciseLogs {
     }
 
     private boolean checkInvariant(ExerciseLog exerciseLog) {
-        if (exerciseLog == null || exerciseLog.getUserID() < 0 || exerciseLog.getExerciseID() < 0 || exerciseLog.getMinutes() <= 0)
-            return false;
-        return true;
+        return exerciseLog != null && exerciseLog.getUserID() >= 0 && exerciseLog.getExerciseID() >= 0 && exerciseLog.getMinutes() > 0;
     }
 }
