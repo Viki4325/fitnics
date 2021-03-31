@@ -1,20 +1,20 @@
 package com.group12.fitnics.application;
 
-import com.group12.fitnics.persistence.stub.ExerciseLogPersistenceStub;
-import com.group12.fitnics.persistence.stub.ExercisePersistenceStub;
-import com.group12.fitnics.persistence.stub.FoodLogPersistenceStub;
-import com.group12.fitnics.persistence.stub.FoodPersistenceStub;
 import com.group12.fitnics.persistence.IExerciseLogPersistence;
 import com.group12.fitnics.persistence.IExercisePersistence;
 import com.group12.fitnics.persistence.IFoodLogPersistence;
 import com.group12.fitnics.persistence.IFoodPersistence;
 import com.group12.fitnics.persistence.IUserPersistence;
-import com.group12.fitnics.persistence.stub.UserPersistenceStub;
 import com.group12.fitnics.persistence.hsqldb.ExerciseLogPersistenceHSQLDB;
 import com.group12.fitnics.persistence.hsqldb.ExercisePersistenceHSQLDB;
 import com.group12.fitnics.persistence.hsqldb.FoodLogPersistenceHSQLDB;
 import com.group12.fitnics.persistence.hsqldb.FoodPersistenceHSQLDB;
 import com.group12.fitnics.persistence.hsqldb.UserPersistenceHSQLDB;
+import com.group12.fitnics.persistence.stub.ExerciseLogPersistenceStub;
+import com.group12.fitnics.persistence.stub.ExercisePersistenceStub;
+import com.group12.fitnics.persistence.stub.FoodLogPersistenceStub;
+import com.group12.fitnics.persistence.stub.FoodPersistenceStub;
+import com.group12.fitnics.persistence.stub.UserPersistenceStub;
 
 public class Services {
 
@@ -25,60 +25,56 @@ public class Services {
     private static IExercisePersistence exercisePersistence = null;
 
     private static final boolean forProduction = false;
+    private static boolean initialized = false;
 
     public static IUserPersistence getUserPersistence() {
-        if (userPersistence == null) {
-            if (forProduction) {
-                userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
-            } else {
-                userPersistence = new UserPersistenceStub();
-            }
-        }
+        if (!initialized)
+            buildPersistence();
         return userPersistence;
     }
 
     public static IFoodLogPersistence getFoodLogPersistence() {
-        if (foodLogPersistence == null) {
-            if (forProduction) {
-                foodLogPersistence = new FoodLogPersistenceHSQLDB(Main.getDBPathName());
-            } else {
-                foodLogPersistence = new FoodLogPersistenceStub();
-            }
-        }
+        if (!initialized)
+            buildPersistence();
         return foodLogPersistence;
     }
 
     public static IExerciseLogPersistence getExerciseLogPersistence() {
-        if (exerciseLogPersistence == null) {
-            if (forProduction) {
-                exerciseLogPersistence = new ExerciseLogPersistenceHSQLDB(Main.getDBPathName());
-            } else {
-                exerciseLogPersistence = new ExerciseLogPersistenceStub();
-            }
-        }
+        if (!initialized)
+            buildPersistence();
         return exerciseLogPersistence;
     }
 
     public static IFoodPersistence getFoodPersistence() {
-        if (foodPersistence == null) {
-            if (forProduction) {
-                foodPersistence = new FoodPersistenceHSQLDB(Main.getDBPathName());
-            } else {
-                foodPersistence = new FoodPersistenceStub();
-            }
-        }
+        if (!initialized)
+            buildPersistence();
         return foodPersistence;
     }
 
     public static IExercisePersistence getExercisePersistence() {
-        if (exercisePersistence == null) {
+        if (!initialized)
+            buildPersistence();
+        return exercisePersistence;
+    }
+
+    private static void buildPersistence() {
+        if (!initialized) {
             if (forProduction) {
+                userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
+                foodPersistence = new FoodPersistenceHSQLDB(Main.getDBPathName());
                 exercisePersistence = new ExercisePersistenceHSQLDB(Main.getDBPathName());
+                foodLogPersistence = new FoodLogPersistenceHSQLDB(Main.getDBPathName());
+                exerciseLogPersistence = new ExerciseLogPersistenceHSQLDB(Main.getDBPathName());
             } else {
+                userPersistence = new UserPersistenceStub();
+                foodPersistence = new FoodPersistenceStub();
                 exercisePersistence = new ExercisePersistenceStub();
+                foodLogPersistence = new FoodLogPersistenceStub();
+                exerciseLogPersistence = new ExerciseLogPersistenceStub();
             }
         }
-        return exercisePersistence;
+
+        initialized = true;
     }
 
 }
