@@ -24,7 +24,6 @@ public class Services {
     private static IFoodPersistence foodPersistence = null;
     private static IExercisePersistence exercisePersistence = null;
 
-    private static final boolean forProduction = false;
     private static boolean initialized = false;
 
     public static IUserPersistence getUserPersistence() {
@@ -59,19 +58,17 @@ public class Services {
 
     private static void buildPersistence() {
         if (!initialized) {
-            if (forProduction) {
-                userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
-                foodPersistence = new FoodPersistenceHSQLDB(Main.getDBPathName());
-                exercisePersistence = new ExercisePersistenceHSQLDB(Main.getDBPathName());
-                foodLogPersistence = new FoodLogPersistenceHSQLDB(Main.getDBPathName());
-                exerciseLogPersistence = new ExerciseLogPersistenceHSQLDB(Main.getDBPathName());
-            } else {
-                userPersistence = new UserPersistenceStub();
-                foodPersistence = new FoodPersistenceStub();
-                exercisePersistence = new ExercisePersistenceStub();
-                foodLogPersistence = new FoodLogPersistenceStub();
-                exerciseLogPersistence = new ExerciseLogPersistenceStub();
-            }
+            userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
+            foodPersistence = new FoodPersistenceHSQLDB(Main.getDBPathName());
+            exercisePersistence = new ExercisePersistenceHSQLDB(Main.getDBPathName());
+            foodLogPersistence = new FoodLogPersistenceHSQLDB(Main.getDBPathName());
+            exerciseLogPersistence = new ExerciseLogPersistenceHSQLDB(Main.getDBPathName());
+
+//            userPersistence = new UserPersistenceStub();
+//            foodPersistence = new FoodPersistenceStub();
+//            exercisePersistence = new ExercisePersistenceStub();
+//            foodLogPersistence = new FoodLogPersistenceStub();
+//            exerciseLogPersistence = new ExerciseLogPersistenceStub();
         }
 
         initialized = true;
