@@ -1,14 +1,11 @@
 package com.group12.fitnics;
 
-import android.content.Context;
 import android.os.SystemClock;
 
-import androidx.test.filters.LargeTest;
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
-import com.group12.fitnics.objects.User;
 import com.group12.fitnics.presentation.MainActivity;
 import com.group12.fitnics.utils.TestUtils;
 
@@ -29,16 +26,10 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
-import static org.junit.Assert.*;
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class InstrumentedTest {
+public class FoodFinderTest {
     private final int sleepTime = 500;
     private TestUtils testUtils;
     private LocalDate dateToday;
@@ -53,14 +44,31 @@ public class InstrumentedTest {
     }
 
     @Test
-    public void useAppContext() {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.group12.fitnics", appContext.getPackageName());
+    public void findFoodTest() {
+        // click the 'Log in' button
+        onView(withId(R.id.btnLogIn)).perform(click());
+        // log in with username
+        onView(withId(R.id.editUsername)).perform(typeText("alice"));
+        closeSoftKeyboard();
+        onView(withId(R.id.btnLogInToHome)).perform(click());
+        SystemClock.sleep(sleepTime);
+        // verify that the user logged in
+        onView(withId(R.id.textGreeting)).check(matches(withText("Welcome, alice")));
+        // click 'Add breakfast' button
+        onView(withId(R.id.breakfast)).perform(click());
+        // search food item
+        onView(withId(R.id.searchFood)).perform(typeText("bread"));
+        closeSoftKeyboard();
+        // TODO: verify that the item appeared on the list
+        onData(anything()).inAdapterView(withId(R.id.Search_food)).atPosition(0).
+                onChildView(withId(R.id.list_item)).
+                check(matches(withText("bread")));
+        // add the item
+        onData(anything()).inAdapterView(withId(R.id.Search_food)).atPosition(0).perform(click());
+        onView(withId(R.id.foodGrams)).perform(typeText("100"));
+        onView(withId(R.id.add_food)).perform(click());
+        pressBack();
+        // TODO: need to verify something from here? or from foodLoggerTest??
+
     }
-
-
-
-
-
 }

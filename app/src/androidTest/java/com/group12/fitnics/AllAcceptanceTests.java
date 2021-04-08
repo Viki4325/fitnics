@@ -8,7 +8,15 @@ import org.junit.runners.Suite;
 @LargeTest
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        InstrumentedTest.class
+        AccountManageTest.class,
+        FoodFinderTest.class,
+        ExerciseFinderTest.class,
+        FoodLoggerTest.class,
+        ExerciseLoggerTest.class,
+        DailyCaloriesTest.class,
+        NotificationTest.class,
+        WorkoutProgressTest.class,
+        DietProgressTest.class
 })
 
 
