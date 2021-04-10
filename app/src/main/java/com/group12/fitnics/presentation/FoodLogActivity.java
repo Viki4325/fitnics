@@ -1,11 +1,14 @@
 package com.group12.fitnics.presentation;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,28 +19,60 @@ import com.group12.fitnics.objects.Food;
 import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.User;
 
+import org.w3c.dom.Text;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class FoodLogActivity extends AppCompatActivity {
+public class FoodLogActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
     private final static int UPDATE_CODE = 30;
     private User selectedUser;
     ListView listView;
     ArrayAdapter<FoodLog> adapter;
     private AccessFood foods;
     private AccessFoodLogs log;
+    private TextView pickedDateText;
+    private int year;
+    private int month;
+    private int day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_log);
 
+        year = Calendar.getInstance().get(Calendar.YEAR);
+        month = Calendar.getInstance().get(Calendar.MONTH);
+        day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+
         foods = new AccessFood();
         getUserLoggedIn();
         log =  new AccessFoodLogs();
 
+        pickedDateText = findViewById(R.id.date_picked);
+        pickedDateText.setText((month+1) + "/" + day + "/" + year);
+
+        findViewById(R.id.date_picker).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
+
         setupList();
         setUpOnClickListener();
+    }
+
+    private void showDatePickerDialog() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
     }
 
     private void setupList(){
@@ -87,5 +122,10 @@ public class FoodLogActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         setupList();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        pickedDateText.setText((month+1) + "/" + dayOfMonth + "/" + year);
     }
 }
