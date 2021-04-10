@@ -51,7 +51,8 @@ public class FoodLogActivity extends AppCompatActivity implements DatePickerDial
         log =  new AccessFoodLogs();
 
         pickedDateText = findViewById(R.id.date_picked);
-        pickedDateText.setText((month+1) + "/" + day + "/" + year);
+
+        pickedDateText.setText((month + 1) + "/" + day + "/" + year);
 
         findViewById(R.id.date_picker).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +127,9 @@ public class FoodLogActivity extends AppCompatActivity implements DatePickerDial
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        pickedDateText.setText((month+1) + "/" + dayOfMonth + "/" + year);
+        this.year = year;
+        this.month = month;
+        this.day = dayOfMonth;
+        pickedDateText.setText((month + 1) + "/" + day + "/" + year);
     }
 }
