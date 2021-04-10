@@ -1,8 +1,9 @@
-package com.group12.fitnics.persistence;
+package com.group12.fitnics.persistence.stub;
 
 import com.group12.fitnics.exceptions.FoodLogNotFoundException;
 import com.group12.fitnics.exceptions.InvalidFoodLogException;
 import com.group12.fitnics.objects.FoodLog;
+import com.group12.fitnics.persistence.IFoodLogPersistence;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

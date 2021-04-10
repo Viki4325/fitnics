@@ -440,7 +440,6 @@ public class AccessExercisesIT {
         int lastId = 6;
         assertEquals("No exercise objects deleted. Should have the right count",exerciseHandler.getAllExercise().size(), size);
 
-        //should be id 7
         Exercise new_1 = new Exercise(
                 "I am new",
                 "This is description\n" ,
@@ -449,7 +448,6 @@ public class AccessExercisesIT {
                 100
         );
 
-        //should be id 8
         Exercise new_2 = new Exercise(
                 "I am new_2",
                 "This is description\n" ,
@@ -458,19 +456,18 @@ public class AccessExercisesIT {
                 100
         );
 
-        exerciseHandler.insertExercise(new_1); // Inserted exercise object
+        int newId_1 = exerciseHandler.insertExercise(new_1); // Inserted exercise object
         size++;
-        exerciseHandler.deleteExerciseById(new_1.getExerciseID()); // Exercise object deleted using id
+        exerciseHandler.deleteExerciseById(newId_1); // Exercise object deleted using id
         size--;
         assertEquals("Exercise object deleted using id. Size should decrease respectively",exerciseHandler.getAllExercise().size(),size);
 
-        exerciseHandler.insertExercise(new_2); // Inserted exercise object
+        int newId_2 = exerciseHandler.insertExercise(new_2); // Inserted exercise object
         size++;
-        System.out.println(exerciseHandler.getExerciseById(8));
-        System.out.println(new_2.getExerciseID());
-        System.out.println(exerciseHandler.getAllExercise().toString());
-        exerciseHandler.deleteExerciseById(new_1.getExerciseID()); // Exercise object deleted using id
+        exerciseHandler.deleteExerciseById(newId_2); // Exercise object deleted using id
         size--;
+
+        assertEquals(newId_2, new_2.getExerciseID());
         assertEquals("Exercise object deleted using id. Size should decrease respectively",exerciseHandler.getAllExercise().size(),size);
 
         assertEquals("Objects inserted and deleted respectively. Size should be equal to the original list's size",exerciseHandler.getAllExercise().size(),original_size);
