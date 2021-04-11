@@ -32,7 +32,9 @@ import static org.hamcrest.CoreMatchers.anything;
 public class AccountManageTest {
     private final int sleepTime = 500;
     private TestUtils testUtils;
+    private User testUser;
     private LocalDate dateToday;
+    private int[] UNITS = {1, 0};
 
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
@@ -41,20 +43,21 @@ public class AccountManageTest {
     public void setup() {
         testUtils = new TestUtils();
         dateToday = LocalDate.now();
+        testUser = new User("testUser", 15, 4, 1998, 1, 55, 163, 'F', 0, UNITS);
     }
 
     @Test
     public void signUpTest() {
         // click the 'Sign up' button
         onView(withId(R.id.btnSignUp)).perform(click());
-        // goal - loose weight
+        // select the goal - loose weight
         onView(withId(R.id.loseWeightbtn)).perform(click());
         // enter the user info
         onView(withId(R.id.enterUsername)).perform(typeText("eve"));
         onView(withId(R.id.editBirthday)).perform(typeText("15041998"));
         onView(withId(R.id.chooseGender)).perform(click()); // AppCompatSpinner
         onData(anything()).atPosition(0).perform(click()); // M? F? 0? 1?
-        onView(withId(R.id.weightUnitSwitch)).perform(click()); // switch to kilogram
+        onView(withId(R.id.weightUnitSwitch)).perform(click()); // switch to kilogram (it shows LBS first)
         onView(withId(R.id.editWeight)).perform(typeText("60"));
         onView(withId(R.id.editHeight)).perform(typeText("158"));
         onView(withId(R.id.btnContinue)).perform(click());
@@ -68,7 +71,7 @@ public class AccountManageTest {
         // verify if the user can login with the new account
         onView(withId(R.id.textGreeting)).check(matches(withText("Welcome, eve")));
         onView(withId(R.id.textRemaining)).check(matches(withText("1900"))); // TODO: correct number
-        // TODO: delete the new account just added ??
+        // TODO: delete the new account just added
         testUtils.deleteUser("eve");
     }
 
@@ -90,9 +93,8 @@ public class AccountManageTest {
         onView(withId(R.id.saveButton)).perform(click());
         // verify if the daily caloric target updates
         onView(withId(R.id.textRemaining)).check(matches(withText("1900"))); // TODO: correct number
-        // TODO: undo the changes ??
-        int[] units = {1, 0};
-        User alice = new User("alice", 15, 4, 1998, 1, 55, 163, 'F', 0, units);
+        // TODO: undo the changes
+        User alice = new User("alice", 15, 4, 1998, 1, 55, 163, 'F', 0, UNITS);
         testUtils.updateUser("alice", alice);
     }
 

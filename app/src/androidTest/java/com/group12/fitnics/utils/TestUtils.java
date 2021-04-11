@@ -2,6 +2,8 @@ package com.group12.fitnics.utils;
 
 import com.group12.fitnics.application.Main;
 import com.group12.fitnics.business.AccessExerciseLogs;
+import com.group12.fitnics.business.AccessExercises;
+import com.group12.fitnics.business.AccessFood;
 import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.objects.User;
@@ -15,6 +17,8 @@ import java.time.LocalDate;
 
 public class TestUtils {
     private AccessUsers accessUsers;
+    private AccessFood accessFood;
+    private AccessExercises accessExercises;
     private AccessFoodLogs accessFoodLogs;
     private AccessExerciseLogs accessExerciseLogs;
 
@@ -37,11 +41,15 @@ public class TestUtils {
         accessUsers.updateUser(id, user);
     }
 
-    public void deleteFoodLog(int userID, int foodID, LocalDate date) {
-        accessFoodLogs.deleteFoodLog(userID, foodID, date);
+    public void deleteFoodLog(String username, String foodName, LocalDate date) {
+        int id = accessUsers.getUserByName(username).getUserID();
+        int fid = accessFood.searchByFoodName(foodName).getFoodID();
+        accessFoodLogs.deleteFoodLog(id, fid, date);
     }
 
-    public void deleteExerciseLog(int userID, int exerciseID, LocalDate date) {
-        accessExerciseLogs.deleteExerciseLog(userID, exerciseID, date);
+    public void deleteExerciseLog(String username, String exerciseName, LocalDate date) {
+        int id = accessUsers.getUserByName(username).getUserID();
+        int eid = accessExercises.getExerciseByName(exerciseName).getExerciseID();
+        accessExerciseLogs.deleteExerciseLog(id, eid, date);
     }
 }

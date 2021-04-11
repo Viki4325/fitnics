@@ -17,12 +17,14 @@ import org.junit.runner.RunWith;
 import java.time.LocalDate;
 
 import static androidx.test.espresso.Espresso.closeSoftKeyboard;
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.anything;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -54,13 +56,16 @@ public class ExerciseFinderTest {
         // click 'Add exercise' button
         onView(withId(R.id.exercise)).perform(click());
         // search exercise item
-        onView(withId(R.id.searchExercise)).perform(typeText("chin"));
+        onView(withId(R.id.searchExercise)).perform(typeText("axe"));
         closeSoftKeyboard();
         // TODO: verify that the item appeared on the list
-
-        // TODO: add the item
-
-        // TODO: need to verify something from here ? or from exerciseLoggerTest??
+        onData(anything()).inAdapterView(withId(R.id.exerciseList)).atPosition(0).
+                onChildView(withId(R.id.list_item)). // list_item ???
+                check(matches(withText("Axe Hold")));
+        // click the item
+        onData(anything()).inAdapterView(withId(R.id.exerciseList)).atPosition(0).perform(click());
+        // verify the title of the detailed-info screen
+        onView(withId(R.id.exerciseTitle)).check(matches(withText("Axe Hold")));
 
     }
 

@@ -63,12 +63,5 @@ public class FoodFinderTest {
         onData(anything()).inAdapterView(withId(R.id.Search_food)).atPosition(0).
                 onChildView(withId(R.id.list_item)).
                 check(matches(withText("bread")));
-        // add the item
-        onData(anything()).inAdapterView(withId(R.id.Search_food)).atPosition(0).perform(click());
-        onView(withId(R.id.foodGrams)).perform(typeText("100"));
-        onView(withId(R.id.add_food)).perform(click());
-        pressBack();
-        // TODO: need to verify something from here? or from foodLoggerTest??
-
     }
 }
