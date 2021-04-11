@@ -77,9 +77,9 @@ public class FoodLogActivity extends AppCompatActivity implements DatePickerDial
     }
 
     private void setupList(){
-        LocalDate today = LocalDate.now();
+        LocalDate date = LocalDate.of(year, month+1, day);
         listView = (ListView) findViewById(R.id.food_log);
-        ArrayList<FoodLog> list = new ArrayList<>(log.getFoodLogByUserDate(selectedUser.getUserID(), today));
+        ArrayList<FoodLog> list = new ArrayList<>(log.getFoodLogByUserDate(selectedUser.getUserID(), date));
 
         adapter = new ArrayAdapter<>(
                 this,
@@ -131,5 +131,6 @@ public class FoodLogActivity extends AppCompatActivity implements DatePickerDial
         this.month = month;
         this.day = dayOfMonth;
         pickedDateText.setText((month + 1) + "/" + day + "/" + year);
+        setupList();
     }
 }
