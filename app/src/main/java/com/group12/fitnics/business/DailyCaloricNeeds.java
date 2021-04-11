@@ -34,6 +34,4 @@ public class DailyCaloricNeeds {
 
         return dailyCaloricNeeds;
     }
-
-
 }
