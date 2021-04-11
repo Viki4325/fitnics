@@ -10,7 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="122dp"
+        android:layout_height="371dp"
         android:layout_weight="1">
 
         <TextView
@@ -20,42 +20,69 @@
             android:layout_marginTop="24dp"
             android:text="TextView"
             android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/date_picked"
             app:layout_constraintEnd_toStartOf="@+id/date_picker"
-            app:layout_constraintHorizontal_bias="0.211"
+            app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.428" />
 
         <TextView
             android:id="@+id/date_picked"
             android:layout_width="128dp"
             android:layout_height="25dp"
-            android:layout_marginTop="48dp"
             android:text="TextView"
             android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/date_picker"
-            app:layout_constraintHorizontal_bias="0.21"
+            app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.767" />
 
         <Button
             android:id="@+id/date_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="64dp"
+            android:layout_width="126dp"
+            android:layout_height="54dp"
+            android:layout_marginEnd="56dp"
             android:text="Date"
             android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.622" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ListView
-        android:id="@+id/food_log"
-        android:layout_width="match_parent"
-        android:layout_height="668dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="800dp"
         android:layout_weight="1"
-        android:padding="20dp"
-        tools:listitem="@android:layout/simple_list_item_activated_1" />
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/food_log"
+            android:layout_width="match_parent"
+            android:layout_height="516dp"
+            android:layout_weight="1"
+            android:padding="20dp"
+            tools:listitem="@android:layout/simple_list_item_activated_1" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="381dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="224dp"
+            android:layout_height="67dp"
+            android:text="View Diet Progress"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
