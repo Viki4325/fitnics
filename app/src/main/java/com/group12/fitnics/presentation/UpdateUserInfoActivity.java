@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -16,7 +15,7 @@ import android.widget.ToggleButton;
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.business.UnitConverter;
-import com.group12.fitnics.objects.User;
+import com.group12.fitnics.objects.User.User;
 
 import static com.group12.fitnics.business.UnitConverter.convertUnitToString;
 

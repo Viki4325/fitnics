@@ -1,6 +1,6 @@
 package com.group12.fitnics.persistence;
 
-import com.group12.fitnics.objects.User;
+import com.group12.fitnics.objects.User.User;
 
 import java.util.List;
 

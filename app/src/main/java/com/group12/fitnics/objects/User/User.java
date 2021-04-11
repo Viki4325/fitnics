@@ -1,4 +1,4 @@
-package com.group12.fitnics.objects;
+package com.group12.fitnics.objects.User;
 
 import com.group12.fitnics.business.DailyCaloricNeeds;
 import com.group12.fitnics.exceptions.InvalidSignUpDateException;
@@ -20,15 +20,12 @@ public class User implements Serializable {
     private int birthDay;
     private int birthMonth;
     private int birthYear;
-    // activityLevel: 0 - Not Active, 1 - Somewhat Active, 2 - Active, 3 - Very Active
-    private int activityLevel;
+    private IActLvl activityLevel; // (previously) 0 - Not Active, 1 - Somewhat Active, 2 - Active, 3 - Very Active
     private double weight;
     private double height;
-    // gender: 'M' - Male, 'F' - Female, 'O' - Other
-    private char gender;
+    private IGender gender; // (previously) 'M' - Male, 'F' - Female, 'O' - Other
     private double dailyCaloricNeeds;
-    // goal: 0 - Loose Weight, 1 - Maintain Weight, 2 - Gain Weight
-    private int goal;
+    private IGoal goal; // (previously) 0 - Lose Weight, 1 - Maintain Weight, 2 - Gain Weight
     // lastUserID is 3 because we are currently using a fake database for users.
     private static int lastUserID = -1;
     //units 0 - weight[0 - lbs, 1 - kg], 1 - height[0 - cm, 1 - ft]
@@ -36,24 +33,16 @@ public class User implements Serializable {
 
     public User(){}
 
-    public User(String username, int activityLevel, double weight, double height, char gender) {
+    public User(String username, IActLvl activityLevel, double weight, double height, IGender gender) {
         this.username = username;
         this.activityLevel = activityLevel;
         this.weight = weight;
         this.height = height;
         this.gender = gender;
         this.dailyCaloricNeeds = DailyCaloricNeeds.resetDailyCaloricNeeds(this);
-        this.activityLevel = 0;
     }
 
-    public int getAge() {
-        LocalDate birthday = LocalDate.of(birthYear, birthMonth, birthDay);
-        LocalDate today = LocalDate.now();
-        Period age = Period.between(birthday, today);
-        return age.getYears();
-    }
-
-    public User(String username, int bD, int bM, int bY, int actLvl, double w, double h, char gender, int goal, int[] units) {
+    public User(String username, int bD, int bM, int bY, IActLvl actLvl, double w, double h, IGender gender, IGoal goal, int[] units) {
         this.username = username;
         this.birthDay = bD;
         this.birthMonth = bM;
@@ -65,6 +54,13 @@ public class User implements Serializable {
         this.goal = goal;
         this.units = units;
         this.dailyCaloricNeeds = DailyCaloricNeeds.resetDailyCaloricNeeds(this);
+    }
+
+    public int getAge() {
+        LocalDate birthday = LocalDate.of(birthYear, birthMonth, birthDay);
+        LocalDate today = LocalDate.now();
+        Period age = Period.between(birthday, today);
+        return age.getYears();
     }
 
     public double getHeight() {
@@ -87,15 +83,15 @@ public class User implements Serializable {
         return username;
     }
 
-    public int getActivityLevel() {
+    public IActLvl getActivityLevel() {
         return activityLevel;
     }
 
-    public char getGender() {
+    public IGender getGender() {
         return gender;
     }
 
-    public void setActivityLevel(int activityLevel) {
+    public void setActivityLevel(IActLvl activityLevel) {
         this.activityLevel = activityLevel;
     }
 
@@ -107,7 +103,7 @@ public class User implements Serializable {
         dailyCaloricNeeds = (int) caloryAmount;
     }
 
-    public void setGender(char gender) {
+    public void setGender(IGender gender) {
         this.gender = gender;
     }
 
@@ -164,7 +160,7 @@ public class User implements Serializable {
         return birthYear;
     }
 
-    public int getGoal() {
+    public IGoal getGoal() {
         return goal;
     }
 
@@ -193,7 +189,7 @@ public class User implements Serializable {
         }
     }
 
-    public void setGoal(int goal) {
+    public void setGoal(IGoal goal) {
         this.goal = goal;
     }
 

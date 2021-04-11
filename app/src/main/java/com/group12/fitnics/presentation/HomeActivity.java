@@ -12,7 +12,7 @@ import com.group12.fitnics.business.AccessExerciseLogs;
 import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.business.UnitConverter;
-import com.group12.fitnics.objects.User;
+import com.group12.fitnics.objects.User.User;
 import com.timqi.sectorprogressview.ColorfulRingProgressView;
 
 import java.time.LocalDate;

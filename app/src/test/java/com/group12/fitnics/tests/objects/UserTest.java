@@ -1,7 +1,7 @@
 package com.group12.fitnics.tests.objects;
 
 import com.group12.fitnics.business.AccessUsers;
-import com.group12.fitnics.objects.User;
+import com.group12.fitnics.objects.User.User;
 
 import org.junit.Test;
 

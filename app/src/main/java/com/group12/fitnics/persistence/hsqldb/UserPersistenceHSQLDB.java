@@ -1,7 +1,7 @@
 package com.group12.fitnics.persistence.hsqldb;
 
 import com.group12.fitnics.exceptions.HSQLDBException;
-import com.group12.fitnics.objects.User;
+import com.group12.fitnics.objects.User.User;
 import com.group12.fitnics.persistence.IUserPersistence;
 
 import java.sql.Connection;

@@ -17,7 +17,7 @@ import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExerciseLogs;
 import com.group12.fitnics.business.AccessExercises;
 import com.group12.fitnics.objects.ExerciseLog;
-import com.group12.fitnics.objects.User;
+import com.group12.fitnics.objects.User.User;
 
 import java.util.Objects;
 

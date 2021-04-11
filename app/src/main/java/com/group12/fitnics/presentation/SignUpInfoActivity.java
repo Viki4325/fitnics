@@ -18,7 +18,7 @@ import android.widget.ToggleButton;
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.business.UnitConverter;
-import com.group12.fitnics.objects.User;
+import com.group12.fitnics.objects.User.User;
 
 import java.util.Calendar;
 

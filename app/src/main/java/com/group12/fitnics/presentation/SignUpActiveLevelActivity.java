@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
-import com.group12.fitnics.objects.User;
+import com.group12.fitnics.objects.User.User;
 
 public class SignUpActiveLevelActivity extends AppCompatActivity {
 
