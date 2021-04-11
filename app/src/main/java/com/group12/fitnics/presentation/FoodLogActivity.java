@@ -22,6 +22,7 @@ import com.group12.fitnics.objects.User;
 import org.w3c.dom.Text;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -33,26 +34,25 @@ public class FoodLogActivity extends AppCompatActivity implements DatePickerDial
     private AccessFood foods;
     private AccessFoodLogs log;
     private TextView pickedDateText;
-    private int year;
-    private int month;
-    private int day;
+    private TextView pickedDayText;
+    private LocalDate datePicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_log);
 
-        year = Calendar.getInstance().get(Calendar.YEAR);
-        month = Calendar.getInstance().get(Calendar.MONTH);
-        day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        datePicked = LocalDate.now();
 
         foods = new AccessFood();
         getUserLoggedIn();
         log =  new AccessFoodLogs();
 
         pickedDateText = findViewById(R.id.date_picked);
+        pickedDateText.setText(datePicked.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
 
-        pickedDateText.setText((month + 1) + "/" + day + "/" + year);
+        pickedDayText = findViewById(R.id.day_picked);
+        pickedDayText.setText(datePicked.format(DateTimeFormatter.ofPattern("EEEE")));
 
         findViewById(R.id.date_picker).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,9 +77,8 @@ public class FoodLogActivity extends AppCompatActivity implements DatePickerDial
     }
 
     private void setupList(){
-        LocalDate date = LocalDate.of(year, month+1, day);
         listView = (ListView) findViewById(R.id.food_log);
-        ArrayList<FoodLog> list = new ArrayList<>(log.getFoodLogByUserDate(selectedUser.getUserID(), date));
+        ArrayList<FoodLog> list = new ArrayList<>(log.getFoodLogByUserDate(selectedUser.getUserID(), datePicked));
 
         adapter = new ArrayAdapter<>(
                 this,
@@ -127,10 +126,9 @@ public class FoodLogActivity extends AppCompatActivity implements DatePickerDial
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        this.year = year;
-        this.month = month;
-        this.day = dayOfMonth;
-        pickedDateText.setText((month + 1) + "/" + day + "/" + year);
+        datePicked = LocalDate.of(year, month+1, dayOfMonth);
+        pickedDateText.setText(datePicked.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+        pickedDayText.setText(datePicked.format(DateTimeFormatter.ofPattern("EEEE")));
         setupList();
     }
 }
