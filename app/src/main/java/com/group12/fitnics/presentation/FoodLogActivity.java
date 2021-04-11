@@ -25,6 +25,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class FoodLogActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
     private final static int UPDATE_CODE = 30;
@@ -73,6 +74,9 @@ public class FoodLogActivity extends AppCompatActivity implements DatePickerDial
                 Calendar.getInstance().get(Calendar.MONTH),
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         );
+        // Hard coded the date account created. Need to store that date in the database
+        datePickerDialog.getDatePicker().setMinDate(new GregorianCalendar(2021, 3, 1).getTimeInMillis());
+        datePickerDialog.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis());
         datePickerDialog.show();
     }
 
