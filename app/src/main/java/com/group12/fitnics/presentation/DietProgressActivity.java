@@ -35,7 +35,7 @@ public class DietProgressActivity extends AppCompatActivity {
         userLoggedIn();
 
         userGoal = findViewById(R.id.userGoal);
-        goalMessage = findViewById(R.id.goalMessage);
+        goalMessage = findViewById(R.id.progress_message);
 
         if (selectedUser.getGoal() == 0) {
             userGoal.setText("Lose Weight");
