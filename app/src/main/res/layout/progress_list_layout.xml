@@ -33,9 +33,12 @@
         android:gravity="center"
         android:textAlignment="center"
         android:text="TextView1"
+        android:layout_marginRight="25px"
+        android:min="0"
+        android:max="3500"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:id="@+id/textView1"
+        android:id="@+id/progress_bar"
         android:layout_weight="30"/>
 
 </LinearLayout>

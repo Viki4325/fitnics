@@ -9,8 +9,10 @@ import android.widget.TextView;
 
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExerciseLogs;
+import com.group12.fitnics.business.AccessFood;
 import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.business.AccessUsers;
+import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.ProgressObject;
 import com.group12.fitnics.objects.User;
 import com.group12.fitnics.presentation.adapters.DietProgressAdapter;
@@ -24,6 +26,7 @@ public class DietProgressActivity extends AppCompatActivity {
 
     private AccessUsers accessUsers;
     private AccessFoodLogs accessFoodLogs;
+    private AccessFood accessFood;
 
     private User selectedUser;
 
@@ -31,6 +34,7 @@ public class DietProgressActivity extends AppCompatActivity {
     private TextView goalMessage;
 
     private ListView listView;
+    private DietProgressAdapter adapter;
 
     private ArrayList<ProgressObject> dietProgressList;
 
@@ -42,6 +46,7 @@ public class DietProgressActivity extends AppCompatActivity {
         //initialize
         accessUsers = new AccessUsers();
         accessFoodLogs = new AccessFoodLogs();
+        accessFood = new AccessFood();
         userLoggedIn();
         userGoal = findViewById(R.id.userGoal);
         goalMessage = findViewById(R.id.progress_message);
@@ -53,9 +58,8 @@ public class DietProgressActivity extends AppCompatActivity {
         //Create the ArrayList of Progress Objects
         dietProgressList = setUpProgressObjectList();
 
-        DietProgressAdapter adapter = new DietProgressAdapter(this, R.layout.progress_list_layout, dietProgressList);
+        adapter = new DietProgressAdapter(this, R.layout.progress_list_layout, dietProgressList);
         listView.setAdapter(adapter);
-
     }
 
     private void userLoggedIn(){
@@ -79,12 +83,30 @@ public class DietProgressActivity extends AppCompatActivity {
 
     private ArrayList<ProgressObject> setUpProgressObjectList() {
         ArrayList<ProgressObject> list = new ArrayList<ProgressObject>();
-        LocalDate newDate = LocalDate.of(2021, 4, 1);
+        LocalDate newDate = LocalDate.of(2021, 4, 10);
         while(!newDate.equals(LocalDate.now().plusDays(1))) {
-            list.add(0, new ProgressObject(newDate, 500, 90, (int) selectedUser.getDailyCaloricNeeds()));
+            int caloriesConsumed = calculateConsumption(newDate);
+            System.out.println("-----------------------------------------------------------------Calories consumed:" + caloriesConsumed);
+            list.add(0, new ProgressObject(newDate, caloriesConsumed, 0, (int) selectedUser.getDailyCaloricNeeds()));
             newDate = newDate.plusDays(1);
         }
 
         return list;
+    }
+
+    private int calculateConsumption(LocalDate date) {
+        int totalCalories = 0;
+        int grams = 0;
+        double caloriesPerGram = 0;
+
+        ArrayList<FoodLog> list = new ArrayList<>(accessFoodLogs.getFoodLogByUserDate(selectedUser.getUserID(), date));
+
+        for(int i=0; i<list.size(); i++) {
+            grams = list.get(i).getGrams();
+            caloriesPerGram = accessFood.searchByFoodID(list.get(i).getFoodID()).getCalories();
+            totalCalories += grams * caloriesPerGram;
+        }
+
+        return totalCalories;
     }
 }

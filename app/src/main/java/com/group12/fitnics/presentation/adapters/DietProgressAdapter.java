@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,9 +40,12 @@ public class DietProgressAdapter extends ArrayAdapter<ProgressObject> {
 
         TextView dayOfWeek = (TextView) convertView.findViewById(R.id.dayOfWeek);
         TextView date = (TextView) convertView.findViewById(R.id.date);
+        ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 
         dayOfWeek.setText(objects.get(position).getDate().format(DateTimeFormatter.ofPattern("EEEE")));
         date.setText(objects.get(position).getDate().format(DateTimeFormatter.ofPattern("MMMM d, YYYY")));
+        progressBar.setMax((int) (objects.get(position).getDailyCaloricNeeds()));
+        progressBar.setProgress(objects.get(position).getCaloriesConsumed());
 
         return convertView;
     }
