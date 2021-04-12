@@ -1,9 +1,13 @@
 package com.group12.fitnics.presentation;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,13 +17,14 @@ import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.business.UnitConverter;
 import com.group12.fitnics.objects.User;
+import com.hitomi.cmlibrary.CircleMenu;
+import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.timqi.sectorprogressview.ColorfulRingProgressView;
 
 import java.time.LocalDate;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private AccessUsers accessUsers;
     private AccessFoodLogs accessFoodLogs;
     private AccessExerciseLogs accessExerciseLogs;
     private ColorfulRingProgressView crpv;
@@ -33,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         crpv = (ColorfulRingProgressView) findViewById(R.id.crpv);
-        accessUsers = new AccessUsers();
+        AccessUsers accessUsers = new AccessUsers();
         accessFoodLogs = new AccessFoodLogs();
         accessExerciseLogs = new AccessExerciseLogs();
 
@@ -46,13 +51,14 @@ public class HomeActivity extends AppCompatActivity {
         paintCaloriesBurned();
         paintRemaining();
         printRingGraph();
+
     }
+
 
     private void userLoggedIn(){
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         selectedUser = (User) intent.getSerializableExtra("userLoggedIn");
-//        selectedUser = accessUsers.getUserByName(username);
     }
 
     /*
@@ -166,5 +172,6 @@ public class HomeActivity extends AppCompatActivity {
         paintCaloriesConsumed();
         printRingGraph();
     }
+
 
 }
