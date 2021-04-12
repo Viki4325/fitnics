@@ -75,14 +75,15 @@
         android:layout_weight="1">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnDietProgress"
             android:layout_width="224dp"
             android:layout_height="67dp"
             android:text="View Diet Progress"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="btnDietProgressOnClick"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

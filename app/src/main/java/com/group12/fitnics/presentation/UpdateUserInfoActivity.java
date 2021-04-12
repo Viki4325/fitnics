@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -51,7 +50,7 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
     }
 
     private void showUserName(String user_Name){
-        TextView userName = findViewById(R.id.userName);
+        TextView userName = findViewById(R.id.currentGoalText);
         userName.setText("");
         userName.setText(user_Name.toUpperCase());
     }

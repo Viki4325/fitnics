@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fitnics">
+        <activity android:name=".presentation.DietProgressActivity"></activity>
         <activity
             android:name=".presentation.IndividualFoodActivity"
             android:theme="@style/Theme.Fitnics.NoActionBar" />

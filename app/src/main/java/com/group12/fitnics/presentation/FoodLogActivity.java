@@ -19,8 +19,6 @@ import com.group12.fitnics.objects.Food;
 import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.objects.User;
 
-import org.w3c.dom.Text;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -134,5 +132,16 @@ public class FoodLogActivity extends AppCompatActivity implements DatePickerDial
         pickedDateText.setText(datePicked.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
         pickedDayText.setText(datePicked.format(DateTimeFormatter.ofPattern("EEEE")));
         setupList();
+    }
+
+    public void btnDietProgressOnClick(View v) {
+        generateIntent(DietProgressActivity.class);
+    }
+
+    private void generateIntent (Class to){
+
+        Intent intent = new Intent(FoodLogActivity.this, to);
+        intent.putExtra("userLoggedIn", selectedUser);
+        startActivity(intent);
     }
 }
