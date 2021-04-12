@@ -63,6 +63,7 @@ dependencies {
     //for circular image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    compile  'com.github.Hitomis:CircleMenu:v1.1.0'
 
 
 }
