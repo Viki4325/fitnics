@@ -151,11 +151,7 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    public void btnSetNotificationsOnClick(View v){
-//        Intent intent = new Intent(HomeActivity.this, CreateNotificationActivity.class);
-//        intent.putExtra("userID",Integer.toString(selectedUser.getUserID()));
-//        startActivity(intent);
-//    }
+    public void btnSetNotificationsOnClick(View v){ generateIntent(CreateNotificationActivity.class); }
 
 
     @Override

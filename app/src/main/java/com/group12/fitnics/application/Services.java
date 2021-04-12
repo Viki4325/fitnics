@@ -1,5 +1,10 @@
 package com.group12.fitnics.application;
 
+import com.group12.fitnics.persistence.INotificationLogPersistence;
+import com.group12.fitnics.persistence.INotificationPersistence;
+import com.group12.fitnics.persistence.hsqldb.NotificationLogPersistenceHSQLDB;
+import com.group12.fitnics.persistence.stub.NotificationLogPersistenceStub;
+import com.group12.fitnics.persistence.hsqldb.NotificationPersistenceHSQLDB;
 import com.group12.fitnics.persistence.stub.ExerciseLogPersistenceStub;
 import com.group12.fitnics.persistence.stub.ExercisePersistenceStub;
 import com.group12.fitnics.persistence.stub.FoodLogPersistenceStub;
@@ -9,6 +14,7 @@ import com.group12.fitnics.persistence.IExercisePersistence;
 import com.group12.fitnics.persistence.IFoodLogPersistence;
 import com.group12.fitnics.persistence.IFoodPersistence;
 import com.group12.fitnics.persistence.IUserPersistence;
+import com.group12.fitnics.persistence.stub.NotificationPersistenceStub;
 import com.group12.fitnics.persistence.stub.UserPersistenceStub;
 import com.group12.fitnics.persistence.hsqldb.ExerciseLogPersistenceHSQLDB;
 import com.group12.fitnics.persistence.hsqldb.ExercisePersistenceHSQLDB;
@@ -23,6 +29,8 @@ public class Services {
     private static IExerciseLogPersistence exerciseLogPersistence = null;
     private static IFoodPersistence foodPersistence = null;
     private static IExercisePersistence exercisePersistence = null;
+    private static INotificationPersistence notificationPersistence = null;
+    private static INotificationLogPersistence notificationLogPersistence = null;
 
     private static final boolean forProduction = true;
 
@@ -79,6 +87,28 @@ public class Services {
             }
         }
         return exercisePersistence;
+    }
+
+    public static INotificationLogPersistence getNotificationLogPersistence() {
+        if (notificationLogPersistence == null) {
+            if (forProduction) {
+                notificationLogPersistence = new NotificationLogPersistenceHSQLDB(Main.getDBPathName());
+            } else {
+                notificationLogPersistence = new NotificationLogPersistenceStub();
+            }
+        }
+        return notificationLogPersistence;
+    }
+
+    public static INotificationPersistence getNotificationPersistence() {
+        if (notificationPersistence == null) {
+            if (forProduction) {
+                notificationPersistence = new NotificationPersistenceHSQLDB(Main.getDBPathName());
+            } else {
+                notificationPersistence = new NotificationPersistenceStub();
+            }
+        }
+        return notificationPersistence;
     }
 
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@color/soft_white"
+    android:layout_marginTop="2dp">
+
+
+    <TextView
+        android:id="@+id/NotificationTitle"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="266dp"
+        android:layout_marginBottom="80dp"
+        android:text="TempTitle 1"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/NotificationTime"
+        android:layout_width="177dp"
+        android:layout_height="53dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="122dp"
+        android:layout_marginBottom="16dp"
+        android:text="XX:XX PM"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/ActiveBox"
+        android:layout_width="106dp"
+        android:layout_height="27dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="267dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="83dp"
+        android:text="Not Active"
+        android:textSize="20sp" />
+
+</RelativeLayout>

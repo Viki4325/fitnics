@@ -347,6 +347,15 @@
                 android:onClick="btnUpdateUserInfoOnClick"
                 android:text="Update Information" />
 
+            <Button
+                android:id="@+id/btnCreateNotification"
+                android:layout_width="201dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:onClick="btnSetNotificationsOnClick"
+                android:text="Set Notifications" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
