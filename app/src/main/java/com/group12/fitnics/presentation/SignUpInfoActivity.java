@@ -18,7 +18,6 @@ import android.widget.ToggleButton;
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.business.UnitConverter;
-import com.group12.fitnics.exceptions.InvalidUnitsException;
 import com.group12.fitnics.objects.User;
 
 import java.util.Calendar;
@@ -128,12 +127,9 @@ public class SignUpInfoActivity extends AppCompatActivity {
             updateWeightInfo();
             updateHeightInfo();
             insertUserInDB();
-
             setupIntent();
-        } catch (InvalidUnitsException e)
-        {
-            Messages.fatalError(this,e.getMessage());
-        } catch (Exception e){
+
+        }catch (Exception e){
             Messages.fatalError(this,e.getMessage());
         }
 
@@ -212,10 +208,8 @@ public class SignUpInfoActivity extends AppCompatActivity {
         }
     }
 
-    /*
-     * User's weight information stored as lbs's by default
-     * */
-    private void updateWeightInfo() throws InvalidUnitsException{
+    private void updateWeightInfo(){
+        EditText data = (EditText) findViewById(R.id.editWeight);
         if(choiceUnits[0] == 1)
         {//If kgs : then convert to default unit -> lbs
             newUser.setWeight(UnitConverter.KGToLB(getWeight()));
@@ -226,15 +220,18 @@ public class SignUpInfoActivity extends AppCompatActivity {
     }
 
     /*
-    * User's height information stored as ft's by default
+    * User's height information stored as cm's by default
     * */
-    private void updateHeightInfo() throws InvalidUnitsException{
+    private void updateHeightInfo(){
+        EditText data = (EditText) findViewById(R.id.editHeight);
         if(choiceUnits[1] == 1)
+        {//If fts : then convert to default unit -> kgs
+
+            newUser.setHeight(UnitConverter.FTToCM(getHeight()));
+
+        }else
         {
             newUser.setHeight(getHeight());
-        }else
-        {//If cm : then convert to default unit -> fts
-            newUser.setHeight(UnitConverter.CMToFT(getHeight()));
         }
     }
 
@@ -242,7 +239,7 @@ public class SignUpInfoActivity extends AppCompatActivity {
         Intent ActivityPage = new Intent(this, SignUpActiveLevelActivity.class);
         ActivityPage.putExtra("username",getUserName());
         startActivity(ActivityPage);
-        finish();
+
     }
 
     private void setupUnitSwitch(){
@@ -252,22 +249,22 @@ public class SignUpInfoActivity extends AppCompatActivity {
         weightSwitch.setTextOn("kgs");
         weightSwitch.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton toggleButton, boolean checkedState) {
-                updateWeight(checkedState);
-                //Update what units the user has
+            public void onCheckedChanged(CompoundButton toggleButton, boolean convertToKgs) {
+                updateWeight(convertToKgs);
+                //call setUnits to update what units the user has
                 setUnits();
             }
         }) ;
 
         heightSwitch = (ToggleButton) findViewById(R.id.heightUnitSwitch);
-        heightSwitch.setText("ft");
-        heightSwitch.setTextOff("ft");
-        heightSwitch.setTextOn("cm");
+        heightSwitch.setText("cm");
+        heightSwitch.setTextOff("cm");
+        heightSwitch.setTextOn("ft");
         heightSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean checkedState) {
-                updateHeight(checkedState);
-                //Update what units the user has
+            public void onCheckedChanged(CompoundButton compoundButton, boolean convertToFts) {
+                updateHeight(convertToFts);
+                //call setUnits to update what units the user has
                 setUnits();
             }
         });
@@ -275,14 +272,14 @@ public class SignUpInfoActivity extends AppCompatActivity {
     }
 
     /*
-    * IF weightSwitch is checked -> current unit is kgs (Need to be converted to lbs)
-    * IF weightSwitch is unchecked -> current unit is lb (Need to be converted to kgs)
+    * IF weightSwitch is checked -> current unit is LBS (Need to be converted to Kgs)
+    * IF weightSwitch is unchecked -> current unit is KGS (Need to be converted to LBS)
     * */
-    private void updateWeight(boolean checkedState) {
+    private void updateWeight(boolean convertToKgs) {
         try {
             EditText weightData = (EditText) findViewById(R.id.editWeight);
-
-            if(checkedState){
+            double currentValue = Double.parseDouble(weightData.getText().toString());
+            if(convertToKgs){
                 double toKg = UnitConverter.LBToKg(Double.parseDouble(weightData.getText().toString().trim()));
                 String toKgString = convertUnitToString(toKg,1);
                 setTextToEditText(weightData,toKgString);
@@ -298,22 +295,23 @@ public class SignUpInfoActivity extends AppCompatActivity {
     }
 
     /*
-     * IF heightSwitch is checked -> current unit is cm (Need to be converted to FT)
-     * IF heightSwitch is unchecked -> current unit is ft (Need to be converted to cm)
+     * IF heightSwitch is checked -> current unit is FT (Need to be converted to cm)
+     * IF heightSwitch is unchecked -> current unit is cm (Need to be converted to FT)
      * */
-    private void updateHeight(boolean checkedState) {
+    private void updateHeight(boolean convertToFts) {
         try {
-            //by default user types in lbs, ft
+            //by default user types in lbs, cm
             EditText heightData = (EditText) findViewById(R.id.editHeight);
 
-            if(checkedState){
-                double toCm = UnitConverter.FTToCM(Double.parseDouble(heightData.getText().toString().trim()));
-                String toCm_String = convertUnitToString(toCm,1);
-                setTextToEditText(heightData,toCm_String);
-            }else{
+            if(convertToFts){
                 double toFt = UnitConverter.CMToFT(Double.parseDouble(heightData.getText().toString().trim()));
                 String toFt_String = convertUnitToString(toFt,1);
                 setTextToEditText(heightData,toFt_String);
+
+            }else{
+                double toCm = UnitConverter.FTToCM(Double.parseDouble(heightData.getText().toString().trim()));
+                String toCm_String = convertUnitToString(toCm,1);
+                setTextToEditText(heightData,toCm_String);
             }
         }catch (Exception e){
             Toast.makeText(this,e.getLocalizedMessage(), LENGTH_SHORT).show();
@@ -336,9 +334,9 @@ public class SignUpInfoActivity extends AppCompatActivity {
         }
 
         if(heightSwitch.isChecked()){
-            choiceUnits[1] = 0; //if cm
+            choiceUnits[1] = 1; //if ft
         }else{
-            choiceUnits[1] = 1;  //if ft
+            choiceUnits[1] = 0;  //if cm
         }
         newUser.setUnits(choiceUnits);
     }
