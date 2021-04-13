@@ -1,5 +1,6 @@
 package com.group12.fitnics.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -78,8 +80,11 @@ public class IndividualExerciseLogActivity extends AppCompatActivity {
 
     public void updateMin(View view) {
         updateExerciseLog();
-        Toast.makeText(this,"Updating min",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Time updated.",Toast.LENGTH_SHORT).show();
+        //Go back to exercise log page
+        onBackPressed();
     }
+
     /*
     * Updating exercise log affects -> the minutes spent on an exercise
     *                               -> the calories the user has burnt (Invoke a method to receives the updates)
@@ -117,6 +122,8 @@ public class IndividualExerciseLogActivity extends AppCompatActivity {
     private int getExerciseMins(){
         return Integer.parseInt(String.valueOf(minutes_editText.getText()));
     }
+
+
 
     public boolean onSupportNavigateUp() {
         onBackPressed();

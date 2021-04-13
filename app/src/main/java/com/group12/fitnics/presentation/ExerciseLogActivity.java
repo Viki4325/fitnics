@@ -73,6 +73,7 @@ public class ExerciseLogActivity extends AppCompatActivity {
         userLoggedIn = (User) getIntent().getSerializableExtra("userLoggedIn");
     }
 
+
     /*
     * Updates info on this page
     * */
