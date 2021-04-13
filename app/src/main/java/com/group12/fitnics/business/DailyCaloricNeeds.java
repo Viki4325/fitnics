@@ -1,6 +1,6 @@
 package com.group12.fitnics.business;
 
-import com.group12.fitnics.objects.User.User;
+import com.group12.fitnics.objects.User;
 
 public class DailyCaloricNeeds {
 
@@ -11,6 +11,7 @@ public class DailyCaloricNeeds {
                 + (user.getGender().getAgeFactor() * user.getAge());
 
         return bmr * user.getActivityLevel().getHBFactor() + user.getGoal().getAddingTerm();
+
     }
 
 

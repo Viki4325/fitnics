@@ -1,6 +1,5 @@
 package com.group12.fitnics.presentation;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -19,7 +17,7 @@ import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExerciseLogs;
 import com.group12.fitnics.business.AccessExercises;
 import com.group12.fitnics.objects.ExerciseLog;
-import com.group12.fitnics.objects.User.User;
+import com.group12.fitnics.objects.User;
 
 import java.util.Objects;
 

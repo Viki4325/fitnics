@@ -1,6 +1,6 @@
 package com.group12.fitnics.persistence.stub;
 
-import com.group12.fitnics.objects.User.User;
+import com.group12.fitnics.objects.User;
 import com.group12.fitnics.persistence.IUserPersistence;
 
 import java.util.ArrayList;

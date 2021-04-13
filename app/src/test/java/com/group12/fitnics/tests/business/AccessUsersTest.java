@@ -4,7 +4,7 @@ import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.exceptions.InvalidUserException;
 import com.group12.fitnics.exceptions.InvalidUserNameException;
 import com.group12.fitnics.exceptions.UserNotFoundException;
-import com.group12.fitnics.objects.User.User;
+import com.group12.fitnics.objects.User;
 
 import org.junit.Before;
 import org.junit.Test;

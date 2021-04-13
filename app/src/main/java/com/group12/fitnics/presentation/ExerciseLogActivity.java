@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExerciseLogs;
 import com.group12.fitnics.objects.ExerciseLog;
-import com.group12.fitnics.objects.User.User;
+import com.group12.fitnics.objects.User;
 import com.group12.fitnics.presentation.adapters.ExerciseLogItemAdapter;
 
 import java.time.LocalDate;

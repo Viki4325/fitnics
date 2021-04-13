@@ -55,7 +55,7 @@
                     android:background="@drawable/purple_love"
                     android:fontFamily="@font/muli"
                     android:gravity="center"
-                    android:onClick="btnComplete"
+                    android:onClick="btnNotActive"
                     android:text="@string/not_activebtn"
                     android:padding="10dp"
                     android:layout_marginTop="7dp"
@@ -106,7 +106,7 @@
                     android:layout_gravity="center"
                     android:background="@drawable/purple_love"
                     android:fontFamily="@font/muli"
-                    android:onClick="btnComplete"
+                    android:onClick="btnSomeActive"
                     android:text="@string/somewhat_activebtn"
                     android:padding="10dp"
                     android:layout_marginTop="7dp"
@@ -156,8 +156,13 @@
                     android:layout_gravity="center"
                     android:background="@drawable/purple_love"
                     android:fontFamily="@font/muli"
+<<<<<<< Updated upstream
                     android:onClick="btnComplete"
                     android:text="@string/somewhat_activebtn"
+=======
+                    android:onClick="btnActive"
+                    android:text="@string/activebtn"
+>>>>>>> Stashed changes
                     android:padding="10dp"
                     android:layout_marginTop="7dp"
                     />
@@ -206,7 +211,7 @@
                     android:layout_gravity="center"
                     android:background="@drawable/purple_love"
                     android:fontFamily="@font/muli"
-                    android:onClick="btnComplete"
+                    android:onClick="veryActive"
                     android:text="@string/very_activebtn"
                     android:padding="10dp"
                     android:layout_marginTop="7dp"

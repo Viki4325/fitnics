@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
-import com.group12.fitnics.objects.User.User;
+import com.group12.fitnics.objects.User;
 
 public class LogInActivity extends AppCompatActivity {
 

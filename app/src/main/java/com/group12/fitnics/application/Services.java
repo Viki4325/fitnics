@@ -58,17 +58,17 @@ public class Services {
 
     private static void buildPersistence() {
         if (!initialized) {
-            userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
-            foodPersistence = new FoodPersistenceHSQLDB(Main.getDBPathName());
-            exercisePersistence = new ExercisePersistenceHSQLDB(Main.getDBPathName());
-            foodLogPersistence = new FoodLogPersistenceHSQLDB(Main.getDBPathName());
-            exerciseLogPersistence = new ExerciseLogPersistenceHSQLDB(Main.getDBPathName());
+//            userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
+//            foodPersistence = new FoodPersistenceHSQLDB(Main.getDBPathName());
+//            exercisePersistence = new ExercisePersistenceHSQLDB(Main.getDBPathName());
+//            foodLogPersistence = new FoodLogPersistenceHSQLDB(Main.getDBPathName());
+//            exerciseLogPersistence = new ExerciseLogPersistenceHSQLDB(Main.getDBPathName());
 
-//            userPersistence = new UserPersistenceStub();
-//            foodPersistence = new FoodPersistenceStub();
-//            exercisePersistence = new ExercisePersistenceStub();
-//            foodLogPersistence = new FoodLogPersistenceStub();
-//            exerciseLogPersistence = new ExerciseLogPersistenceStub();
+            userPersistence = new UserPersistenceStub();
+            foodPersistence = new FoodPersistenceStub();
+            exercisePersistence = new ExercisePersistenceStub();
+            foodLogPersistence = new FoodLogPersistenceStub();
+            exerciseLogPersistence = new ExerciseLogPersistenceStub();
         }
 
         initialized = true;

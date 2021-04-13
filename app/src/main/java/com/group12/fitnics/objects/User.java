@@ -1,6 +1,9 @@
-package com.group12.fitnics.objects.User;
+package com.group12.fitnics.objects;
 
 import com.group12.fitnics.business.DailyCaloricNeeds;
+import com.group12.fitnics.enums.ActivityLevel;
+import com.group12.fitnics.enums.Gender;
+import com.group12.fitnics.enums.Goal;
 import com.group12.fitnics.exceptions.InvalidSignUpDateException;
 import com.group12.fitnics.exceptions.InvalidUnitsException;
 import com.group12.fitnics.exceptions.InvalidUserNameException;
@@ -20,12 +23,12 @@ public class User implements Serializable {
     private int birthDay;
     private int birthMonth;
     private int birthYear;
-    private IActLvl activityLevel; // (previously) 0 - Not Active, 1 - Somewhat Active, 2 - Active, 3 - Very Active
+    private ActivityLevel activityLevel; // (previously) 0 - Not Active, 1 - Somewhat Active, 2 - Active, 3 - Very Active
     private double weight;
     private double height;
-    private IGender gender; // (previously) 'M' - Male, 'F' - Female, 'O' - Other
+    private Gender gender; // (previously) 'M' - Male, 'F' - Female, 'O' - Other
     private double dailyCaloricNeeds;
-    private IGoal goal; // (previously) 0 - Lose Weight, 1 - Maintain Weight, 2 - Gain Weight
+    private Goal goal; // (previously) 0 - Lose Weight, 1 - Maintain Weight, 2 - Gain Weight
     // lastUserID is 3 because we are currently using a fake database for users.
     private static int lastUserID = -1;
     //units 0 - weight[0 - lbs, 1 - kg], 1 - height[0 - cm, 1 - ft]
@@ -33,25 +36,25 @@ public class User implements Serializable {
 
     public User(){}
 
-    public User(String username, IActLvl activityLevel, double weight, double height, IGender gender) {
+    public User(String username, int activityLevel, double weight, double height, char gender) {
         this.username = username;
-        this.activityLevel = activityLevel;
+        this.activityLevel = ActivityLevel.valueOf(activityLevel);
         this.weight = weight;
         this.height = height;
-        this.gender = gender;
+        this.gender = Gender.valueOf(gender);
         this.dailyCaloricNeeds = DailyCaloricNeeds.resetDailyCaloricNeeds(this);
     }
 
-    public User(String username, int bD, int bM, int bY, IActLvl actLvl, double w, double h, IGender gender, IGoal goal, int[] units) {
+    public User(String username, int bD, int bM, int bY, int actLvl, double w, double h, char gender, int goal, int[] units) {
         this.username = username;
         this.birthDay = bD;
         this.birthMonth = bM;
         this.birthYear = bY;
-        this.activityLevel = actLvl;
+        this.activityLevel = ActivityLevel.valueOf(actLvl);
         this.weight = w;
         this.height = h;
-        this.gender = gender;
-        this.goal = goal;
+        this.gender = Gender.valueOf(gender);
+        this.goal = Goal.valueOf(goal);
         this.units = units;
         this.dailyCaloricNeeds = DailyCaloricNeeds.resetDailyCaloricNeeds(this);
     }
@@ -83,15 +86,15 @@ public class User implements Serializable {
         return username;
     }
 
-    public IActLvl getActivityLevel() {
+    public ActivityLevel getActivityLevel() {
         return activityLevel;
     }
 
-    public IGender getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setActivityLevel(IActLvl activityLevel) {
+    public void setActivityLevel(ActivityLevel activityLevel) {
         this.activityLevel = activityLevel;
     }
 
@@ -103,7 +106,7 @@ public class User implements Serializable {
         dailyCaloricNeeds = (int) caloryAmount;
     }
 
-    public void setGender(IGender gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -160,7 +163,7 @@ public class User implements Serializable {
         return birthYear;
     }
 
-    public IGoal getGoal() {
+    public Goal getGoal() {
         return goal;
     }
 
@@ -189,7 +192,7 @@ public class User implements Serializable {
         }
     }
 
-    public void setGoal(IGoal goal) {
+    public void setGoal(Goal goal) {
         this.goal = goal;
     }
 

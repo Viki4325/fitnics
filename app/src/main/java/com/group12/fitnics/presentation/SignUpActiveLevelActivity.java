@@ -10,12 +10,14 @@ import android.view.View;
 
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
-import com.group12.fitnics.objects.User.User;
+import com.group12.fitnics.enums.ActivityLevel;
+import com.group12.fitnics.objects.User;
 
 public class SignUpActiveLevelActivity extends AppCompatActivity {
 
     private User newUser;
     private AccessUsers accessUsers;
+    private ActivityLevel activityLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,23 +36,34 @@ public class SignUpActiveLevelActivity extends AppCompatActivity {
     //Probably make separate code or method for this.
     //Looks like code smell -> Coz of the if statements
 
-    public void btnComplete(View v)
-    {
-        int activityLevel = -1;
-        if(v == findViewById(R.id.NotActivebtn))
-            activityLevel = 0;
-        else if(v == findViewById(R.id.SomewhatActivebtn))
-            activityLevel = 1;
-        else if(v == findViewById(R.id.Activebtn))
-            activityLevel = 2;
-        else if(v == findViewById(R.id.VeryActivebtn))
-            activityLevel = 3;
+    public void btnNotActive(View v){
+        activityLevel = ActivityLevel.NOT_ACTIVE;
+        setUserActivityLevel(activityLevel);
+    }
+    public void btnActive(View v){
+        activityLevel = ActivityLevel.ACTIVE;
+        setUserActivityLevel(activityLevel);
+    }
+    public void btnSomeActive(View v){
+        activityLevel = ActivityLevel.SOMEWHAT_ACTIVE;
+        setUserActivityLevel(activityLevel);
+    }
+    public void veryActive(View v){
+        activityLevel = ActivityLevel.VERY_ACTIVE;
+        setUserActivityLevel(activityLevel);
+    }
 
-        newUser.setActivityLevel(activityLevel);
-
+    private void setUserActivityLevel(ActivityLevel userActivityLevel){
+        newUser.setActivityLevel(userActivityLevel);
         accessUsers.updateUser(newUser.getUserID(), newUser);
+        //After finishing the setting up and updating
+        goToLogInScreen();
+    }
 
-        //send the user to the login page with a message
+    /*
+    * Sends the user to the log in page after finishing the last step of signing up
+    * */
+    public void goToLogInScreen(){
         Intent logInToHomeIntent = new Intent(this, LogInActivity.class);
         AlertDialog welcome = Messages.welcome(this,"You are signed up. You will be redirected to the login page where you can login using your username. Thank you for signing up. \nYour goals are now our priority.","Welcome to Fitnics");
         welcome.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -62,6 +75,6 @@ public class SignUpActiveLevelActivity extends AppCompatActivity {
                 startActivity(logInToHomeIntent);
             }
         });
-
     }
+
 }

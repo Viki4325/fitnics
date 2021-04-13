@@ -6,7 +6,7 @@ import com.group12.fitnics.exceptions.InvalidUserException;
 import com.group12.fitnics.exceptions.InvalidUserNameException;
 import com.group12.fitnics.exceptions.UserNotFoundException;
 import com.group12.fitnics.objects.FoodLog;
-import com.group12.fitnics.objects.User.User;
+import com.group12.fitnics.objects.User;
 import com.group12.fitnics.persistence.IFoodLogPersistence;
 import com.group12.fitnics.persistence.IFoodPersistence;
 import com.group12.fitnics.persistence.IUserPersistence;

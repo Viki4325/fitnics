@@ -12,7 +12,7 @@ import android.widget.SearchView;
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessExercises;
 import com.group12.fitnics.objects.Exercise;
-import com.group12.fitnics.objects.User.User;
+import com.group12.fitnics.objects.User;
 import com.group12.fitnics.presentation.adapters.ExerciseAdapter;
 
 import java.util.ArrayList;

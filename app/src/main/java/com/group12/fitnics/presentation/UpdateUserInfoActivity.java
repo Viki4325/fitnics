@@ -15,7 +15,10 @@ import android.widget.ToggleButton;
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.business.UnitConverter;
-import com.group12.fitnics.objects.User.User;
+import com.group12.fitnics.enums.ActivityLevel;
+import com.group12.fitnics.enums.Gender;
+import com.group12.fitnics.enums.Goal;
+import com.group12.fitnics.objects.User;
 
 import static com.group12.fitnics.business.UnitConverter.convertUnitToString;
 
@@ -59,14 +62,14 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
         String[] goal_array = getResources().getStringArray(R.array.goals);
         TextView goal = findViewById(R.id.goal);
         goal.setText("");
-        goal.setText(goal_array[selectedUser.getGoal()]);
+        goal.setText(goal_array[selectedUser.getGoal().getValue()]);
     }
 
     private void showActivityLevel(){
         String[] level_array = getResources().getStringArray(R.array.activityLevels);
         TextView activity = findViewById(R.id.activityLevel);
         activity.setText("");
-        activity.setText(level_array[selectedUser.getActivityLevel()]);
+        activity.setText(level_array[selectedUser.getActivityLevel().getValue()]);
     }
 
     private void showInitWeight(double weight_){
@@ -190,15 +193,15 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
 
     private void updateGender(){
         Spinner choice = (Spinner) findViewById(R.id.genderSpinner);
-        selectedUser.setGender(choice.getSelectedItem().toString().charAt(0));
+        selectedUser.setGender(Gender.valueOf(choice.getSelectedItem().toString().charAt(0)));
     }
     private void updateGoal(){
         Spinner choice = (Spinner) findViewById(R.id.goalSpinner);
-        selectedUser.setGoal(choice.getSelectedItemPosition());
+        selectedUser.setGoal(Goal.valueOf(choice.getSelectedItemPosition()));
     }
     private void updateActivity(){
         Spinner choice = (Spinner) findViewById(R.id.activityLevelSpinner);
-        selectedUser.setActivityLevel(choice.getSelectedItemPosition());
+        selectedUser.setActivityLevel(ActivityLevel.valueOf(choice.getSelectedItemPosition()));
     }
     private void updateWeight(){
         EditText weightData = (EditText) findViewById(R.id.editWeight);
@@ -214,7 +217,7 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
         ArrayAdapter<String> goalAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.goals));
         goalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         goals.setAdapter(goalAdapter);
-        goals.setSelection(selectedUser.getGoal());
+        goals.setSelection(selectedUser.getGoal().getValue());
 
     }
 
@@ -223,7 +226,7 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
         ArrayAdapter<String> activityLevelAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.activityLevels));
         activityLevelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         activityLevel.setAdapter(activityLevelAdapter);
-        activityLevel.setSelection(selectedUser.getActivityLevel());
+        activityLevel.setSelection(selectedUser.getActivityLevel().getValue());
     }
 
 
@@ -232,20 +235,7 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Genders));
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Gender.setAdapter(genderAdapter);
-        Gender.setSelection(getGender());
-    }
-
-    //CAN GO TO USERS
-    private int getGender(){
-        int selection = -1;
-        if(selectedUser.getGender() == 'M'){
-            selection = 0;
-        }else if(selectedUser.getGender() == 'F'){
-            selection = 1;
-        }else if(selectedUser.getGender() == 'O'){
-            selection = 2;
-        }
-        return selection;
+        Gender.setSelection(selectedUser.getGender().getPos());
     }
 
 

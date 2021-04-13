@@ -14,7 +14,7 @@ import java.util.List;
 
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessFood;
-import com.group12.fitnics.objects.User.User;
+import com.group12.fitnics.objects.User;
 import com.group12.fitnics.objects.Food;
 import com.group12.fitnics.presentation.adapters.FoodAdapter;
 

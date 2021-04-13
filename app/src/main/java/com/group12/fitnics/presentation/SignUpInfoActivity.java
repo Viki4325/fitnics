@@ -18,7 +18,9 @@ import android.widget.ToggleButton;
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.business.UnitConverter;
-import com.group12.fitnics.objects.User.User;
+import com.group12.fitnics.enums.Gender;
+import com.group12.fitnics.enums.Goal;
+import com.group12.fitnics.objects.User;
 
 import java.util.Calendar;
 
@@ -42,7 +44,7 @@ public class SignUpInfoActivity extends AppCompatActivity {
         newUser = new User();
         accessUsers = new AccessUsers();
         Intent intent = getIntent();
-        newUser.setGoal(intent.getIntExtra("goal",-1));
+        newUser.setGoal(Goal.valueOf(intent.getIntExtra("goal",-1)));
 
         Spinner Gender = (Spinner) findViewById(R.id.chooseGender);
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Genders));
@@ -185,9 +187,9 @@ public class SignUpInfoActivity extends AppCompatActivity {
         }
     }
 
-    private char getGender(){
+    private Gender getGender(){
         Spinner choice = (Spinner) findViewById(R.id.chooseGender);
-        return choice.getSelectedItem().toString().charAt(0);
+        return Gender.valueOf(choice.getSelectedItem().toString().charAt(0));
     }
 
     private Double getWeight()   {
