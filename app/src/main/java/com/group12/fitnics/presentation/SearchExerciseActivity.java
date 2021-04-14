@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -16,7 +15,6 @@ import com.group12.fitnics.objects.Exercise;
 import com.group12.fitnics.objects.User;
 import com.group12.fitnics.presentation.adapters.ExerciseAdapter;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -5,6 +5,7 @@ import com.group12.fitnics.exceptions.ExerciseNotFoundException;
 import com.group12.fitnics.exceptions.InvalidExNameException;
 import com.group12.fitnics.exceptions.InvalidExerciseException;
 import com.group12.fitnics.objects.Exercise;
+import com.group12.fitnics.persistence.stub.ExercisePersistenceStub;
 
 import static org.junit.Assert.*;
 import org.junit.AfterClass;
@@ -43,7 +44,7 @@ public class AccessExercisesTest {
 
     @Before
     public void setup(){
-        exerciseHandler = new AccessExercises();
+        exerciseHandler = new AccessExercises(new ExercisePersistenceStub());
 
         //id 0
          axe_Hold = new Exercise(

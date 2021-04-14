@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.group12.fitnics.R;
+import com.group12.fitnics.enums.Goal;
 
 public class SignUpActivity extends AppCompatActivity {
+
+    private Goal goal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,16 +19,24 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
     }
 
-    public void btnSetGoal(View v) {
-        int goal = -1;
-        if(v == findViewById(R.id.loseWeightbtn))
-            goal = 0;
-        else if(v == findViewById(R.id.maintianWeightbtn))
-            goal = 1;
-        else if(v == findViewById(R.id.gainWeightbtn))
-            goal = 2;
-        Intent SignUpInfo = new Intent(this, SignUpInfoActivity.class);
-        SignUpInfo.putExtra("goal",goal);
-        startActivity(SignUpInfo);
+    public void btnLoseWeight(View v) {
+        goal = Goal.GOAL_LOSE;
+        goSignUpInfoScreen();
+    }
+
+    public void btnMaintainWeight(View v) {
+        goal = Goal.GOAL_MAINTAIN;
+        goSignUpInfoScreen();
+    }
+
+    public void btnGainWeight(View v) {
+        goal = Goal.GOAL_GAIN;
+        goSignUpInfoScreen();
+    }
+
+    public void goSignUpInfoScreen() {
+        Intent intent = new Intent(this, SignUpInfoActivity.class);
+        intent.putExtra("goal", goal.getValue());
+        startActivity(intent);
     }
 }

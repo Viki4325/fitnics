@@ -4,6 +4,8 @@ import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.exceptions.FoodLogNotFoundException;
 import com.group12.fitnics.exceptions.InvalidFoodLogException;
 import com.group12.fitnics.objects.FoodLog;
+import com.group12.fitnics.persistence.stub.FoodLogPersistenceStub;
+import com.group12.fitnics.persistence.stub.FoodPersistenceStub;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +23,7 @@ public class AccessFoodLogsTest {
     @Before
     public void setUp() {
         System.out.println("Starting test for AccessFoodLogs");
-        accessFoodLogs = new AccessFoodLogs();
+        accessFoodLogs = new AccessFoodLogs(new FoodLogPersistenceStub(), new FoodPersistenceStub());
         date = LocalDate.of(2021, 1, 1);
     }
 

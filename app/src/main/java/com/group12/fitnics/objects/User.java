@@ -1,6 +1,9 @@
 package com.group12.fitnics.objects;
 
 import com.group12.fitnics.business.DailyCaloricNeeds;
+import com.group12.fitnics.enums.ActivityLevel;
+import com.group12.fitnics.enums.Gender;
+import com.group12.fitnics.enums.Goal;
 import com.group12.fitnics.exceptions.InvalidSignUpDateException;
 import com.group12.fitnics.exceptions.InvalidUnitsException;
 import com.group12.fitnics.exceptions.InvalidUserNameException;
@@ -20,15 +23,12 @@ public class User implements Serializable {
     private int birthDay;
     private int birthMonth;
     private int birthYear;
-    // activityLevel: 0 - Not Active, 1 - Somewhat Active, 2 - Active, 3 - Very Active
-    private int activityLevel;
+    private ActivityLevel activityLevel; // (previously) 0 - Not Active, 1 - Somewhat Active, 2 - Active, 3 - Very Active
     private double weight;
     private double height;
-    // gender: 'M' - Male, 'F' - Female, 'O' - Other
-    private char gender;
+    private Gender gender; // (previously) 'M' - Male, 'F' - Female, 'O' - Other
     private double dailyCaloricNeeds;
-    // goal: 0 - Loose Weight, 1 - Maintain Weight, 2 - Gain Weight
-    private int goal;
+    private Goal goal; // (previously) 0 - Lose Weight, 1 - Maintain Weight, 2 - Gain Weight
     // lastUserID is 3 because we are currently using a fake database for users.
     private static int lastUserID = -1;
     //units 0 - weight[0 - lbs, 1 - kg], 1 - height[0 - cm, 1 - ft]
@@ -38,19 +38,11 @@ public class User implements Serializable {
 
     public User(String username, int activityLevel, double weight, double height, char gender) {
         this.username = username;
-        this.activityLevel = activityLevel;
+        this.activityLevel = ActivityLevel.valueOf(activityLevel);
         this.weight = weight;
         this.height = height;
-        this.gender = gender;
+        this.gender = Gender.valueOf(gender);
         this.dailyCaloricNeeds = DailyCaloricNeeds.resetDailyCaloricNeeds(this);
-        this.activityLevel = 0;
-    }
-
-    public int getAge() {
-        LocalDate birthday = LocalDate.of(birthYear, birthMonth, birthDay);
-        LocalDate today = LocalDate.now();
-        Period age = Period.between(birthday, today);
-        return age.getYears();
     }
 
     public User(String username, int bD, int bM, int bY, int actLvl, double w, double h, char gender, int goal, int[] units) {
@@ -58,13 +50,20 @@ public class User implements Serializable {
         this.birthDay = bD;
         this.birthMonth = bM;
         this.birthYear = bY;
-        this.activityLevel = actLvl;
+        this.activityLevel = ActivityLevel.valueOf(actLvl);
         this.weight = w;
         this.height = h;
-        this.gender = gender;
-        this.goal = goal;
+        this.gender = Gender.valueOf(gender);
+        this.goal = Goal.valueOf(goal);
         this.units = units;
         this.dailyCaloricNeeds = DailyCaloricNeeds.resetDailyCaloricNeeds(this);
+    }
+
+    public int getAge() {
+        LocalDate birthday = LocalDate.of(birthYear, birthMonth, birthDay);
+        LocalDate today = LocalDate.now();
+        Period age = Period.between(birthday, today);
+        return age.getYears();
     }
 
     public double getHeight() {
@@ -87,15 +86,15 @@ public class User implements Serializable {
         return username;
     }
 
-    public int getActivityLevel() {
+    public ActivityLevel getActivityLevel() {
         return activityLevel;
     }
 
-    public char getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setActivityLevel(int activityLevel) {
+    public void setActivityLevel(ActivityLevel activityLevel) {
         this.activityLevel = activityLevel;
     }
 
@@ -107,7 +106,7 @@ public class User implements Serializable {
         dailyCaloricNeeds = (int) caloryAmount;
     }
 
-    public void setGender(char gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -164,7 +163,7 @@ public class User implements Serializable {
         return birthYear;
     }
 
-    public int getGoal() {
+    public Goal getGoal() {
         return goal;
     }
 
@@ -193,7 +192,7 @@ public class User implements Serializable {
         }
     }
 
-    public void setGoal(int goal) {
+    public void setGoal(Goal goal) {
         this.goal = goal;
     }
 

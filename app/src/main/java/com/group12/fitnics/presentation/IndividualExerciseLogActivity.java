@@ -78,8 +78,11 @@ public class IndividualExerciseLogActivity extends AppCompatActivity {
 
     public void updateMin(View view) {
         updateExerciseLog();
-        Toast.makeText(this,"Updating min",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Time updated.",Toast.LENGTH_SHORT).show();
+        //Go back to exercise log page
+        onBackPressed();
     }
+
     /*
     * Updating exercise log affects -> the minutes spent on an exercise
     *                               -> the calories the user has burnt (Invoke a method to receives the updates)
@@ -117,6 +120,8 @@ public class IndividualExerciseLogActivity extends AppCompatActivity {
     private int getExerciseMins(){
         return Integer.parseInt(String.valueOf(minutes_editText.getText()));
     }
+
+
 
     public boolean onSupportNavigateUp() {
         onBackPressed();
