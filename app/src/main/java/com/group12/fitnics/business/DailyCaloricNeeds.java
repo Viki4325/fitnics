@@ -8,8 +8,7 @@ public class DailyCaloricNeeds {
         double bmr = user.getGender().getAddingTerm()
                 + (user.getGender().getWeightFactor() * user.getWeight())
                 + (user.getGender().getHeightFactor() * user.getHeight())
-                + (user.getGender().getAgeFactor() * user.getAge());
-
+                - (user.getGender().getAgeFactor() * user.getAge());
         return bmr * user.getActivityLevel().getHBFactor() + user.getGoal().getAddingTerm();
 
     }

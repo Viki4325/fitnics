@@ -156,13 +156,8 @@
                     android:layout_gravity="center"
                     android:background="@drawable/purple_love"
                     android:fontFamily="@font/muli"
-<<<<<<< Updated upstream
-                    android:onClick="btnComplete"
-                    android:text="@string/somewhat_activebtn"
-=======
                     android:onClick="btnActive"
                     android:text="@string/activebtn"
->>>>>>> Stashed changes
                     android:padding="10dp"
                     android:layout_marginTop="7dp"
                     />

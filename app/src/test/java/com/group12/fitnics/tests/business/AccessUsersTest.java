@@ -1,10 +1,13 @@
 package com.group12.fitnics.tests.business;
 
 import com.group12.fitnics.business.AccessUsers;
+import com.group12.fitnics.enums.ActivityLevel;
+import com.group12.fitnics.enums.Gender;
 import com.group12.fitnics.exceptions.InvalidUserException;
 import com.group12.fitnics.exceptions.InvalidUserNameException;
 import com.group12.fitnics.exceptions.UserNotFoundException;
 import com.group12.fitnics.objects.User;
+import com.group12.fitnics.persistence.stub.UserPersistenceStub;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +24,7 @@ public class AccessUsersTest {
     @Before
     public void setUp() {
         System.out.println("Starting test for AccessUsers");
-        accessUsers = new AccessUsers();
+        accessUsers = new AccessUsers(new UserPersistenceStub());
     }
 
     @Test
@@ -73,10 +76,10 @@ public class AccessUsersTest {
         assertNotNull(accessUsers.getUserByName("eve"));
         assertEquals(id, accessUsers.getUserByName("eve").getUserID());
         assertEquals("eve", accessUsers.getUserByName("eve").getUsername());
-        assertEquals(1, accessUsers.getUserByName("eve").getActivityLevel());
+        assertEquals(ActivityLevel.SOMEWHAT_ACTIVE, accessUsers.getUserByName("eve").getActivityLevel());
         assertEquals(47.0, accessUsers.getUserByName("eve").getWeight(), 0.0001);
         assertEquals(160.0, accessUsers.getUserByName("eve").getHeight(), 0.0001);
-        assertEquals('F', accessUsers.getUserByName("eve").getGender());
+        assertEquals(Gender.FEMALE, accessUsers.getUserByName("eve").getGender());
 
         // delete what we just added
         accessUsers.deleteUser(id);
@@ -116,7 +119,7 @@ public class AccessUsersTest {
         accessUsers.updateUser(0, updatedAlice);
 
         User alice = accessUsers.getUserByName("alice");
-        assertEquals(2, alice.getActivityLevel());
+        assertEquals(ActivityLevel.ACTIVE, alice.getActivityLevel());
         assertEquals(49, alice.getWeight(), 0.0001);
         assertEquals(163, alice.getHeight(), 0.0001);
 

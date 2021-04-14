@@ -18,6 +18,7 @@ import android.widget.ToggleButton;
 import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessUsers;
 import com.group12.fitnics.business.UnitConverter;
+import com.group12.fitnics.enums.ActivityLevel;
 import com.group12.fitnics.enums.Gender;
 import com.group12.fitnics.enums.Goal;
 import com.group12.fitnics.objects.User;
@@ -124,6 +125,7 @@ public class SignUpInfoActivity extends AppCompatActivity {
         try {
             setUserName();
             setBirthday();
+            setActivityLevelTemp();
             setGender();
             setUnits();
             updateWeightInfo();
@@ -148,6 +150,11 @@ public class SignUpInfoActivity extends AppCompatActivity {
         newUser.setBirthDay(getDay());
         newUser.setBirthMonth(getMonth());
         newUser.setBirthYear(getYear());
+    }
+
+    // User will select act.lvl. at the next page, so set it temporarily NOT_ACTIVE just for now.
+    private void setActivityLevelTemp() {
+        newUser.setActivityLevel(ActivityLevel.NOT_ACTIVE);
     }
 
     private void setUserName(){

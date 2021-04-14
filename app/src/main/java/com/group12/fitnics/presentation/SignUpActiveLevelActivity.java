@@ -33,9 +33,6 @@ public class SignUpActiveLevelActivity extends AppCompatActivity {
 
     }
 
-    //Probably make separate code or method for this.
-    //Looks like code smell -> Coz of the if statements
-
     public void btnNotActive(View v){
         activityLevel = ActivityLevel.NOT_ACTIVE;
         setUserActivityLevel(activityLevel);

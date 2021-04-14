@@ -49,22 +49,22 @@ public enum Gender {
     OTHER('O',2){
         @Override
         public double getHeightFactor() {
-            return 0;
+            return 12.9;
         }
 
         @Override
         public double getWeightFactor() {
-            return 0;
+            return 6.3;
         }
 
         @Override
         public double getAgeFactor() {
-            return 0;
+            return 6.8;
         }
 
         @Override
         public int getAddingTerm() {
-            return 0;
+            return 66;
         }
     };
 

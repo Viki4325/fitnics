@@ -19,7 +19,7 @@ public enum Goal {
             return 0;
         }
     },
-    GOAL_LOOSE(1){
+    GOAL_LOSE(1){
         @Override
         public double getAddingTerm(){
             return -750;

@@ -116,7 +116,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             st.setInt(5, currentUser.getActivityLevel().getValue());
             st.setDouble(6, currentUser.getWeight());
             st.setDouble(7, currentUser.getHeight());
-            st.setString(8, String.valueOf(currentUser.getGender()));
+            st.setString(8, String.valueOf(currentUser.getGender().getValue()));
             st.setDouble(9, currentUser.getDailyCaloricNeeds());
             st.setInt(10, currentUser.getGoal().getValue());
             String wUnit = "lbs";
@@ -148,7 +148,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             st.setInt(2, currentUser.getActivityLevel().getValue());
             st.setDouble(3, currentUser.getWeight());
             st.setDouble(4, currentUser.getHeight());
-            st.setString(5, String.valueOf(currentUser.getGender()));
+            st.setString(5, String.valueOf(currentUser.getGender().getValue()));
             st.setDouble(6, currentUser.getDailyCaloricNeeds());
             st.setInt(7, currentUser.getGoal().getValue());
             st.setString(8, Integer.toString(userID));

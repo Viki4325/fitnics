@@ -10,16 +10,16 @@ public enum ActivityLevel {
             return 1.2;
         }
     },
-    ACTIVE(2){
-        @Override
-        public double getHBFactor() {
-            return 1.725;
-        }
-    },
     SOMEWHAT_ACTIVE(1){
         @Override
         public double getHBFactor() {
             return 1.55;
+        }
+    },
+    ACTIVE(2){
+        @Override
+        public double getHBFactor() {
+            return 1.725;
         }
     },
     VERY_ACTIVE(3){

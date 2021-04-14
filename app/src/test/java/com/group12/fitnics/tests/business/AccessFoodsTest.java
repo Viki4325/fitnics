@@ -10,6 +10,7 @@ import com.group12.fitnics.objects.Exercise;
 import com.group12.fitnics.objects.Food;
 import com.group12.fitnics.business.AccessFood;
 import com.group12.fitnics.persistence.IExercisePersistence;
+import com.group12.fitnics.persistence.stub.FoodPersistenceStub;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class AccessFoodsTest {
 
     @Before
     public void setUp() {
-        accessFood = new AccessFood();
+        accessFood = new AccessFood(new FoodPersistenceStub());
         food = new Food(10, "Orange", 1.5);
     }
 

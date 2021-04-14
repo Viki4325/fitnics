@@ -97,9 +97,9 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
     private String getHeightUnits(){
         int[] units = selectedUser.getUnits();
         String heightUnit = "";
-        if(units[0] == 1){
+        if(units[1] == 1){
             heightUnit =  "fts";
-        }else if(units[0] == 0){
+        }else if(units[1] == 0){
             heightUnit = "cm";
         }
         return heightUnit;
