@@ -28,12 +28,13 @@ import com.group12.fitnics.presentation.adapters.NotificationLogItemAdapter;
 import java.util.Calendar;
 
 public class CreateNotificationActivity extends AppCompatActivity {
+
     TimePickerDialog picker;
     ListView NotificationListView;
     FloatingActionButton add;
     private AccessNotificationLogs log;
     Calendar c;
-    User user;
+    User selectedUser;
     int size;
     AccessNotification accessNotification;
 
@@ -43,17 +44,11 @@ public class CreateNotificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_notification);
 
-        user = (User) getIntent().getSerializableExtra("userLoggedIn");
-        if(user == null){
-            System.out.println("Null User");
-            user = new User();
-            user.setUserID();
-        }
-
         add = (FloatingActionButton) findViewById(R.id.addNotificationBtn);
         log = new AccessNotificationLogs();
         accessNotification = new AccessNotification();
 
+        getUserLoggedIn();
         setupList();
         setupPickerOnClickListener();
         setupListOnClickListener();
@@ -61,7 +56,7 @@ public class CreateNotificationActivity extends AppCompatActivity {
 
     private void setupList(){
         NotificationListView = (ListView) findViewById(R.id.NotificationList);
-        NotificationLogItemAdapter adapter = (NotificationLogItemAdapter) new NotificationLogItemAdapter(getApplicationContext(),0,log.getNotificationLogByUser(user.getUserID()));
+        NotificationLogItemAdapter adapter = (NotificationLogItemAdapter) new NotificationLogItemAdapter(getApplicationContext(),0,log.getNotificationLogByUser(selectedUser.getUserID()));
         NotificationListView.setAdapter(adapter);
         size = NotificationListView.getAdapter().getCount();
     }
@@ -75,7 +70,7 @@ public class CreateNotificationActivity extends AppCompatActivity {
                 NotificationLog selectNotificationLog = (NotificationLog) (NotificationListView.getItemAtPosition(position));
 
                 Intent showDetail = new Intent(getApplicationContext(), IndividualNotificationActivity.class);
-                showDetail.putExtra("user", user);
+                showDetail.putExtra("user", selectedUser);
                 showDetail.putExtra("NotificationLogSelected",  selectNotificationLog);
                 startActivity(showDetail);
 
@@ -110,9 +105,9 @@ public class CreateNotificationActivity extends AppCompatActivity {
         c.set(Calendar.MINUTE,min);
         c.set(Calendar.SECOND,0);
 
-        Notification notify = new Notification("Notification"+size,hour,min,true);
+        Notification notify = new Notification("Notification "+size,hour,min,true);
         notify.setNotificationID();
-        NotificationLog notifyLog = new NotificationLog(title,user.getUserID(),notify.getNotificationID(),hour,min);
+        NotificationLog notifyLog = new NotificationLog(title,selectedUser.getUserID(),notify.getNotificationID(),hour,min);
         accessNotification.insertNotification(notify);
         log.insertNotificationLog(notifyLog);
 
@@ -141,6 +136,21 @@ public class CreateNotificationActivity extends AppCompatActivity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,intent,0);
 
         alarmManager.cancel(pendingIntent);
+    }
+
+    private void getUserLoggedIn(){
+        selectedUser = (User) getIntent().getSerializableExtra("userLoggedIn");
+        if(selectedUser == null){
+            selectedUser = new User();
+            selectedUser.setUserID(-1);
+        }
+    }
+
+    public void backOnClick(View v){
+        Intent back = new Intent(getApplicationContext(), HomeActivity.class);
+        back.putExtra("userLoggedIn", selectedUser);
+        back.putExtra("username",selectedUser.getUsername());
+        startActivity(back);
     }
 
     /*

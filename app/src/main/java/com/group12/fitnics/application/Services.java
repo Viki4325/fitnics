@@ -32,7 +32,7 @@ public class Services {
     private static INotificationPersistence notificationPersistence = null;
     private static INotificationLogPersistence notificationLogPersistence = null;
 
-    private static final boolean forProduction = true;
+    private static final boolean forProduction = false;
 
     public static IUserPersistence getUserPersistence() {
         if (userPersistence == null) {

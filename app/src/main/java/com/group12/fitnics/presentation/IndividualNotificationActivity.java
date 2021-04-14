@@ -6,6 +6,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import com.group12.fitnics.business.AccessNotificationLogs;
 import com.group12.fitnics.business.NotificationBuilder;
 import com.group12.fitnics.objects.Notification;
 import com.group12.fitnics.objects.NotificationLog;
+import com.group12.fitnics.objects.User;
 
 import org.w3c.dom.Text;
 
@@ -29,12 +31,14 @@ public class IndividualNotificationActivity extends AppCompatActivity {
     TimePicker picker;
     EditText title;
     Calendar c;
-    String user;
+    User user;
     NotificationLog notificationLog;
     Notification notification;
     AccessNotification accessNotification;
     AccessNotificationLogs accessNotificationLogs;
     Switch activate;
+    TextView deletedText;
+    boolean deleted = false;
 
 
     @Override
@@ -42,7 +46,7 @@ public class IndividualNotificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_notification);
 
-        user = getIntent().getStringExtra("user");
+        user = (User) getIntent().getSerializableExtra("user");
         notificationLog = (NotificationLog) getIntent().getSerializableExtra("NotificationLogSelected");
         accessNotification = new AccessNotification();
         accessNotificationLogs = new AccessNotificationLogs();
@@ -52,20 +56,40 @@ public class IndividualNotificationActivity extends AppCompatActivity {
         c.set(Calendar.HOUR_OF_DAY,notificationLog.getHour());
         c.set(Calendar.MINUTE,notificationLog.getMinutes());
         c.set(Calendar.SECOND,0);
+
         picker = (TimePicker) findViewById(R.id.timePicker);
+        picker.setHour(notification.getHour());
+        picker.setMinute(notification.getMinute());
+
         title = (EditText) findViewById(R.id.TitleBox);
         title.setText(notificationLog.getTitle());
+
         activate = (Switch) findViewById(R.id.ActivateAlarmSwitch);
         activate.setChecked(notification.isActive());
+
+        deletedText = (TextView) findViewById(R.id.DeletedTextBox);
 
     }
 
     //this is an update so it needs to be deleted then inserted
     public void saveNotificationOnClick(View v){
-        deleteAlarmOnClick(v);
+        if(!deleted) {
+            deleteAlarmOnClick(v);
+        }
+        deletedText.setText("");
 
-        int hour =  c.get(Calendar.HOUR_OF_DAY);
-        int min = c.get(Calendar.MINUTE);
+        int hour, min;
+        if (Build.VERSION.SDK_INT >= 23 ){
+            hour = picker.getHour();
+            min = picker.getMinute();
+        }
+        else{
+            hour = picker.getCurrentHour();
+            min = picker.getCurrentMinute();
+        }
+
+        c.set(Calendar.HOUR_OF_DAY,hour);
+        c.set(Calendar.MINUTE,min);
         c.set(Calendar.SECOND,0);
 
         //update title,hour,min,activate for Notification
@@ -90,7 +114,11 @@ public class IndividualNotificationActivity extends AppCompatActivity {
 
             alarmManager.setRepeating(alarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
         }
-        return;
+
+        finish();
+        Intent back = new Intent(getApplicationContext(), CreateNotificationActivity.class);
+        back.putExtra("userLoggedIn", user);
+        startActivity(back);
     }
 
     public void deleteAlarmOnClick(View v){
@@ -106,6 +134,7 @@ public class IndividualNotificationActivity extends AppCompatActivity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,intent,0);
 
         alarmManager.cancel(pendingIntent);
-        return;
+        deletedText.setText("Alarm Deleted");
+        deleted = true;
     }
 }

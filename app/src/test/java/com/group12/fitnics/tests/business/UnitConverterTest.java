@@ -57,4 +57,20 @@ public class UnitConverterTest {
         assertEquals(96, UnitConverter.calculatePercent(1024.0, 45.0));
         System.out.println("Finished testCalculatePercent");
     }
+
+    @Test
+    public void testConvert12hour(){
+        System.out.println("\nStarting testConvert12hour");
+        assertEquals(12, UnitConverter.convert12hour(12));
+        assertEquals(1, UnitConverter.convert12hour(13));
+        System.out.println("Finished testConvert12hour");
+    }
+
+    @Test
+    public void testAm_pm(){
+        System.out.println("\nStarting testAm_pm");
+        assertEquals("am", UnitConverter.am_pm(12));
+        assertEquals("pm", UnitConverter.am_pm(13));
+        System.out.println("Finished testAm_pm");
+    }
 }

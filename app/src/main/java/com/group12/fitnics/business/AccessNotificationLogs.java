@@ -37,16 +37,6 @@ public class AccessNotificationLogs {
         NotificationLogPersistence.insertNotificationLog(NotificationLog);
     }
 
-    public void updateNotificationLog(int userID, int NotificationID, NotificationLog updatedLog) throws InvalidNotificationLogException, NotificationLogNotFoundException {
-        if (!checkInvariant(updatedLog))
-            throw new InvalidNotificationLogException("The Notification log has invalid userID or NotificationID or minutes. ");
-
-        if (getNotificationLog(userID, NotificationID) == null)
-            throw new NotificationLogNotFoundException("There is no such Notification log to update. ");
-
-        NotificationLogPersistence.updateNotificationLog(userID, NotificationID, updatedLog);
-    }
-
     public void deleteNotificationLog(int userID, int NotificationID) throws NotificationLogNotFoundException {
         if (getNotificationLog(userID, NotificationID) == null)
             throw new NotificationLogNotFoundException("There is no such Notification log to update. ");

@@ -14,8 +14,6 @@ import com.group12.fitnics.R;
 
 public class NotificationHelper extends ContextWrapper
 {
-
-    public static final String channelName = "Channel Name";
     private NotificationManager mManager;
 
     public NotificationHelper(Context base, Notification notify) {
@@ -27,7 +25,7 @@ public class NotificationHelper extends ContextWrapper
 
     @TargetApi(Build.VERSION_CODES.O)
     private void createChannel(Notification notify) {
-        NotificationChannel channel = new NotificationChannel(""+notify.getNotificationID(), channelName, NotificationManager.IMPORTANCE_HIGH);
+        NotificationChannel channel = new NotificationChannel("Channel"+notify.getNotificationID(), notify.getTitle(), NotificationManager.IMPORTANCE_HIGH);
         getManager().createNotificationChannel(channel);
     }
 
@@ -39,8 +37,9 @@ public class NotificationHelper extends ContextWrapper
     }
 
     public NotificationCompat.Builder getChannelNotification(Notification notify) {
-        return new NotificationCompat.Builder(getApplicationContext(), ""+notify.getNotificationID())
+        return new NotificationCompat.Builder(getApplicationContext(), "Channel"+notify.getNotificationID())
                 .setContentTitle(notify.getTitle())
+                .setContentText("Your alarm was set Fitnics needs you")
                 .setSmallIcon(R.mipmap.ic_fitnics_logo_round);
     }
 

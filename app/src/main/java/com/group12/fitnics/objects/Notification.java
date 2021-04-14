@@ -10,7 +10,6 @@ public class Notification implements Serializable {
     private boolean active;
     private static int lastNotificationID = -1;
 
-    Notification(){}
 
     public Notification(String title, int hour, int minute, boolean active)
     {

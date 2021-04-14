@@ -13,10 +13,10 @@ public class NotificationBuilder extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Notification notify = (Notification) intent.getSerializableExtra("Notification");
+        Notification notification = (Notification) intent.getSerializableExtra("Notification");
 
-        NotificationHelper notificationHelper = new NotificationHelper(context,notify);
-        NotificationCompat.Builder nb = notificationHelper.getChannelNotification(notify);
-        notificationHelper.getManager().notify(0,nb.build());
+        NotificationHelper notificationHelper = new NotificationHelper(context,notification);
+        NotificationCompat.Builder nb = notificationHelper.getChannelNotification(notification);
+        notificationHelper.getManager().notify(notification.getNotificationID(),nb.build());
     }
 }

@@ -1,6 +1,7 @@
 package com.group12.fitnics.business;
 
 import com.group12.fitnics.application.Services;
+import com.group12.fitnics.exceptions.InvalidExerciseException;
 import com.group12.fitnics.exceptions.InvalidNotificationException;
 import com.group12.fitnics.exceptions.InvalidNotificationLogException;
 import com.group12.fitnics.exceptions.NotificationNotFoundException;
@@ -34,6 +35,8 @@ public class AccessNotification {
 
     public void insertNotification(Notification notify) throws InvalidNotificationException
     {
+        if(notify == null)
+            throw new InvalidNotificationException("The Notification is not valid. ");
         if (getNotificationById(notify.getNotificationID()) != null)
             throw new InvalidNotificationLogException("The Notification is duplicate. You could instead increase the time for this Notification. Thank you!");
 

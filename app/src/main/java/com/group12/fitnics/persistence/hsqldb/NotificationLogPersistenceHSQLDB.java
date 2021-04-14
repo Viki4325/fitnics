@@ -1,8 +1,5 @@
 package com.group12.fitnics.persistence.hsqldb;
 
-
-
-
 import com.group12.fitnics.objects.NotificationLog;
 import com.group12.fitnics.persistence.INotificationLogPersistence;
 
@@ -11,10 +8,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NotificationLogPersistenceHSQLDB implements INotificationLogPersistence {
+
     private final String dbPath;
 
     public NotificationLogPersistenceHSQLDB(final String dbPath) {

@@ -47,7 +47,11 @@ public class NotificationLogItemAdapter extends ArrayAdapter<NotificationLog> {
         TextView activate = convertView.findViewById(R.id.ActiveBox);
 
         notificationTitle.setText(notification.getTitle());
-        notificationTime.setText(UnitConverter.convert12hour(notification.getHour())+":"+notification.getMinute()+" "+ UnitConverter.am_pm(notification.getHour()));
+        if(notification.getMinute() >= 10) {
+            notificationTime.setText(UnitConverter.convert12hour(notification.getHour()) + ":" + notification.getMinute() + " " + UnitConverter.am_pm(notification.getHour()));
+        }else{
+            notificationTime.setText(UnitConverter.convert12hour(notification.getHour()) + ":0" + notification.getMinute() + " " + UnitConverter.am_pm(notification.getHour()));
+        }
         if(notification.isActive()) {
             activate.setText("Active");
         }else{
