@@ -52,7 +52,6 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         selectedUser = (User) intent.getSerializableExtra("userLoggedIn");
-//        selectedUser = accessUsers.getUserByName(username);
     }
 
     /*
@@ -150,8 +149,6 @@ public class HomeActivity extends AppCompatActivity {
         intent.putExtra("userLoggedIn", selectedUser);
         startActivity(intent);
     }
-
-    public void btnSetNotificationsOnClick(View v){ generateIntent(CreateNotificationActivity.class); }
 
 
     @Override

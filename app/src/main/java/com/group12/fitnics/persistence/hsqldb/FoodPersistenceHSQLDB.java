@@ -1,8 +1,6 @@
 package com.group12.fitnics.persistence.hsqldb;
 
-import com.group12.fitnics.exceptions.FoodNotFoundException;
-import com.group12.fitnics.exceptions.InvalidFdNameException;
-import com.group12.fitnics.exceptions.InvalidFoodException;
+import com.group12.fitnics.exceptions.HSQLDBException;
 import com.group12.fitnics.objects.Food;
 import com.group12.fitnics.persistence.IFoodPersistence;
 
@@ -48,7 +46,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return foods;
     }
@@ -64,7 +62,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
             }
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return null;
     }
@@ -80,7 +78,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
             }
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return null;
     }
@@ -91,15 +89,13 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO FOODS VALUES(DEFAULT, ?, ?)");
 
-//            currentFood.setFoodID();
-//            st.setString(1, Integer.toString(currentFood.getFoodID()));
             st.setString(1, currentFood.getName());
             st.setDouble(2, currentFood.getCalories());
             st.executeUpdate();
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
 
         Food created = getFoodByFoodName(currentFood.getName());
@@ -118,7 +114,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 
@@ -132,7 +128,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 }

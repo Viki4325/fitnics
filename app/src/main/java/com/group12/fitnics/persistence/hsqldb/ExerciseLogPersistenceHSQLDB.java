@@ -1,8 +1,7 @@
 package com.group12.fitnics.persistence.hsqldb;
 
 import com.group12.fitnics.business.DateHelper;
-import com.group12.fitnics.exceptions.ExerciseLogNotFoundException;
-import com.group12.fitnics.exceptions.InvalidExerciseLogException;
+import com.group12.fitnics.exceptions.HSQLDBException;
 import com.group12.fitnics.objects.ExerciseLog;
 import com.group12.fitnics.persistence.IExerciseLogPersistence;
 
@@ -50,7 +49,7 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return null;
     }
@@ -70,7 +69,7 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
 
         return logs;
@@ -92,7 +91,7 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
 
         return logs;
@@ -111,7 +110,7 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 
@@ -131,7 +130,7 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 
@@ -147,7 +146,7 @@ public class ExerciseLogPersistenceHSQLDB implements IExerciseLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 }

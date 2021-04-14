@@ -1,5 +1,6 @@
 package com.group12.fitnics.persistence.hsqldb;
 
+import com.group12.fitnics.exceptions.HSQLDBException;
 import com.group12.fitnics.objects.User;
 import com.group12.fitnics.persistence.IUserPersistence;
 
@@ -61,7 +62,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return users;
     }
@@ -79,7 +80,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return null;
     }
@@ -97,7 +98,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return null;
     }
@@ -108,19 +109,16 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO USERS VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-//            currentUser.setUserID();
-
-//            st.setString(1, Integer.toString(currentUser.getUserID()));
             st.setString(1, currentUser.getUsername());
             st.setString(2, Integer.toString(currentUser.getBirthDay()));
             st.setString(3, Integer.toString(currentUser.getBirthMonth()));
             st.setString(4, Integer.toString(currentUser.getBirthYear()));
-            st.setInt(5, currentUser.getActivityLevel());
+            st.setInt(5, currentUser.getActivityLevel().getValue());
             st.setDouble(6, currentUser.getWeight());
             st.setDouble(7, currentUser.getHeight());
-            st.setString(8, String.valueOf(currentUser.getGender()));
+            st.setString(8, String.valueOf(currentUser.getGender().getValue()));
             st.setDouble(9, currentUser.getDailyCaloricNeeds());
-            st.setInt(10, currentUser.getGoal());
+            st.setInt(10, currentUser.getGoal().getValue());
             String wUnit = "lbs";
             String hUnit = "cm";
             if (currentUser.getUnits()[0] == 1)
@@ -134,7 +132,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
 
         User created = getUserByUsername(currentUser.getUsername());
@@ -147,18 +145,18 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("UPDATE USERS SET username=?, actLvl=?, weight=?, height=?, gender=?, caloricNeeds=?, goal=? WHERE id = ?");
             st.setString(1, currentUser.getUsername());
-            st.setInt(2, currentUser.getActivityLevel());
+            st.setInt(2, currentUser.getActivityLevel().getValue());
             st.setDouble(3, currentUser.getWeight());
             st.setDouble(4, currentUser.getHeight());
-            st.setString(5, String.valueOf(currentUser.getGender()));
+            st.setString(5, String.valueOf(currentUser.getGender().getValue()));
             st.setDouble(6, currentUser.getDailyCaloricNeeds());
-            st.setInt(7, currentUser.getGoal());
+            st.setInt(7, currentUser.getGoal().getValue());
             st.setString(8, Integer.toString(userID));
             st.executeUpdate();
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 
@@ -184,7 +182,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 }

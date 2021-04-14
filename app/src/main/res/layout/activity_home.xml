@@ -79,10 +79,10 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="10dp"
-                        android:padding="5dp"
                         android:fontFamily="muli_bold"
-                        android:textColor="@color/black"
+                        android:padding="5dp"
                         android:text="@string/breakfast_button_text"
+                        android:textColor="@color/black"
                         android:textSize="30sp" />
 
                     <ImageView
@@ -90,8 +90,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_alignParentEnd="true"
-                        android:layout_gravity="end"
                         android:layout_centerVertical="true"
+                        android:layout_gravity="end"
                         android:layout_marginEnd="10dp"
                         android:scaleType="center"
                         android:src="@drawable/ic_baseline_add_circle" />

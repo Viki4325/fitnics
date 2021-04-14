@@ -15,6 +15,9 @@ import com.group12.fitnics.tests.business.AccessNotificationTest;
 import com.group12.fitnics.tests.business.AccessUsersTest;
 import com.group12.fitnics.tests.business.DateHelperTest;
 import com.group12.fitnics.tests.business.UnitConverterTest;
+import com.group12.fitnics.tests.enums.ActivityLevelTest;
+import com.group12.fitnics.tests.enums.GenderTest;
+import com.group12.fitnics.tests.enums.GoalTest;
 import com.group12.fitnics.tests.objects.ExerciseLogTest;
 import com.group12.fitnics.tests.objects.ExerciseTest;
 import com.group12.fitnics.tests.objects.FoodLogTest;
@@ -45,7 +48,10 @@ import com.group12.fitnics.tests.objects.UserTest;
         AccessNotificationTest.class,
         AccessNotificationLogTest.class,
         DateHelperTest.class,
-        UnitConverterTest.class
+        UnitConverterTest.class,
+        ActivityLevelTest.class,
+        GenderTest.class,
+        GoalTest.class
 })
 
 //NotificationBuilder and Notification helper are untestable since junit requires a zero-argument constructor and they cannot have one

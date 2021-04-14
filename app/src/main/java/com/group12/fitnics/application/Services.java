@@ -21,6 +21,11 @@ import com.group12.fitnics.persistence.hsqldb.ExercisePersistenceHSQLDB;
 import com.group12.fitnics.persistence.hsqldb.FoodLogPersistenceHSQLDB;
 import com.group12.fitnics.persistence.hsqldb.FoodPersistenceHSQLDB;
 import com.group12.fitnics.persistence.hsqldb.UserPersistenceHSQLDB;
+import com.group12.fitnics.persistence.stub.ExerciseLogPersistenceStub;
+import com.group12.fitnics.persistence.stub.ExercisePersistenceStub;
+import com.group12.fitnics.persistence.stub.FoodLogPersistenceStub;
+import com.group12.fitnics.persistence.stub.FoodPersistenceStub;
+import com.group12.fitnics.persistence.stub.UserPersistenceStub;
 
 public class Services {
 
@@ -32,83 +37,71 @@ public class Services {
     private static INotificationPersistence notificationPersistence = null;
     private static INotificationLogPersistence notificationLogPersistence = null;
 
-    private static final boolean forProduction = false;
+
+    private static boolean initialized = false;
 
     public static IUserPersistence getUserPersistence() {
-        if (userPersistence == null) {
-            if (forProduction) {
-                userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
-            } else {
-                userPersistence = new UserPersistenceStub();
-            }
-        }
+        if (!initialized)
+            buildPersistence();
         return userPersistence;
     }
 
     public static IFoodLogPersistence getFoodLogPersistence() {
-        if (foodLogPersistence == null) {
-            if (forProduction) {
-                foodLogPersistence = new FoodLogPersistenceHSQLDB(Main.getDBPathName());
-            } else {
-                foodLogPersistence = new FoodLogPersistenceStub();
-            }
-        }
+        if (!initialized)
+            buildPersistence();
         return foodLogPersistence;
     }
 
     public static IExerciseLogPersistence getExerciseLogPersistence() {
-        if (exerciseLogPersistence == null) {
-            if (forProduction) {
-                exerciseLogPersistence = new ExerciseLogPersistenceHSQLDB(Main.getDBPathName());
-            } else {
-                exerciseLogPersistence = new ExerciseLogPersistenceStub();
-            }
-        }
+        if (!initialized)
+            buildPersistence();
         return exerciseLogPersistence;
     }
 
     public static IFoodPersistence getFoodPersistence() {
-        if (foodPersistence == null) {
-            if (forProduction) {
-                foodPersistence = new FoodPersistenceHSQLDB(Main.getDBPathName());
-            } else {
-                foodPersistence = new FoodPersistenceStub();
-            }
-        }
+        if (!initialized)
+            buildPersistence();
         return foodPersistence;
     }
 
     public static IExercisePersistence getExercisePersistence() {
-        if (exercisePersistence == null) {
-            if (forProduction) {
-                exercisePersistence = new ExercisePersistenceHSQLDB(Main.getDBPathName());
-            } else {
-                exercisePersistence = new ExercisePersistenceStub();
-            }
-        }
+        if (!initialized)
+            buildPersistence();
         return exercisePersistence;
     }
 
     public static INotificationLogPersistence getNotificationLogPersistence() {
-        if (notificationLogPersistence == null) {
-            if (forProduction) {
-                notificationLogPersistence = new NotificationLogPersistenceHSQLDB(Main.getDBPathName());
-            } else {
-                notificationLogPersistence = new NotificationLogPersistenceStub();
-            }
-        }
+        if (!initialized)
+            buildPersistence();
         return notificationLogPersistence;
     }
 
     public static INotificationPersistence getNotificationPersistence() {
-        if (notificationPersistence == null) {
-            if (forProduction) {
-                notificationPersistence = new NotificationPersistenceHSQLDB(Main.getDBPathName());
-            } else {
-                notificationPersistence = new NotificationPersistenceStub();
-            }
-        }
+        if (!initialized)
+            buildPersistence();
         return notificationPersistence;
+    }
+    
+    private static void buildPersistence() {
+        if (!initialized) {
+            userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
+            foodPersistence = new FoodPersistenceHSQLDB(Main.getDBPathName());
+            exercisePersistence = new ExercisePersistenceHSQLDB(Main.getDBPathName());
+            foodLogPersistence = new FoodLogPersistenceHSQLDB(Main.getDBPathName());
+            exerciseLogPersistence = new ExerciseLogPersistenceHSQLDB(Main.getDBPathName());
+            notificationPersistence = new NotificationPersistenceHSQLDB(Main.getDBPathName());
+            notificationLogPersistence = new NotificationLogPersistenceHSQLDB(Main.getDBPathName());
+//            userPersistence = new UserPersistenceStub();
+//            foodPersistence = new FoodPersistenceStub();
+//            exercisePersistence = new ExercisePersistenceStub();
+//            foodLogPersistence = new FoodLogPersistenceStub();
+//            exerciseLogPersistence = new ExerciseLogPersistenceStub();
+//            notificationPersistence = new NotificationPersistenceStub();
+//            notificationLogPersistence = new NotificationLogPersistenceStub();
+        }
+
+        initialized = true;
+>>>>>>> app/src/main/java/com/group12/fitnics/application/Services.java
     }
 
 }
