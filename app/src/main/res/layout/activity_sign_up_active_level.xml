@@ -156,7 +156,7 @@
                     android:layout_gravity="center"
                     android:background="@drawable/purple_love"
                     android:fontFamily="@font/muli"
-                    android:onClick="btnActive"
+                    android:onClick="btnComplete"
                     android:text="@string/activebtn"
                     android:padding="10dp"
                     android:layout_marginTop="7dp"
