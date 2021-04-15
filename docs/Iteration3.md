@@ -14,6 +14,7 @@ What technical debt did you leave?
 ----------------------------------
 - The coverage of the acceptance test is not very high. 
   - If it could simulate a little more user behaviors, the system would have been stable even if there were modifications to the code. However there was not enough time to increase the coverage.
+  - This dept can be classified into Prudent & Inadvertent type. For most features, one feature is being tested in almost one method, which will certainly not be easy to test if any changes are made in the feature later.
 
 
 Discuss a Feature or User Story that was cut/re-prioritized
