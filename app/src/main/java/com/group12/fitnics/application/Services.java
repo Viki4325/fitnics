@@ -101,7 +101,6 @@ public class Services {
         }
 
         initialized = true;
->>>>>>> app/src/main/java/com/group12/fitnics/application/Services.java
     }
 
 }

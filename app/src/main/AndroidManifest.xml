@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fitnics">
-        <activity android:name=".presentation.IndividualNotificationActivity"></activity>
+
 
         <uses-library
             android:name="com.google.android.wearable"
@@ -25,15 +25,6 @@
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
-        <activity
-            android:name=".presentation.CreateNotificationActivity"
-            android:label="@string/title_activity_create_notification">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".presentation.IndividualFoodActivity"
             android:theme="@style/Theme.Fitnics.NoActionBar" />
@@ -54,7 +45,9 @@
         <activity android:name=".presentation.SearchFoodActivity" />
         <activity android:name=".presentation.FoodLogActivity" />
         <activity android:name=".presentation.SignUpActivity" />
+        <activity android:name=".presentation.IndividualNotificationActivity"/>
         <activity android:name=".presentation.LogInActivity" />
+        <activity android:name=".presentation.CreateNotificationActivity"/>
         <activity android:name=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
