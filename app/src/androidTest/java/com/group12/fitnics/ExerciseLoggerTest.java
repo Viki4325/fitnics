@@ -68,6 +68,7 @@ public class ExerciseLoggerTest {
         onView(withId(R.id.add_button)).perform(click()); // will add with 30 minutes
         closeSoftKeyboard();
         pressBack();
+        SystemClock.sleep(sleepTime);
         // open the exercise log screen
         onView(withId(R.id.btnExerciseLog)).perform(click());
         // verify that the log item is there

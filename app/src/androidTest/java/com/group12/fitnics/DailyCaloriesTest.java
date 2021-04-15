@@ -74,6 +74,7 @@ public class DailyCaloriesTest {
         onView(withId(R.id.add_food)).perform(click()); // should go to the log screen
         closeSoftKeyboard();
         pressBack();
+        SystemClock.sleep(sleepTime);
         // add exercise log
         onView(withId(R.id.exercise)).perform(click());
         onView(withId(R.id.searchExercise)).perform(typeText("axe"));
@@ -82,6 +83,7 @@ public class DailyCaloriesTest {
         onView(withId(R.id.add_button)).perform(click()); // will add with 30 minutes
         closeSoftKeyboard();
         pressBack();
+        SystemClock.sleep(sleepTime);
         onView(withId(R.id.btnExerciseLog)).perform(click());
         onData(anything()).inAdapterView(withId(R.id.exerciseLog)).atPosition(0).perform(click());
         onView(withId(R.id.exerciseMinutes)).perform(replaceText("20"));

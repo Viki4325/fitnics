@@ -35,4 +35,20 @@ public class UnitConverter {
         return (int)Math.round(((oldValue - newValue)/(oldValue))*100);
     }
 
+    public static int convert12hour(int hour)
+    {
+        if(hour > 12){
+            return hour-12;
+        }
+        return hour;
+    }
+
+    public static String am_pm(int hour)
+    {
+        if(hour > 12){
+            return "pm";
+        }
+        return "am";
+    }
+
 }

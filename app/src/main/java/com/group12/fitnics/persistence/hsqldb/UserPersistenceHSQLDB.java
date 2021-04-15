@@ -176,6 +176,12 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             excslogs.executeUpdate();
             excslogs.close();
 
+            // Delete on cascade
+            final PreparedStatement notilogs = c.prepareStatement("DELETE FROM NOTIFICATIONLOGS WHERE uid = ?");
+            notilogs.setString(1, Integer.toString(userID));
+            notilogs.executeUpdate();
+            notilogs.close();
+
             final PreparedStatement st = c.prepareStatement("DELETE FROM USERS WHERE id = ?");
             st.setString(1, Integer.toString(userID));
             st.executeUpdate();

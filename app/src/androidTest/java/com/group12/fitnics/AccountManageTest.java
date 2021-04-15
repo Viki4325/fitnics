@@ -70,7 +70,6 @@ public class AccountManageTest {
         closeSoftKeyboard();
         onView(withId(R.id.editHeight)).perform(replaceText("5.35"));
         closeSoftKeyboard();
-        // updateInfoScrollView
         onView(withId(R.id.saveButton)).perform(scrollTo()).perform(click());
         // verify if the daily caloric target updates
         SystemClock.sleep(sleepTime);
