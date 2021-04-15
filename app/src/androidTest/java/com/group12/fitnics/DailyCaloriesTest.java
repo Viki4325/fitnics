@@ -64,28 +64,33 @@ public class DailyCaloriesTest {
         SystemClock.sleep(sleepTime);
         // verify the remaining calories for today
         onView(withId(R.id.textGreeting)).check(matches(withText("Welcome, testUser")));
-        onView(withId(R.id.textRemaining)).check(matches(withText("2137")));
+        onView(withId(R.id.textRemaining)).check(matches(withText("1024")));
         // add food log
         onView(withId(R.id.breakfast)).perform(click());
         onView(withId(R.id.searchFood)).perform(typeText("bread"));
         closeSoftKeyboard();
         onData(anything()).inAdapterView(withId(R.id.Search_food)).atPosition(0).perform(click());
-        onView(withId(R.id.foodGrams)).perform(typeText("100"));
+        onView(withId(R.id.foodGrams)).perform(replaceText("100"));
         onView(withId(R.id.add_food)).perform(click()); // should go to the log screen
+        closeSoftKeyboard();
         pressBack();
         // add exercise log
         onView(withId(R.id.exercise)).perform(click());
         onView(withId(R.id.searchExercise)).perform(typeText("axe"));
         closeSoftKeyboard();
         onData(anything()).inAdapterView(withId(R.id.exerciseList)).atPosition(0).perform(click());
-        onView(withId(R.id.add_button)).perform(click());
+        onView(withId(R.id.add_button)).perform(click()); // will add with 30 minutes
+        closeSoftKeyboard();
+        pressBack();
+        onView(withId(R.id.btnExerciseLog)).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.exerciseLog)).atPosition(0).perform(click());
         onView(withId(R.id.exerciseMinutes)).perform(replaceText("20"));
         onView(withId(R.id.update_Min)).perform(click()); // should go to the log screen
         pressBack();
         // verify
         onView(withId(R.id.textTotalIntake)).check(matches(withText("233")));
         onView(withId(R.id.textTotalBurned)).check(matches(withText("100")));
-        onView(withId(R.id.textRemaining)).check(matches(withText("2004")));
+        onView(withId(R.id.textRemaining)).check(matches(withText("891")));
 
         // undo the change
         testUtils.deleteFoodLog("testUser", "Bread", dateToday);
@@ -107,7 +112,7 @@ public class DailyCaloriesTest {
         onView(withId(R.id.weightUnitSwitch)).perform(click()); // switch to kilogram (it shows LBS first)
         onView(withId(R.id.editWeight)).perform(typeText("60"));
         closeSoftKeyboard();
-        onView(withId(R.id.editHeight)).perform(typeText("158"));
+        onView(withId(R.id.editHeight)).perform(typeText("5.18"));
         closeSoftKeyboard();
         onView(withId(R.id.btnContinue)).perform(scrollTo()).perform(click());
         // activity level
@@ -117,19 +122,7 @@ public class DailyCaloriesTest {
                 .inRoot(isDialog())
                 .check(matches(isDisplayed()))
                 .perform(click());
-//        test1();
     }
 
-//    public void test1() {
-//        User user = testUtils.getUser("testUser");
-//        assertEquals(132.3, user.getWeight(), 0.001);
-//        assertEquals(158, user.getHeight(), 0.001);
-//        assertEquals(ActivityLevel.SOMEWHAT_ACTIVE, user.getActivityLevel());
-//        assertEquals(Goal.GOAL_LOSE, user.getGoal());
-//        assertEquals(Gender.FEMALE, user.getGender());
-//        assertEquals(1998, user.getBirthYear());
-//        assertEquals(6, user.getBirthMonth());
-//        assertEquals(15, user.getBirthDay());
-//    }
 
 }

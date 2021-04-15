@@ -1,8 +1,10 @@
-package com.group12.fitnics.presentation;
+ package com.group12.fitnics.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.group12.fitnics.R;
@@ -25,7 +28,8 @@ import static com.group12.fitnics.business.UnitConverter.convertUnitToString;
 public class UpdateUserInfoActivity extends AppCompatActivity {
     private AccessUsers accessUsers;
     private User selectedUser;
-
+    ToggleButton weightSwitch;
+    ToggleButton heightSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +37,15 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_user_info);
 
         accessUsers = new AccessUsers();
-        Intent intent = getIntent();
-        String id = intent.getStringExtra("userID");
+        weightSwitch = (ToggleButton) findViewById(R.id.weightUnitSwitch);
+        heightSwitch = (ToggleButton) findViewById(R.id.heightUnitSwitch);
+
 
         selectedUser = (User) getIntent().getSerializableExtra("userLoggedIn");
         selectedUser = accessUsers.getUserById(selectedUser.getUserID());
 
+
+        setUnitsInSwitch();
         setupUnitSwitch();
         setUpSpinner_gender();
         setUpSpinner_activity();
@@ -49,6 +56,7 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
         showActivityLevel();
         showInitHeight(selectedUser.getHeight());
         showInitWeight(selectedUser.getWeight());
+        showToggleStates();
 
     }
 
@@ -76,67 +84,65 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
         EditText weight = findViewById(R.id.editWeight);
         weight.setText(String.valueOf(weight_).trim());
     }
+
     private void showInitHeight(double height_){
         EditText height = findViewById(R.id.editHeight);
         height.setText(String.valueOf(height_).trim());
     }
 
-    //CAN GO TO USERS
-    private String getWeightUnits(){
-        int[] units = selectedUser.getUnits();
-        String weightUnit = "";
-        if(units[0] == 1){
-            weightUnit =  "kgs";
-        }else if(units[0] == 0){
-            weightUnit = "lbs";
-        }
-        return weightUnit;
+    private void showToggleStates(){
+        weightSwitch.setChecked(loadToggleWeight(selectedUser.getUserID()));
+        heightSwitch.setChecked(loadToggleHeight(selectedUser.getUserID()));
+
     }
 
-    //cAN GO TO USERS
-    private String getHeightUnits(){
-        int[] units = selectedUser.getUnits();
-        String heightUnit = "";
-        if(units[1] == 1){
-            heightUnit =  "fts";
-        }else if(units[1] == 0){
-            heightUnit = "cm";
-        }
-        return heightUnit;
-    }
 
     private void callDialogMessages(String message){
         Messages.fatalError(this,message);
 
     }
 
-    private void setupUnitSwitch(){
-        ToggleButton weightSwitch = (ToggleButton) findViewById(R.id.weightUnitSwitch);
-        weightSwitch.setText(getWeightUnits());
-        weightSwitch.setTextOff("lbs");
-        weightSwitch.setTextOn("kgs");
+    /*
+    * This methods sets the ON and OFF string values to be set for the switches
+    * This is tricky, because the "purpose" of the switch keeps changing,
+    * therefore there is no fixed string to be set.
+    * Hence, this is controlled here
+    * */
+    private void setUnitsInSwitch(){
+        weightSwitch.setTextOff("lbs"); //selectedUser.getWeightUnit()
+        heightSwitch.setTextOff("ft"); //selectedUser.getHeightUnit()
 
+        weightSwitch.setTextOn("kgs"); //negateWeightUnit()
+        heightSwitch.setTextOn("cm"); //negateHeightUnit()
+    }
+
+
+
+    private void setupUnitSwitch(){
         weightSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton toggleButton, boolean convertToKgs) {
+            public void onCheckedChanged(CompoundButton toggleButton, boolean checkedState) {
                 try {
-                    updateWeight(convertToKgs);
+                    updateUnits();
+                    convertWeight(checkedState);
+                    //save state
+                    saveToggle("weight_toggle"+selectedUser.getUserID(),checkedState);
+
                 }catch (Exception e){
                     callDialogMessages(e.getMessage());
                 }
-
             }
         }) ;
 
-        ToggleButton heightSwitch = (ToggleButton) findViewById(R.id.heightUnitSwitch);
-        heightSwitch.setText(getHeightUnits());
-        heightSwitch.setTextOff("cm");
-        heightSwitch.setTextOn("ft");
         heightSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean convertToFts) {
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checkedState) {
                 try {
-                    updateHeight(convertToFts);
+                    updateUnits();
+                    convertHeight(checkedState);
+                    //save the state
+                    saveToggle("height_toggle"+selectedUser.getUserID(),checkedState);
+
                 }catch (Exception e){
                     callDialogMessages(e.getMessage());
                 }
@@ -144,8 +150,33 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
         });
     }
 
+    private void saveToggle(String key,boolean isToggled) {
+        final SharedPreferences sharedPreferences = getSharedPreferences(key, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key, isToggled).apply();
+    }
 
-    private void updateWeight(boolean convertToKgs) {
+    private boolean loadToggleWeight(int id){
+        final SharedPreferences sharedPreferences = getSharedPreferences("weight_toggle"+id, Context.MODE_PRIVATE);
+        boolean defaultVal = false;
+        if(selectedUser.getUnits()[0] == 1)// does not match default
+        {
+            defaultVal = true;
+        }
+        return sharedPreferences.getBoolean("weight_toggle"+id, defaultVal);
+    }
+
+    private boolean loadToggleHeight(int id){
+        final SharedPreferences sharedPreferences = getSharedPreferences("height_toggle"+id, Context.MODE_PRIVATE);
+        boolean defaultVal = false;
+        if(selectedUser.getUnits()[1] == 0)// does not match default
+        {
+            defaultVal = true;
+        }
+        return sharedPreferences.getBoolean("height_toggle"+id, defaultVal);
+    }
+
+    private void convertWeight(boolean checkedState) {
         EditText weightData = (EditText) findViewById(R.id.editWeight);
         double read = 0.0;
         if(weightData.getText().toString().trim().equals("")){
@@ -153,7 +184,8 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
         }else{
             read = Double.parseDouble(weightData.getText().toString().trim());
         }
-        if(convertToKgs){
+
+        if(checkedState){
             double toKg = UnitConverter.LBToKg(read);
             String toKgString = convertUnitToString(toKg,1);
             weightData.setText(toKgString);
@@ -162,15 +194,14 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
             String toLbsString = convertUnitToString(toLbs, 1);
             weightData.setText(toLbsString);
         }
-
     }
 
     /*
      * IF heightSwitch is checked -> current unit is FT (Need to be converted to cm)
      * IF heightSwitch is unchecked -> current unit is cm (Need to be converted to FT)
      * */
-    private void updateHeight(boolean convertToFts) {
-        //by default user types in lbs, cm
+    private void convertHeight(boolean checkedState) {
+        //by default user types in lbs, ft
         EditText heightData = (EditText) findViewById(R.id.editHeight);
         double read = 0.0;
         if(heightData.getText().toString().trim().equals("")){
@@ -178,17 +209,33 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
         }else{
             read = Double.parseDouble(heightData.getText().toString().trim());
         }
-        if(convertToFts){
-            double toFt = UnitConverter.CMToFT(read);
-            String toFt_String = convertUnitToString(toFt,1);
-            heightData.setText(toFt_String);
-
-        }else{
+        if(checkedState){
             double toCm = UnitConverter.FTToCM(read);
             String toCm_String = convertUnitToString(toCm,1);
             heightData.setText(toCm_String);
+
+        }else{
+            double toFt = UnitConverter.CMToFT(read);
+            String toFt_String = convertUnitToString(toFt,1);
+            heightData.setText(toFt_String);
         }
 
+    }
+
+    private void updateUnits(){
+        int[] choiceUnits = new int[2];
+        if(weightSwitch.isChecked()){
+            choiceUnits[0] = 1; //if kgs
+        }else{
+            choiceUnits[0] = 0;  //if lbs
+        }
+
+        if(heightSwitch.isChecked()){
+            choiceUnits[1] = 0; //if cm
+        }else{
+            choiceUnits[1] = 1;  //if ft
+        }
+        selectedUser.setUnits(choiceUnits);
     }
 
     private void updateGender(){
@@ -203,14 +250,29 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
         Spinner choice = (Spinner) findViewById(R.id.activityLevelSpinner);
         selectedUser.setActivityLevel(ActivityLevel.valueOf(choice.getSelectedItemPosition()));
     }
+
     private void updateWeight(){
         EditText weightData = (EditText) findViewById(R.id.editWeight);
-        selectedUser.setWeight(Double.parseDouble(weightData.getText().toString().trim()));
+        if(weightSwitch.isChecked())
+        {//If kgs : then convert to default unit -> lbs
+            selectedUser.setWeight(UnitConverter.KGToLB(Double.parseDouble(weightData.getText().toString().trim())));
+        }else
+        {
+            selectedUser.setWeight(Double.parseDouble(weightData.getText().toString().trim()));
+        }
     }
+
     private void updateHeight(){
         EditText heightData = (EditText) findViewById(R.id.editHeight);
-        selectedUser.setHeight(Double.parseDouble(heightData.getText().toString().trim()));
+        if(heightSwitch.isChecked())
+        {
+            selectedUser.setHeight(UnitConverter.CMToFT(Double.parseDouble(heightData.getText().toString().trim())));
+        }else
+        {//If cms : then convert to default unit -> ft
+            selectedUser.setHeight(Double.parseDouble(heightData.getText().toString().trim()));
+        }
     }
+
 
     private void setUpSpinner_goal(){
         Spinner goals = (Spinner) findViewById(R.id.goalSpinner);
@@ -247,11 +309,14 @@ public class UpdateUserInfoActivity extends AppCompatActivity {
             updateGoal();
             updateHeight();
             updateWeight();
+            updateUnits();
+
 
             accessUsers.updateUser(selectedUser.getUserID(),selectedUser);
             Intent logInToHomeIntent = new Intent(this, HomeActivity.class);
             logInToHomeIntent.putExtra("userLoggedIn",selectedUser);
             startActivity(logInToHomeIntent);
+            finish();
         }catch (Exception e){
             Messages.fatalError(this,e.getMessage());
         }

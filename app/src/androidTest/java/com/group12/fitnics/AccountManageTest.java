@@ -63,16 +63,18 @@ public class AccountManageTest {
         SystemClock.sleep(sleepTime);
         // check the original daily caloric target
         onView(withId(R.id.textRemaining)).check(matches(withText("3151")));
-        // change weight
+        // change weight, height
         SystemClock.sleep(sleepTime);
         onView(withId(R.id.btnUpdateUserInfo)).perform(click());
         onView(withId(R.id.editWeight)).perform(replaceText("52"));
+        closeSoftKeyboard();
+        onView(withId(R.id.editHeight)).perform(replaceText("5.35"));
         closeSoftKeyboard();
         // updateInfoScrollView
         onView(withId(R.id.saveButton)).perform(scrollTo()).perform(click());
         // verify if the daily caloric target updates
         SystemClock.sleep(sleepTime);
-        onView(withId(R.id.textRemaining)).check(matches(withText("3131")));
+        onView(withId(R.id.textRemaining)).check(matches(withText("2400")));
         // undo the changes
         User alice = new User("alice", 15, 4, 1998, 1, 55, 163, 'F', 0, UNITS);
         testUtils.updateUser("alice", alice);
@@ -93,7 +95,7 @@ public class AccountManageTest {
         onView(withId(R.id.weightUnitSwitch)).perform(click()); // switch to kilogram (it shows LBS first)
         onView(withId(R.id.editWeight)).perform(scrollTo()).perform(typeText("66"));
         closeSoftKeyboard();
-        onView(withId(R.id.editHeight)).perform(scrollTo()).perform(typeText("174"));
+        onView(withId(R.id.editHeight)).perform(scrollTo()).perform(typeText("5.71"));
         closeSoftKeyboard();
         onView(withId(R.id.btnContinue)).perform(scrollTo()).perform(click());
         // activity level
@@ -110,7 +112,7 @@ public class AccountManageTest {
         SystemClock.sleep(sleepTime);
         // verify if the user can login with the new account
         onView(withId(R.id.textGreeting)).check(matches(withText("Welcome, eddie")));
-        onView(withId(R.id.textRemaining)).check(matches(withText("6047")));
+        onView(withId(R.id.textRemaining)).check(matches(withText("2302")));
         // delete the new account just added
         testUtils.deleteUser("eddie");
     }

@@ -105,7 +105,7 @@ public class FoodLoggerTest {
         onView(withId(R.id.weightUnitSwitch)).perform(click()); // switch to kilogram (it shows LBS first)
         onView(withId(R.id.editWeight)).perform(typeText("60"));
         closeSoftKeyboard();
-        onView(withId(R.id.editHeight)).perform(typeText("158"));
+        onView(withId(R.id.editHeight)).perform(typeText("5.18"));
         closeSoftKeyboard();
         onView(withId(R.id.btnContinue)).perform(scrollTo()).perform(click());
         // activity level

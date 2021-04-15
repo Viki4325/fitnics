@@ -65,9 +65,7 @@ public class ExerciseLoggerTest {
         // click the item
         onData(anything()).inAdapterView(withId(R.id.exerciseList)).atPosition(0).perform(click());
         // click the add (+) button
-        onView(withId(R.id.add_button)).perform(click());
-        onView(withId(R.id.exerciseMinutes)).perform(replaceText("5"));
-        onView(withId(R.id.update_Min)).perform(click()); // should go to the log screen
+        onView(withId(R.id.add_button)).perform(click()); // will add with 30 minutes
         closeSoftKeyboard();
         pressBack();
         // open the exercise log screen
@@ -77,7 +75,7 @@ public class ExerciseLoggerTest {
                 .inAdapterView(withId(R.id.exerciseLog))
                 .atPosition(0)
                 .check(matches(isDisplayed()));
-        // TODO: click the item, and change minutes
+        // click the item, and change minutes
         onData(anything()).inAdapterView(withId(R.id.exerciseLog)).atPosition(0).perform(click());
         onView(withId(R.id.exerciseMinutes)).perform(replaceText("10"));
         onView(withId(R.id.update_Min)).perform(click()); // should go to the log screen
@@ -103,7 +101,7 @@ public class ExerciseLoggerTest {
         onView(withId(R.id.weightUnitSwitch)).perform(click()); // switch to kilogram (it shows LBS first)
         onView(withId(R.id.editWeight)).perform(typeText("60"));
         closeSoftKeyboard();
-        onView(withId(R.id.editHeight)).perform(typeText("158"));
+        onView(withId(R.id.editHeight)).perform(typeText("5.18"));
         closeSoftKeyboard();
         onView(withId(R.id.btnContinue)).perform(scrollTo()).perform(click());
         // activity level

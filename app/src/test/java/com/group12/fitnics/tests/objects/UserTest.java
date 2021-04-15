@@ -69,7 +69,7 @@ public class UserTest {
     @Test
     public void testUserSetters() {
         System.out.println("\nStarting testUserSetters");
-        User eve = new User("eve", 15, 4, 1998, 1, 47, 160, 'F', 1, units);
+        User eve = new User("eve", 15, 4, 1998, 1, 105, 5.3, 'F', 1, units);
 
         //before changing
         assertEquals(eve.getActivityLevel(), ActivityLevel.SOMEWHAT_ACTIVE);
@@ -79,8 +79,8 @@ public class UserTest {
         eve.setUsername("eve77");
         eve.setGender(Gender.OTHER);
         eve.setGoal(Goal.GOAL_MAINTAIN);
-        eve.setWeight(45);
-        eve.setHeight(161);
+        eve.setWeight(99.225);
+        eve.setHeight(5.282);
         eve.setBirthYear(2000);
         eve.setBirthMonth(2);
         eve.setBirthDay(14);
@@ -90,8 +90,8 @@ public class UserTest {
         assertEquals(7, eve.getUserID());
         assertEquals("eve77", eve.getUsername());
         assertEquals(2, eve.getActivityLevel().getValue());
-        assertEquals(45, eve.getWeight(), 0.0001);
-        assertEquals(161, eve.getHeight(), 0.0001);
+        assertEquals(99.225, eve.getWeight(), 0.0001);
+        assertEquals(5.282, eve.getHeight(), 0.0001);
         assertEquals(2000, eve.getBirthYear());
         assertEquals(2, eve.getBirthMonth());
         assertEquals(14, eve.getBirthDay());
