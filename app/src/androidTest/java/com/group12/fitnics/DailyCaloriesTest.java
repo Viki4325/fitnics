@@ -6,6 +6,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
+import com.group12.fitnics.enums.ActivityLevel;
+import com.group12.fitnics.enums.Gender;
+import com.group12.fitnics.enums.Goal;
+import com.group12.fitnics.objects.User;
 import com.group12.fitnics.presentation.MainActivity;
 import com.group12.fitnics.utils.TestUtils;
 
@@ -14,6 +18,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static androidx.test.espresso.action.ViewActions.replaceText;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.time.LocalDate;
 
 import static androidx.test.espresso.Espresso.closeSoftKeyboard;
@@ -21,8 +29,11 @@ import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.isDialog;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
@@ -30,7 +41,7 @@ import static org.hamcrest.CoreMatchers.anything;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class DailyCaloriesTest {
-    private final int sleepTime = 500;
+    private final int sleepTime = 300;
     private TestUtils testUtils;
     private LocalDate dateToday;
 
@@ -51,8 +62,9 @@ public class DailyCaloriesTest {
         closeSoftKeyboard();
         onView(withId(R.id.btnLogInToHome)).perform(click());
         SystemClock.sleep(sleepTime);
-        // TODO: verify the remaining calories for today
-
+        // verify the remaining calories for today
+        onView(withId(R.id.textGreeting)).check(matches(withText("Welcome, testUser")));
+        onView(withId(R.id.textRemaining)).check(matches(withText("2137")));
         // add food log
         onView(withId(R.id.breakfast)).perform(click());
         onView(withId(R.id.searchFood)).perform(typeText("bread"));
@@ -67,17 +79,17 @@ public class DailyCaloriesTest {
         closeSoftKeyboard();
         onData(anything()).inAdapterView(withId(R.id.exerciseList)).atPosition(0).perform(click());
         onView(withId(R.id.add_button)).perform(click());
-        onView(withId(R.id.exerciseMinutes)).perform(typeText("10"));
+        onView(withId(R.id.exerciseMinutes)).perform(replaceText("20"));
         onView(withId(R.id.update_Min)).perform(click()); // should go to the log screen
         pressBack();
         // verify
-        onView(withId(R.id.textTotalIntake)).check(matches(withText("100"))); // TODO: correct number
-        onView(withId(R.id.textTotalBurned)).check(matches(withText("100"))); // TODO: correct number
-        onView(withId(R.id.textRemaining)).check(matches(withText("1900"))); // TODO: correct number
+        onView(withId(R.id.textTotalIntake)).check(matches(withText("233")));
+        onView(withId(R.id.textTotalBurned)).check(matches(withText("100")));
+        onView(withId(R.id.textRemaining)).check(matches(withText("2004")));
 
         // undo the change
-        testUtils.deleteFoodLog("testUser", "bread", dateToday);
-        testUtils.deleteExerciseLog("testUser", "axe hold", dateToday);
+        testUtils.deleteFoodLog("testUser", "Bread", dateToday);
+        testUtils.deleteExerciseLog("testUser", "Axe Hold", dateToday);
         testUtils.deleteUser("testUser");
     }
 
@@ -88,15 +100,36 @@ public class DailyCaloriesTest {
         onView(withId(R.id.loseWeightbtn)).perform(click());
         // enter the user info
         onView(withId(R.id.enterUsername)).perform(typeText("testUser"));
-        onView(withId(R.id.editBirthday)).perform(typeText("15041998"));
+        onView(withId(R.id.editBirthday)).perform(typeText("15061998"));
+        closeSoftKeyboard();
         onView(withId(R.id.chooseGender)).perform(click()); // AppCompatSpinner
-        onData(anything()).atPosition(1).perform(click()); // M? F? 0? 1?
+        onData(anything()).atPosition(1).perform(click()); // F
         onView(withId(R.id.weightUnitSwitch)).perform(click()); // switch to kilogram (it shows LBS first)
         onView(withId(R.id.editWeight)).perform(typeText("60"));
+        closeSoftKeyboard();
         onView(withId(R.id.editHeight)).perform(typeText("158"));
-        onView(withId(R.id.btnContinue)).perform(click());
+        closeSoftKeyboard();
+        onView(withId(R.id.btnContinue)).perform(scrollTo()).perform(click());
         // activity level
         onView(withId(R.id.SomewhatActivebtn)).perform(click());
+        // click "Got it" on the alert message
+        onView(withText("GOT IT"))
+                .inRoot(isDialog())
+                .check(matches(isDisplayed()))
+                .perform(click());
+//        test1();
     }
+
+//    public void test1() {
+//        User user = testUtils.getUser("testUser");
+//        assertEquals(132.3, user.getWeight(), 0.001);
+//        assertEquals(158, user.getHeight(), 0.001);
+//        assertEquals(ActivityLevel.SOMEWHAT_ACTIVE, user.getActivityLevel());
+//        assertEquals(Goal.GOAL_LOSE, user.getGoal());
+//        assertEquals(Gender.FEMALE, user.getGender());
+//        assertEquals(1998, user.getBirthYear());
+//        assertEquals(6, user.getBirthMonth());
+//        assertEquals(15, user.getBirthDay());
+//    }
 
 }

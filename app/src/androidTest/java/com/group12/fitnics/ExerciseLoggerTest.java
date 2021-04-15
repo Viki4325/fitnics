@@ -34,7 +34,7 @@ import static org.hamcrest.CoreMatchers.anything;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class ExerciseLoggerTest {
-    private final int sleepTime = 500;
+    private final int sleepTime = 300;
     private TestUtils testUtils;
     private LocalDate dateToday;
 

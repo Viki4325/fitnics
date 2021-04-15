@@ -31,6 +31,10 @@ public class TestUtils {
 
     }
 
+    public User getUser(String username) {
+        return accessUsers.getUserByName(username);
+    }
+
     public void deleteUser(String username) {
         int id = accessUsers.getUserByName(username).getUserID();
         accessUsers.deleteUser(id);

@@ -234,7 +234,7 @@ public class SignUpInfoActivity extends AppCompatActivity {
     private void updateHeightInfo(){
         EditText data = (EditText) findViewById(R.id.editHeight);
         if(choiceUnits[1] == 1)
-        {//If fts : then convert to default unit -> kgs
+        {//If fts : then convert to default unit -> cm
 
             newUser.setHeight(UnitConverter.FTToCM(getHeight()));
 
