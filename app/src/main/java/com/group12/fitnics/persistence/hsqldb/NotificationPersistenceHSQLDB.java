@@ -1,5 +1,6 @@
 package com.group12.fitnics.persistence.hsqldb;
 
+import com.group12.fitnics.exceptions.HSQLDBException;
 import com.group12.fitnics.objects.Notification;
 import com.group12.fitnics.persistence.INotificationPersistence;
 
@@ -45,7 +46,7 @@ public class NotificationPersistenceHSQLDB implements INotificationPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return null;
     }
@@ -66,7 +67,7 @@ public class NotificationPersistenceHSQLDB implements INotificationPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 
@@ -84,7 +85,7 @@ public class NotificationPersistenceHSQLDB implements INotificationPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 }
