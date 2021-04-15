@@ -23,9 +23,12 @@ import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
+import static org.hamcrest.Matchers.hasToString;
+import static org.hamcrest.Matchers.startsWith;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -51,7 +54,6 @@ public class FoodFinderTest {
         onView(withId(R.id.editUsername)).perform(typeText("alice"));
         closeSoftKeyboard();
         onView(withId(R.id.btnLogInToHome)).perform(click());
-        SystemClock.sleep(sleepTime);
         // verify that the user logged in
         onView(withId(R.id.textGreeting)).check(matches(withText("Welcome, alice")));
         // click 'Add breakfast' button
@@ -59,9 +61,10 @@ public class FoodFinderTest {
         // search food item
         onView(withId(R.id.searchFood)).perform(typeText("bread"));
         closeSoftKeyboard();
-        // TODO: verify that the item appeared on the list
-        onData(anything()).inAdapterView(withId(R.id.Search_food)).atPosition(0).
-                onChildView(withId(R.id.list_item)).
-                check(matches(withText("bread")));
+        // verify that the result displayed on the list
+        onData(anything())
+                .inAdapterView(withId(R.id.Search_food))
+                .atPosition(0)
+                .check(matches(isDisplayed()));
     }
 }

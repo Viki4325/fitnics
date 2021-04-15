@@ -23,11 +23,11 @@ public class TestUtils {
     private AccessExerciseLogs accessExerciseLogs;
 
     public TestUtils() {
-        // does it work..?
-        String path = Main.getDBPathName();
-        this.accessUsers = new AccessUsers(new UserPersistenceHSQLDB(path));
-        this.accessFoodLogs = new AccessFoodLogs(new FoodLogPersistenceHSQLDB(path), new FoodPersistenceHSQLDB(path));
-        this.accessExerciseLogs = new AccessExerciseLogs(new ExerciseLogPersistenceHSQLDB(path), new ExercisePersistenceHSQLDB(path));
+        this.accessUsers = new AccessUsers();
+        this.accessFood = new AccessFood();
+        this.accessExercises = new AccessExercises();
+        this.accessFoodLogs = new AccessFoodLogs();
+        this.accessExerciseLogs = new AccessExerciseLogs();
 
     }
 

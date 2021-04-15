@@ -22,8 +22,12 @@ import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.isDialog;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
@@ -55,35 +59,35 @@ public class FoodLoggerTest {
         closeSoftKeyboard();
         onView(withId(R.id.btnLogInToHome)).perform(click());
         SystemClock.sleep(sleepTime);
+        // verify that the user logged in with the new account
+        onView(withId(R.id.textGreeting)).check(matches(withText("Welcome, testUser")));
         // click 'Add breakfast' button
         onView(withId(R.id.breakfast)).perform(click());
         // search food item
         onView(withId(R.id.searchFood)).perform(typeText("bread"));
         closeSoftKeyboard();
-        // TODO: verify that the item appeared on the list
-        onData(anything()).inAdapterView(withId(R.id.Search_food)).atPosition(0).
-                onChildView(withId(R.id.list_item)).
-                check(matches(withText("bread")));
         // add the item
         onData(anything()).inAdapterView(withId(R.id.Search_food)).atPosition(0).perform(click());
-        onView(withId(R.id.foodGrams)).perform(typeText("100"));
-        onView(withId(R.id.add_food)).perform(click()); // should go to the log screen
+        onView(withId(R.id.foodGrams)).perform(replaceText("100"));
+        onView(withId(R.id.add_food)).perform(click()); // should go to the finder screen
+        closeSoftKeyboard();
         pressBack();
         // open the food log screen
         onView(withId(R.id.btnFoodLog)).perform(click());
-        // TODO: verify that the added log item is there
-        onData(anything()).inAdapterView(withId(R.id.food_log)).atPosition(0).
-                onChildView(withId(R.id.list_item)).
-                check(matches(withText("bread"))); // is it right?
-        // TODO: click the item, and change grams
+        // verify that the added log item is there
+        onData(anything())
+                .inAdapterView(withId(R.id.food_log))
+                .atPosition(0)
+                .check(matches(isDisplayed()));
+        // click the item, and change grams
         onData(anything()).inAdapterView(withId(R.id.food_log)).atPosition(0).perform(click());
-        onView(withId(R.id.foodGrams)).perform(typeText("200"));
+        onView(withId(R.id.foodGrams)).perform(replaceText("200"));
         onView(withId(R.id.add_food)).perform(click()); // should go to the log screen
-        pressBack();
-        // TODO: verify the change is made on the log screen
-
+        // verify the change is made on the log screen
+        onData(anything()).inAdapterView(withId(R.id.food_log)).atPosition(0).perform(click());
+        onView(withId(R.id.foodGrams)).check(matches(withText("200")));
         // undo the change
-        testUtils.deleteFoodLog("testUser", "bread", dateToday);
+        testUtils.deleteFoodLog("testUser", "Bread", dateToday);
         testUtils.deleteUser("testUser");
     }
 
@@ -95,14 +99,22 @@ public class FoodLoggerTest {
         // enter the user info
         onView(withId(R.id.enterUsername)).perform(typeText("testUser"));
         onView(withId(R.id.editBirthday)).perform(typeText("15041998"));
+        closeSoftKeyboard();
         onView(withId(R.id.chooseGender)).perform(click()); // AppCompatSpinner
-        onData(anything()).atPosition(1).perform(click()); // M? F? 0? 1?
+        onData(anything()).atPosition(1).perform(click());
         onView(withId(R.id.weightUnitSwitch)).perform(click()); // switch to kilogram (it shows LBS first)
         onView(withId(R.id.editWeight)).perform(typeText("60"));
+        closeSoftKeyboard();
         onView(withId(R.id.editHeight)).perform(typeText("158"));
-        onView(withId(R.id.btnContinue)).perform(click());
+        closeSoftKeyboard();
+        onView(withId(R.id.btnContinue)).perform(scrollTo()).perform(click());
         // activity level
         onView(withId(R.id.SomewhatActivebtn)).perform(click());
+        // click "Got it" on the alert message
+        onView(withText("GOT IT"))
+                .inRoot(isDialog())
+                .check(matches(isDisplayed()))
+                .perform(click());
     }
 
 

@@ -22,6 +22,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
@@ -50,7 +51,6 @@ public class ExerciseFinderTest {
         onView(withId(R.id.editUsername)).perform(typeText("alice"));
         closeSoftKeyboard();
         onView(withId(R.id.btnLogInToHome)).perform(click());
-        SystemClock.sleep(sleepTime);
         // verify that the user logged in
         onView(withId(R.id.textGreeting)).check(matches(withText("Welcome, alice")));
         // click 'Add exercise' button
@@ -58,10 +58,11 @@ public class ExerciseFinderTest {
         // search exercise item
         onView(withId(R.id.searchExercise)).perform(typeText("axe"));
         closeSoftKeyboard();
-        // TODO: verify that the item appeared on the list
-        onData(anything()).inAdapterView(withId(R.id.exerciseList)).atPosition(0).
-                onChildView(withId(R.id.list_item)). // list_item ???
-                check(matches(withText("Axe Hold")));
+        // verify that the result displayed on the list
+        onData(anything())
+                .inAdapterView(withId(R.id.exerciseList))
+                .atPosition(0)
+                .check(matches(isDisplayed()));
         // click the item
         onData(anything()).inAdapterView(withId(R.id.exerciseList)).atPosition(0).perform(click());
         // verify the title of the detailed-info screen
