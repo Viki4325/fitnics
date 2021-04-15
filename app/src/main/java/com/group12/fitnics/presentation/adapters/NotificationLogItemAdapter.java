@@ -36,6 +36,7 @@ public class NotificationLogItemAdapter extends ArrayAdapter<NotificationLog> {
 
         NotificationLog notificationLog = getItem(position);
         //Should we make AccessNotification object or is there another way???
+        System.out.println(notificationLog.getNotificationID());
         Notification notification = accessNotification.getNotificationById(notificationLog.getNotificationID());
 
         if(convertView == null){

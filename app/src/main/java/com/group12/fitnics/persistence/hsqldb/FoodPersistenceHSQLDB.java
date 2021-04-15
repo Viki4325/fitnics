@@ -22,7 +22,7 @@ public class FoodPersistenceHSQLDB implements IFoodPersistence {
     }
 
     private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true;hsqldb.lock_file=false", "SA", "");
     }
 
     private Food fromResultSet(ResultSet rs) throws SQLException {

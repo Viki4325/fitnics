@@ -48,10 +48,7 @@ public class NotificationTest {
         onView(withId(R.id.btnLogInToHome)).perform(click());
         SystemClock.sleep(sleepTime);
         // open the notification setting screen
-//        onView(withId(R.id._____)).perform(click());
-        // TODO: How to test push notification ???
-        // https://stackoverflow.com/questions/34467310/espresso-test-for-notification-to-showing-up
-        // https://stackoverflow.com/questions/33495294/testing-notifications-in-android
+        onView(withId(R.id._____)).perform(click());
 
     }
 

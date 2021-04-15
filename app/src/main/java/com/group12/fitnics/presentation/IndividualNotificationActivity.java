@@ -19,6 +19,9 @@ import com.group12.fitnics.R;
 import com.group12.fitnics.business.AccessNotification;
 import com.group12.fitnics.business.AccessNotificationLogs;
 import com.group12.fitnics.business.NotificationBuilder;
+import com.group12.fitnics.exceptions.InvalidNotifLogTitleException;
+import com.group12.fitnics.exceptions.InvalidNotificationException;
+import com.group12.fitnics.exceptions.InvalidUnitsException;
 import com.group12.fitnics.objects.Notification;
 import com.group12.fitnics.objects.NotificationLog;
 import com.group12.fitnics.objects.User;
@@ -92,33 +95,39 @@ public class IndividualNotificationActivity extends AppCompatActivity {
         c.set(Calendar.MINUTE,min);
         c.set(Calendar.SECOND,0);
 
-        //update title,hour,min,activate for Notification
-        notification.setTitle(title.getText().toString());
-        notification.setHour(hour);
-        notification.setMinute(min);
-        notification.setIsActive(activate.isChecked());
-        //update title,hour,min for NotificationLog
-        notificationLog.setTitle(title.getText().toString());
-        notificationLog.setHour(hour);
-        notificationLog.setMinutes(min);
+        try {
+            //update title,hour,min,activate for Notification
+            notification.setTitle(title.getText().toString());
+            notification.setHour(hour);
+            notification.setMinute(min);
+            notification.setIsActive(activate.isChecked());
+            //update title,hour,min for NotificationLog
+            notificationLog.setTitle(title.getText().toString());
+            notificationLog.setHour(hour);
+            notificationLog.setMinutes(min);
 
-        accessNotification.insertNotification(notification);
-        accessNotificationLogs.insertNotificationLog(notificationLog);
+            accessNotification.insertNotification(notification);
+            accessNotificationLogs.insertNotificationLog(notificationLog);
 
-        if(notification.isActive()) {
-            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent(this, NotificationBuilder.class);
-            intent.putExtra("Notification", notification);
+            if (notification.isActive()) {
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                Intent intent = new Intent(this, NotificationBuilder.class);
+                intent.putExtra("Notification", notification);
 
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 
-            alarmManager.setRepeating(alarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+                alarmManager.setRepeating(alarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+            }
+
+            finish();
+            Intent back = new Intent(getApplicationContext(), CreateNotificationActivity.class);
+            back.putExtra("userLoggedIn", user);
+            startActivity(back);
+        } catch (InvalidNotificationException e) {
+            Messages.fatalError(this,e.getMessage());
+        } catch (Exception e){
+            Messages.fatalError(this,e.getMessage());
         }
-
-        finish();
-        Intent back = new Intent(getApplicationContext(), CreateNotificationActivity.class);
-        back.putExtra("userLoggedIn", user);
-        startActivity(back);
     }
 
     public void deleteAlarmOnClick(View v){

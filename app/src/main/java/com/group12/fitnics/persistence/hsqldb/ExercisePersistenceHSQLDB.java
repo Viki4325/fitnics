@@ -26,7 +26,7 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
     }
 
     private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true;hsqldb.lock_file=false", "SA", "");
     }
 
     private Exercise fromResultSet(ResultSet rs) throws SQLException {

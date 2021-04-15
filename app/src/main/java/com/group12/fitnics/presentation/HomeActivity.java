@@ -144,6 +144,10 @@ public class HomeActivity extends AppCompatActivity {
         generateIntent(UpdateUserInfoActivity.class);
     }
 
+    public void btnSetNotificationsOnClick(View v) {
+        generateIntent(CreateNotificationActivity.class);
+    }
+
     /*
     * This method generates intent,and passes the current logged in user, since we need that info everywhere
     * */

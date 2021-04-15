@@ -2,8 +2,10 @@ package com.group12.fitnics.business;
 
 import com.group12.fitnics.application.Services;
 import com.group12.fitnics.exceptions.InvalidExerciseException;
+import com.group12.fitnics.exceptions.InvalidNotifLogTitleException;
 import com.group12.fitnics.exceptions.InvalidNotificationException;
 import com.group12.fitnics.exceptions.InvalidNotificationLogException;
+import com.group12.fitnics.exceptions.InvalidUserNameException;
 import com.group12.fitnics.exceptions.NotificationNotFoundException;
 import com.group12.fitnics.objects.Notification;
 import com.group12.fitnics.persistence.INotificationPersistence;
@@ -37,12 +39,14 @@ public class AccessNotification {
         notificationPersistence.deleteNotification(notificationId);
     }
 
-    public void insertNotification(Notification notify) throws InvalidNotificationException
+    public void insertNotification(Notification notify) throws InvalidNotificationException, InvalidNotifLogTitleException
     {
         if(notify == null)
             throw new InvalidNotificationException("The Notification is not valid. ");
         if (getNotificationById(notify.getNotificationID()) != null)
-            throw new InvalidNotificationLogException("The Notification is duplicate. You could instead increase the time for this Notification. Thank you!");
+            throw new InvalidNotificationLogException("The Notification is duplicate. You could instead change the time for this Notification. Thank you!");
+        if (notify.getTitle().length() > 20)
+            throw new InvalidNotifLogTitleException("The title is too long, should be no more than 20 characters.");
 
         notificationPersistence.insertNotification(notify);
         notify.setNotificationID(notify.getNotificationID());

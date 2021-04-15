@@ -371,14 +371,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <Button
-                android:id="@+id/btnCreateNotification"
-                android:layout_width="201dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:onClick="btnSetNotificationsOnClick"
-                android:text="Set Notifications" />
 
         </LinearLayout>
 
