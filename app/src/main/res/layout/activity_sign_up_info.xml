@@ -5,10 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".presentation.SignUpInfoActivity"
-android:scrollbars="none"
-android:padding="10dp">
-
-
+android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +36,7 @@ android:padding="10dp">
             android:layout_height="wrap_content"
             android:gravity="center"
            android:layout_marginTop="10dp"
-            android:layout_marginBottom="70dp"
+            android:layout_marginBottom="30dp"
             android:text="Let's get started with the basics"
             android:fontFamily="@font/muli"
             android:textStyle="italic"
@@ -226,6 +223,7 @@ android:padding="10dp">
         </RelativeLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnContinue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -234,7 +232,7 @@ android:padding="10dp">
             android:fontFamily="@font/muli"
             android:gravity="center"
             android:onClick="btnNextPage"
-            android:padding="20dp"
+            android:padding="15dp"
             android:text="CONTINUE"
             android:textStyle="bold"
             app:cornerRadius="50dp" />

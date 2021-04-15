@@ -70,6 +70,7 @@ public class SignUpActiveLevelActivity extends AppCompatActivity {
                 logInToHomeIntent.putExtra("userID", Integer.toString(newUser.getUserID()));
 
                 startActivity(logInToHomeIntent);
+                finish();
             }
         });
     }

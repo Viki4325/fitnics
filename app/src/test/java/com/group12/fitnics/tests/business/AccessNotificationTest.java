@@ -4,6 +4,7 @@ import com.group12.fitnics.business.AccessNotification;
 import com.group12.fitnics.exceptions.InvalidNotificationException;
 import com.group12.fitnics.exceptions.NotificationNotFoundException;
 import com.group12.fitnics.objects.Notification;
+import com.group12.fitnics.persistence.stub.NotificationPersistenceStub;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +17,7 @@ public class AccessNotificationTest {
 
     @Before
     public void setup() {
-        accessNotification = new AccessNotification();
+        accessNotification = new AccessNotification(new NotificationPersistenceStub());
     }
 
     @Test

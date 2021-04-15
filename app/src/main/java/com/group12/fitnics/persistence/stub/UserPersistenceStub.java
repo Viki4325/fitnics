@@ -14,7 +14,7 @@ public class UserPersistenceStub implements IUserPersistence {
         this.users = new ArrayList<>();
         int[] units = {1, 0};
 
-        User alice = new User("alice", 15, 4, 1998, 1, 55, 163, 'F', 0, units);
+        User alice = new User("alice", 15, 6, 1998, 1, 55, 163, 'F', 0, units);
         User bob = new User("bob", 1, 5, 2000, 2, 70, 175, 'M', 1, units);
         User carol = new User("carol", 22, 7, 1995, 3, 47, 160, 'F', 2, units);
         User david = new User("david", 27, 11, 1985, 1, 50, 160, 'M', 0, units);

@@ -65,5 +65,4 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     compileOnly 'com.google.android.wearable:wearable:2.8.1'
 
-
 }

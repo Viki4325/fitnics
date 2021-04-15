@@ -1,5 +1,6 @@
 package com.group12.fitnics.persistence.hsqldb;
 
+import com.group12.fitnics.exceptions.HSQLDBException;
 import com.group12.fitnics.objects.NotificationLog;
 import com.group12.fitnics.persistence.INotificationLogPersistence;
 
@@ -21,7 +22,7 @@ public class NotificationLogPersistenceHSQLDB implements INotificationLogPersist
     }
 
     private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true;hsqldb.lock_file=false", "SA", "");
     }
 
     private NotificationLog fromResultSet(ResultSet rs) throws SQLException {
@@ -47,7 +48,7 @@ public class NotificationLogPersistenceHSQLDB implements INotificationLogPersist
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return null;
     }
@@ -67,7 +68,7 @@ public class NotificationLogPersistenceHSQLDB implements INotificationLogPersist
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
 
         return logs;
@@ -86,14 +87,14 @@ public class NotificationLogPersistenceHSQLDB implements INotificationLogPersist
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 
     @Override
     public void updateNotificationLog(int userID, int NotificationID, NotificationLog updatedLog) {
         try (final Connection c = connect()) {
-            final PreparedStatement st = c.prepareStatement("UPDATE NOTIFICATIONLOGS SET name=?, uid=?, eid=?, hour=?, minutes=? where uid=? AND nid=?");
+            final PreparedStatement st = c.prepareStatement("UPDATE NOTIFICATIONLOGS SET name=?, uid=?, nid=?, hour=?, minutes=? where uid=? AND nid=?");
             st.setString(1, updatedLog.getTitle());
             st.setInt(2, updatedLog.getUserID());
             st.setInt(3, updatedLog.getNotificationID());
@@ -105,21 +106,21 @@ public class NotificationLogPersistenceHSQLDB implements INotificationLogPersist
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 
     @Override
     public void deleteNotificationLog(int userID, int NotificationID) {
         try (final Connection c = connect()) {
-            final PreparedStatement st = c.prepareStatement("DELETE FROM NOTIFICATIONLOGS WHERE uid = ? AND eid = ?");
+            final PreparedStatement st = c.prepareStatement("DELETE FROM NOTIFICATIONLOGS WHERE uid = ? AND nid = ?");
             st.setString(1, Integer.toString(userID));
             st.setString(2, Integer.toString(NotificationID));
             st.executeUpdate();
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 }

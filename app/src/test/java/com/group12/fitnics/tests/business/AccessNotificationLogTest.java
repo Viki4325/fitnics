@@ -6,6 +6,8 @@ import com.group12.fitnics.business.AccessNotificationLogs;
 import com.group12.fitnics.exceptions.InvalidNotificationLogException;
 import com.group12.fitnics.exceptions.NotificationLogNotFoundException;
 import com.group12.fitnics.objects.NotificationLog;
+import com.group12.fitnics.persistence.stub.NotificationLogPersistenceStub;
+import com.group12.fitnics.persistence.stub.NotificationPersistenceStub;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +25,7 @@ public class AccessNotificationLogTest {
     @Before
     public void setUp() {
         System.out.println("Starting test for AccessNotificationLogs");
-        accessNotificationLogs = new AccessNotificationLogs();
+        accessNotificationLogs = new AccessNotificationLogs(new NotificationLogPersistenceStub(), new NotificationPersistenceStub());
 
     }
 

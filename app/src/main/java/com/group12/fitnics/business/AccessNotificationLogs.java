@@ -6,6 +6,7 @@ import com.group12.fitnics.exceptions.NotificationLogNotFoundException;
 import com.group12.fitnics.objects.NotificationLog;
 import com.group12.fitnics.persistence.INotificationLogPersistence;
 import com.group12.fitnics.persistence.INotificationPersistence;
+import com.group12.fitnics.persistence.stub.NotificationLogPersistenceStub;
 
 import java.util.List;
 
@@ -16,6 +17,11 @@ public class AccessNotificationLogs {
     public AccessNotificationLogs() {
         NotificationLogPersistence = Services.getNotificationLogPersistence();
         NotificationPersistence = Services.getNotificationPersistence();
+    }
+
+    public AccessNotificationLogs(INotificationLogPersistence nl, INotificationPersistence n) {
+        this.NotificationLogPersistence = nl;
+        this.NotificationPersistence = n;
     }
 
     public NotificationLog getNotificationLog(int userID, int NotificationID) {

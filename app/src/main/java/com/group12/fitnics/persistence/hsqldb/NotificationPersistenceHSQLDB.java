@@ -1,5 +1,6 @@
 package com.group12.fitnics.persistence.hsqldb;
 
+import com.group12.fitnics.exceptions.HSQLDBException;
 import com.group12.fitnics.objects.Notification;
 import com.group12.fitnics.persistence.INotificationPersistence;
 
@@ -18,11 +19,11 @@ public class NotificationPersistenceHSQLDB implements INotificationPersistence {
     }
 
     private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true;hsqldb.lock_file=false", "SA", "");
     }
 
     private Notification fromResultSet(ResultSet rs) throws SQLException {
-        int NotificationID = rs.getInt("id");
+        int NotificationID = rs.getInt("nid");
         String name = rs.getString("name");
         int hour = rs.getInt("hour");
         int min = rs.getInt("min");
@@ -35,7 +36,7 @@ public class NotificationPersistenceHSQLDB implements INotificationPersistence {
     @Override
     public Notification getNotificationById(final int NotificationID){
         try (Connection c = connect()) {
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM NOTIFICATION WHERE id = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM NOTIFICATION WHERE nid = ?");
             st.setString(1, Integer.toString(NotificationID));
             final ResultSet rs = st.executeQuery();
             if (rs.next()) {
@@ -45,7 +46,7 @@ public class NotificationPersistenceHSQLDB implements INotificationPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return null;
     }
@@ -53,13 +54,20 @@ public class NotificationPersistenceHSQLDB implements INotificationPersistence {
     @Override
     public void deleteNotification(final int NotificationID){
         try (final Connection c = connect()) {
-            final PreparedStatement st = c.prepareStatement("DELETE FROM NOTIFICATION WHERE id = ?");
+
+            // Delete on cascade
+            final PreparedStatement notilogs = c.prepareStatement("DELETE FROM NOTIFICATIONLOGS WHERE nid = ?");
+            notilogs.setString(1, Integer.toString(NotificationID));
+            notilogs.executeUpdate();
+            notilogs.close();
+
+            final PreparedStatement st = c.prepareStatement("DELETE FROM NOTIFICATION WHERE nid = ?");
             st.setString(1, Integer.toString(NotificationID));
             st.executeUpdate();
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 
@@ -77,7 +85,7 @@ public class NotificationPersistenceHSQLDB implements INotificationPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 }

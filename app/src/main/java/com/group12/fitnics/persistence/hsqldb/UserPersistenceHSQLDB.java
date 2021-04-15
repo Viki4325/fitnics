@@ -22,7 +22,7 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
     }
 
     private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true;hsqldb.lock_file=false", "SA", "");
     }
 
     private User fromResultSet(final ResultSet rs) throws SQLException {
@@ -175,6 +175,12 @@ public class UserPersistenceHSQLDB implements IUserPersistence {
             excslogs.setString(1, Integer.toString(userID));
             excslogs.executeUpdate();
             excslogs.close();
+
+            // Delete on cascade
+            final PreparedStatement notilogs = c.prepareStatement("DELETE FROM NOTIFICATIONLOGS WHERE uid = ?");
+            notilogs.setString(1, Integer.toString(userID));
+            notilogs.executeUpdate();
+            notilogs.close();
 
             final PreparedStatement st = c.prepareStatement("DELETE FROM USERS WHERE id = ?");
             st.setString(1, Integer.toString(userID));
