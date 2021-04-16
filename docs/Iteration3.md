@@ -42,5 +42,8 @@ Acceptance test, untestable
 
 Velocity/teamwork
 -----------------
+![Charts](Velocity Chart.png)
 
+Compared to the beginning, we can say that our estimate get better. This is because at the beginning we don't have experience about how much time to complete each feature, But with the end of the first iteration, we found that we should remove some features and increase the estimated time for each feature. This helped us basically complete the feature we set in the iteration 2. In Iteration 3, we don't have much time here because the final, which makes us unable to complete all the feature we set. Although it is slightly inadequate compared to Iteration 2, it is still an improvement compared to Iteration 1. 
+Relevant evidence [Iteration 1 · Milestones ](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/milestones/1) [Iteration 2 · Milestones](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/milestones/2) [Iteration 3 · Milestones](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/milestones/3).
 
