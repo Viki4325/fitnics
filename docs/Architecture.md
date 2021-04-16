@@ -1,6 +1,10 @@
 Architecture
 ============
 
+Iteration 3 Diagram
+-------------------
+![architecture](Architecture_i3.png)
+
 Iteration 2 Diagram
 -------------------
 ![architecture](Architecture_i2.png)
@@ -34,7 +38,7 @@ Presentation Layer
  - A place where the types and amounts of foods eaten during the day are listed
 
 [SearchExerciseActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/SearchExerciseActivity.java)
- -  A screen where to search for exercise to get information
+ - A screen where to search for exercise to get information
  
 [IndividualExercise](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/IndividualExercise.java)
  - A screen where user can add an exercise item to their list of exercises done
@@ -45,6 +49,12 @@ Presentation Layer
 [UpdateUserInfoActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/UpdateUserInfoActivity.java)
  - A screen where user can update their information
  
+[CreateNotificationActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/CreateNotificationActivity.java)
+ - A screen where user can view a list of notification set, and add a new one
+  
+[IndividualNotificationActivity](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/presentation/IndividualNotificationActivity.java)
+ - A screen where user can make a change or delete one notification
+ 
 
 Application Layer
 -----------------
@@ -54,6 +64,7 @@ Application Layer
 [Services](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/application/Services.java)
  - The class that provides persistence objects
 
+
 Logic Layer
 --------------
 [AccessUsers](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/AccessUsers.java)
@@ -62,14 +73,20 @@ Logic Layer
 [AccessFood](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/AccessFood.java)
  - The class the representation layer calls to do foods-related things
 
+[AccessFoodLogs](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/AccessFoodLogs.java)
+ - The class the representation layer calls to do food logs-related things
+ 
 [AccessExercises](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/AccessExercises.java)
  - The class the representation layer calls to do exercises-related things
 
-[AccessFoodLogs](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/AccessFoodLogs.java)
- - The class the representation layer calls to do food logs-related things
-
 [AccessExerciseLogs](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/AccessExerciseLogs.java)
  - The class the representation layer calls to do exercise logs-related things
+ 
+[AccessNotification](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/AccessNotification.java)
+ - The class the representation layer calls to do notification-related things
+
+[AccessNotificationLogs](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/AccessNotificationLogs.java)
+ - The class the representation layer calls to do notification logs-related things
 
 [DailyCaloricNeeds](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/business/DailyCaloricNeeds.java)
  - The helper class to calculate daily calorie needs based on a user information
@@ -141,6 +158,16 @@ Logic Layer
  
 [ExerciseLogNotFoundException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/ExerciseLogNotFoundException.java)
  - The exception class for when an ExerciseLog object requested was not found
+
+#### Notification and NotificationLog-related
+[InvalidNotificationException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidNotificationException.java)
+ - The exception class for invalid Notification object (null)
+ 
+[InvalidNotificationLogException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidNotificationLogException.java)
+ - The exception class for invalid NotificationLog object (null)
+ 
+[InvalidNotifLogTitleException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidNotifLogTitleException.java)
+ - The exception class for checking if the title of notification is too long
  
 #### Other
 [InvalidUnitsException](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/exceptions/InvalidUnitsException.java)
@@ -154,32 +181,44 @@ Persistence Layer
 
 [IFoodPersistence](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/IFoodPersistence.java)
  - The interface for handling the set of foods in the database
-
-[IExercisePersistence](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/IExercisePersistence.java)
- - The interface for handling the set of exercises in the database
-
+ 
 [IFoodLogPersistence](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/IFoodLogPersistence.java)
  - The interface for handling the food logs in the database
+ 
+[IExercisePersistence](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/IExercisePersistence.java)
+ - The interface for handling the set of exercises in the database
 
 [IExerciseLogPersistence](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/IExerciseLogPersistence.java)
  - The interface for the exercise logs in the database
 
+[INotificationPersistence](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/INotificationPersistence.java)
+ - The interface for handling the set of notifications in the database
+
+[INotificationLogPersistence](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/INotificationLogPersistence.java)
+ - The interface for the notification logs in the database
+
 ### Stubs
-[UserPersistenceStub](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/UserPersistenceStub.java)
+[UserPersistenceStub](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/stub/UserPersistenceStub.java)
  - Current User implementation for the "database" for the app
 
-[FoodPersistenceStub](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/FoodPersistenceStub.java)
+[FoodPersistenceStub](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/stub/FoodPersistenceStub.java)
  - Current Food implementation for the "database" for the app
 
-[ExercisePersistenceStub](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/ExercisePersistenceStub.java)
- - Current Exercise implementation for the "database" for the app
-
-[FoodLogPersistenceStub](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/FoodLogPersistenceStub.java)
+[FoodLogPersistenceStub](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/stub/FoodLogPersistenceStub.java)
  - Current FoodLog implementation for the "database" for the app
 
-[ExerciseLogPersistenceStub](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/ExerciseLogPersistenceStub.java)
+[ExercisePersistenceStub](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/stub/ExercisePersistenceStub.java)
+ - Current Exercise implementation for the "database" for the app
+
+[ExerciseLogPersistenceStub](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/stub/ExerciseLogPersistenceStub.java)
  - Current ExerciseLog implementation for the "database" for the app
- 
+
+[NotificationPersistenceStub](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/stub/NotificationPersistenceStub.java)
+ - Current Notification implementation for the "database" for the app
+
+[NotificationLogPersistenceStub](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/stub/NotificationLogPersistenceStub.java)
+ - Current NotificationLog implementation for the "database" for the app
+
 ### hsqldb
 [UserPersistenceHSQLDB](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/hsqldb/UserPersistenceHSQLDB.java)
  - Current User database implementation
@@ -187,16 +226,22 @@ Persistence Layer
 [FoodPersistenceHSQLDB](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/hsqldb/FoodPersistenceHSQLDB.java)
  - Current Food database implementation
 
-[ExercisePersistenceHSQLDB](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/hsqldb/ExercisePersistenceHSQLDB.java)
- - Current Exercise database implementation
-
 [FoodLogPersistenceHSQLDB](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/hsqldb/FoodLogPersistenceHSQLDB.java)
  - Current FoodLog database implementation
+
+[ExercisePersistenceHSQLDB](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/hsqldb/ExercisePersistenceHSQLDB.java)
+ - Current Exercise database implementation
  
 [ExerciseLogPersistenceHSQLDB](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/hsqldb/ExerciseLogPersistenceHSQLDB.java)
- - Current ExecriceLog database implementation
+ - Current ExerciseLog database implementation
 
+[NotificationPersistenceHSQLDB](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/hsqldb/NotificationPersistenceHSQLDB.java)
+ - Current Notification database implementation
+ 
+[NotificationLogPersistenceHSQLDB](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/persistence/hsqldb/NotificationLogPersistenceHSQLDB.java)
+ - Current NotificationLog database implementation
    
+ 
 Domain Specific Objects
 -----------------------
 [User](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/objects/User.java)
@@ -205,11 +250,29 @@ Domain Specific Objects
 [Food](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/objects/Food.java)
  - The object representing one kind of food
 
-[Exercise](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/objects/Exercise.java)
- - The object representing one kind of exercise
-
 [FoodLog](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/objects/FoodLog.java)
  - The object indicating which user ate what food and how much on what date
 
+[Exercise](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/objects/Exercise.java)
+ - The object representing one kind of exercise
+
 [ExerciseLog](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/objects/ExerciseLog.java)
  - The object indicating which user did what exercise and how many minutes on what date
+
+[Notification](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/objects/Notification.java)
+ - The object representing a notification
+
+[NotificationLog](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/objects/NotificationLog.java)
+ - The object indicating one notification item with more detailed information
+
+
+Enums
+-----
+[ActivityLevel](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/enums/ActivityLevel.java)
+ - An enumeration type to represents the user's activity level
+ 
+[Gender](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/enums/Gender.java)
+ - An enumeration type to represents the user's gender
+
+[Goal](https://code.cs.umanitoba.ca/3350-winter-2021-a01/fitnics-group-12/-/blob/master/app/src/main/java/com/group12/fitnics/enums/Goal.java)
+ - An enumeration type to represents the user's goal
