@@ -15,8 +15,6 @@ import org.junit.runners.Suite;
         ExerciseLoggerTest.class,
         DailyCaloriesTest.class,
         NotificationTest.class,
-        WorkoutProgressTest.class,
-        DietProgressTest.class
 })
 
 
