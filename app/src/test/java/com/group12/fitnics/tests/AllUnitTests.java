@@ -56,6 +56,6 @@ import com.group12.fitnics.tests.objects.UserTest;
 
 //NotificationBuilder and Notification helper are untestable since junit requires a zero-argument constructor and they cannot have one
 
-public class AllTests {
+public class AllUnitTests {
 
 }
