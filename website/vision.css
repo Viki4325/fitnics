@@ -32,3 +32,12 @@ body {
     font-size: xx-large;
     font-weight: 00;
 }
+
+.image-container {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
