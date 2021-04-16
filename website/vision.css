@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #e8e8e8;
+    font-family: Poppins;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#vision-statement {
+    color: black;
+    font-size: x-large;
+    text-align: justify;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding: 50px 75px;
+    width: 75vw;
+    height: auto;
+
+    border-radius: 50px;
+    background: #e8e8e8;
+    box-shadow:  -20px 20px 60px #c5c5c5,
+                20px -20px 60px #ffffff;
+}
+
+#vision-statement span {
+    font-size: xx-large;
+    font-weight: 00;
+}
