@@ -5,6 +5,8 @@ import com.group12.fitnics.exceptions.ExerciseLogNotFoundException;
 import com.group12.fitnics.exceptions.InvalidExerciseLogException;
 import com.group12.fitnics.exceptions.InvalidFoodLogException;
 import com.group12.fitnics.objects.ExerciseLog;
+import com.group12.fitnics.persistence.stub.ExerciseLogPersistenceStub;
+import com.group12.fitnics.persistence.stub.ExercisePersistenceStub;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +24,7 @@ public class AccessExerciseLogsTest {
     @Before
     public void setUp() {
         System.out.println("Starting test for AccessExerciseLogs");
-        accessExerciseLogs = new AccessExerciseLogs();
+        accessExerciseLogs = new AccessExerciseLogs(new ExerciseLogPersistenceStub(), new ExercisePersistenceStub());
         date = LocalDate.of(2021, 1, 1);
     }
 

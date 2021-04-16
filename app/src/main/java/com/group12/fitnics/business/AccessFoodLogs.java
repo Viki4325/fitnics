@@ -84,8 +84,6 @@ public class AccessFoodLogs {
     }
 
     private boolean checkInvariant(FoodLog foodLog) {
-        if (foodLog == null || foodLog.getUserID() < 0 || foodLog.getFoodID() < 0 || foodLog.getGrams() <= 0)
-            return false;
-        return true;
+        return foodLog != null && foodLog.getUserID() >= 0 && foodLog.getFoodID() >= 0 && foodLog.getGrams() > 0;
     }
 }

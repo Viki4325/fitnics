@@ -73,7 +73,10 @@ public class AccessFood{
         if(newFood.getName().length() > 20)
             throw new InvalidFdNameException("The name should be no more than 20 characters.");
 
-        return foodList.insertFood(newFood);
+        int newId = foodList.insertFood(newFood);
+        newFood.setFoodID(newId);
+
+        return newId;
     }
 
     public void deleteFood(int foodID) throws FoodNotFoundException {

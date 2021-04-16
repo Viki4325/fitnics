@@ -1,9 +1,10 @@
-package com.group12.fitnics.persistence;
+package com.group12.fitnics.persistence.stub;
 
 import com.group12.fitnics.exceptions.FoodNotFoundException;
 import com.group12.fitnics.exceptions.InvalidFdNameException;
 import com.group12.fitnics.exceptions.InvalidFoodException;
 import com.group12.fitnics.objects.Food;
+import com.group12.fitnics.persistence.IFoodPersistence;
 
 import java.util.ArrayList;
 

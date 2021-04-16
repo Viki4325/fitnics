@@ -1,6 +1,7 @@
-package com.group12.fitnics.persistence;
+package com.group12.fitnics.persistence.stub;
 
 import com.group12.fitnics.objects.ExerciseLog;
+import com.group12.fitnics.persistence.IExerciseLogPersistence;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,8 +14,6 @@ public class ExerciseLogPersistenceStub implements IExerciseLogPersistence {
     public ExerciseLogPersistenceStub() {
         exerciseLogs = new ArrayList<>();
 
-//        MyDate date1 = new MyDate(new GregorianCalendar(2021, 0, 1));
-//        MyDate date2 = new MyDate(new GregorianCalendar(2021, 0, 2));
         LocalDate date1 = LocalDate.of(2021, 1, 1);
         LocalDate date2 = LocalDate.of(2021, 1, 2);
 

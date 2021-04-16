@@ -6,58 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".presentation.CreateNotificationActivity">
 
-    <LinearLayout
-        android:layout_width="382dp"
-        android:layout_height="556dp"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:weightSum="1"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addNotificationBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.97"
+        app:srcCompat="@drawable/ic_add" />
 
-        <TextView
-            android:id="@+id/AlertText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/backbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="backOnClick"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.00999999" />
 
-            android:layout_marginBottom="30dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="No Alarm set"
-            android:textSize="30sp" />
-
-        <TimePicker
-            android:id="@+id/timePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:timePickerMode="clock" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:layout_marginTop="27dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/deletebtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:onClick="deleteAlarmOnClick"
-                android:text="Delete" />
-
-            <Button
-                android:id="@+id/savebtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="10000"
-                android:onClick="createNotificationOnClick"
-                android:text="Save" />
-        </LinearLayout>
-    </LinearLayout>
-
+    <ListView
+        android:id="@+id/NotificationList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,7 +45,7 @@
         <item>Very Active</item>
     </string-array>
     <string-array name="goals">
-        <item>Loose Weight</item>
+        <item>Lose Weight</item>
         <item>Maintain Weight</item>
         <item>Gain Weight</item>
     </string-array>
@@ -65,7 +65,7 @@
     <string name="search" />
 
     <string name="searchExerciseHint">Search Exercise</string>
-    <string name="goal_loose_weight">Loose Weight</string>
+    <string name="goal_lose_weight">Lose Weight</string>
     <string name="goal_maintain_weight">Maintain Weight  </string>
     <string name="goal_gain_weight">Gain Weight  </string>
     <string name="breakfast_button_text">Add breakfast</string>
@@ -81,4 +81,11 @@
     <string name="ex_category">Category</string>
     <string name="ex_level">Level</string>
     <string name="default_grams_consumed">1</string>
+    <string name="title_activity_create_notification">CreateNotificationActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="title_activity_individual_notification">IndividualNotification</string>
 </resources>

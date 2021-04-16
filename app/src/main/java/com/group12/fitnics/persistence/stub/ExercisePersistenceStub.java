@@ -1,4 +1,4 @@
-package com.group12.fitnics.persistence;
+package com.group12.fitnics.persistence.stub;
 
 import android.os.Build;
 
@@ -8,6 +8,7 @@ import com.group12.fitnics.exceptions.ExerciseNotFoundException;
 import com.group12.fitnics.exceptions.InvalidExNameException;
 import com.group12.fitnics.exceptions.InvalidExerciseException;
 import com.group12.fitnics.objects.Exercise;
+import com.group12.fitnics.persistence.IExercisePersistence;
 
 import java.util.ArrayList;
 import java.util.Collections;

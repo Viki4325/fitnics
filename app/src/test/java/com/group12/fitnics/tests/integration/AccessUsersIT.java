@@ -2,6 +2,8 @@ package com.group12.fitnics.tests.integration;
 
 import com.group12.fitnics.business.AccessFoodLogs;
 import com.group12.fitnics.business.AccessUsers;
+import com.group12.fitnics.enums.ActivityLevel;
+import com.group12.fitnics.enums.Gender;
 import com.group12.fitnics.exceptions.InvalidUserException;
 import com.group12.fitnics.exceptions.InvalidUserNameException;
 import com.group12.fitnics.exceptions.UserNotFoundException;
@@ -92,10 +94,10 @@ public class AccessUsersIT {
         assertNotNull(accessUsers.getUserByName("eve"));
         assertEquals(id, accessUsers.getUserByName("eve").getUserID());
         assertEquals("eve", accessUsers.getUserByName("eve").getUsername());
-        assertEquals(1, accessUsers.getUserByName("eve").getActivityLevel());
+        assertEquals(ActivityLevel.SOMEWHAT_ACTIVE, accessUsers.getUserByName("eve").getActivityLevel());
         assertEquals(47.0, accessUsers.getUserByName("eve").getWeight(), 0.0001);
         assertEquals(160.0, accessUsers.getUserByName("eve").getHeight(), 0.0001);
-        assertEquals('F', accessUsers.getUserByName("eve").getGender());
+        assertEquals(Gender.FEMALE, accessUsers.getUserByName("eve").getGender());
 
         // delete what we just added
         accessUsers.deleteUser(id);
@@ -135,7 +137,7 @@ public class AccessUsersIT {
         accessUsers.updateUser(0, updatedAlice);
 
         User alice = accessUsers.getUserByName("alice");
-        assertEquals(2, alice.getActivityLevel());
+        assertEquals(ActivityLevel.ACTIVE, alice.getActivityLevel());
         assertEquals(49, alice.getWeight(), 0.0001);
         assertEquals(163, alice.getHeight(), 0.0001);
 

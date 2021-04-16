@@ -39,9 +39,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/homeScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:overScrollMode="never"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
@@ -49,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="10dp"
+            android:padding="5dp"
             android:theme="@style/Theme.Fitnics">
 
             <com.google.android.material.card.MaterialCardView
@@ -71,7 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:padding="10dp">
+                    android:padding="5dp">
 
                     <TextView
                         android:id="@+id/breakfast"
@@ -79,19 +81,19 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="10dp"
-                        android:padding="5dp"
                         android:fontFamily="muli_bold"
-                        android:textColor="@color/black"
+                        android:padding="5dp"
                         android:text="@string/breakfast_button_text"
-                        android:textSize="30sp" />
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
 
                     <ImageView
                         android:id="@+id/add_img_1"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_alignParentEnd="true"
-                        android:layout_gravity="end"
                         android:layout_centerVertical="true"
+                        android:layout_gravity="end"
                         android:layout_marginEnd="10dp"
                         android:scaleType="center"
                         android:src="@drawable/ic_baseline_add_circle" />
@@ -117,7 +119,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:padding="10dp">
+                    android:padding="5dp">
 
                     <TextView
                         android:id="@+id/lunch"
@@ -129,7 +131,7 @@
                         android:textColor="@color/black"
                         android:padding="5dp"
                         android:text="@string/add_lunch_btn_text"
-                        android:textSize="30sp" />
+                        android:textSize="15sp" />
 
                     <ImageView
                         android:id="@+id/img_create_event_icon_2"
@@ -163,7 +165,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:padding="10dp">
+                    android:padding="5dp">
 
                     <TextView
                         android:id="@+id/dinner"
@@ -175,7 +177,7 @@
                         android:fontFamily="muli_bold"
                         android:textColor="@color/black"
                         android:text="@string/add_dinner_btn_text"
-                        android:textSize="30sp" />
+                        android:textSize="15sp" />
 
                     <ImageView
                         android:id="@+id/img_create_event_icon_3"
@@ -209,7 +211,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:padding="10dp">
+                    android:padding="5dp">
 
                     <TextView
                         android:id="@+id/exercise"
@@ -221,7 +223,7 @@
                         android:fontFamily="muli_bold"
                         android:textColor="@color/black"
                         android:text="@string/add_exercise_btn_text"
-                        android:textSize="30sp" />
+                        android:textSize="15sp" />
 
                     <ImageView
                         android:id="@+id/img_create_event_icon_4"
@@ -250,41 +252,41 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:padding="10dp">
+                    android:orientation="horizontal"
+                    android:padding="5dp">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnFoodLog"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="5dp"
                         android:elevation="10dp"
                         android:fontFamily="@font/muli"
                         android:gravity="center"
-                        android:onClick="btnFoodLogOnClick"                        android:padding="20dp"
+                        android:onClick="btnFoodLogOnClick"
                         android:text="@string/foodLog"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:textStyle="bold"
                         app:cornerRadius="50dp" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnExerciseLog"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginStart="30dp"
                         android:layout_marginEnd="10dp"
+                        android:layout_weight="2"
                         android:elevation="10dp"
                         android:fontFamily="@font/muli"
                         android:gravity="center"
                         android:onClick="btnExerciseLogOnClick"
                         android:text="@string/exerciseLog"
                         android:textStyle="bold"
-                        android:layout_weight="2"
                         app:cornerRadius="50dp" />
 
                 </LinearLayout>
@@ -303,50 +305,57 @@
                 android:padding="10dp"
                 android:foreground="?attr/selectableItemBackground">
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="vertical"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:padding="10dp">-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
 
-<!--                    <TextView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:gravity="center"-->
-<!--                        android:text="@string/notification_note"-->
-<!--                        android:textSize="15sp"-->
-<!--                        android:fontFamily="@font/muli"/>-->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/Notificationbtn"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/muli"
+                        android:gravity="center"
+                        android:onClick="btnSetNotificationsOnClick"
+                        android:padding="5dp"
+                        android:text="@string/notification_btn_text"
+                        android:textSize="10sp"
+                        android:layout_weight="2"
+                        android:textAlignment="center"
+                        app:cornerRadius="10dp"
+                        android:drawableTop="@drawable/add_notification"
+                        tools:ignore="OnClick" />
 
-<!--                    <com.google.android.material.button.MaterialButton-->
-<!--                        android:id="@+id/Notificationbtn"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:padding="10dp"-->
-<!--                        android:elevation="10dp"-->
-<!--                        android:fontFamily="@font/muli"-->
-<!--                        android:gravity="center"-->
-<!--                        android:onClick="btnSetNotificationsOnClick"-->
-<!--                        android:text="@string/notification_btn_text"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:layout_weight="2"-->
-<!--                        app:cornerRadius="50dp" />-->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnUpdateUserInfo"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:elevation="10dp"
+                        android:fontFamily="@font/muli"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:onClick="btnUpdateUserInfoOnClick"
+                        android:text="Profile"
+                        android:textSize="10sp"
+                        android:textAlignment="center"
+                        android:layout_weight="2"
+                        android:drawableTop="@drawable/user_profile"
+                        app:cornerRadius="10dp" />
 
-<!--                </LinearLayout>-->
 
+                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <Button
-                android:id="@+id/btnUpdateUserInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:onClick="btnUpdateUserInfoOnClick"
-                android:text="Update Information" />
-
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

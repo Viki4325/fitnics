@@ -119,7 +119,7 @@ public class AccessExercises {
         return exercisePersistence.getExerciseByName(exerciseTitle);
    }
 
-    public void insertExercise(Exercise exercise) throws InvalidExerciseException {
+    public int insertExercise(Exercise exercise) throws InvalidExerciseException {
         if(exercise == null)
             throw new InvalidExerciseException("The exercise is not valid. ");
         if(exercise.getTitle().length() > 20)
@@ -131,7 +131,10 @@ public class AccessExercises {
         if(exercise.getCategory().length() > 20)
             throw new InvalidExNameException("The category should be no more than 20 characters.");
 
-        exercisePersistence.insertExercise(exercise);
+        int newId = exercisePersistence.insertExercise(exercise);
+        exercise.setExerciseID(newId);
+
+        return newId;
     }
 
     /*

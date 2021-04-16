@@ -1,9 +1,13 @@
 package com.group12.fitnics.presentation;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +23,6 @@ import java.time.LocalDate;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private AccessUsers accessUsers;
     private AccessFoodLogs accessFoodLogs;
     private AccessExerciseLogs accessExerciseLogs;
     private ColorfulRingProgressView crpv;
@@ -33,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         crpv = (ColorfulRingProgressView) findViewById(R.id.crpv);
-        accessUsers = new AccessUsers();
+        AccessUsers accessUsers = new AccessUsers();
         accessFoodLogs = new AccessFoodLogs();
         accessExerciseLogs = new AccessExerciseLogs();
 
@@ -46,13 +49,14 @@ public class HomeActivity extends AppCompatActivity {
         paintCaloriesBurned();
         paintRemaining();
         printRingGraph();
+
     }
+
 
     private void userLoggedIn(){
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         selectedUser = (User) intent.getSerializableExtra("userLoggedIn");
-//        selectedUser = accessUsers.getUserByName(username);
     }
 
     /*
@@ -140,6 +144,10 @@ public class HomeActivity extends AppCompatActivity {
         generateIntent(UpdateUserInfoActivity.class);
     }
 
+    public void btnSetNotificationsOnClick(View v) {
+        generateIntent(CreateNotificationActivity.class);
+    }
+
     /*
     * This method generates intent,and passes the current logged in user, since we need that info everywhere
     * */
@@ -151,12 +159,6 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    public void btnSetNotificationsOnClick(View v){
-//        Intent intent = new Intent(HomeActivity.this, CreateNotificationActivity.class);
-//        intent.putExtra("userID",Integer.toString(selectedUser.getUserID()));
-//        startActivity(intent);
-//    }
-
 
     @Override
     protected void onResume() {
@@ -166,5 +168,6 @@ public class HomeActivity extends AppCompatActivity {
         paintCaloriesConsumed();
         printRingGraph();
     }
+
 
 }

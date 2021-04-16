@@ -1,7 +1,7 @@
 package com.group12.fitnics.persistence.hsqldb;
 
 import com.group12.fitnics.exceptions.ExerciseNotFoundException;
-import com.group12.fitnics.exceptions.InvalidExNameException;
+import com.group12.fitnics.exceptions.HSQLDBException;
 import com.group12.fitnics.exceptions.InvalidExerciseException;
 import com.group12.fitnics.objects.Exercise;
 import com.group12.fitnics.persistence.IExercisePersistence;
@@ -26,7 +26,7 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
     }
 
     private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true;hsqldb.lock_file=false", "SA", "");
     }
 
     private Exercise fromResultSet(ResultSet rs) throws SQLException {
@@ -55,7 +55,7 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
 
         List<Exercise> exerciseSortedAlpha = new ArrayList<>(exerciseList.size());
@@ -85,7 +85,7 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return null;
     }
@@ -103,7 +103,7 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return null;
     }
@@ -123,7 +123,7 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
 
         return exercises;
@@ -144,7 +144,7 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
 
         return exercises;
@@ -154,24 +154,23 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
     public int insertExercise(Exercise newExercise) {
 
         try (final Connection c = connect()) {
-            final PreparedStatement st = c.prepareStatement("INSERT INTO EXERCISES VALUES(?, ?, ?, ?, ?, ?)");
+            final PreparedStatement st = c.prepareStatement("INSERT INTO EXERCISES VALUES(DEFAULT, ?, ?, ?, ?, ?)");
 
-            newExercise.setExerciseID();
-
-            st.setString(1, Integer.toString(newExercise.getExerciseID()));
-            st.setString(2, newExercise.getTitle());
-            st.setString(3, newExercise.getDescription());
-            st.setString(4, newExercise.getCategory());
-            st.setString(5, newExercise.getLevel());
-            st.setInt(6, newExercise.getCaloriesBurn());
+            st.setString(1, newExercise.getTitle());
+            st.setString(2, newExercise.getDescription());
+            st.setString(3, newExercise.getCategory());
+            st.setString(4, newExercise.getLevel());
+            st.setInt(5, newExercise.getCaloriesBurn());
             st.executeUpdate();
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
 
-        return newExercise.getExerciseID();
+        Exercise created = getExerciseByName(newExercise.getTitle());
+
+        return created.getExerciseID();
     }
 
     @Override
@@ -195,12 +194,12 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 
     @Override
-    public void deleteExercise(int exerciseID) {
+    public void deleteExercise(int exerciseID) throws ExerciseNotFoundException {
 
         try (final Connection c = connect()) {
             final PreparedStatement st = c.prepareStatement("DELETE FROM EXERCISES WHERE id = ?");
@@ -209,13 +208,12 @@ public class ExercisePersistenceHSQLDB implements IExercisePersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new ExerciseNotFoundException("There's no exercise with the exerciseID.");
         }
     }
 
     @Override
     public void deleteExercise(Exercise currentExercise) {
-
         deleteExercise(currentExercise.getExerciseID());
     }
 }

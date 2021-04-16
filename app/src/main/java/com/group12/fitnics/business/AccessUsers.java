@@ -42,7 +42,10 @@ public class AccessUsers {
         if (currentUser.getUsername().length() > 20)
             throw new InvalidUserNameException("The username is too long, should be no more than 20 characters.");
 
-        return userPersistence.insertUser(currentUser);
+        int newId = userPersistence.insertUser(currentUser);
+        currentUser.setUserID(newId);
+
+        return newId;
     }
 
     public void updateUser(int userID, User currentUser) throws InvalidUserException, UserNotFoundException {

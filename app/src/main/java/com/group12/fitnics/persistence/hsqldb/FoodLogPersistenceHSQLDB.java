@@ -1,8 +1,7 @@
 package com.group12.fitnics.persistence.hsqldb;
 
 import com.group12.fitnics.business.DateHelper;
-import com.group12.fitnics.exceptions.FoodLogNotFoundException;
-import com.group12.fitnics.exceptions.InvalidFoodLogException;
+import com.group12.fitnics.exceptions.HSQLDBException;
 import com.group12.fitnics.objects.FoodLog;
 import com.group12.fitnics.persistence.IFoodLogPersistence;
 
@@ -24,7 +23,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
     }
 
     private Connection connect() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true;hsqldb.lock_file=false", "SA", "");
     }
 
     private FoodLog fromResultSet(ResultSet rs) throws SQLException {
@@ -50,7 +49,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
         return null;
     }
@@ -70,7 +69,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
 
         return logs;
@@ -92,7 +91,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
 
         return logs;
@@ -111,7 +110,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 
@@ -131,7 +130,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 
@@ -146,7 +145,7 @@ public class FoodLogPersistenceHSQLDB implements IFoodLogPersistence {
             st.close();
 
         } catch (final SQLException e) {
-            e.printStackTrace();
+            throw new HSQLDBException(e);
         }
     }
 

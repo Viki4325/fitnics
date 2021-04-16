@@ -34,21 +34,21 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/looseWeightbtn"
+            android:id="@+id/loseWeightbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-            android:onClick="btnSetGoal"
+            android:onClick="btnLoseWeight"
             android:elevation="10dp"
             android:padding="20dp"
             android:fontFamily="@font/muli"
             android:textStyle="bold"
             app:cornerRadius="50dp"
-            android:text="@string/goal_loose_weight" />
+            android:text="@string/goal_lose_weight" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/maintianWeightbtn"
+            android:id="@+id/maintainWeightbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -57,7 +57,7 @@
             android:padding="20dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:onClick="btnSetGoal"
+            android:onClick="btnMaintainWeight"
             android:elevation="10dp"
             app:cornerRadius="50dp"
             android:text="@string/goal_maintain_weight" />
@@ -71,7 +71,7 @@
             android:elevation="10dp"
             android:fontFamily="@font/muli"
             android:gravity="center"
-            android:onClick="btnSetGoal"
+            android:onClick="btnGainWeight"
             android:padding="20dp"
             android:text="@string/goal_gain_weight"
             android:textStyle="bold"
